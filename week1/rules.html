@@ -66,19 +66,18 @@ footer { max-width:60rem; margin:2rem auto 0; color:var(--muted); font-size:.85r
 <h2>Access outcomes are never graded; attempts are</h2>
 <p>A denied or pending account costs nothing. What is graded: the link used, the timestamp, the status evidence, the remaining blocker, and what you learned about what that platform is for.</p>
 <p>The same applies to entitlements. <strong>An honest &quot;I diagnosed it and the answer is still unclear&quot; earns full marks</strong> — that is the state the instructor is in.</p>
-<h2>Verify generated code before you run it</h2>
-<p>Any AI-written code against a data source is checked before it is trusted: package name, endpoint or table, field names, coverage window, and licence.</p>
-<p><strong>Recording that you checked is part of the deliverable.</strong> &quot;It worked&quot; is not a verification.</p>
-<p>An AI&#x27;s statement about a source — what it holds, what it costs, what you may do with it — is a claim, not documentation.</p>
+<h2>Verify source facts before you rely on code</h2>
+<p>Before relying on any code against a data source — written by you, found online, or generated — check it against the vendor&#x27;s current documentation: package name, endpoint or table, field names, coverage window, and licence.</p>
+<p><strong>Recording that you checked is part of the deliverable.</strong> &quot;It worked&quot; is not a verification; code can run against the wrong field and return plausible numbers.</p>
+<p>A statement about a source is a claim, not documentation, whatever its source.</p>
 <h2>Licence compliance</h2>
 <p>Capital IQ and PitchBook licences restrict bulk export and scripted extraction. <strong>Do not write scrapers against them.</strong> Do not share exported data outside your submission.</p>
 <p><strong>Do not pool accounts or share credentials.</strong> WRDS and LSEG accounts are personal. Sharing one is an integrity violation, not a shortcut.</p>
 <p>If an analysis seems to require bulk extraction from a restricted platform, the analysis is designed wrong for this course. Use WRDS, the Generation 2 sources, or the guaranteed lane.</p>
-<h2>AI use</h2>
-<p>AI writes most of the code in this course. That is expected and encouraged.</p>
-<p>What must be yours: the framing of the problem, the choice of which source to ask, the judgment about which source is right, the adjudication of every discrepancy, and the explanation you could give under questioning.</p>
-<p>An AI can diff two dataframes. It cannot decide whether a difference is a defect or a convention. If your adjudications read as generated rather than reasoned, that is visible, and it is the part of the lab that carries the weight.</p>
-<p>You must be able to explain every line of code you submit. &quot;The AI wrote it&quot; is not an answer to a question about what a line does.</p>
+<h2>Tools</h2>
+<p>Use whatever tools you like, including AI assistants. That is expected and needs no disclosure.</p>
+<p>What must be yours: the framing of the problem, the choice of which source to ask, the judgment about which source is right, the adjudication of every discrepancy, and the explanation you could give under questioning. Those are the graded surfaces, and no tool produces them for you — deciding whether a difference is a defect or a convention requires knowing how securities trade.</p>
+<p><strong>You must be able to explain every line of code you submit.</strong> Where it came from is not a defence, and that has always been true of copied code.</p>
 <h2>Reproducibility</h2>
 <p>Every submitted notebook must run start to finish on a fresh kernel. A notebook that only works because of state left in memory is not a deliverable.</p>
 <p>Every number in a write-up must be traceable to a line of code that produced it. Numbers typed in by hand are not sourced.</p>
