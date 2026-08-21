@@ -1,0 +1,107 @@
+<!doctype html><html lang='en'><head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width,initial-scale=1'>
+<title>Week 1 — Prework</title><style>
+:root { --bg:#ffffff; --fg:#111418; --muted:#5a6572; --rule:#dfe3e8;
+        --accent:#0b5fa5; --code-bg:#f6f8fa; }
+@media (prefers-color-scheme: dark) {
+  :root { --bg:#11151a; --fg:#e8eaed; --muted:#9aa4b2; --rule:#2a323c;
+          --accent:#6fb3f2; --code-bg:#1a2029; } }
+* { box-sizing: border-box; }
+body { margin:0; padding:2rem 1rem 4rem; background:var(--bg); color:var(--fg);
+       font: 16px/1.55 -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+main { max-width: 60rem; margin: 0 auto; }
+.slide { border:1px solid var(--rule); border-radius:10px; padding:1.75rem 2rem;
+         margin:0 0 1.5rem; background:var(--bg); overflow-x:auto; }
+.cue { display:inline-block; font:600 11px/1 ui-monospace, Menlo, Consolas, monospace;
+       letter-spacing:.09em; text-transform:uppercase; color:var(--accent);
+       border:1px solid var(--accent); border-radius:999px; padding:.35rem .6rem;
+       margin-bottom:1rem; }
+h1 { font-size:1.5rem; margin:0 0 1.25rem; }
+h2 { font-size:1.35rem; margin:0 0 1rem; line-height:1.25; }
+p, li { color:var(--fg); }
+blockquote { margin:1rem 0; padding:.6rem 0 .6rem 1rem; border-left:3px solid var(--accent);
+             color:var(--muted); }
+pre { background:var(--code-bg); border:1px solid var(--rule); border-radius:8px;
+      padding:.9rem 1rem; overflow-x:auto;
+      font:13px/1.5 ui-monospace, Menlo, Consolas, monospace; }
+code { font:.92em ui-monospace, Menlo, Consolas, monospace; }
+table { border-collapse:collapse; width:100%; margin:1rem 0; font-size:.95rem;
+        display:block; overflow-x:auto; }
+th, td { border:1px solid var(--rule); padding:.45rem .7rem; text-align:left; }
+th { background:var(--code-bg); }
+.math { background:var(--code-bg); border:1px solid var(--rule); border-radius:8px;
+        padding:.7rem 1rem; margin:1rem 0; font-family:ui-monospace, Menlo, Consolas, monospace;
+        font-size:.95rem; color:var(--fg); }
+footer { max-width:60rem; margin:2rem auto 0; color:var(--muted); font-size:.85rem;
+         border-top:1px solid var(--rule); padding-top:1rem; }
+
+.nav { margin: 0 0 1.5rem; font-size:.9rem; }
+.nav a { color: var(--accent); text-decoration: none; }
+.nav a:hover { text-decoration: underline; }
+.wk { border:1px solid var(--rule); border-radius:10px; padding:1.1rem 1.4rem; margin:0 0 1rem; }
+.wk h3 { margin:.1rem 0 .5rem; font-size:1.05rem; }
+.wk .num { color:var(--muted); font:600 11px/1 ui-monospace,Menlo,Consolas,monospace;
+           letter-spacing:.1em; text-transform:uppercase; }
+.surfaces a { display:inline-block; margin:.3rem .4rem .3rem 0; padding:.3rem .65rem;
+              border:1px solid var(--accent); border-radius:999px; font-size:.85rem;
+              color:var(--accent); text-decoration:none; }
+.surfaces a:hover { background:var(--code-bg); }
+.surfaces span.held { display:inline-block; margin:.3rem .4rem .3rem 0; padding:.3rem .65rem;
+                      border:1px dashed var(--rule); border-radius:999px; font-size:.85rem;
+                      color:var(--muted); }
+.lede { color:var(--muted); margin:0 0 2rem; }
+</style></head>
+<body><main>
+<div class='nav'><a href='../index.html'>MSF Financial Modeling</a></div>
+<h1>Week 1 — Prework</h1><h1>Week 1 — Prework</h1>
+<blockquote><strong>Register: TEACH.</strong> Do this before the first session. It is the bridge from what you arrive with to what the lab assumes.</blockquote>
+<p><strong>You arrive with:</strong> a finance background, mixed programming experience, and no accounts on any professional platform.</p>
+<p><strong>Honest time budget: about 2 hours 15 minutes.</strong></p>
+<table><thead><tr><th>Part</th><th>What</th><th>Time</th></tr></thead><tbody><tr><td>A</td><td>Environment — get a notebook running</td><td>25 min</td></tr><tr><td>B</td><td>Generation 1 — start the access requests</td><td>45 min</td></tr><tr><td>C</td><td>Generation 2 — get a key and pull something</td><td>35 min</td></tr><tr><td>D</td><td>Ask an AI for source code, and check it</td><td>20 min</td></tr><tr><td>E</td><td>One paragraph, before class</td><td>10 min</td></tr></tbody></table>
+<p>Part B is mostly waiting on forms. <strong>Start it first</strong>, then do the rest while requests are pending.</p>
+<p>---</p>
+<h2>Part A — Environment</h2>
+<p>You do not need to install anything. Use Google Colab.</p>
+<ol><li><code>https://colab.research.google.com</code>, sign in with your Purdue account.</li><li><strong>File → New notebook.</strong></li><li>Run:</li></ol>
+<pre><code>!pip install yfinance --quiet
+import yfinance as yf, pandas as pd
+print(&quot;yfinance&quot;, yf.__version__, &quot;| pandas&quot;, pd.__version__)</code></pre>
+<p>Two version numbers and no red text. If you see red, paste the entire error into your AI and ask <strong>what it means</strong> — do not ask it to fix the code yet. Understanding the error is the skill.</p>
+<p><strong>You are not expected to write Python from scratch in this course.</strong> You are expected to read code, say what it does, find the error in it, and check that it does what it claims.</p>
+<p>---</p>
+<h2>Part B — Generation 1: start the access requests</h2>
+<p>These are slow. Start them now.</p>
+<p><strong>WRDS</strong> — the research platform. Purdue routes access through the library; note that WRDS accounts are typically for graduate students and faculty, which includes you. Expect an approval queue.</p>
+<p><strong>LSEG Workspace</strong> — available to all Purdue users. Register with your <code>@purdue.edu</code> address. Registration is handled by LSEG, not Purdue, and the welcome mail sometimes lands in spam.</p>
+<p>Start from the Purdue Libraries business databases guide — <code>https://guides.lib.purdue.edu/refinitivworkspace</code> for LSEG, and the business databases list for the rest.</p>
+<p><strong>Optional, worth attempting:</strong> S&amp;P Capital IQ and PitchBook. Both are lookup tools rather than pipelines — their licences restrict bulk export, so no lab depends on them.</p>
+<p><strong>Not in this course:</strong> Bloomberg. It is terminal-bound and cannot be scripted for coursework. Knowing <em>why</em> is the capability; nothing here needs it.</p>
+<p>For each attempt, record: link used, date and time, resulting status, remaining blocker, and one sentence on what you learned about what that platform is <em>for</em>.</p>
+<p><strong>A denial or a pending queue costs you nothing.</strong> The documented attempt is what is graded.</p>
+<p><strong>If you are blocked:</strong> contact Purdue business data library support, then the Libraries help channels, then the instructor — <strong>during</strong> prework, not the night before the lab.</p>
+<p>---</p>
+<h2>Part C — Generation 2: get a key and pull something</h2>
+<p>This is the half that works immediately.</p>
+<p><strong>SEC EDGAR needs no account at all.</strong> Run this now:</p>
+<pre><code>import json, urllib.request
+
+req = urllib.request.Request(
+    &quot;https://data.sec.gov/submissions/CIK0000320193.json&quot;,
+    headers={&quot;User-Agent&quot;: &quot;your.name@purdue.edu&quot;})   # a real contact is required
+d = json.load(urllib.request.urlopen(req))
+print(d[&quot;name&quot;], d[&quot;tickers&quot;])</code></pre>
+<p>Then get <strong>one</strong> API key from a Generation 2 source in [the source register](../sources.html) — Financial Datasets and Databento both have free tiers or credits. Pull something with it.</p>
+<p><strong>Check the cost page before you sign up, and do not spend money.</strong> Nothing in this course requires payment. If a source wants a card before it will issue a key, skip it and use another.</p>
+<p>Record how long Part C took compared with Part B. Bring both numbers.</p>
+<p>---</p>
+<h2>Part D — Ask an AI, then check it</h2>
+<p>Ask your AI assistant:</p>
+<blockquote><em>&quot;Write Python to pull a price history from Refinitiv.&quot;</em></blockquote>
+<p>Then check what it produced against the current documentation — package name, import path, whether the API still exists in that form.</p>
+<p><strong>Bring what you got, whatever it is.</strong> Some of you will get working current code. Some will not. The mix is the point.</p>
+<p>---</p>
+<h2>Part E — Write one paragraph</h2>
+<blockquote>You have two sources for the same security and they disagree about one number. What would make you decide the disagreement is a <strong>defect in the data</strong> rather than a <strong>difference in convention</strong>? Give one concrete test you could run.</blockquote>
+<p>Keep it. You will compare it against what you learn in the session, and the comparison is part of Lab 1.</p>
+<p><strong>Bring to the session:</strong> a running notebook, your Generation 1 attempts, a Generation 2 key with something pulled, what the AI gave you for Refinitiv, and this paragraph.</p>
+</main></body></html>

@@ -1,0 +1,160 @@
+<!doctype html><html lang='en'><head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width,initial-scale=1'>
+<title>Data Source Register</title><style>
+:root { --bg:#ffffff; --fg:#111418; --muted:#5a6572; --rule:#dfe3e8;
+        --accent:#0b5fa5; --code-bg:#f6f8fa; }
+@media (prefers-color-scheme: dark) {
+  :root { --bg:#11151a; --fg:#e8eaed; --muted:#9aa4b2; --rule:#2a323c;
+          --accent:#6fb3f2; --code-bg:#1a2029; } }
+* { box-sizing: border-box; }
+body { margin:0; padding:2rem 1rem 4rem; background:var(--bg); color:var(--fg);
+       font: 16px/1.55 -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+main { max-width: 60rem; margin: 0 auto; }
+.slide { border:1px solid var(--rule); border-radius:10px; padding:1.75rem 2rem;
+         margin:0 0 1.5rem; background:var(--bg); overflow-x:auto; }
+.cue { display:inline-block; font:600 11px/1 ui-monospace, Menlo, Consolas, monospace;
+       letter-spacing:.09em; text-transform:uppercase; color:var(--accent);
+       border:1px solid var(--accent); border-radius:999px; padding:.35rem .6rem;
+       margin-bottom:1rem; }
+h1 { font-size:1.5rem; margin:0 0 1.25rem; }
+h2 { font-size:1.35rem; margin:0 0 1rem; line-height:1.25; }
+p, li { color:var(--fg); }
+blockquote { margin:1rem 0; padding:.6rem 0 .6rem 1rem; border-left:3px solid var(--accent);
+             color:var(--muted); }
+pre { background:var(--code-bg); border:1px solid var(--rule); border-radius:8px;
+      padding:.9rem 1rem; overflow-x:auto;
+      font:13px/1.5 ui-monospace, Menlo, Consolas, monospace; }
+code { font:.92em ui-monospace, Menlo, Consolas, monospace; }
+table { border-collapse:collapse; width:100%; margin:1rem 0; font-size:.95rem;
+        display:block; overflow-x:auto; }
+th, td { border:1px solid var(--rule); padding:.45rem .7rem; text-align:left; }
+th { background:var(--code-bg); }
+.math { background:var(--code-bg); border:1px solid var(--rule); border-radius:8px;
+        padding:.7rem 1rem; margin:1rem 0; font-family:ui-monospace, Menlo, Consolas, monospace;
+        font-size:.95rem; color:var(--fg); }
+footer { max-width:60rem; margin:2rem auto 0; color:var(--muted); font-size:.85rem;
+         border-top:1px solid var(--rule); padding-top:1rem; }
+
+.nav { margin: 0 0 1.5rem; font-size:.9rem; }
+.nav a { color: var(--accent); text-decoration: none; }
+.nav a:hover { text-decoration: underline; }
+.wk { border:1px solid var(--rule); border-radius:10px; padding:1.1rem 1.4rem; margin:0 0 1rem; }
+.wk h3 { margin:.1rem 0 .5rem; font-size:1.05rem; }
+.wk .num { color:var(--muted); font:600 11px/1 ui-monospace,Menlo,Consolas,monospace;
+           letter-spacing:.1em; text-transform:uppercase; }
+.surfaces a { display:inline-block; margin:.3rem .4rem .3rem 0; padding:.3rem .65rem;
+              border:1px solid var(--accent); border-radius:999px; font-size:.85rem;
+              color:var(--accent); text-decoration:none; }
+.surfaces a:hover { background:var(--code-bg); }
+.surfaces span.held { display:inline-block; margin:.3rem .4rem .3rem 0; padding:.3rem .65rem;
+                      border:1px dashed var(--rule); border-radius:999px; font-size:.85rem;
+                      color:var(--muted); }
+.lede { color:var(--muted); margin:0 0 2rem; }
+</style></head>
+<body><main>
+<div class='nav'><a href='index.html'>MSF Financial Modeling</a></div>
+<h1>Data Source Register</h1><h1>Data Source Register</h1>
+<p><strong>The authoritative home for every fact about a data source.</strong> Module surfaces link here; they never restate an access route, a package name, a price, or a coverage window.</p>
+<p>---</p>
+<h2>The two generations</h2>
+<p>This distinction is the spine of the course. It is not a ranking.</p>
+<p><strong>Generation 1 — institutional.</strong> Licensed, seat-bound or approval-gated, built for humans and for batch research. Deep history, survivorship-free, authoritative. Access is slow and procedural; the interface was never designed for a machine to drive.</p>
+<p><strong>Generation 2 — API-native.</strong> Key-based, metered, documented for machines, often with an MCP server. Access is instant and cheap. History is shallower, coverage narrower, and the vendor may be four years old.</p>
+<p>An analyst in the AI era has to work both, and the skill is different in each.</p>
+<p>---</p>
+<h2>Generation 1 — Purdue&#x27;s institutional holdings</h2>
+<h3>WRDS</h3>
+<table><thead><tr><th></th><th></th></tr></thead><tbody><tr><td>What</td><td>Research platform hosting CRSP, Compustat, TRACE, IBES and many others</td></tr><tr><td>Access</td><td>Purdue library pathway; account request with an approval queue</td></tr><tr><td>Python</td><td><code>pip install wrds</code> — PostgreSQL-backed; <code>db.raw_sql()</code> for arbitrary SQL, plus per-dataset helpers; returns pandas</td></tr><tr><td>Keyed on</td><td>per dataset — CRSP <code>PERMNO</code>, Compustat <code>GVKEY</code>, TRACE <code>CUSIP</code></td></tr><tr><td>Strength</td><td>Deep history, delisting returns, point-in-time membership — observations free sources structurally cannot hold</td></tr><tr><td>AI fit</td><td><strong>Good once oriented, bad cold.</strong> The query language is SQL, which AI writes well. The <em>schema</em> is large, idiosyncratic, and not in the model&#x27;s reliable knowledge — expect invented table and column names.</td></tr></tbody></table>
+<h3>LSEG Workspace — and CodeBook, the coding route</h3>
+<p>Researched against Purdue Libraries&#x27; own guides 2026-08-21. <strong>Owner is confirming the exact entitlement from library correspondence</strong> — treat the CodeBook line as strong inference, not established fact, until that lands.</p>
+<p><strong>What Purdue publishes</strong> (<code>guides.lib.purdue.edu/refinitivworkspace</code>):</p>
+<table><thead><tr><th></th><th></th></tr></thead><tbody><tr><td>Product</td><td><strong>LSEG Workspace</strong> — company, industry, economic data, news, ESG, M&amp;A, charting</td></tr><tr><td>Eligibility</td><td><strong>All Purdue users.</strong> Register with an <code>@purdue.edu</code> address</td></tr><tr><td>Registration</td><td>Handled by LSEG, not Purdue. Delays are normal; check the spam folder for the welcome mail</td></tr><tr><td>Access</td><td><strong>Web (recommended)</strong>, desktop (adds an Excel add-in), mobile (not recommended)</td></tr><tr><td>Add-ons</td><td>Datastream (time series), Aftermarket Research, SDC Platinum — see the Datastream entry below, it is <strong>not</strong> a programmatic route</td></tr><tr><td>Stated export limit</td><td>Deals Screener: 200 deals per export, 1,000 per 24 hours, per account</td></tr></tbody></table>
+<p><strong>The Purdue guide does not mention Python, APIs, or programmatic access anywhere.</strong> That absence is itself the finding: the coding route exists but is not advertised by the library.</p>
+<p><strong>CodeBook — the coding route inside Workspace:</strong></p>
+<table><thead><tr><th></th><th></th></tr></thead><tbody><tr><td>What</td><td>A cloud-hosted Jupyter/Python environment available as an <strong>app inside Workspace</strong>. Zero install</td></tr><tr><td>Auth</td><td>Pre-authenticated by your Workspace session — no separate key to manage</td></tr><tr><td>Libraries</td><td>LSEG data libraries plus common Python packages, pre-installed</td></tr><tr><td>Runs</td><td><strong>In LSEG&#x27;s cloud, in the browser.</strong> Not on your machine</td></tr></tbody></table>
+<p><strong>Why this shape matters more than it first appears.</strong> With CodeBook, your code runs inside the vendor&#x27;s sandbox rather than in your own environment. That is genuinely different from every Generation 2 source, where the code lives with you and the vendor just answers requests.</p>
+<p>Consequences worth teaching directly:</p>
+<ul><li><strong>No local install and no lab-machine dependency.</strong> It is a browser app, so it works from any</li></ul>
+<p>machine. My earlier claim that LSEG needed campus lab machines was wrong.</p>
+<ul><li><strong>Your notebook lives in their environment.</strong> Version control, reproducibility, and handing</li></ul>
+<p>work to a colleague all become harder, and the Week 7 reproducibility standard has to account for it.</p>
+<ul><li><strong>Getting results out is governed by export limits and licence</strong>, not by your code.</li><li><strong>You cannot pip-install whatever you like.</strong> The environment is theirs.</li></ul>
+<p>That trade — convenience and pre-authentication in exchange for control over your own environment — is a real one analysts meet constantly, and it is the sharpest available contrast with the Generation 2 model.</p>
+<p><strong>Not what Purdue has, so do not build against it:</strong> the locally installed LSEG Data Library (<code>pip install lseg-data</code>, <code>import lseg.data as ld</code>) driving a Workspace <strong>desktop</strong> session. Name it in Week 1 as the fuller commercial product; nothing in this course depends on it.</p>
+<h3>Datastream at Purdue — Excel only, and that is the point</h3>
+<p>Verified against <code>guides.lib.purdue.edu/refinitivworkspace/datastream</code>, 2026-08-21. Owner flagged this correctly: <strong>it is an Excel add-in, not a Python route.</strong></p>
+<table><thead><tr><th></th><th></th></tr></thead><tbody><tr><td>What</td><td>100+ years of historical time series — equities, indices, economics, FX</td></tr><tr><td>Access</td><td><strong>Excel Add-In</strong> (appears as a &quot;Workspace&quot; tab in the Excel ribbon after installation), plus web</td></tr><tr><td>Python / R / API</td><td><strong>None described by Purdue.</strong> No DSWS, no <code>DatastreamPy</code>, no programmatic path</td></tr><tr><td>Download limits</td><td><strong>30,000 values per download request</strong>; 2,000 suggested for historical instrument codes</td></tr><tr><td>Eligibility</td><td><strong>Licences are limited</strong> — faculty, graduate students, and those working directly with faculty on research. MSF students qualify, but the seat is scarce</td></tr><tr><td>How to get it</td><td>Two steps: obtain a Workspace account <strong>first</strong>, then email the library to request the add-on</td></tr><tr><td>Retention</td><td><strong>&quot;Licences may be removed at any time due to inactivity&quot;</strong></td></tr></tbody></table>
+<p><strong>Do not present Datastream as scriptable at Purdue.</strong> An earlier draft of this register suggested a Datastream Web Service route; that was wrong for our entitlement and is corrected here.</p>
+<p><strong>Why this belongs in the course rather than being quietly dropped.</strong> Datastream is Generation 1 at its most extreme, and it makes the point better than WRDS does: a century of excellent data, reachable only through a spreadsheet, on a scarce licence that expires if you stop using it.</p>
+<p><strong>You cannot put an AI on it.</strong> Not because the AI is inadequate — because there is no interface for one. That is a real and common constraint, and the professional response is not to complain about it but to use the source for what it is uniquely good at, export within the stated limits, and <strong>document what you did by hand so someone else can repeat it.</strong> A manual extraction with a written procedure is reproducible. A manual extraction with no record is not.</p>
+<p>Teach it as: reach for Datastream when you need long history nobody else has, and accept that the cost is manual work and a written procedure instead of a script.</p>
+<h3>LSEG programmatic access — RESOLVED 2026-08-21: not available</h3>
+<p><strong>Owner confirmed there is no LSEG API access under Purdue&#x27;s licence.</strong> The questions below were sent and never answered; the answer arrived by other means. Keep the list — it is the right list to send, and the next person to ask should send exactly this.</p>
+<p><strong>Standing position:</strong> LSEG Workspace is a lookup and exploration tool in this course, used through its web interface. It is not a data pipeline. Nothing scripted depends on it.</p>
+<p><strong>Status 2026-08-21: the library was asked and did not reply.</strong> This is not a gap in preparation. It is the normal case, and the course treats it as such.</p>
+<p>The owner sent the following questions to Purdue&#x27;s business-data librarian. <strong>Reuse this list verbatim</strong> — it distinguishes the things that actually determine whether you can write code, and most people do not know to separate them:</p>
+<ol><li>Does the licence include <strong>LSEG Data Library for Python / LSEG Data API</strong> access?</li><li><strong>Desktop Session</strong> access via the Workspace Desktop App, including permission to use the</li></ol>
+<p><strong>Workspace API Proxy</strong>?</p>
+<ol><li><strong>Platform Session</strong> access to LSEG Data Platform/cloud APIs — App Key, Machine ID/User ID,</li></ol>
+<p>or Service ID / Client ID + Client Secret credentials?</p>
+<ol><li><strong>LSEG MCP connector</strong> access for ChatGPT / OpenAI Enterprise, if the institution supports it?</li><li>Content entitlements specifically: equities, company fundamentals, estimates, valuation</li></ol>
+<p>ratios, news, earnings transcripts, historical pricing, real-time and delayed market data?</p>
+<ol><li>If API access is not included, <strong>can it be enabled</strong> under the university&#x27;s LSEG contract?</li></ol>
+<h3>Diagnose your own entitlement in five minutes — do not wait for a reply</h3>
+<p>The registration welcome mail points at everything needed to answer this yourself. This is the procedure; it is also a graded readiness step, because self-diagnosing an entitlement is the professional skill.</p>
+<p><strong>1. Sign in to Workspace web</strong> — <code>workspace.refinitiv.com/web</code>, with the <code>@purdue.edu</code> User ID from the welcome mail.</p>
+<p><strong>2. Search the app bar for <code>APPKEY</code></strong> — the App Key Generator. It is reachable from the <strong>web</strong> version, not only desktop.</p>
+<ul><li>If it opens and offers <strong>Register New App</strong>, note **which APIs appear in the selectable</li></ul>
+<p>list**. That list is the entitlement answer, directly, without asking anyone.</p>
+<ul><li>If it does not appear, API access is not enabled on the account.</li></ul>
+<p><strong>3. Search the app bar for <code>CODEBOOK</code></strong> — if it opens, the hosted Python environment is entitled.</p>
+<p><strong>4. Open MyAccount</strong> — the welcome mail describes it as where you &quot;view product, data and exchange information.&quot; This is the authoritative record of product, data, and exchange entitlements, and it decodes the package label shown on the account.</p>
+<p><strong>Reading the result honestly — three separate things, routinely confused:</strong></p>
+<table><thead><tr><th></th><th>What it is</th><th>Likely on an academic licence</th></tr></thead><tbody><tr><td><strong>App Key</strong></td><td>identifies your <em>application</em>. Created in APPKEY</td><td>Often available</td></tr><tr><td><strong>Session type</strong></td><td><strong>Desktop Session</strong> needs the Workspace <strong>desktop app running</strong> (it listens on a local port), so no Colab. <strong>Platform Session</strong> uses cloud credentials — Machine/Service ID and secret</td><td>Desktop plausible; <strong>Platform is usually a separate enterprise entitlement and commonly absent</strong></td></tr><tr><td><strong>Content entitlements</strong></td><td>which data you may actually pull — estimates, transcripts, real-time</td><td><strong>Separate again.</strong> Having a key does not grant content</td></tr></tbody></table>
+<p><strong>An App Key is not the same as data access.</strong> A student can hold a valid key and still be refused the content. Check all three, and record what each says.</p>
+<p>Workspace web is confirmed available to every Purdue user and carries the hands-on work. The entitlement inquiry itself becomes a graded readiness item — the student sends the questions and reports what came back, including nothing.</p>
+<p><strong>Why this is worth teaching rather than working around.</strong> &quot;What does my licence actually permit?&quot; is a real professional question that routinely has no fast answer. The competent behaviour is to ask precisely and in writing, keep a record, and design so you are not blocked while you wait. Students who learn only that data is available by typing a ticker have not met the constraint that governs most institutional work.</p>
+<h3>The LSEG MCP connector — the frontier, and the same gate</h3>
+<p>LSEG announced an <strong>MCP connector for ChatGPT</strong> on 2025-12-03, live from that December, phased in starting with LSEG Financial Analytics. It lets a user with <strong>LSEG licensed credentials</strong> pull market data, analytics, and news directly into ChatGPT.</p>
+<p>Two things students should take from it:</p>
+<ol><li><strong>The direction of travel is real.</strong> Financial Datasets ships an MCP server. LSEG now ships</li></ol>
+<p>one for ChatGPT. Professional vendors are making themselves addressable by agents, and this is a genuine change in what an analyst&#x27;s day looks like.</p>
+<ol><li><strong>The gate did not move.</strong> It still requires licensed credentials, and whether an</li></ol>
+<p>institution&#x27;s licence includes it is the same unanswered question as above. An MCP connector does not dissolve an entitlement problem; it inherits it.</p>
+<p>Treat this as a <strong>demonstration and a discussion</strong>, never a dependency.</p>
+<blockquote><strong>The teaching asset survives whichever product it turns out to be.</strong> LSEG absorbed Refinitiv, which absorbed Thomson Reuters, and the Python package was renamed <code>refinitiv-data</code> → <code>lseg-data</code>. Ask an AI for Refinitiv or LSEG Python code and check the package name, import path, and field names against current documentation. The student runs the experiment; the result is the lesson.</blockquote>
+<h3>Bloomberg — not used in this course</h3>
+<p>Terminal-seat-bound. There is a <code>blpapi</code> interface, but it requires a live authenticated terminal session on the same machine, which makes it unusable for coursework and unusable for most reproducible analysis.</p>
+<p><strong>Removed from the required list entirely</strong> (owner ruling 2026-08-21). Named once, in Week 1, so students can say why — being able to explain that you cannot build a pipeline on it is the capability. Nothing in this course depends on it.</p>
+<p>---</p>
+<h2>Generation 2 — API-native, AI-era</h2>
+<p>Purdue does not supply these. You obtain your own keys. All are usable at low or zero cost at course scale — but <strong>check the current cost yourself before signing up.</strong> These vendors change pricing often, and this page may be out of date by the time you read it.</p>
+<h3>SEC EDGAR (direct)</h3>
+<table><thead><tr><th></th><th></th></tr></thead><tbody><tr><td>What</td><td>Every SEC filing, plus the XBRL company-facts and company-concept APIs</td></tr><tr><td>Access</td><td><code>https://data.sec.gov/...</code> — no key, no account. A descriptive <code>User-Agent</code> header is required</td></tr><tr><td>Python</td><td>plain <code>urllib</code>/<code>requests</code>; no SDK needed</td></tr><tr><td>Cost</td><td><strong>Free</strong>, rate-limited but generous</td></tr><tr><td>AI fit</td><td><strong>Excellent.</strong> Stable, public, well-known endpoints</td></tr></tbody></table>
+<p><strong>This is the course&#x27;s guaranteed lane.</strong> Every graded task is completable here. It is also where the identifier (<code>CIK</code>), the filing lag, and the restatement lessons all live.</p>
+<h3>edgartools</h3>
+<table><thead><tr><th></th><th></th></tr></thead><tbody><tr><td>What</td><td>Open-source Python library over EDGAR with far better ergonomics than raw HTTP</td></tr><tr><td>Python</td><td><code>pip install edgartools</code></td></tr><tr><td>Cost</td><td><strong>Free</strong>, open source</td></tr><tr><td>AI fit</td><td>Good. Worth knowing as the comfortable path once students understand the raw one</td></tr></tbody></table>
+<p>Teach raw EDGAR first. A student who only knows the wrapper cannot debug it.</p>
+<h3>Financial Datasets (financialdatasets.ai)</h3>
+<table><thead><tr><th></th><th></th></tr></thead><tbody><tr><td>What</td><td>Fundamentals, prices, insider trades, filings, estimates</td></tr><tr><td>Access</td><td>Own API key</td></tr><tr><td>Cost</td><td>Free tier with a <strong>limited history window</strong>; pay-as-you-go roughly $0.01–$0.10 per request; Developer tier $200/mo</td></tr><tr><td>Verified</td><td>The free tier served data from 2023-08-22 onward when tested 2026-08-20</td></tr><tr><td>AI fit</td><td><strong>Excellent — native MCP server.</strong> Claude and other assistants can query it conversationally</td></tr></tbody></table>
+<p>The clearest example in the course of a source <strong>designed for an agent to use</strong>. Contrast it directly with WRDS.</p>
+<h3>Databento</h3>
+<table><thead><tr><th></th><th></th></tr></thead><tbody><tr><td>What</td><td>Market data — equities, futures, options; historical and live; tick to OHLCV</td></tr><tr><td>Access</td><td>Own API key</td></tr><tr><td>Python</td><td><code>pip install databento</code></td></tr><tr><td>Cost</td><td>Usage-based; <strong>$125 in free credits</strong> for new users at time of check</td></tr><tr><td>Notable</td><td>Publishes point-in-time instrument definitions and symbology mappings <strong>free of look-ahead bias</strong></td></tr><tr><td>AI fit</td><td><strong>Excellent.</strong> Clean, consistent schemas across live and historical</td></tr></tbody></table>
+<p>That point-in-time symbology is not a marketing line — it is the Week 1 identifier lesson and the Week 2 look-ahead lesson, solved at the vendor level. Worth showing students what it looks like when a vendor has taken the problem seriously.</p>
+<h3>sec-api.io</h3>
+<table><thead><tr><th></th><th></th></tr></thead><tbody><tr><td>What</td><td>Commercial SEC layer: full-text search since 2001, XBRL-to-JSON, extractor, streaming</td></tr><tr><td>Python</td><td><code>pip install sec-api</code></td></tr><tr><td>Cost</td><td><strong>Free tier is ~100 API calls total — lifetime, not monthly.</strong> Paid from about $49/mo</td></tr><tr><td>AI fit</td><td>Good — clean SDK, structured JSON</td></tr></tbody></table>
+<p>⚠ <strong>Not viable as a required tool at the free tier.</strong> A student would exhaust it in one lab. Use it as a demonstrated contrast — full-text search across all filings is something raw EDGAR cannot do easily — and never require it.</p>
+<p>---</p>
+<h2>Course policy</h2>
+<p><strong>Guaranteed lane:</strong> SEC EDGAR direct, plus <code>yfinance</code> and FRED for prices and macro. Every graded task is completable here alone, at zero cost, with no account.</p>
+<p><strong>Institutional lane:</strong> WRDS and LSEG. Students pursue access; whoever gets it uses it. Access is never worth points — the documented attempt and what it taught them is.</p>
+<p><strong>API-native lane:</strong> students obtain keys where the free tier or credits allow. Any spend must be optional and trivial; a student who spends nothing is never disadvantaged.</p>
+<p><strong>Cost ceiling:</strong> no graded task may require a student to pay. Where a paid source appears, it appears as a demonstration or an optional enrichment, and the free equivalent is named beside it.</p>
+<h2>Licence constraints</h2>
+<table><thead><tr><th>Source</th><th>Constraint</th></tr></thead><tbody><tr><td>S&amp;P Capital IQ, PitchBook</td><td>Licences generally prohibit bulk export and scripted extraction. <strong>Do not build scrapers.</strong> Use for lookup, not pipelines</td></tr><tr><td>LSEG / Datastream</td><td>Entitlements are per-subscription and narrower than the full product. Redistribution of extracts restricted. Credentials are personal</td></tr><tr><td>WRDS</td><td>Account is personal. <strong>Do not share credentials.</strong> Redistribution of extracts restricted</td></tr><tr><td>Bloomberg</td><td>Terminal-bound; not used</td></tr><tr><td>Databento, Financial Datasets, sec-api.io</td><td>Commercial terms; check redistribution before publishing extracts</td></tr></tbody></table>
+<p>Sharing an account or pooling a login is an integrity violation, not a shortcut.</p>
+<h2>What AI gets wrong about each of these</h2>
+<p>The course&#x27;s recurring lesson. Failure modes differ by generation:</p>
+<table><thead><tr><th>Source</th><th>The characteristic AI failure</th></tr></thead><tbody><tr><td>WRDS</td><td>Invents plausible table and column names. The schema is not reliably in the model</td></tr><tr><td>LSEG Workspace / CodeBook</td><td>Generates the <strong>retired</strong> <code>refinitiv-data</code> package and old import paths</td></tr><tr><td>Datastream</td><td>Will happily write <code>DatastreamPy</code> code for an entitlement Purdue does not have. There is no Python route here at all</td></tr><tr><td>SEC EDGAR</td><td>Usually correct on endpoints; often omits the required <code>User-Agent</code> header</td></tr><tr><td>Databento</td><td>Confuses schemas and datasets; may assume the wrong symbology</td></tr><tr><td>Financial Datasets</td><td>Generally good — the MCP server means the model is querying, not recalling</td></tr><tr><td>Any of them</td><td>States a coverage window or a price with total confidence and no basis</td></tr></tbody></table>
+<p><strong>The transferable rule:</strong> an AI&#x27;s knowledge of a data source is a <em>claim</em>, not documentation. Verify the package name, the endpoint, and the schema against the vendor&#x27;s current docs before you trust generated code. That check takes two minutes and it is the difference between working code and a plausible-looking failure.</p>
+</main></body></html>

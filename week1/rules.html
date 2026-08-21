@@ -1,0 +1,91 @@
+<!doctype html><html lang='en'><head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width,initial-scale=1'>
+<title>Week 1 — Rules</title><style>
+:root { --bg:#ffffff; --fg:#111418; --muted:#5a6572; --rule:#dfe3e8;
+        --accent:#0b5fa5; --code-bg:#f6f8fa; }
+@media (prefers-color-scheme: dark) {
+  :root { --bg:#11151a; --fg:#e8eaed; --muted:#9aa4b2; --rule:#2a323c;
+          --accent:#6fb3f2; --code-bg:#1a2029; } }
+* { box-sizing: border-box; }
+body { margin:0; padding:2rem 1rem 4rem; background:var(--bg); color:var(--fg);
+       font: 16px/1.55 -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+main { max-width: 60rem; margin: 0 auto; }
+.slide { border:1px solid var(--rule); border-radius:10px; padding:1.75rem 2rem;
+         margin:0 0 1.5rem; background:var(--bg); overflow-x:auto; }
+.cue { display:inline-block; font:600 11px/1 ui-monospace, Menlo, Consolas, monospace;
+       letter-spacing:.09em; text-transform:uppercase; color:var(--accent);
+       border:1px solid var(--accent); border-radius:999px; padding:.35rem .6rem;
+       margin-bottom:1rem; }
+h1 { font-size:1.5rem; margin:0 0 1.25rem; }
+h2 { font-size:1.35rem; margin:0 0 1rem; line-height:1.25; }
+p, li { color:var(--fg); }
+blockquote { margin:1rem 0; padding:.6rem 0 .6rem 1rem; border-left:3px solid var(--accent);
+             color:var(--muted); }
+pre { background:var(--code-bg); border:1px solid var(--rule); border-radius:8px;
+      padding:.9rem 1rem; overflow-x:auto;
+      font:13px/1.5 ui-monospace, Menlo, Consolas, monospace; }
+code { font:.92em ui-monospace, Menlo, Consolas, monospace; }
+table { border-collapse:collapse; width:100%; margin:1rem 0; font-size:.95rem;
+        display:block; overflow-x:auto; }
+th, td { border:1px solid var(--rule); padding:.45rem .7rem; text-align:left; }
+th { background:var(--code-bg); }
+.math { background:var(--code-bg); border:1px solid var(--rule); border-radius:8px;
+        padding:.7rem 1rem; margin:1rem 0; font-family:ui-monospace, Menlo, Consolas, monospace;
+        font-size:.95rem; color:var(--fg); }
+footer { max-width:60rem; margin:2rem auto 0; color:var(--muted); font-size:.85rem;
+         border-top:1px solid var(--rule); padding-top:1rem; }
+
+.nav { margin: 0 0 1.5rem; font-size:.9rem; }
+.nav a { color: var(--accent); text-decoration: none; }
+.nav a:hover { text-decoration: underline; }
+.wk { border:1px solid var(--rule); border-radius:10px; padding:1.1rem 1.4rem; margin:0 0 1rem; }
+.wk h3 { margin:.1rem 0 .5rem; font-size:1.05rem; }
+.wk .num { color:var(--muted); font:600 11px/1 ui-monospace,Menlo,Consolas,monospace;
+           letter-spacing:.1em; text-transform:uppercase; }
+.surfaces a { display:inline-block; margin:.3rem .4rem .3rem 0; padding:.3rem .65rem;
+              border:1px solid var(--accent); border-radius:999px; font-size:.85rem;
+              color:var(--accent); text-decoration:none; }
+.surfaces a:hover { background:var(--code-bg); }
+.surfaces span.held { display:inline-block; margin:.3rem .4rem .3rem 0; padding:.3rem .65rem;
+                      border:1px dashed var(--rule); border-radius:999px; font-size:.85rem;
+                      color:var(--muted); }
+.lede { color:var(--muted); margin:0 0 2rem; }
+</style></head>
+<body><main>
+<div class='nav'><a href='../index.html'>MSF Financial Modeling</a></div>
+<h1>Week 1 — Rules</h1><h1>Week 1 — Rules and Conventions</h1>
+<blockquote><strong>Register: RULES.</strong> Conventions, integrity, and fallbacks. No teaching here — see <code>handout.md</code>.</blockquote>
+<h2>The two lanes, and the guarantee</h2>
+<p><strong>Generation 1 — institutional:</strong> WRDS, LSEG Workspace. Attempt required; access not required.</p>
+<p><strong>Generation 2 — API-native:</strong> SEC EDGAR, Financial Datasets, Databento, and others in the register.</p>
+<p><strong>Guaranteed lane:</strong> SEC EDGAR direct, <code>yfinance</code>, FRED. <strong>Every graded task in this course is completable here alone, at zero cost, with no account.</strong> A student working entirely in this lane can earn full marks on every assignment.</p>
+<p><strong>Not used:</strong> Bloomberg. Terminal-bound, unscriptable for coursework.</p>
+<h2>No graded task requires you to spend money</h2>
+<p>Free tiers and credits only. If a source demands payment before issuing a key, use another one.</p>
+<p>If you choose to spend your own money on an optional enrichment, that is your decision and it earns you nothing in points.</p>
+<h2>Access outcomes are never graded; attempts are</h2>
+<p>A denied or pending account costs nothing. What is graded: the link used, the timestamp, the status evidence, the remaining blocker, and what you learned about what that platform is for.</p>
+<p>The same applies to entitlements. <strong>An honest &quot;I diagnosed it and the answer is still unclear&quot; earns full marks</strong> — that is the state the instructor is in.</p>
+<h2>Verify generated code before you run it</h2>
+<p>Any AI-written code against a data source is checked before it is trusted: package name, endpoint or table, field names, coverage window, and licence.</p>
+<p><strong>Recording that you checked is part of the deliverable.</strong> &quot;It worked&quot; is not a verification.</p>
+<p>An AI&#x27;s statement about a source — what it holds, what it costs, what you may do with it — is a claim, not documentation.</p>
+<h2>Licence compliance</h2>
+<p>Capital IQ and PitchBook licences restrict bulk export and scripted extraction. <strong>Do not write scrapers against them.</strong> Do not share exported data outside your submission.</p>
+<p><strong>Do not pool accounts or share credentials.</strong> WRDS and LSEG accounts are personal. Sharing one is an integrity violation, not a shortcut.</p>
+<p>If an analysis seems to require bulk extraction from a restricted platform, the analysis is designed wrong for this course. Use WRDS, the Generation 2 sources, or the guaranteed lane.</p>
+<h2>AI use</h2>
+<p>AI writes most of the code in this course. That is expected and encouraged.</p>
+<p>What must be yours: the framing of the problem, the choice of which source to ask, the judgment about which source is right, the adjudication of every discrepancy, and the explanation you could give under questioning.</p>
+<p>An AI can diff two dataframes. It cannot decide whether a difference is a defect or a convention. If your adjudications read as generated rather than reasoned, that is visible, and it is the part of the lab that carries the weight.</p>
+<p>You must be able to explain every line of code you submit. &quot;The AI wrote it&quot; is not an answer to a question about what a line does.</p>
+<h2>Reproducibility</h2>
+<p>Every submitted notebook must run start to finish on a fresh kernel. A notebook that only works because of state left in memory is not a deliverable.</p>
+<p>Every number in a write-up must be traceable to a line of code that produced it. Numbers typed in by hand are not sourced.</p>
+<p><strong>Never commit an API key.</strong> Use an environment variable or Colab&#x27;s secrets. A key in a submitted notebook is a security incident, and you should rotate it immediately.</p>
+<h2>Citation of data</h2>
+<p>Every source used gets an entry in <code>source_log.md</code>: the source, the access route, the coverage window it actually serves, and the retrieval date.</p>
+<p>Week 7 is graded on whether a colleague can reproduce your work. An uncited source makes that impossible.</p>
+<h2>Late work and academic integrity</h2>
+<p>See the course syllabus and the course syllabus. Nothing here overrides them.</p>
+</main></body></html>
