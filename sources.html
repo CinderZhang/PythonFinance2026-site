@@ -1,39 +1,59 @@
 <!doctype html><html lang='en'><head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width,initial-scale=1'>
 <title>Data Source Register</title><style>
-:root { --bg:#ffffff; --fg:#111418; --muted:#5a6572; --rule:#dfe3e8;
-        --accent:#0b5fa5; --code-bg:#f6f8fa; }
+:root { --bg:#ffffff; --fg:#14181d; --muted:#5a6572; --rule:#dfe3e8;
+        --accent:#0b5fa5; --code-bg:#f4f6f8; }
 @media (prefers-color-scheme: dark) {
-  :root { --bg:#11151a; --fg:#e8eaed; --muted:#9aa4b2; --rule:#2a323c;
-          --accent:#6fb3f2; --code-bg:#1a2029; } }
+  :root { --bg:#0f1419; --fg:#e9ecf0; --muted:#9aa4b2; --rule:#2a323c;
+          --accent:#6fb3f2; --code-bg:#182029; } }
 * { box-sizing: border-box; }
-body { margin:0; padding:2rem 1rem 4rem; background:var(--bg); color:var(--fg);
-       font: 16px/1.55 -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
-main { max-width: 60rem; margin: 0 auto; }
-.slide { border:1px solid var(--rule); border-radius:10px; padding:1.75rem 2rem;
-         margin:0 0 1.5rem; background:var(--bg); overflow-x:auto; }
-.cue { display:inline-block; font:600 11px/1 ui-monospace, Menlo, Consolas, monospace;
-       letter-spacing:.09em; text-transform:uppercase; color:var(--accent);
-       border:1px solid var(--accent); border-radius:999px; padding:.35rem .6rem;
-       margin-bottom:1rem; }
-h1 { font-size:1.5rem; margin:0 0 1.25rem; }
-h2 { font-size:1.35rem; margin:0 0 1rem; line-height:1.25; }
-p, li { color:var(--fg); }
-blockquote { margin:1rem 0; padding:.6rem 0 .6rem 1rem; border-left:3px solid var(--accent);
-             color:var(--muted); }
+html, body { height:100%; }
+body { margin:0; background:var(--bg); color:var(--fg);
+       font: 22px/1.5 -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+
+.slide { display:none; min-height:100vh; padding:5vh 7vw 9vh;
+         flex-direction:column; justify-content:center; }
+.slide.current { display:flex; }
+.slide > *:first-child { margin-top:0; }
+
+h1 { font-size:2.8rem; line-height:1.15; margin:0 0 1rem; letter-spacing:-.01em; }
+h2 { font-size:2.1rem; line-height:1.2; margin:0 0 1.4rem; letter-spacing:-.01em; }
+h3 { font-size:1.4rem; margin:1.2rem 0 .6rem; color:var(--muted); }
+p, li { max-width:52ch; }
+li { margin:.45rem 0; }
+strong { font-weight:650; }
+blockquote { margin:1.3rem 0; padding:.7rem 0 .7rem 1.2rem;
+             border-left:4px solid var(--accent); color:var(--muted); }
 pre { background:var(--code-bg); border:1px solid var(--rule); border-radius:8px;
-      padding:.9rem 1rem; overflow-x:auto;
-      font:13px/1.5 ui-monospace, Menlo, Consolas, monospace; }
-code { font:.92em ui-monospace, Menlo, Consolas, monospace; }
-table { border-collapse:collapse; width:100%; margin:1rem 0; font-size:.95rem;
+      padding:1rem 1.2rem; overflow-x:auto; max-width:100%;
+      font:.72em/1.5 ui-monospace, Menlo, Consolas, monospace; }
+code { font:.88em ui-monospace, Menlo, Consolas, monospace; }
+table { border-collapse:collapse; margin:1.1rem 0; font-size:.78em; max-width:100%;
         display:block; overflow-x:auto; }
-th, td { border:1px solid var(--rule); padding:.45rem .7rem; text-align:left; }
+th, td { border:1px solid var(--rule); padding:.5rem .8rem; text-align:left; }
 th { background:var(--code-bg); }
 .math { background:var(--code-bg); border:1px solid var(--rule); border-radius:8px;
-        padding:.7rem 1rem; margin:1rem 0; font-family:ui-monospace, Menlo, Consolas, monospace;
-        font-size:.95rem; color:var(--fg); }
-footer { max-width:60rem; margin:2rem auto 0; color:var(--muted); font-size:.85rem;
-         border-top:1px solid var(--rule); padding-top:1rem; }
+        padding:.8rem 1.1rem; margin:1.1rem 0; font-size:.8em;
+        font-family:ui-monospace, Menlo, Consolas, monospace; }
+
+.title-slide h1 { font-size:3.4rem; }
+.title-slide .sub { color:var(--muted); font-size:1.3rem; margin-top:.6rem; }
+
+#bar { position:fixed; top:0; left:0; height:3px; background:var(--accent);
+       width:0; transition:width .15s ease; z-index:10; }
+#num { position:fixed; bottom:1.4vh; right:2vw; color:var(--muted);
+       font:600 .7rem ui-monospace, Menlo, Consolas, monospace; z-index:10; }
+#hint { position:fixed; bottom:1.4vh; left:2vw; color:var(--muted);
+        font:.68rem -apple-system, "Segoe UI", sans-serif; z-index:10; opacity:.75; }
+
+@media print {
+  #bar, #num, #hint { display:none; }
+  .slide { display:flex !important; min-height:auto; page-break-after:always;
+           padding:6% 8%; border-bottom:none; }
+  body { font-size:15px; }
+  h1 { font-size:2rem; } h2 { font-size:1.6rem; }
+}
+@media (max-width:820px) { body { font-size:17px; } h2 { font-size:1.6rem; } }
 
 .nav { margin: 0 0 1.5rem; font-size:.9rem; }
 .nav a { color: var(--accent); text-decoration: none; }
@@ -145,11 +165,42 @@ footer { max-width:60rem; margin:2rem auto 0; color:var(--muted); font-size:.85r
 <table><thead><tr><th></th><th></th></tr></thead><tbody><tr><td>What</td><td>Commercial SEC layer: full-text search since 2001, XBRL-to-JSON, extractor, streaming</td></tr><tr><td>Python</td><td><code>pip install sec-api</code></td></tr><tr><td>Cost</td><td><strong>Free tier is ~100 API calls total — lifetime, not monthly.</strong> Paid from about $49/mo</td></tr><tr><td>AI fit</td><td>Good — clean SDK, structured JSON</td></tr></tbody></table>
 <p>⚠ <strong>Not viable as a required tool at the free tier.</strong> A student would exhaust it in one lab. Use it as a demonstrated contrast — full-text search across all filings is something raw EDGAR cannot do easily — and never require it.</p>
 <p>---</p>
+<h2>The wider landscape — including what Purdue does not have</h2>
+<p>Everything above is what you can reach. This section is what <strong>exists</strong>, because an analyst seat will not be bounded by one university&#x27;s licences and you should not arrive thinking it is.</p>
+<p><strong>Nothing here is required and nothing is graded on it. This is orientation, and orientation is the point</strong> — the course informs you what exists; it does not fund any of it, and what you choose to pay for is your own business.</p>
+<p>The tables below name what each source is <strong>for</strong> rather than what it costs. Not squeamishness: the only pricing available for most of these is the vendor&#x27;s own marketing, tiers move constantly, and a stale price in a handout is exactly the kind of unverified claim this course teaches you to refuse. Check the current terms yourself.</p>
+<h3>Institutional platforms — the professional tier</h3>
+<table><thead><tr><th>Platform</th><th>What it is for</th><th>At Purdue?</th></tr></thead><tbody><tr><td><strong>Bloomberg Terminal</strong></td><td>The desk standard: real-time markets, news, chat, and the Excel API most of the street runs on</td><td>Available on campus, <strong>not used in this course</strong> — terminal-bound and unscriptable for coursework</td></tr><tr><td><strong>FactSet</strong></td><td>Integrated fundamentals, estimates, ownership and portfolio analytics</td><td><strong>Yes</strong>, inside Purdue&#x27;s WRDS instance</td></tr><tr><td><strong>S&amp;P Capital IQ Pro</strong></td><td>Company screening, transactions, credit; deep private-company coverage</td><td>Yes, by request through the library</td></tr><tr><td><strong>MSCI / Barra</strong></td><td>Index data and the risk models most institutions report against</td><td>No</td></tr><tr><td><strong>Morningstar Direct</strong></td><td>Fund and manager research, style analysis</td><td>No</td></tr><tr><td><strong>PitchBook · Preqin · Burgiss</strong></td><td>Private markets — venture, PE, and fund performance benchmarks</td><td>PitchBook by request; the others no</td></tr><tr><td><strong>ICE Data Services · Moody&#x27;s Analytics</strong></td><td>Fixed-income pricing, credit models, structured products</td><td>No</td></tr><tr><td><strong>BlackRock Aladdin</strong></td><td>Portfolio and risk management as an operating system, not a data feed</td><td>No — named so you know what it is when it comes up</td></tr></tbody></table>
+<h3>API-native vendors — you can hold these yourself</h3>
+<p>Purdue does not need to license these. They sell to individuals, most have a free tier, and a student can hold a key personally. <strong>Tiers move constantly; check the current terms before you build on one.</strong></p>
+<table><thead><tr><th>Vendor</th><th>Where it fits</th></tr></thead><tbody><tr><td><strong>Polygon.io</strong></td><td>US equities, options and crypto; strong intraday and websocket coverage</td></tr><tr><td><strong>Tiingo</strong></td><td>Clean split- and dividend-adjusted history; long daily series</td></tr><tr><td><strong>Alpha Vantage</strong></td><td>Long-standing free tier; broad but rate-limited</td></tr><tr><td><strong>Financial Modeling Prep</strong></td><td>Fundamentals and ratios at a low entry price</td></tr><tr><td><strong>Intrinio</strong></td><td>XBRL-standardised US fundamentals, options, ETF data</td></tr><tr><td><strong>Finnhub</strong></td><td>Estimates, news and alternative datasets</td></tr><tr><td><strong>Nasdaq Data Link</strong> (formerly Quandl)</td><td>A marketplace rather than one feed — economic and alternative datasets, priced per dataset</td></tr><tr><td><strong>Alpaca · Interactive Brokers</strong></td><td>Market data attached to a brokerage API, so the data and the execution path are the same</td></tr><tr><td><strong>OpenBB</strong></td><td>Not a source — an open-source layer that puts many of the above behind one interface</td></tr></tbody></table>
+<h3>Free and open, and better than most students expect</h3>
+<p>The most under-used tier. Several of these are what published research actually runs on.</p>
+<table><thead><tr><th>Source</th><th>What it holds</th></tr></thead><tbody><tr><td><strong>Ken French Data Library</strong></td><td>The canonical factor returns — market, size, value, momentum, and the industry portfolios. Free, and the reference implementation for most factor work</td></tr><tr><td><strong>Open Source Asset Pricing</strong> (Chen – Zimmermann)</td><td>Replicated cross-sectional predictors with published code — the honest answer to &quot;does this signal survive?&quot;</td></tr><tr><td><strong>FRED</strong> (guaranteed lane)</td><td>US macro, rates and the risk-free series you will need for any Sharpe ratio</td></tr><tr><td><strong>World Bank · IMF · OECD</strong></td><td>Cross-country macro, all with documented APIs</td></tr><tr><td><strong>SEC XBRL frames API</strong></td><td>The same filings as EDGAR, but sliced across companies for one tag and one period</td></tr></tbody></table>
+<h3>The cautionary case: IEX Cloud</h3>
+<p><strong>IEX Cloud announced retirement on 31 May 2024 and shut down on 31 August 2024</strong>, referring its customers to Intrinio. It was popular, developer-friendly, and widely built on. The exchange itself still operates — it was the data subsidiary that closed.</p>
+<p>Two things follow, and both matter more than any table above.</p>
+<p><strong>A data source is a counterparty, not a fact of nature.</strong> Code written against a single vendor inherits that vendor&#x27;s business decisions. Anything you intend to rerun in a year should be able to survive its source disappearing — which means an abstraction layer, or at minimum a documented second source you could switch to.</p>
+<p><strong>Tutorials outlive the services they teach.</strong> Search for market-data examples today and you will still find IEX Cloud code, confidently presented, that cannot run. An AI assistant trained on that corpus will write it for you without hesitation. This is the concrete form of the rule in the last section of this file: <strong>an AI&#x27;s knowledge of a data source is a claim, not documentation.</strong></p>
 <h2>Course policy</h2>
 <p><strong>Guaranteed lane:</strong> SEC EDGAR direct, plus <code>yfinance</code> and FRED for prices and macro. Every graded task is completable here alone, at zero cost, with no account.</p>
 <p><strong>Institutional lane:</strong> WRDS and LSEG. Students pursue access; whoever gets it uses it. Access is never worth points — the documented attempt and what it taught them is.</p>
-<p><strong>API-native lane:</strong> students obtain keys where the free tier or credits allow. Any spend must be optional and trivial; a student who spends nothing is never disadvantaged.</p>
-<p><strong>Cost ceiling:</strong> no graded task may require a student to pay. Where a paid source appears, it appears as a demonstration or an optional enrichment, and the free equivalent is named beside it.</p>
+<p><strong>API-native lane:</strong> students obtain their own keys. Many of these vendors have free tiers; some do not.</p>
+<p><strong>We inform; we do not fund</strong> (owner ruling 2026-08-22, superseding the cost ceiling). The course names what exists at every tier, paid included, and what each source is for. <strong>What a source costs, and who pays for it, is between the student and the vendor.</strong> It is not the course&#x27;s business and is not policed here.</p>
+<p><strong>The guaranteed lane stands, on different grounds.</strong> Every graded task remains completable on SEC EDGAR, <code>yfinance</code> and FRED alone — not because of cost, but because approval queues are real and the eval-safety invariant requires an identical graded ask for every student regardless of which access has landed.</p>
+<h2>Licence and retention — what a student may DO with an extract</h2>
+<p><strong>Owner build-order item (b): this table is filled before any lab tells a student to store or submit an extract.</strong> Every lab from Week 1 onward asks for a saved artifact (<code>security_master.csv</code>, a panel, a source ledger), so this governs all of them.</p>
+<p>Read the columns as: may they keep a local copy, may they hand it in, may it appear in a public repo, and what must be recorded alongside it.</p>
+<table><thead><tr><th>Source</th><th>Store locally</th><th>Submit to instructor</th><th>Public repo / site</th><th>Retention</th><th>Attribution required</th></tr></thead><tbody><tr><td><strong>SEC EDGAR</strong></td><td>yes</td><td>yes</td><td><strong>yes</strong></td><td>indefinite</td><td>source + retrieval date</td></tr><tr><td><strong>edgartools</strong></td><td>yes</td><td>yes</td><td>yes</td><td>indefinite</td><td>same as EDGAR</td></tr><tr><td><strong>FRED</strong></td><td>yes</td><td>yes</td><td>yes, with attribution</td><td>indefinite</td><td>series ID + source</td></tr><tr><td><strong><code>yfinance</code></strong></td><td>yes</td><td>yes</td><td><strong>avoid</strong> — unofficial scrape of Yahoo, redistribution not licensed</td><td>course duration</td><td>source + retrieval date</td></tr><tr><td><strong>Financial Datasets</strong></td><td>yes</td><td>yes</td><td><strong>no</strong> — commercial terms, no redistribution</td><td>course duration</td><td>source + retrieval date</td></tr><tr><td><strong>Databento</strong></td><td>yes</td><td>yes</td><td><strong>no</strong> — licensed data, redistribution prohibited</td><td>check your plan</td><td>source + retrieval date</td></tr><tr><td><strong>sec-api.io</strong></td><td>yes</td><td>yes</td><td><strong>no</strong> — commercial layer over public filings</td><td>course duration</td><td>source + retrieval date</td></tr><tr><td><strong>WRDS (CRSP, Compustat, TRACE, IBES)</strong></td><td>yes, <strong>personal use only</strong></td><td>yes</td><td><strong>NEVER</strong></td><td>delete at course end unless research-approved</td><td>dataset + vendor + access date</td></tr><tr><td><strong>LSEG Workspace / Datastream</strong></td><td>export within stated limits</td><td>yes</td><td><strong>NEVER</strong></td><td>delete at course end</td><td>product + retrieval date</td></tr><tr><td><strong>S&amp;P Capital IQ</strong></td><td>manual export only</td><td>yes</td><td><strong>NEVER</strong></td><td>delete at course end</td><td>product + retrieval date</td></tr><tr><td><strong>PitchBook</strong></td><td>manual export only</td><td>yes</td><td><strong>NEVER</strong></td><td>delete at course end</td><td>product + retrieval date</td></tr></tbody></table>
+<h3>The rules behind that table</h3>
+<p><strong>Public repo means public.</strong> The course site and any public GitHub repo are the same thing as publishing. Nothing from WRDS, LSEG, Capital IQ, or PitchBook goes there — not a CSV, not a screenshot, not a table of values pasted into a notebook. <strong>A student cannot fix this after the fact</strong>: git history keeps deleted files, and a published extract is published.</p>
+<p><strong>Submission is not redistribution.</strong> Handing an extract to your instructor for assessment is normal academic use and is permitted by every source here. Posting it is not.</p>
+<p><strong>Accounts are personal.</strong> WRDS and LSEG credentials are issued to you. Sharing a login, or pulling data on behalf of someone whose request was denied, is an integrity violation and can cost the university its subscription — not just you your account.</p>
+<p><strong>Derived results are usually fine; raw extracts are not.</strong> A chart of returns you computed, a regression coefficient, a summary statistic — these are your analysis. The underlying licensed rows are the vendor&#x27;s product. When in doubt, publish the finding and keep the extract private.</p>
+<p><strong>Bulk extraction is separately prohibited</strong> for Capital IQ and PitchBook regardless of what you do with the result. Do not write scrapers against them. If an analysis seems to need bulk extraction from a restricted platform, it is designed wrong for this course.</p>
+<h3>What this means for your submissions</h3>
+<p>Every lab artifact you hand in is fine. <strong>Your public-facing work is where the constraint bites</strong> — and Week 7 asks for a package a colleague could rerun, which is exactly where students are tempted to publish a repo.</p>
+<p>The Week 7 deliverable is submitted, <strong>not published</strong>. If you want a public portfolio version, rebuild it on the free lane — SEC EDGAR, FRED, <code>yfinance</code> — and say in the write-up that the licensed sources were used in the assessed version and cannot be included. That sentence is itself professional literacy, and an employer reading it will recognise it.</p>
 <h2>Licence constraints</h2>
 <table><thead><tr><th>Source</th><th>Constraint</th></tr></thead><tbody><tr><td>S&amp;P Capital IQ, PitchBook</td><td>Licences generally prohibit bulk export and scripted extraction. <strong>Do not build scrapers.</strong> Use for lookup, not pipelines</td></tr><tr><td>LSEG / Datastream</td><td>Entitlements are per-subscription and narrower than the full product. Redistribution of extracts restricted. Credentials are personal</td></tr><tr><td>WRDS</td><td>Account is personal. <strong>Do not share credentials.</strong> Redistribution of extracts restricted</td></tr><tr><td>Bloomberg</td><td>Terminal-bound; not used</td></tr><tr><td>Databento, Financial Datasets, sec-api.io</td><td>Commercial terms; check redistribution before publishing extracts</td></tr></tbody></table>
 <p>Sharing an account or pooling a login is an integrity violation, not a shortcut.</p>
