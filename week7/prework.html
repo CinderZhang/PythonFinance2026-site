@@ -1,6 +1,6 @@
 <!doctype html><html lang='en'><head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width,initial-scale=1'>
-<title>MSF Financial Modeling</title><style>
+<title>Week 7 — Prework</title><style>
 :root { --bg:#ffffff; --fg:#14181d; --muted:#5a6572; --rule:#dfe3e8;
         --accent:#0b5fa5; --code-bg:#f4f6f8; }
 @media (prefers-color-scheme: dark) {
@@ -72,6 +72,31 @@ th { background:var(--code-bg); }
 .lede { color:var(--muted); margin:0 0 2rem; }
 </style></head>
 <body><main>
-<div class='nav'><a href='index.html'>MSF Financial Modeling</a></div>
-<h1>MSF Financial Modeling</h1><p class='lede'>Professional data sources in the AI era. Materials are released as the term progresses — prework before each session, teaching materials after it.</p><div class='wk'><div class='num'>Week 1</div><h3>Professional Data in the AI Era: Two Generations</h3><div class='surfaces'><a href='week1/prework.html'>Prework</a><a href='week1/rules.html'>Rules</a><span class='held'>Handout — not yet released</span><span class='held'>Lab — not yet released</span><span class='held'>Deck — not yet released</span></div></div><div class='wk'><div class='num'>Week 2</div><h3>Data Quality and Point-in-Time Discipline</h3><div class='surfaces'><a href='week2/prework.html'>Prework</a><a href='week2/rules.html'>Rules</a><span class='held'>Handout — not yet released</span><span class='held'>Lab — not yet released</span><span class='held'>Deck — not yet released</span></div></div><div class='wk'><div class='num'>Week 3</div><h3>Return, Risk, and Benchmark Construction</h3><div class='surfaces'><a href='week3/prework.html'>Prework</a><a href='week3/rules.html'>Rules</a><span class='held'>Handout — not yet released</span><span class='held'>Lab — not yet released</span><span class='held'>Deck — not yet released</span></div></div><div class='wk'><div class='num'>Week 4</div><h3>Portfolio Construction and the Limits of Optimization</h3><div class='surfaces'><a href='week4/prework.html'>Prework</a><a href='week4/rules.html'>Rules</a><span class='held'>Handout — not yet released</span><span class='held'>Lab — not yet released</span><span class='held'>Deck — not yet released</span></div></div><div class='wk'><div class='num'>Week 5</div><h3>Allocation, Rebalancing, and Risk Reporting</h3><div class='surfaces'><a href='week5/prework.html'>Prework</a><a href='week5/rules.html'>Rules</a><span class='held'>Handout — not yet released</span><span class='held'>Lab — not yet released</span><span class='held'>Deck — not yet released</span></div></div><div class='wk'><div class='num'>Week 6</div><h3>Valuation on Professional Fundamentals</h3><div class='surfaces'><a href='week6/prework.html'>Prework</a><a href='week6/rules.html'>Rules</a><span class='held'>Handout — not yet released</span><span class='held'>Lab — not yet released</span><span class='held'>Deck — not yet released</span></div></div><div class='wk'><div class='num'>Week 7</div><h3>Capstone: The Analyst Deliverable and Its Defense</h3><div class='surfaces'><a href='week7/prework.html'>Prework</a><a href='week7/rules.html'>Rules</a><span class='held'>Handout — not yet released</span><span class='held'>Lab — not yet released</span><span class='held'>Deck — not yet released</span></div></div><p class='lede'><a href='sources.html'>Data source register</a> — access routes, costs, coverage, and what AI gets wrong about each source.</p>
+<div class='nav'><a href='../index.html'>MSF Financial Modeling</a></div>
+<h1>Week 7 — Prework</h1><h1>Week 7 — Prework</h1>
+<blockquote><strong>Register: TEACH.</strong> The bridge from six weeks of artefacts to one deliverable.</blockquote>
+<p><strong>You arrive with:</strong> everything you built. This week assembles it.</p>
+<p><strong>Honest time budget: about 2 hours.</strong> More than usual, deliberately — the assembly is the work, and doing it before the session makes the session useful.</p>
+<table><thead><tr><th>Part</th><th>What</th><th>Time</th></tr></thead><tbody><tr><td>A</td><td>Gather every artefact into one place</td><td>30 min</td></tr><tr><td>B</td><td>Run everything on a fresh kernel</td><td>45 min</td></tr><tr><td>C</td><td>Identify your load-bearing assumption</td><td>20 min</td></tr><tr><td>D</td><td>Draft the finding paragraph</td><td>25 min</td></tr></tbody></table>
+<p>---</p>
+<h2>Part A — Gather</h2>
+<p>One directory. Everything from Weeks 1 through 6:</p>
+<ul><li><code>security_master.csv</code> and <code>source_log.md</code></li><li>your panel and <code>data_quality_issues.md</code></li><li>your conventions statement and metrics</li><li>your portfolio weights and constraints</li><li>your risk report and limitations section</li><li>your valuation and source ledger</li><li>every notebook</li></ul>
+<p><strong>If something is missing, find out now.</strong> Week 7 assembles; it does not rebuild. A missing artefact is a missing section of your deliverable.</p>
+<h2>Part B — Run everything, fresh kernel, in order</h2>
+<p>This will take longer than you expect and things will break. That is the point of doing it now rather than the night before the deadline.</p>
+<p>Record for each failure: what broke, why, and whether you can fix it.</p>
+<p>Common causes, in rough order of frequency:</p>
+<ul><li>a file path that only existed on the day you wrote it</li><li>a variable defined in a cell you later deleted</li><li>a data pull that returns something different now than it did then</li><li>a library behaviour that changed</li></ul>
+<p>The third one is worth pausing on. If a data source returns different values now than it did in Week 2, <strong>that is a finding</strong>, and it belongs in your deliverable — you have direct evidence of the vintage problem you were taught, in your own work.</p>
+<h2>Part C — Identify your load-bearing assumption</h2>
+<p>Across your whole analysis, which single assumption, if wrong, most changes your conclusion?</p>
+<p>Write it down along with:</p>
+<ul><li>why you made it</li><li>what evidence supports it</li><li>how strong that evidence actually is</li><li>what would have to be true for it to be wrong</li></ul>
+<p>You will defend this one on video with a data point you have not seen. Choosing it carefully now is worth more than rehearsing later.</p>
+<p><strong>Choose the real one.</strong> There is a temptation to nominate an assumption you feel comfortable defending. The grader will be able to tell whether it is actually load-bearing, and defending a minor assumption well scores worse than defending the real one imperfectly.</p>
+<h2>Part D — Draft the finding paragraph</h2>
+<p>Write the opening paragraph of your deliverable: your conclusion, its range, and your confidence in it. One paragraph.</p>
+<p>Bring it. One of these will be read cold by the room in the session, and every question the room asks is a defect you get to fix before submission.</p>
+<p><strong>Bring to the session:</strong> everything gathered, your fresh-kernel failure list, your load-bearing assumption with its evidence, and the finding paragraph.</p>
 </main></body></html>

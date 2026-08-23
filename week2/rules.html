@@ -1,6 +1,6 @@
 <!doctype html><html lang='en'><head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width,initial-scale=1'>
-<title>MSF Financial Modeling</title><style>
+<title>Week 2 — Rules</title><style>
 :root { --bg:#ffffff; --fg:#14181d; --muted:#5a6572; --rule:#dfe3e8;
         --accent:#0b5fa5; --code-bg:#f4f6f8; }
 @media (prefers-color-scheme: dark) {
@@ -72,6 +72,32 @@ th { background:var(--code-bg); }
 .lede { color:var(--muted); margin:0 0 2rem; }
 </style></head>
 <body><main>
-<div class='nav'><a href='index.html'>MSF Financial Modeling</a></div>
-<h1>MSF Financial Modeling</h1><p class='lede'>Professional data sources in the AI era. Materials are released as the term progresses — prework before each session, teaching materials after it.</p><div class='wk'><div class='num'>Week 1</div><h3>Professional Data in the AI Era: Two Generations</h3><div class='surfaces'><a href='week1/prework.html'>Prework</a><a href='week1/rules.html'>Rules</a><span class='held'>Handout — not yet released</span><span class='held'>Lab — not yet released</span><span class='held'>Deck — not yet released</span></div></div><div class='wk'><div class='num'>Week 2</div><h3>Data Quality and Point-in-Time Discipline</h3><div class='surfaces'><a href='week2/prework.html'>Prework</a><a href='week2/rules.html'>Rules</a><span class='held'>Handout — not yet released</span><span class='held'>Lab — not yet released</span><span class='held'>Deck — not yet released</span></div></div><div class='wk'><div class='num'>Week 3</div><h3>Return, Risk, and Benchmark Construction</h3><div class='surfaces'><a href='week3/prework.html'>Prework</a><a href='week3/rules.html'>Rules</a><span class='held'>Handout — not yet released</span><span class='held'>Lab — not yet released</span><span class='held'>Deck — not yet released</span></div></div><div class='wk'><div class='num'>Week 4</div><h3>Portfolio Construction and the Limits of Optimization</h3><div class='surfaces'><a href='week4/prework.html'>Prework</a><a href='week4/rules.html'>Rules</a><span class='held'>Handout — not yet released</span><span class='held'>Lab — not yet released</span><span class='held'>Deck — not yet released</span></div></div><div class='wk'><div class='num'>Week 5</div><h3>Allocation, Rebalancing, and Risk Reporting</h3><div class='surfaces'><a href='week5/prework.html'>Prework</a><a href='week5/rules.html'>Rules</a><span class='held'>Handout — not yet released</span><span class='held'>Lab — not yet released</span><span class='held'>Deck — not yet released</span></div></div><div class='wk'><div class='num'>Week 6</div><h3>Valuation on Professional Fundamentals</h3><div class='surfaces'><a href='week6/prework.html'>Prework</a><a href='week6/rules.html'>Rules</a><span class='held'>Handout — not yet released</span><span class='held'>Lab — not yet released</span><span class='held'>Deck — not yet released</span></div></div><div class='wk'><div class='num'>Week 7</div><h3>Capstone: The Analyst Deliverable and Its Defense</h3><div class='surfaces'><a href='week7/prework.html'>Prework</a><a href='week7/rules.html'>Rules</a><span class='held'>Handout — not yet released</span><span class='held'>Lab — not yet released</span><span class='held'>Deck — not yet released</span></div></div><p class='lede'><a href='sources.html'>Data source register</a> — access routes, costs, coverage, and what AI gets wrong about each source.</p>
+<div class='nav'><a href='../index.html'>MSF Financial Modeling</a></div>
+<h1>Week 2 — Rules</h1><h1>Week 2 — Rules and Conventions</h1>
+<blockquote><strong>Register: RULES.</strong> No teaching here — see <code>handout.md</code>.</blockquote>
+<h2>The Blocker rule</h2>
+<p><strong>A Blocker open in <code>data_quality_issues.md</code> means no headline result.</strong> Not a result with a caveat. No result.</p>
+<p>This binds for the rest of the course. Week 3 will take your Week 2 limitations statement at face value, and so will every week after it.</p>
+<p>Logging an issue is not clearing it.</p>
+<h2>Evidence standard</h2>
+<p>Every entry in the catalog carries <strong>counts and percentages</strong>. Qualitative descriptions of data problems are not evidence.</p>
+<ul><li>Not evidence: &quot;some names are missing&quot;, &quot;returns look noisy&quot;, &quot;coverage is spotty&quot;</li><li>Evidence: &quot;3 of 12 requested names returned 0 rows (25%)&quot;, &quot;returns exceed ±50% on 4 of</li></ul>
+<p>3,140 security-days (0.13%)&quot;</p>
+<p>If you suspect a problem, measure it. A suspicion you did not measure does not go in the catalog; it goes in your notes until you measure it.</p>
+<h2>Severity is yours</h2>
+<p>You assign severity. Two analysts can rate the same issue differently and both defend it, because severity depends on what the panel is for.</p>
+<p>Declining to rate is the only indefensible option.</p>
+<h2>Provenance of claims</h2>
+<p>Distinguish, in writing, between:</p>
+<ul><li><strong>Evidence you generated</strong> — you ran it, here is the output</li><li><strong>Evidence you read</strong> — documented elsewhere, here is the citation</li></ul>
+<p>Both are legitimate. Presenting the second as the first is not. This applies to the documentation findings in prework Part C and to anything your AI tells you about a dataset.</p>
+<h2>AI use</h2>
+<p>AI will happily write panel-construction code that contains every contamination in this week&#x27;s handout. It has no way to know where your name list came from or whether your sample spans your event.</p>
+<p>What must be yours: the universe choice, the severity ratings, the lag policy, and the judgment about which contamination actually matters for your question.</p>
+<p>You must be able to explain every line of code you submit.</p>
+<h2>Live-data drift</h2>
+<p>The demonstrations in this week&#x27;s materials use live sources and will change over time. If your reproduction differs from the printed numbers, <strong>report the difference</strong> — do not silently adjust to match. A drifted demonstration is a genuine finding and is treated as one.</p>
+<h2>Reproducibility and citation</h2>
+<p>Unchanged from Week 1: fresh-kernel runs, every number traceable to code, every source recorded in <code>source_log.md</code> with its access route, coverage window, and retrieval date.</p>
+<p>Your source log now covers a panel rather than one security. Every source in it gets an entry.</p>
 </main></body></html>

@@ -1,6 +1,6 @@
 <!doctype html><html lang='en'><head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width,initial-scale=1'>
-<title>MSF Financial Modeling</title><style>
+<title>Week 3 — Rules</title><style>
 :root { --bg:#ffffff; --fg:#14181d; --muted:#5a6572; --rule:#dfe3e8;
         --accent:#0b5fa5; --code-bg:#f4f6f8; }
 @media (prefers-color-scheme: dark) {
@@ -72,6 +72,31 @@ th { background:var(--code-bg); }
 .lede { color:var(--muted); margin:0 0 2rem; }
 </style></head>
 <body><main>
-<div class='nav'><a href='index.html'>MSF Financial Modeling</a></div>
-<h1>MSF Financial Modeling</h1><p class='lede'>Professional data sources in the AI era. Materials are released as the term progresses — prework before each session, teaching materials after it.</p><div class='wk'><div class='num'>Week 1</div><h3>Professional Data in the AI Era: Two Generations</h3><div class='surfaces'><a href='week1/prework.html'>Prework</a><a href='week1/rules.html'>Rules</a><span class='held'>Handout — not yet released</span><span class='held'>Lab — not yet released</span><span class='held'>Deck — not yet released</span></div></div><div class='wk'><div class='num'>Week 2</div><h3>Data Quality and Point-in-Time Discipline</h3><div class='surfaces'><a href='week2/prework.html'>Prework</a><a href='week2/rules.html'>Rules</a><span class='held'>Handout — not yet released</span><span class='held'>Lab — not yet released</span><span class='held'>Deck — not yet released</span></div></div><div class='wk'><div class='num'>Week 3</div><h3>Return, Risk, and Benchmark Construction</h3><div class='surfaces'><a href='week3/prework.html'>Prework</a><a href='week3/rules.html'>Rules</a><span class='held'>Handout — not yet released</span><span class='held'>Lab — not yet released</span><span class='held'>Deck — not yet released</span></div></div><div class='wk'><div class='num'>Week 4</div><h3>Portfolio Construction and the Limits of Optimization</h3><div class='surfaces'><a href='week4/prework.html'>Prework</a><a href='week4/rules.html'>Rules</a><span class='held'>Handout — not yet released</span><span class='held'>Lab — not yet released</span><span class='held'>Deck — not yet released</span></div></div><div class='wk'><div class='num'>Week 5</div><h3>Allocation, Rebalancing, and Risk Reporting</h3><div class='surfaces'><a href='week5/prework.html'>Prework</a><a href='week5/rules.html'>Rules</a><span class='held'>Handout — not yet released</span><span class='held'>Lab — not yet released</span><span class='held'>Deck — not yet released</span></div></div><div class='wk'><div class='num'>Week 6</div><h3>Valuation on Professional Fundamentals</h3><div class='surfaces'><a href='week6/prework.html'>Prework</a><a href='week6/rules.html'>Rules</a><span class='held'>Handout — not yet released</span><span class='held'>Lab — not yet released</span><span class='held'>Deck — not yet released</span></div></div><div class='wk'><div class='num'>Week 7</div><h3>Capstone: The Analyst Deliverable and Its Defense</h3><div class='surfaces'><a href='week7/prework.html'>Prework</a><a href='week7/rules.html'>Rules</a><span class='held'>Handout — not yet released</span><span class='held'>Lab — not yet released</span><span class='held'>Deck — not yet released</span></div></div><p class='lede'><a href='sources.html'>Data source register</a> — access routes, costs, coverage, and what AI gets wrong about each source.</p>
+<div class='nav'><a href='../index.html'>MSF Financial Modeling</a></div>
+<h1>Week 3 — Rules</h1><h1>Week 3 — Rules and Conventions</h1>
+<blockquote><strong>Register: RULES.</strong> No teaching here — see <code>handout.md</code>.</blockquote>
+<h2>Conventions are declared, not assumed</h2>
+<p>Every reported metric carries its conventions: return type, annualization basis, risk-free assumption, and window. A number without them is not a result.</p>
+<p>Once declared in Lab 3 Step 1, these bind for the rest of the course. If you change one later, say so and say why.</p>
+<h2>The verification standard</h2>
+<p>A metric is verified when it has been checked against a source <strong>you did not compute</strong>.</p>
+<p>Acceptable outcomes, all of them:</p>
+<ul><li>Matches within a stated tolerance — verified</li><li>Differs, and the difference is explained by a convention or window — verified, explanation</li></ul>
+<p>recorded</p>
+<ul><li>Differs, was investigated, remains unexplained — <strong>reported as unresolved</strong></li></ul>
+<p>Not acceptable: claiming verification without naming a source, or quietly adjusting your number to match theirs. If you change a number after seeing someone else&#x27;s, say that is what happened and why it was right to.</p>
+<h2>The catalog constrains the claim</h2>
+<p>Open issues in <code>data_quality_issues.md</code> limit what you may report. <strong>A Blocker means no headline result.</strong></p>
+<p>Three honest responses per issue: fix the input, bound the damage, or restrict the claim. Choose one and record which.</p>
+<h2>Benchmarks are stated, never implied</h2>
+<p>Every comparison names its benchmark and the rules defining its membership. &quot;Against the market&quot; is not a benchmark.</p>
+<p>Where a point-in-time membership file is unavailable, say so and state what it prevents you from claiming.</p>
+<h2>AI use</h2>
+<p>AI will compute any metric you ask for and will silently choose conventions for you. It annualizes on 252 or 365 depending on nothing in particular and does not mention which.</p>
+<p><strong>Check the conventions in generated code before you trust the output.</strong> This is the single highest-value review you can perform on AI-written analytics code this week.</p>
+<p>What must be yours: the convention choices, the benchmark choice, the verification judgment, and the decision about what your catalog allows you to claim.</p>
+<p>You must be able to explain every line of code you submit.</p>
+<h2>Reproducibility and citation</h2>
+<p>Unchanged: fresh-kernel runs, every number traceable to code, every source in <code>source_log.md</code> with access route, coverage window, and retrieval date.</p>
+<p>Independent verification sources go in the source log too — including the ones that failed to resolve a gap.</p>
 </main></body></html>

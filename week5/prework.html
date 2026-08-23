@@ -1,6 +1,6 @@
 <!doctype html><html lang='en'><head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width,initial-scale=1'>
-<title>MSF Financial Modeling</title><style>
+<title>Week 5 — Prework</title><style>
 :root { --bg:#ffffff; --fg:#14181d; --muted:#5a6572; --rule:#dfe3e8;
         --accent:#0b5fa5; --code-bg:#f4f6f8; }
 @media (prefers-color-scheme: dark) {
@@ -72,6 +72,28 @@ th { background:var(--code-bg); }
 .lede { color:var(--muted); margin:0 0 2rem; }
 </style></head>
 <body><main>
-<div class='nav'><a href='index.html'>MSF Financial Modeling</a></div>
-<h1>MSF Financial Modeling</h1><p class='lede'>Professional data sources in the AI era. Materials are released as the term progresses — prework before each session, teaching materials after it.</p><div class='wk'><div class='num'>Week 1</div><h3>Professional Data in the AI Era: Two Generations</h3><div class='surfaces'><a href='week1/prework.html'>Prework</a><a href='week1/rules.html'>Rules</a><span class='held'>Handout — not yet released</span><span class='held'>Lab — not yet released</span><span class='held'>Deck — not yet released</span></div></div><div class='wk'><div class='num'>Week 2</div><h3>Data Quality and Point-in-Time Discipline</h3><div class='surfaces'><a href='week2/prework.html'>Prework</a><a href='week2/rules.html'>Rules</a><span class='held'>Handout — not yet released</span><span class='held'>Lab — not yet released</span><span class='held'>Deck — not yet released</span></div></div><div class='wk'><div class='num'>Week 3</div><h3>Return, Risk, and Benchmark Construction</h3><div class='surfaces'><a href='week3/prework.html'>Prework</a><a href='week3/rules.html'>Rules</a><span class='held'>Handout — not yet released</span><span class='held'>Lab — not yet released</span><span class='held'>Deck — not yet released</span></div></div><div class='wk'><div class='num'>Week 4</div><h3>Portfolio Construction and the Limits of Optimization</h3><div class='surfaces'><a href='week4/prework.html'>Prework</a><a href='week4/rules.html'>Rules</a><span class='held'>Handout — not yet released</span><span class='held'>Lab — not yet released</span><span class='held'>Deck — not yet released</span></div></div><div class='wk'><div class='num'>Week 5</div><h3>Allocation, Rebalancing, and Risk Reporting</h3><div class='surfaces'><a href='week5/prework.html'>Prework</a><a href='week5/rules.html'>Rules</a><span class='held'>Handout — not yet released</span><span class='held'>Lab — not yet released</span><span class='held'>Deck — not yet released</span></div></div><div class='wk'><div class='num'>Week 6</div><h3>Valuation on Professional Fundamentals</h3><div class='surfaces'><a href='week6/prework.html'>Prework</a><a href='week6/rules.html'>Rules</a><span class='held'>Handout — not yet released</span><span class='held'>Lab — not yet released</span><span class='held'>Deck — not yet released</span></div></div><div class='wk'><div class='num'>Week 7</div><h3>Capstone: The Analyst Deliverable and Its Defense</h3><div class='surfaces'><a href='week7/prework.html'>Prework</a><a href='week7/rules.html'>Rules</a><span class='held'>Handout — not yet released</span><span class='held'>Lab — not yet released</span><span class='held'>Deck — not yet released</span></div></div><p class='lede'><a href='sources.html'>Data source register</a> — access routes, costs, coverage, and what AI gets wrong about each source.</p>
+<div class='nav'><a href='../index.html'>MSF Financial Modeling</a></div>
+<h1>Week 5 — Prework</h1><h1>Week 5 — Prework</h1>
+<blockquote><strong>Register: TEACH.</strong> The bridge from Lab 4 to what Lab 5 assumes.</blockquote>
+<p><strong>You arrive with:</strong> a portfolio, its constraints, and its gross leverage.</p>
+<p><strong>Honest time budget: about 1 hour 20 minutes.</strong></p>
+<table><thead><tr><th>Part</th><th>What</th><th>Time</th></tr></thead><tbody><tr><td>A</td><td>Reproduce the VaR backtest</td><td>30 min</td></tr><tr><td>B</td><td>Choose your rebalancing policy — before pricing it</td><td>20 min</td></tr><tr><td>C</td><td>Find a real transaction cost number</td><td>20 min</td></tr><tr><td>D</td><td>One paragraph, before class</td><td>10 min</td></tr></tbody></table>
+<p>---</p>
+<h2>Part A — Reproduce the backtest</h2>
+<p>Run the rolling VaR backtest from <code>handout.md</code> Part 2 on any liquid series.</p>
+<p>Then check one thing deliberately: <strong>remove the shift and run it again.</strong></p>
+<p>Record both breach rates. The version without the shift will look much better calibrated. Write one sentence explaining why that improvement is worthless.</p>
+<p>This is the most important five minutes of prework in the course. A risk model that looks well calibrated because it can see the future is the exact failure this week exists to prevent.</p>
+<h2>Part B — Choose your rebalancing policy</h2>
+<p>Decide now, <strong>before</strong> you price anything: calendar, threshold, or never.</p>
+<p>Write one sentence on why. If you choose threshold, state the band and why that band.</p>
+<p>You will be asked in Lab 5 Step 4 whether you chose before or after seeing the cost. Choosing after is allowed and must be disclosed — but deciding now gives you a cleaner answer and a better defence.</p>
+<h2>Part C — Find a real transaction cost number</h2>
+<p>Find an actual estimate of round-trip trading cost for the kind of security in your portfolio. Not a number you assumed — one you can cite.</p>
+<p>Places to look: broker commission schedules, published bid-ask spread statistics, academic estimates of market impact, fund annual reports that disclose trading costs.</p>
+<p>Write down the number and where it came from. If you cannot find one, write down where you looked and what you will assume instead — <strong>an assumption you have labelled as an assumption is fine; an assumption presented as a fact is not.</strong></p>
+<h2>Part D — Write one paragraph</h2>
+<blockquote>Your portfolio breaches its risk limit tomorrow. Before you know anything about why, what would you do?  Now: what would have to be true for that response to make things worse?</blockquote>
+<p>Write both halves. The second is the harder one and it is the one Lab 5 Step 6 grades.</p>
+<p><strong>Bring to the session:</strong> both backtest results with your explanation, your rebalancing policy, your cited cost number, and this paragraph.</p>
 </main></body></html>

@@ -1,6 +1,6 @@
 <!doctype html><html lang='en'><head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width,initial-scale=1'>
-<title>MSF Financial Modeling</title><style>
+<title>Week 6 — Prework</title><style>
 :root { --bg:#ffffff; --fg:#14181d; --muted:#5a6572; --rule:#dfe3e8;
         --accent:#0b5fa5; --code-bg:#f4f6f8; }
 @media (prefers-color-scheme: dark) {
@@ -72,6 +72,29 @@ th { background:var(--code-bg); }
 .lede { color:var(--muted); margin:0 0 2rem; }
 </style></head>
 <body><main>
-<div class='nav'><a href='index.html'>MSF Financial Modeling</a></div>
-<h1>MSF Financial Modeling</h1><p class='lede'>Professional data sources in the AI era. Materials are released as the term progresses — prework before each session, teaching materials after it.</p><div class='wk'><div class='num'>Week 1</div><h3>Professional Data in the AI Era: Two Generations</h3><div class='surfaces'><a href='week1/prework.html'>Prework</a><a href='week1/rules.html'>Rules</a><span class='held'>Handout — not yet released</span><span class='held'>Lab — not yet released</span><span class='held'>Deck — not yet released</span></div></div><div class='wk'><div class='num'>Week 2</div><h3>Data Quality and Point-in-Time Discipline</h3><div class='surfaces'><a href='week2/prework.html'>Prework</a><a href='week2/rules.html'>Rules</a><span class='held'>Handout — not yet released</span><span class='held'>Lab — not yet released</span><span class='held'>Deck — not yet released</span></div></div><div class='wk'><div class='num'>Week 3</div><h3>Return, Risk, and Benchmark Construction</h3><div class='surfaces'><a href='week3/prework.html'>Prework</a><a href='week3/rules.html'>Rules</a><span class='held'>Handout — not yet released</span><span class='held'>Lab — not yet released</span><span class='held'>Deck — not yet released</span></div></div><div class='wk'><div class='num'>Week 4</div><h3>Portfolio Construction and the Limits of Optimization</h3><div class='surfaces'><a href='week4/prework.html'>Prework</a><a href='week4/rules.html'>Rules</a><span class='held'>Handout — not yet released</span><span class='held'>Lab — not yet released</span><span class='held'>Deck — not yet released</span></div></div><div class='wk'><div class='num'>Week 5</div><h3>Allocation, Rebalancing, and Risk Reporting</h3><div class='surfaces'><a href='week5/prework.html'>Prework</a><a href='week5/rules.html'>Rules</a><span class='held'>Handout — not yet released</span><span class='held'>Lab — not yet released</span><span class='held'>Deck — not yet released</span></div></div><div class='wk'><div class='num'>Week 6</div><h3>Valuation on Professional Fundamentals</h3><div class='surfaces'><a href='week6/prework.html'>Prework</a><a href='week6/rules.html'>Rules</a><span class='held'>Handout — not yet released</span><span class='held'>Lab — not yet released</span><span class='held'>Deck — not yet released</span></div></div><div class='wk'><div class='num'>Week 7</div><h3>Capstone: The Analyst Deliverable and Its Defense</h3><div class='surfaces'><a href='week7/prework.html'>Prework</a><a href='week7/rules.html'>Rules</a><span class='held'>Handout — not yet released</span><span class='held'>Lab — not yet released</span><span class='held'>Deck — not yet released</span></div></div><p class='lede'><a href='sources.html'>Data source register</a> — access routes, costs, coverage, and what AI gets wrong about each source.</p>
+<div class='nav'><a href='../index.html'>MSF Financial Modeling</a></div>
+<h1>Week 6 — Prework</h1><h1>Week 6 — Prework</h1>
+<blockquote><strong>Register: TEACH.</strong> The bridge from Lab 5 to what Lab 6 assumes.</blockquote>
+<p><strong>You arrive with:</strong> a portfolio, a backtested risk report, a limitations section — and a company you chose last week.</p>
+<p><strong>Honest time budget: about 1 hour 30 minutes.</strong></p>
+<table><thead><tr><th>Part</th><th>What</th><th>Time</th></tr></thead><tbody><tr><td>A</td><td>Confirm you can reach your company&#x27;s filings</td><td>20 min</td></tr><tr><td>B</td><td>Run the revision query</td><td>25 min</td></tr><tr><td>C</td><td>Establish the fiscal calendar</td><td>20 min</td></tr><tr><td>D</td><td>One paragraph, before class</td><td>25 min</td></tr></tbody></table>
+<p>---</p>
+<h2>Part A — Confirm you can reach the filings</h2>
+<p>Find your company&#x27;s CIK and confirm you can pull its filing history from EDGAR.</p>
+<p>If your company does not file with the SEC — a foreign issuer, a private company — you have a problem worth discovering now rather than during the lab. Either switch companies or find the equivalent regulator&#x27;s filings and confirm you can reach them.</p>
+<p><strong>A company you cannot source is a company you cannot value to this course&#x27;s standard.</strong></p>
+<h2>Part B — Run the revision query</h2>
+<p>Run the XBRL company-concept query on your company for at least two line items. Operating cash flow and revenue are good starting points.</p>
+<p>Look for any period that appears with more than one value across filings.</p>
+<p>Report what you find, including nothing. <strong>A negative result is a real result</strong> as long as you actually looked — say which concepts you checked and how many filings were covered.</p>
+<p>If you do find a revision, note the size in dollars and as a percentage. Bring it; there will be time to compare across the room.</p>
+<h2>Part C — Establish the fiscal calendar</h2>
+<p>For your company, work out:</p>
+<ul><li>When does the fiscal year end? Is it a calendar year?</li><li>Are the recent annual periods all the same length?</li><li>Is there a 53-week year in your window?</li><li>Has the fiscal year end ever changed?</li></ul>
+<p>The last one is rarer and nastier than a 53-week year. A company that changes its year end produces a stub period, and any growth series spanning it is meaningless unless adjusted.</p>
+<h2>Part D — Write one paragraph</h2>
+<p>Before the session, and before you build anything:</p>
+<blockquote>Name the single assumption that will drive most of your company&#x27;s valuation. Estimate, in your head, how much the valuation changes if that assumption moves by a modest amount.  Then: what evidence would actually help you narrow it?</blockquote>
+<p>Most students discover their answer to the first question is &quot;the terminal growth rate&quot; and their answer to the third is &quot;I do not know.&quot; Both are honest, and both are the right starting point.</p>
+<p><strong>Bring to the session:</strong> confirmed access to your filings, your revision query result, your fiscal calendar findings, and this paragraph.</p>
 </main></body></html>

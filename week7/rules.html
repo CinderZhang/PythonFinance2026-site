@@ -1,6 +1,6 @@
 <!doctype html><html lang='en'><head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width,initial-scale=1'>
-<title>MSF Financial Modeling</title><style>
+<title>Week 7 — Rules</title><style>
 :root { --bg:#ffffff; --fg:#14181d; --muted:#5a6572; --rule:#dfe3e8;
         --accent:#0b5fa5; --code-bg:#f4f6f8; }
 @media (prefers-color-scheme: dark) {
@@ -72,6 +72,30 @@ th { background:var(--code-bg); }
 .lede { color:var(--muted); margin:0 0 2rem; }
 </style></head>
 <body><main>
-<div class='nav'><a href='index.html'>MSF Financial Modeling</a></div>
-<h1>MSF Financial Modeling</h1><p class='lede'>Professional data sources in the AI era. Materials are released as the term progresses — prework before each session, teaching materials after it.</p><div class='wk'><div class='num'>Week 1</div><h3>Professional Data in the AI Era: Two Generations</h3><div class='surfaces'><a href='week1/prework.html'>Prework</a><a href='week1/rules.html'>Rules</a><span class='held'>Handout — not yet released</span><span class='held'>Lab — not yet released</span><span class='held'>Deck — not yet released</span></div></div><div class='wk'><div class='num'>Week 2</div><h3>Data Quality and Point-in-Time Discipline</h3><div class='surfaces'><a href='week2/prework.html'>Prework</a><a href='week2/rules.html'>Rules</a><span class='held'>Handout — not yet released</span><span class='held'>Lab — not yet released</span><span class='held'>Deck — not yet released</span></div></div><div class='wk'><div class='num'>Week 3</div><h3>Return, Risk, and Benchmark Construction</h3><div class='surfaces'><a href='week3/prework.html'>Prework</a><a href='week3/rules.html'>Rules</a><span class='held'>Handout — not yet released</span><span class='held'>Lab — not yet released</span><span class='held'>Deck — not yet released</span></div></div><div class='wk'><div class='num'>Week 4</div><h3>Portfolio Construction and the Limits of Optimization</h3><div class='surfaces'><a href='week4/prework.html'>Prework</a><a href='week4/rules.html'>Rules</a><span class='held'>Handout — not yet released</span><span class='held'>Lab — not yet released</span><span class='held'>Deck — not yet released</span></div></div><div class='wk'><div class='num'>Week 5</div><h3>Allocation, Rebalancing, and Risk Reporting</h3><div class='surfaces'><a href='week5/prework.html'>Prework</a><a href='week5/rules.html'>Rules</a><span class='held'>Handout — not yet released</span><span class='held'>Lab — not yet released</span><span class='held'>Deck — not yet released</span></div></div><div class='wk'><div class='num'>Week 6</div><h3>Valuation on Professional Fundamentals</h3><div class='surfaces'><a href='week6/prework.html'>Prework</a><a href='week6/rules.html'>Rules</a><span class='held'>Handout — not yet released</span><span class='held'>Lab — not yet released</span><span class='held'>Deck — not yet released</span></div></div><div class='wk'><div class='num'>Week 7</div><h3>Capstone: The Analyst Deliverable and Its Defense</h3><div class='surfaces'><a href='week7/prework.html'>Prework</a><a href='week7/rules.html'>Rules</a><span class='held'>Handout — not yet released</span><span class='held'>Lab — not yet released</span><span class='held'>Deck — not yet released</span></div></div><p class='lede'><a href='sources.html'>Data source register</a> — access routes, costs, coverage, and what AI gets wrong about each source.</p>
+<div class='nav'><a href='../index.html'>MSF Financial Modeling</a></div>
+<h1>Week 7 — Rules</h1><h1>Week 7 — Rules and Conventions</h1>
+<blockquote><strong>Register: RULES.</strong> No teaching here — see <code>handout.md</code>.</blockquote>
+<h2>The reproducibility standard</h2>
+<p>The package must let someone who has never seen your work rebuild your numbers without asking you anything.</p>
+<p>That means: code that runs on a fresh kernel, every input in the source ledger with its as-of date, the data-quality catalog in its final state, your conventions statement, and a README saying what this is and how to run it.</p>
+<h2>Documented breaks are acceptable; silent ones are not</h2>
+<p>Something in six weeks of notebooks will not rerun. Say what, and why.</p>
+<p>An analysis that cannot be reproduced is reported as such, with what it would take to fix. It is not quietly dropped — the reader needs to know it exists and cannot be rerun.</p>
+<h2>Limitations are specific and are not buried</h2>
+<p>The consolidated limitations section carries, for each entry: the limitation, its evidence with numbers, and what the reader should therefore not conclude.</p>
+<p>It appears before the appendix, not inside it.</p>
+<p><strong>&quot;This analysis has limitations&quot; is not a limitations section.</strong></p>
+<h2>Ranges, not points</h2>
+<p>Conclusions are reported as ranges with stated confidence. Inherited from Week 6 and it does not lapse for the final deliverable.</p>
+<h2>The defense is unaided</h2>
+<p>No script. No AI in the loop during recording. No second take after seeing the data point.</p>
+<p>You may prepare — you should prepare — but the recording is the demonstration that the understanding is yours. That is the entire purpose of the exercise, and it does not work if the answer is assembled off camera.</p>
+<p><strong>Updating your conclusion on camera is the strongest available outcome.</strong> It is graded as such.</p>
+<h2>AI use, for the last time</h2>
+<p>AI has written most of the code in this course and that was expected throughout.</p>
+<p>For this deliverable, what must be yours: the framing, the data choices, every adjudication, the assumptions, the limitations, and the defense.</p>
+<p>A deliverable that reads as generated will be treated as one. The tell is usually the limitations section — generated limitations are generic, and yours should be specific to your panel, your catalog, your measured breach rate, and your valuation&#x27;s driving assumption.</p>
+<h2>Citation</h2>
+<p>Every source in <code>source_log.md</code> with access route, coverage window, and retrieval date. Every input in the source ledger with its vintage and basis.</p>
+<p>An input whose only provenance is that a model produced it is not sourced and does not belong in the ledger.</p>
 </main></body></html>

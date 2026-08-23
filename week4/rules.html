@@ -1,6 +1,6 @@
 <!doctype html><html lang='en'><head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width,initial-scale=1'>
-<title>MSF Financial Modeling</title><style>
+<title>Week 4 — Rules</title><style>
 :root { --bg:#ffffff; --fg:#14181d; --muted:#5a6572; --rule:#dfe3e8;
         --accent:#0b5fa5; --code-bg:#f4f6f8; }
 @media (prefers-color-scheme: dark) {
@@ -72,6 +72,30 @@ th { background:var(--code-bg); }
 .lede { color:var(--muted); margin:0 0 2rem; }
 </style></head>
 <body><main>
-<div class='nav'><a href='index.html'>MSF Financial Modeling</a></div>
-<h1>MSF Financial Modeling</h1><p class='lede'>Professional data sources in the AI era. Materials are released as the term progresses — prework before each session, teaching materials after it.</p><div class='wk'><div class='num'>Week 1</div><h3>Professional Data in the AI Era: Two Generations</h3><div class='surfaces'><a href='week1/prework.html'>Prework</a><a href='week1/rules.html'>Rules</a><span class='held'>Handout — not yet released</span><span class='held'>Lab — not yet released</span><span class='held'>Deck — not yet released</span></div></div><div class='wk'><div class='num'>Week 2</div><h3>Data Quality and Point-in-Time Discipline</h3><div class='surfaces'><a href='week2/prework.html'>Prework</a><a href='week2/rules.html'>Rules</a><span class='held'>Handout — not yet released</span><span class='held'>Lab — not yet released</span><span class='held'>Deck — not yet released</span></div></div><div class='wk'><div class='num'>Week 3</div><h3>Return, Risk, and Benchmark Construction</h3><div class='surfaces'><a href='week3/prework.html'>Prework</a><a href='week3/rules.html'>Rules</a><span class='held'>Handout — not yet released</span><span class='held'>Lab — not yet released</span><span class='held'>Deck — not yet released</span></div></div><div class='wk'><div class='num'>Week 4</div><h3>Portfolio Construction and the Limits of Optimization</h3><div class='surfaces'><a href='week4/prework.html'>Prework</a><a href='week4/rules.html'>Rules</a><span class='held'>Handout — not yet released</span><span class='held'>Lab — not yet released</span><span class='held'>Deck — not yet released</span></div></div><div class='wk'><div class='num'>Week 5</div><h3>Allocation, Rebalancing, and Risk Reporting</h3><div class='surfaces'><a href='week5/prework.html'>Prework</a><a href='week5/rules.html'>Rules</a><span class='held'>Handout — not yet released</span><span class='held'>Lab — not yet released</span><span class='held'>Deck — not yet released</span></div></div><div class='wk'><div class='num'>Week 6</div><h3>Valuation on Professional Fundamentals</h3><div class='surfaces'><a href='week6/prework.html'>Prework</a><a href='week6/rules.html'>Rules</a><span class='held'>Handout — not yet released</span><span class='held'>Lab — not yet released</span><span class='held'>Deck — not yet released</span></div></div><div class='wk'><div class='num'>Week 7</div><h3>Capstone: The Analyst Deliverable and Its Defense</h3><div class='surfaces'><a href='week7/prework.html'>Prework</a><a href='week7/rules.html'>Rules</a><span class='held'>Handout — not yet released</span><span class='held'>Lab — not yet released</span><span class='held'>Deck — not yet released</span></div></div><p class='lede'><a href='sources.html'>Data source register</a> — access routes, costs, coverage, and what AI gets wrong about each source.</p>
+<div class='nav'><a href='../index.html'>MSF Financial Modeling</a></div>
+<h1>Week 4 — Rules</h1><h1>Week 4 — Rules and Conventions</h1>
+<blockquote><strong>Register: RULES.</strong> No teaching here — see <code>handout.md</code>.</blockquote>
+<h2>Constraints are declared before results are seen</h2>
+<p>Your constraints go in writing during prework, before you optimize. In Lab 4 Step 6 you will be asked whether you chose them before or after seeing the weights, and the honest answer is required.</p>
+<p>Choosing constraints after seeing an ugly result is legitimate practice — but it must be disclosed as what it is. Presenting a post-hoc constraint as a prior principle is not.</p>
+<h2>Every remedy names its cost</h2>
+<p>Constraints, shrinkage, minimum variance, risk parity — each gives something up. A remedy reported without its cost is incomplete.</p>
+<h2>In-sample results are labelled as such</h2>
+<p>Any Sharpe ratio, return, or volatility computed on the same data used to estimate the inputs is labelled <strong>in-sample</strong>, every time it appears.</p>
+<p>An unlabelled performance number is read as out-of-sample. If it is not, that is a misrepresentation, and it is the most common one in this field.</p>
+<h2>Out-of-sample means untouched</h2>
+<p>A portfolio tested out of sample is estimated on one period and held, unchanged, through another. No re-estimation, no rebalancing, no parameter tweaks informed by the test period.</p>
+<p>If you rebalance during the test, say so and say on what rule — that is a different and legitimate experiment, but it is not the one described here.</p>
+<h2>Leverage is reported, always</h2>
+<p>Every portfolio you report carries its gross leverage — the sum of absolute weights. A weight vector without it hides the most important thing about it.</p>
+<h2>Inherited conventions</h2>
+<p>Your Week 3 conventions bind here: return type, annualization basis, risk-free assumption, window. The optimizer inherits every one of them silently.</p>
+<p>If a convention changes, every downstream number changes with it. Say so.</p>
+<h2>AI use</h2>
+<p>AI writes optimizers readily and writes them correctly. It will not tell you that the output is unstable, will not check the second window, and will not label anything in-sample.</p>
+<p>Ask for the code. Then do the diagnostic work yourself — that is what this week is.</p>
+<p>What must be yours: the constraint choices, the diagnosis, the remedy selection and its stated cost, and the judgment about whether the result is a statement about the world or about your sample.</p>
+<p>You must be able to explain every line of code you submit.</p>
+<h2>Reproducibility and citation</h2>
+<p>Unchanged: fresh-kernel runs, every number traceable to code, every source in <code>source_log.md</code>.</p>
 </main></body></html>

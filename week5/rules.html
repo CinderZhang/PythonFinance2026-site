@@ -1,6 +1,6 @@
 <!doctype html><html lang='en'><head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width,initial-scale=1'>
-<title>MSF Financial Modeling</title><style>
+<title>Week 5 — Rules</title><style>
 :root { --bg:#ffffff; --fg:#14181d; --muted:#5a6572; --rule:#dfe3e8;
         --accent:#0b5fa5; --code-bg:#f4f6f8; }
 @media (prefers-color-scheme: dark) {
@@ -72,6 +72,32 @@ th { background:var(--code-bg); }
 .lede { color:var(--muted); margin:0 0 2rem; }
 </style></head>
 <body><main>
-<div class='nav'><a href='index.html'>MSF Financial Modeling</a></div>
-<h1>MSF Financial Modeling</h1><p class='lede'>Professional data sources in the AI era. Materials are released as the term progresses — prework before each session, teaching materials after it.</p><div class='wk'><div class='num'>Week 1</div><h3>Professional Data in the AI Era: Two Generations</h3><div class='surfaces'><a href='week1/prework.html'>Prework</a><a href='week1/rules.html'>Rules</a><span class='held'>Handout — not yet released</span><span class='held'>Lab — not yet released</span><span class='held'>Deck — not yet released</span></div></div><div class='wk'><div class='num'>Week 2</div><h3>Data Quality and Point-in-Time Discipline</h3><div class='surfaces'><a href='week2/prework.html'>Prework</a><a href='week2/rules.html'>Rules</a><span class='held'>Handout — not yet released</span><span class='held'>Lab — not yet released</span><span class='held'>Deck — not yet released</span></div></div><div class='wk'><div class='num'>Week 3</div><h3>Return, Risk, and Benchmark Construction</h3><div class='surfaces'><a href='week3/prework.html'>Prework</a><a href='week3/rules.html'>Rules</a><span class='held'>Handout — not yet released</span><span class='held'>Lab — not yet released</span><span class='held'>Deck — not yet released</span></div></div><div class='wk'><div class='num'>Week 4</div><h3>Portfolio Construction and the Limits of Optimization</h3><div class='surfaces'><a href='week4/prework.html'>Prework</a><a href='week4/rules.html'>Rules</a><span class='held'>Handout — not yet released</span><span class='held'>Lab — not yet released</span><span class='held'>Deck — not yet released</span></div></div><div class='wk'><div class='num'>Week 5</div><h3>Allocation, Rebalancing, and Risk Reporting</h3><div class='surfaces'><a href='week5/prework.html'>Prework</a><a href='week5/rules.html'>Rules</a><span class='held'>Handout — not yet released</span><span class='held'>Lab — not yet released</span><span class='held'>Deck — not yet released</span></div></div><div class='wk'><div class='num'>Week 6</div><h3>Valuation on Professional Fundamentals</h3><div class='surfaces'><a href='week6/prework.html'>Prework</a><a href='week6/rules.html'>Rules</a><span class='held'>Handout — not yet released</span><span class='held'>Lab — not yet released</span><span class='held'>Deck — not yet released</span></div></div><div class='wk'><div class='num'>Week 7</div><h3>Capstone: The Analyst Deliverable and Its Defense</h3><div class='surfaces'><a href='week7/prework.html'>Prework</a><a href='week7/rules.html'>Rules</a><span class='held'>Handout — not yet released</span><span class='held'>Lab — not yet released</span><span class='held'>Deck — not yet released</span></div></div><p class='lede'><a href='sources.html'>Data source register</a> — access routes, costs, coverage, and what AI gets wrong about each source.</p>
+<div class='nav'><a href='../index.html'>MSF Financial Modeling</a></div>
+<h1>Week 5 — Rules</h1><h1>Week 5 — Rules and Conventions</h1>
+<blockquote><strong>Register: RULES.</strong> No teaching here — see <code>handout.md</code>.</blockquote>
+<h2>No risk number without its backtest</h2>
+<p>Every VaR or CVaR figure you report carries: horizon, confidence level, method, and <strong>the historical breach rate of that method on comparable data.</strong></p>
+<p>A risk number without its failure rate is not a risk number. It is a decoration, and a dangerous one, because it displaces caution that would otherwise be there.</p>
+<h2>The shift rule</h2>
+<p>Any rolling risk estimate uses only data available strictly before the period it governs. In practice that means shifting the estimate forward by one period, and its absence is the most common defect in student risk code.</p>
+<p>A VaR that looks well calibrated is more likely to be look-ahead contaminated than correct. Suspect it first.</p>
+<h2>Leverage is reported, always</h2>
+<p>Gross and net, on every portfolio, in every report. Inherited from Week 4; it does not lapse.</p>
+<h2>Policies are chosen before they are priced</h2>
+<p>Your rebalancing policy goes in writing during prework, before you compute its cost. You will be asked whether you chose before or after, and the honest answer is required.</p>
+<p>Choosing after is legitimate if disclosed. Presenting a post-hoc policy as a prior principle is not.</p>
+<h2>Actions are pre-committed, and their failure scenario is named</h2>
+<p>A risk report that identifies a risk without proposing an action is incomplete.</p>
+<p>An action without a named scenario in which following it is wrong has not been thought through. Every pre-committed response has one.</p>
+<h2>Limitations are specific</h2>
+<p>&quot;This analysis has limitations&quot; is not a limitations section. Each entry names what the report cannot see, why, and what the reader should therefore not conclude.</p>
+<p>Model risk is included explicitly, evidenced by your own backtest ratio.</p>
+<h2>AI use</h2>
+<p>AI writes VaR code fluently and will omit the shift unless asked. It will not backtest unless told, will not report clustering, and will not name a single limitation.</p>
+<p>It is also unusually confident in tone about risk numbers, which is exactly wrong for this artefact.</p>
+<p>What must be yours: the method choice, the backtest and its interpretation, the rebalancing policy, the limitations, and the pre-committed action. Those are the report.</p>
+<p>You must be able to explain every line of code you submit.</p>
+<h2>Reproducibility and citation</h2>
+<p>Unchanged: fresh-kernel runs, every number traceable to code, every source in <code>source_log.md</code>.</p>
+<p>Cost assumptions are sourced. A round-trip cost you assumed without a source is stated as an assumption, not presented as a fact.</p>
 </main></body></html>

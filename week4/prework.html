@@ -1,6 +1,6 @@
 <!doctype html><html lang='en'><head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width,initial-scale=1'>
-<title>MSF Financial Modeling</title><style>
+<title>Week 4 — Prework</title><style>
 :root { --bg:#ffffff; --fg:#14181d; --muted:#5a6572; --rule:#dfe3e8;
         --accent:#0b5fa5; --code-bg:#f4f6f8; }
 @media (prefers-color-scheme: dark) {
@@ -72,6 +72,32 @@ th { background:var(--code-bg); }
 .lede { color:var(--muted); margin:0 0 2rem; }
 </style></head>
 <body><main>
-<div class='nav'><a href='index.html'>MSF Financial Modeling</a></div>
-<h1>MSF Financial Modeling</h1><p class='lede'>Professional data sources in the AI era. Materials are released as the term progresses — prework before each session, teaching materials after it.</p><div class='wk'><div class='num'>Week 1</div><h3>Professional Data in the AI Era: Two Generations</h3><div class='surfaces'><a href='week1/prework.html'>Prework</a><a href='week1/rules.html'>Rules</a><span class='held'>Handout — not yet released</span><span class='held'>Lab — not yet released</span><span class='held'>Deck — not yet released</span></div></div><div class='wk'><div class='num'>Week 2</div><h3>Data Quality and Point-in-Time Discipline</h3><div class='surfaces'><a href='week2/prework.html'>Prework</a><a href='week2/rules.html'>Rules</a><span class='held'>Handout — not yet released</span><span class='held'>Lab — not yet released</span><span class='held'>Deck — not yet released</span></div></div><div class='wk'><div class='num'>Week 3</div><h3>Return, Risk, and Benchmark Construction</h3><div class='surfaces'><a href='week3/prework.html'>Prework</a><a href='week3/rules.html'>Rules</a><span class='held'>Handout — not yet released</span><span class='held'>Lab — not yet released</span><span class='held'>Deck — not yet released</span></div></div><div class='wk'><div class='num'>Week 4</div><h3>Portfolio Construction and the Limits of Optimization</h3><div class='surfaces'><a href='week4/prework.html'>Prework</a><a href='week4/rules.html'>Rules</a><span class='held'>Handout — not yet released</span><span class='held'>Lab — not yet released</span><span class='held'>Deck — not yet released</span></div></div><div class='wk'><div class='num'>Week 5</div><h3>Allocation, Rebalancing, and Risk Reporting</h3><div class='surfaces'><a href='week5/prework.html'>Prework</a><a href='week5/rules.html'>Rules</a><span class='held'>Handout — not yet released</span><span class='held'>Lab — not yet released</span><span class='held'>Deck — not yet released</span></div></div><div class='wk'><div class='num'>Week 6</div><h3>Valuation on Professional Fundamentals</h3><div class='surfaces'><a href='week6/prework.html'>Prework</a><a href='week6/rules.html'>Rules</a><span class='held'>Handout — not yet released</span><span class='held'>Lab — not yet released</span><span class='held'>Deck — not yet released</span></div></div><div class='wk'><div class='num'>Week 7</div><h3>Capstone: The Analyst Deliverable and Its Defense</h3><div class='surfaces'><a href='week7/prework.html'>Prework</a><a href='week7/rules.html'>Rules</a><span class='held'>Handout — not yet released</span><span class='held'>Lab — not yet released</span><span class='held'>Deck — not yet released</span></div></div><p class='lede'><a href='sources.html'>Data source register</a> — access routes, costs, coverage, and what AI gets wrong about each source.</p>
+<div class='nav'><a href='../index.html'>MSF Financial Modeling</a></div>
+<h1>Week 4 — Prework</h1><h1>Week 4 — Prework</h1>
+<blockquote><strong>Register: TEACH.</strong> The bridge from Lab 3 to what Lab 4 assumes.</blockquote>
+<p><strong>You arrive with:</strong> a panel, conventions, verified metrics, a benchmark, and a covariance estimate.</p>
+<p><strong>Honest time budget: about 1 hour 15 minutes.</strong></p>
+<table><thead><tr><th>Part</th><th>What</th><th>Time</th></tr></thead><tbody><tr><td>A</td><td>Load your estimates and check they are sane</td><td>20 min</td></tr><tr><td>B</td><td>Count your parameters</td><td>15 min</td></tr><tr><td>C</td><td>Decide your constraints before you see any weights</td><td>20 min</td></tr><tr><td>D</td><td>One prediction, written before class</td><td>20 min</td></tr></tbody></table>
+<p>---</p>
+<h2>Part A — Load and sanity-check your estimates</h2>
+<p>Load the return series and covariance estimate you saved in Week 3.</p>
+<p>Check three things:</p>
+<ol><li>Does the covariance matrix have the shape you expect — one row and column per asset?</li><li>Are the diagonal entries consistent with the individual volatilities you computed last</li></ol>
+<p>week? They should be, since the diagonal <em>is</em> variance. If they are not, you have a convention mismatch and this is a good time to find it.</p>
+<ol><li>Is the matrix symmetric?</li></ol>
+<p>Any surprise here is a Week 3 problem surfacing late. Fix it now, not during the lab.</p>
+<h2>Part B — Count your parameters</h2>
+<p>Arithmetic, and it takes five minutes.</p>
+<ul><li>How many assets are in your panel? Call it $N$.</li><li>How many distinct entries does your covariance matrix have? $N(N+1)/2$.</li><li>How many expected returns are you estimating? $N$.</li><li><strong>Total parameters:</strong> those two added together.</li><li>How many observations do you have — trading days in your window?</li><li><strong>Observations per parameter:</strong> divide.</li></ul>
+<p>Write the last number down and bring it. It will be relevant.</p>
+<h2>Part C — Decide your constraints before you see any weights</h2>
+<p>This matters and the order matters.</p>
+<p>Write down, <strong>before</strong> you optimize anything, what constraints you believe a portfolio built from your panel should carry. Long-only? A cap on any single position? A limit on gross leverage? None at all?</p>
+<p>For each, one sentence on why.</p>
+<p>The reason to do this now is that it is very easy to choose constraints <em>after</em> seeing an ugly result, and then present them as principled. Deciding first makes your defence in Lab 4 Step 6 honest, and you will be asked whether you decided before or after.</p>
+<h2>Part D — Write one prediction</h2>
+<blockquote>You estimate a maximum-Sharpe portfolio on five years of data and hold it, unchanged, for the next five years. You compare it to putting an equal amount in each asset.  Which does better out of sample, and by how much? Commit to an answer.</blockquote>
+<p>Write it down. Do not hedge — a specific wrong prediction is worth far more to you here than a vague safe one.</p>
+<p>You will be asked to raise your hand for one side in the session.</p>
+<p><strong>Bring to the session:</strong> your loaded estimates, your observations-per-parameter number, your constraints with reasons, and your prediction.</p>
 </main></body></html>
