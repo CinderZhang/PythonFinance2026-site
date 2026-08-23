@@ -1,0 +1,118 @@
+<!doctype html><html lang='en'><head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width,initial-scale=1'>
+<title>Week 7</title><style>
+:root { --bg:#ffffff; --fg:#14181d; --muted:#5a6572; --rule:#dfe3e8;
+        --accent:#0b5fa5; --code-bg:#f4f6f8; }
+@media (prefers-color-scheme: dark) {
+  :root { --bg:#0f1419; --fg:#e9ecf0; --muted:#9aa4b2; --rule:#2a323c;
+          --accent:#6fb3f2; --code-bg:#182029; } }
+* { box-sizing: border-box; }
+html, body { height:100%; }
+body { margin:0; background:var(--bg); color:var(--fg);
+       font: 22px/1.5 -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+
+.slide { display:none; min-height:100vh; padding:5vh 7vw 9vh;
+         flex-direction:column; justify-content:center; }
+.slide.current { display:flex; }
+.slide > *:first-child { margin-top:0; }
+
+h1 { font-size:2.8rem; line-height:1.15; margin:0 0 1rem; letter-spacing:-.01em; }
+h2 { font-size:2.1rem; line-height:1.2; margin:0 0 1.4rem; letter-spacing:-.01em; }
+h3 { font-size:1.4rem; margin:1.2rem 0 .6rem; color:var(--muted); }
+p, li { max-width:52ch; }
+li { margin:.45rem 0; }
+strong { font-weight:650; }
+blockquote { margin:1.3rem 0; padding:.7rem 0 .7rem 1.2rem;
+             border-left:4px solid var(--accent); color:var(--muted); }
+pre { background:var(--code-bg); border:1px solid var(--rule); border-radius:8px;
+      padding:1rem 1.2rem; overflow-x:auto; max-width:100%;
+      font:.72em/1.5 ui-monospace, Menlo, Consolas, monospace; }
+code { font:.88em ui-monospace, Menlo, Consolas, monospace; }
+table { border-collapse:collapse; margin:1.1rem 0; font-size:.78em; max-width:100%;
+        display:block; overflow-x:auto; }
+th, td { border:1px solid var(--rule); padding:.5rem .8rem; text-align:left; }
+th { background:var(--code-bg); }
+.math { background:var(--code-bg); border:1px solid var(--rule); border-radius:8px;
+        padding:.8rem 1.1rem; margin:1.1rem 0; font-size:.8em;
+        font-family:ui-monospace, Menlo, Consolas, monospace; }
+
+.title-slide h1 { font-size:3.4rem; }
+.title-slide .sub { color:var(--muted); font-size:1.3rem; margin-top:.6rem; }
+
+#bar { position:fixed; top:0; left:0; height:3px; background:var(--accent);
+       width:0; transition:width .15s ease; z-index:10; }
+#num { position:fixed; bottom:1.4vh; right:2vw; color:var(--muted);
+       font:600 .7rem ui-monospace, Menlo, Consolas, monospace; z-index:10; }
+#hint { position:fixed; bottom:1.4vh; left:2vw; color:var(--muted);
+        font:.68rem -apple-system, "Segoe UI", sans-serif; z-index:10; opacity:.75; }
+
+@media print {
+  #bar, #num, #hint { display:none; }
+  .slide { display:flex !important; min-height:auto; page-break-after:always;
+           padding:6% 8%; border-bottom:none; }
+  body { font-size:15px; }
+  h1 { font-size:2rem; } h2 { font-size:1.6rem; }
+}
+@media (max-width:820px) { body { font-size:17px; } h2 { font-size:1.6rem; } }
+</style></head><body>
+<div id='bar'></div>
+<section class='slide title-slide'><h1>Week 7</h1><div class='sub'>FIN 69000-003 · Financial Analytics with Python (with AI)</div></section>
+<section class='slide'><h2>You already have everything</h2>
+<table><thead><tr><th>Week</th><th>You built</th></tr></thead><tbody><tr><td>1</td><td>A reconciled security master, keyed on a permanent identifier</td></tr><tr><td>2</td><td>A panel, and a catalog of what is wrong with it</td></tr><tr><td>3</td><td>Verified metrics, against a benchmark you defended</td></tr><tr><td>4</td><td>A portfolio, and proof of where its optimizer breaks</td></tr><tr><td>5</td><td>A risk report carrying its own failure rate</td></tr><tr><td>6</td><td>A valuation where every input is dated</td></tr></tbody></table>
+<p><strong>Nothing new gets built today.</strong></p></section>
+<section class='slide'><h2>What &quot;reproducible&quot; actually means</h2>
+<p>Not &quot;the code runs.&quot;</p>
+<p>A colleague who has never seen your work can:</p>
+<ul><li>Understand the question, from the document alone</li><li>Find every input, with source and as-of date</li><li>Rerun it and get your numbers</li><li><strong>See what you chose, and why</strong></li><li><strong>Find what it cannot support, without asking</strong></li></ul>
+<p>The last two are the ones everyone skips.</p></section>
+<section class='slide'><h2>The cold-read test</h2>
+<p>Give it to someone with no context. Watch them read.</p>
+<p>Their first three questions are almost always:</p>
+<ol><li><em>What was the actual question here?</em></li><li><em>Where did this number come from?</em></li><li><em>Why this way and not the obvious other way?</em></li></ol>
+<blockquote>Every question they ask is a defect in the <strong>document</strong>, not in the reader.</blockquote></section>
+<section class='slide'><h2>Working block — the fresh-kernel audit</h2>
+<p>Run everything. Week 1 to Week 6. Clean kernel. In order.</p>
+<p><strong>Something will break.</strong> That is expected.</p>
+<p>For each: what broke, why, and did you fix it or document it?</p>
+<blockquote>A documented break is honest. A silent one is not.</blockquote></section>
+<section class='slide'><h2>What the deliverable says first</h2>
+<p>Analysts bury the answer. Reports that get read do not.</p>
+<table><thead><tr><th>Section</th><th>Does what</th></tr></thead><tbody><tr><td><strong>The finding</strong></td><td>conclusion, range, confidence</td></tr><tr><td>What it rests on</td><td>the 2–3 assumptions actually driving it</td></tr><tr><td>What would change it</td><td>sensitivity, as statements about the world</td></tr><tr><td>How it was built</td><td>data, method, choices</td></tr><tr><td><strong>What it cannot support</strong></td><td>limitations, specifically</td></tr><tr><td>Reproduce it</td><td>source ledger, how to run</td></tr></tbody></table>
+<p>Limitations come <strong>before</strong> the appendix. Burying them is a tell, and readers know it.</p></section>
+<section class='slide'><h2>The defense</h2>
+<p>Your most load-bearing assumption. A data point you have not seen. On video. Unaided.</p>
+<ol><li>State the assumption, and why</li><li>What evidence supports it — how strong?</li><li><strong>Engage with the new data point</strong></li><li>Does it change the conclusion? By how much?</li><li><strong>If it does — say so</strong></li></ol>
+<p>Bad defenses: restate more confidently · dismiss the data point · retreat into method.</p>
+<p>All three are recognisable in ninety seconds.</p>
+<blockquote><em>&quot;That changes my answer, and here is how&quot;</em> is the strongest sentence available to you.</blockquote></section>
+<section class='slide'><h2>Working block — rehearse in pairs</h2>
+<p>Defend your assumption to your partner.</p>
+<p><strong>Partners: your job is to push, not to be kind.</strong></p>
+<p>The question to ask each other:</p>
+<blockquote><strong>What evidence would change your mind?</strong></blockquote>
+<p>If you cannot answer that, you have found something — and it is better found here than on the recording.</p></section>
+<section class='slide'><h2>Live defense round</h2>
+<p>Two or three of you. In front of the room. With a fresh data point.</p>
+<p>The rest of us are watching for one thing:</p>
+<p><strong>the moment of update.</strong></p></section>
+<section class='slide'><h2>Limitations are an asset</h2>
+<p>Anyone can produce a number.</p>
+<p>Only someone who understands the analysis can say precisely where it fails.</p>
+<blockquote>The limitations section is the only part of your work that <strong>proves you understood it.</strong></blockquote>
+<p>Interviewers ask what is wrong with your model. <em>&quot;Nothing really&quot;</em> ends the conversation badly.</p>
+<p>You have six weeks of specific, evidenced limitations. Almost nobody at your stage does.</p>
+<p><strong>Never write &quot;this analysis has limitations.&quot;</strong> Write the limitation.</p></section>
+<section class='slide'><h2>The strongest argument against yourself</h2>
+<blockquote>What is the strongest argument that <strong>your conclusion is wrong</strong>?</blockquote>
+<p>Not the easiest. The strongest.</p>
+<p>Then answer it — or concede it.</p>
+<p><strong>If writing it changes your mind, say so in the deliverable. That is graded as a success.</strong></p>
+<blockquote><strong>What did you notice that I did not ask about?</strong></blockquote>
+<p><em>For the last time — and this time at term scale.</em></p></section>
+<section class='slide'><h2>What you can now say you can do</h2>
+<blockquote><strong>Two sources minimum — and one of them professional where you have access.</strong> Pending access is documented, never penalised. The attempt counts; the outcome does not.</blockquote>
+<ul><li>Reconcile two sources; tell a defect from a convention</li><li>Key work on a permanent identifier, and say what breaks without one</li><li>Detect contamination that produces clean-looking output</li><li>Run a catalog that constrains what you will claim</li><li>Compute metrics, state their conventions, verify them independently</li><li>Build a portfolio and demonstrate where its optimizer breaks</li><li>Produce a risk report that states its own measured failure rate</li><li>Value a company with every input dated, reported as a range</li><li><strong>Say precisely what your work cannot support</strong></li></ul>
+<p>That last one is what gets you hired. It is the one your competition cannot do.</p>
+<h3>Before you submit — do these</h3>
+<ol><li>Run everything on a <strong>fresh kernel</strong>, in order. Document what breaks.</li><li>Lead the deliverable with <strong>the finding</strong>.</li><li>Write the <strong>consolidated limitations</strong> — each with evidence and a non-conclusion.</li><li>Get a <strong>cold read</strong>. Fix every question they asked.</li><li>Assemble the package: code, source ledger, catalog, README, conventions.</li><li>Record the <strong>defense</strong>, unaided.</li><li>Write the <strong>strongest argument against your own conclusion</strong>.</li></ol></section>
+<div id='num'></div><div id='hint'>← → or space to navigate</div><script>var s=[].slice.call(document.querySelectorAll('.slide')),i=0;function go(n){i=Math.max(0,Math.min(s.length-1,n));s.forEach(function(e,k){e.classList.toggle('current',k===i);});document.getElementById('num').textContent=(i+1)+' / '+s.length;document.getElementById('bar').style.width=((i)/(s.length-1)*100)+'%';if(location.hash!=='#'+(i+1)){history.replaceState(null,'','#'+(i+1));}}document.addEventListener('keydown',function(e){if(e.key==='ArrowRight'||e.key===' '||e.key==='PageDown'){e.preventDefault();go(i+1);}else if(e.key==='ArrowLeft'||e.key==='PageUp'){e.preventDefault();go(i-1);}else if(e.key==='Home'){go(0);}else if(e.key==='End'){go(s.length-1);}});document.addEventListener('click',function(e){if(e.target.closest('a,pre,table'))return;go(i+1);});go(parseInt((location.hash||'#1').slice(1),10)-1||0);</script></body></html>

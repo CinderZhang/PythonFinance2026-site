@@ -1,0 +1,158 @@
+<!doctype html><html lang='en'><head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width,initial-scale=1'>
+<title>Week 1 — Lab</title><style>
+:root { --bg:#ffffff; --fg:#14181d; --muted:#5a6572; --rule:#dfe3e8;
+        --accent:#0b5fa5; --code-bg:#f4f6f8; }
+@media (prefers-color-scheme: dark) {
+  :root { --bg:#0f1419; --fg:#e9ecf0; --muted:#9aa4b2; --rule:#2a323c;
+          --accent:#6fb3f2; --code-bg:#182029; } }
+* { box-sizing: border-box; }
+html, body { height:100%; }
+body { margin:0; background:var(--bg); color:var(--fg);
+       font: 22px/1.5 -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+
+.slide { display:none; min-height:100vh; padding:5vh 7vw 9vh;
+         flex-direction:column; justify-content:center; }
+.slide.current { display:flex; }
+.slide > *:first-child { margin-top:0; }
+
+h1 { font-size:2.8rem; line-height:1.15; margin:0 0 1rem; letter-spacing:-.01em; }
+h2 { font-size:2.1rem; line-height:1.2; margin:0 0 1.4rem; letter-spacing:-.01em; }
+h3 { font-size:1.4rem; margin:1.2rem 0 .6rem; color:var(--muted); }
+p, li { max-width:52ch; }
+li { margin:.45rem 0; }
+strong { font-weight:650; }
+blockquote { margin:1.3rem 0; padding:.7rem 0 .7rem 1.2rem;
+             border-left:4px solid var(--accent); color:var(--muted); }
+pre { background:var(--code-bg); border:1px solid var(--rule); border-radius:8px;
+      padding:1rem 1.2rem; overflow-x:auto; max-width:100%;
+      font:.72em/1.5 ui-monospace, Menlo, Consolas, monospace; }
+code { font:.88em ui-monospace, Menlo, Consolas, monospace; }
+table { border-collapse:collapse; margin:1.1rem 0; font-size:.78em; max-width:100%;
+        display:block; overflow-x:auto; }
+th, td { border:1px solid var(--rule); padding:.5rem .8rem; text-align:left; }
+th { background:var(--code-bg); }
+.math { background:var(--code-bg); border:1px solid var(--rule); border-radius:8px;
+        padding:.8rem 1.1rem; margin:1.1rem 0; font-size:.8em;
+        font-family:ui-monospace, Menlo, Consolas, monospace; }
+
+.title-slide h1 { font-size:3.4rem; }
+.title-slide .sub { color:var(--muted); font-size:1.3rem; margin-top:.6rem; }
+
+#bar { position:fixed; top:0; left:0; height:3px; background:var(--accent);
+       width:0; transition:width .15s ease; z-index:10; }
+#num { position:fixed; bottom:1.4vh; right:2vw; color:var(--muted);
+       font:600 .7rem ui-monospace, Menlo, Consolas, monospace; z-index:10; }
+#hint { position:fixed; bottom:1.4vh; left:2vw; color:var(--muted);
+        font:.68rem -apple-system, "Segoe UI", sans-serif; z-index:10; opacity:.75; }
+
+@media print {
+  #bar, #num, #hint { display:none; }
+  .slide { display:flex !important; min-height:auto; page-break-after:always;
+           padding:6% 8%; border-bottom:none; }
+  body { font-size:15px; }
+  h1 { font-size:2rem; } h2 { font-size:1.6rem; }
+}
+@media (max-width:820px) { body { font-size:17px; } h2 { font-size:1.6rem; } }
+
+.nav { margin: 0 0 1.5rem; font-size:.9rem; }
+.nav a { color: var(--accent); text-decoration: none; }
+.nav a:hover { text-decoration: underline; }
+.wk { border:1px solid var(--rule); border-radius:10px; padding:1.1rem 1.4rem; margin:0 0 1rem; }
+.wk h3 { margin:.1rem 0 .5rem; font-size:1.05rem; }
+.wk .num { color:var(--muted); font:600 11px/1 ui-monospace,Menlo,Consolas,monospace;
+           letter-spacing:.1em; text-transform:uppercase; }
+.surfaces a { display:inline-block; margin:.3rem .4rem .3rem 0; padding:.3rem .65rem;
+              border:1px solid var(--accent); border-radius:999px; font-size:.85rem;
+              color:var(--accent); text-decoration:none; }
+.surfaces a:hover { background:var(--code-bg); }
+.surfaces span.held { display:inline-block; margin:.3rem .4rem .3rem 0; padding:.3rem .65rem;
+                      border:1px dashed var(--rule); border-radius:999px; font-size:.85rem;
+                      color:var(--muted); }
+.lede { color:var(--muted); margin:0 0 2rem; }
+</style></head>
+<body><main>
+<div class='nav'><a href='../index.html'>MSF Financial Modeling</a></div>
+<h1>Week 1 — Lab</h1><h1>Lab 1 — A Pull From Each Generation, and a Number You Can Defend</h1>
+<blockquote><strong>Register: DO.</strong> Teaching is in <code>handout.md</code>; conventions and licence rules in <code>rules.md</code>.</blockquote>
+<p><strong>You arrive with:</strong> access attempts in various states, at least one Generation 2 API key, your entitlement diagnostic, and what your Refinitiv documentation check turned up. From the session you have the two-generation distinction, the CIK identifier, the verification loop, and the 195.95.</p>
+<p><strong>Where this goes next:</strong> the reconciled security master and source log you produce here are Week 2&#x27;s inputs. Week 2 does not re-pull this data — it cleans what you hand it.</p>
+<p>---</p>
+<h2>Step 1 — A pull from each generation</h2>
+<p>Get a working pull from <strong>both</strong> kinds of source.</p>
+<p><strong>Generation 2</strong> — required, and free. SEC EDGAR needs no account. Add one more if you have a key (Financial Datasets, Databento, or another from [the source register](../sources.html)).</p>
+<p><strong>Generation 1</strong> — attempt it. WRDS if your account has cleared; LSEG Workspace or CodeBook if entitled. <strong>If neither is available to you yet, say so and move on.</strong> You are not penalised, and Step 2 works with whatever you did reach.</p>
+<p>Record for each: what you pulled, how you authenticated, and how long it took from nothing to data. That last number is worth having — the difference between the generations is often an order of magnitude and students rarely notice until they measure it.</p>
+<h2>Step 2 — Verify your source facts before you trust your code</h2>
+<p>For at least one of your pulls, run the five-step check from the handout <strong>before</strong> you run the code, and record what you checked:</p>
+<table><thead><tr><th>Check</th><th>What you verified</th><th>Source you checked against</th><th>Verdict</th></tr></thead><tbody></tbody></table>
+<p>At minimum: package name, endpoint or table, field names, coverage window, licence.</p>
+<p><strong>Report anything that turned out to be wrong, or state explicitly that every item checked out and show how you confirmed each one.</strong> Both are complete answers. What is not acceptable is an unchecked &quot;it worked&quot; — code can run against the wrong field and return plausible numbers.</p>
+<h2>Step 3 — The entitlement diagnostic</h2>
+<p>Run the self-diagnosis from <code>handout.md</code> Part 6 on your own Workspace account.</p>
+<p>Report: whether <code>APPKEY</code> opens and what APIs it offers; whether <code>CODEBOOK</code> opens; what MyAccount shows for product, data, and exchange entitlements.</p>
+<p>Then one sentence: <strong>what can you actually do programmatically with this licence, and what can you not?</strong></p>
+<p>If you cannot get a clear answer, say what you tried and what remains unknown. <strong>An honest unresolved answer earns full marks</strong> — this is the question the instructor asked the library and never got a reply to.</p>
+<h2>Step 4 — Total return, both methods</h2>
+<p>For the training case <strong>NVDA</strong>, over 2024-06-10 to 2025-06-10, compute price return, income return, total return by price-plus-dividends, total return by adjusted close, and the gap in basis points.</p>
+<p><strong>The shape, not your answer</strong> — the taught example&#x27;s output, so you can see the format. Yours is a different window and will not match:</p>
+<pre><code>P0 = 121.79   Pt = 143.96   sum D = 0.04
+
+price return   =  18.20%
+income return  =   0.03%
+total return   =  18.24%   (price + dividends)
+total return   =  18.24%   (adjusted close)
+gap            =   0.6 bp</code></pre>
+<p>Then one sentence on why the methods differ and which direction the gap always runs.</p>
+<h2>Step 5 — Reconcile two sources</h2>
+<p>Pull NVDA daily prices for 2024-06-05 through 2024-06-13 from two independent sources. Join on date and compare every field.</p>
+<p>Produce a table of every cell where they disagree by more than rounding: date, field, both values, size of difference in percent.</p>
+<p>Then run an <strong>internal consistency check</strong> on each source alone — no second source. At minimum flag any row where <code>high</code> is below <code>max(open, close)</code>, <code>low</code> is above <code>min(open, close)</code>, or the intraday range is implausible against that day&#x27;s open-to-close move.</p>
+<p>State which check would have caught which problem.</p>
+<h2>Step 6 — Adjudicate, in writing</h2>
+<p>The graded core. For <strong>every</strong> difference from Step 5, one entry answering three things:</p>
+<ol><li><strong>Defect</strong> in one source, or <strong>convention difference</strong> between two honest sources?</li><li>What is your evidence? Name the specific test or fact that decides it.</li><li>Which value goes into your reconciled series, and why?</li></ol>
+<p><strong>The shape, not your answer</strong> — one filled entry from the taught example:</p>
+<blockquote><strong>Field:</strong> volume, all dates <strong>Difference:</strong> 0.23% on 2024-06-10 (314,162,650 vs 313,434,100); similar small gaps other days <strong>Verdict:</strong> Convention difference, not a defect. <strong>Evidence:</strong> Small, present every day rather than isolated, and running in both directions across the sample. US equities trade across multiple venues and vendors differ in which prints they consolidate. A defect would not be this uniform. <strong>Resolution:</strong> Keep Source B&#x27;s volume for consistency, recorded in the source log. Volume is not an input to this week&#x27;s return calculation, so the choice does not propagate — but it is documented in case it does later.</blockquote>
+<p>A difference you cannot adjudicate is written up as unresolved, with what you would need to resolve it. That is an acceptable answer and a much better one than a confident guess.</p>
+<h2>Step 7 — Key it on a permanent identifier</h2>
+<p>Your pull was keyed on a ticker. Tickers are display labels, not identities.</p>
+<ol><li>Find the permanent identifier — CRSP <code>PERMNO</code> if you have WRDS, SEC <code>CIK</code> if not.</li><li>Confirm permanence: retrieve former names and state the date of any name or ticker change.</li></ol>
+<p><strong>&quot;No change in window&quot; is a finding, not a blank.</strong></p>
+<ol><li>Add the identifier as a column on every row.</li><li>Two sentences: name one analysis that would break if this were keyed on ticker, and how.</li></ol>
+<p><strong>The shape, not your answer:</strong></p>
+<blockquote><strong>Identifier:</strong> CIK 0001326801 (SEC EDGAR) · <strong>Entity:</strong> Meta Platforms, Inc. <strong>Former names:</strong> Facebook Inc, through 2021-10-27 <strong>Permanence check:</strong> ticker changed FB → META; the CIK did not. <strong>What would break:</strong> a ten-year ticker-keyed return series would find no FB data after the changeover and no META data before it, silently producing two truncated series instead of one. Any long-window performance number from it would be wrong, and nothing would look broken.</blockquote>
+<h2>Step 8 — Write the instructions you wish you had had</h2>
+<p>Handout Part 9 worked one number four ways and got 0.51, 0.60, −1.32 and 4.91 for the same company on the same day. Write the standing instructions that would make an assistant produce that spread instead of a single confident figure.</p>
+<p><strong>Four mechanisms</strong>, all taught in Part 9. Your instructions must require each one:</p>
+<ol><li><strong>Decompose before sourcing</strong> — break the quantity into primitives before naming any source.</li><li><strong>Name the structural limit</strong> — for at least one primitive, name a source that <em>cannot</em> supply</li></ol>
+<p>it, and why. (Part 9&#x27;s case: no filing contains forward growth.)</p>
+<ol><li><strong>Cross-check a fixed minimum</strong> — <strong>two independent sources per primitive</strong>, each recorded with</li></ol>
+<p>its retrieval date and its definitional choices. A source you could not reach still counts, but only as a <strong>qualifying attempt</strong>: name the source, the access route you tried, the date, the barrier you hit, and why that source would have been independent of the others. Handout Part 9 shows one. &quot;Could not access WRDS&quot; on its own is not an attempt.</p>
+<ol><li><strong>Recompute, then compare</strong> — compute the headline figure from your own primitives first, and</li></ol>
+<p>only then look at a published version. Disagreement is the finding, not an error.</p>
+<p>Add the convention that breaks people: <strong>growth enters the formula as percentage points</strong> (16.88, not 0.1688).</p>
+<p><strong>What you submit is the instruction file itself</strong> — generic, reusable, no company in it. You will run it on your own security in Step 9, and revise it in Week 2 when it fails you.</p>
+<p><strong>The shape, not your answer</strong> — one clause from a finished file:</p>
+<blockquote><em>Before naming any data source, decompose the requested quantity into its primitives and list them. For each primitive, state where it can be obtained, and state explicitly if any commonly used source cannot supply it. Retrieve each primitive from two independent sources, recording retrieval date and definitional basis (which period, which measure, whose estimate). Compute the requested quantity yourself from the primitives before consulting any published value of it. Report every value you obtain, each labelled with the choices that produced it. Never report a single figure without its basis.</em></blockquote>
+<h2>Step 9 — Your security</h2>
+<p>Everything so far was the training case. It is the shape; this is the work.</p>
+<p><strong>Choose a security yourself</strong> and run Steps 5 and 7 on it, then <strong>run your Step 8 instruction file on it</strong> and keep what the assistant returned. Pick it for a reason and say what the reason was.</p>
+<p>Then: did it behave like the training case, or not? Name one concrete way it differed. A security that turned out clean and boring is a legitimate finding — report it as one.</p>
+<h2>Step 10 — What did you notice that I did not ask about?</h2>
+<p>The standing question. It appears in every lab this term.</p>
+<p>Somewhere this week you saw something the steps did not ask about. A field that behaved oddly. Something about how a source handles an edge case. Something in a platform&#x27;s interface that told you what it was really built for. Something that behaved differently the second time you ran it.</p>
+<p>Write it down with your evidence.</p>
+<p><strong>Graded on genuineness and evidence, never on whether it was the right thing to notice.</strong> A wrong hunch you investigated and disproved is worth more than a safe observation.</p>
+<h2>If you want to do this differently</h2>
+<p>You may depart from the method above — different sources, a different reconciliation approach, a different resolution rule. <strong>A defended departure earns full marks.</strong> State what you did instead, why, and what you gave up.</p>
+<p><strong>Two sources, minimum — and where you have professional access, one of them is the professional source.</strong> This week that is <strong>WRDS / CRSP</strong>, for a permanent identifier and a survivorship-free price history behind the ticker you pulled.</p>
+<p>Pending access is neither an excuse nor a penalty. Document the attempt — source, route tried, date, barrier, and why that source would have been independent — and use a second free source instead. <strong>The attempt counts; the outcome never does.</strong></p>
+<h2>Submit</h2>
+<ul><li>Your notebook, runnable start to finish</li><li>Your Step 8 instruction file (generic and reusable), and the response it produced in Step 9</li><li>The Step 2 verification table</li><li>Your Step 3 entitlement diagnostic</li><li><code>security_master.csv</code> (training case and your own), identifier on every row</li><li><code>source_log.md</code> — every source: access route, coverage window, conventions, adjudications</li><li>Your Step 10 finding</li></ul>
+<h2>Before Week 2 — do these</h2>
+<ol><li>Confirm <code>security_master.csv</code> opens cleanly and carries the identifier on every row.</li><li>Make sure <code>source_log.md</code> names the <strong>coverage window</strong> of each source — Week 2 extends the</li></ol>
+<p>series, and a source whose history stops short will surprise you.</p>
+<ol><li>Chase any pending access. Week 2 is richer with WRDS and complete without it.</li></ol>
+<p><strong>Lab 2 preview:</strong> extend one security into a panel keyed on permanent identifiers, and find the contamination hiding in it — survivorship, delistings, and a provider that quietly truncates its own data before publishing it.</p>
+</main></body></html>

@@ -1,0 +1,124 @@
+<!doctype html><html lang='en'><head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width,initial-scale=1'>
+<title>Week 5</title><style>
+:root { --bg:#ffffff; --fg:#14181d; --muted:#5a6572; --rule:#dfe3e8;
+        --accent:#0b5fa5; --code-bg:#f4f6f8; }
+@media (prefers-color-scheme: dark) {
+  :root { --bg:#0f1419; --fg:#e9ecf0; --muted:#9aa4b2; --rule:#2a323c;
+          --accent:#6fb3f2; --code-bg:#182029; } }
+* { box-sizing: border-box; }
+html, body { height:100%; }
+body { margin:0; background:var(--bg); color:var(--fg);
+       font: 22px/1.5 -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+
+.slide { display:none; min-height:100vh; padding:5vh 7vw 9vh;
+         flex-direction:column; justify-content:center; }
+.slide.current { display:flex; }
+.slide > *:first-child { margin-top:0; }
+
+h1 { font-size:2.8rem; line-height:1.15; margin:0 0 1rem; letter-spacing:-.01em; }
+h2 { font-size:2.1rem; line-height:1.2; margin:0 0 1.4rem; letter-spacing:-.01em; }
+h3 { font-size:1.4rem; margin:1.2rem 0 .6rem; color:var(--muted); }
+p, li { max-width:52ch; }
+li { margin:.45rem 0; }
+strong { font-weight:650; }
+blockquote { margin:1.3rem 0; padding:.7rem 0 .7rem 1.2rem;
+             border-left:4px solid var(--accent); color:var(--muted); }
+pre { background:var(--code-bg); border:1px solid var(--rule); border-radius:8px;
+      padding:1rem 1.2rem; overflow-x:auto; max-width:100%;
+      font:.72em/1.5 ui-monospace, Menlo, Consolas, monospace; }
+code { font:.88em ui-monospace, Menlo, Consolas, monospace; }
+table { border-collapse:collapse; margin:1.1rem 0; font-size:.78em; max-width:100%;
+        display:block; overflow-x:auto; }
+th, td { border:1px solid var(--rule); padding:.5rem .8rem; text-align:left; }
+th { background:var(--code-bg); }
+.math { background:var(--code-bg); border:1px solid var(--rule); border-radius:8px;
+        padding:.8rem 1.1rem; margin:1.1rem 0; font-size:.8em;
+        font-family:ui-monospace, Menlo, Consolas, monospace; }
+
+.title-slide h1 { font-size:3.4rem; }
+.title-slide .sub { color:var(--muted); font-size:1.3rem; margin-top:.6rem; }
+
+#bar { position:fixed; top:0; left:0; height:3px; background:var(--accent);
+       width:0; transition:width .15s ease; z-index:10; }
+#num { position:fixed; bottom:1.4vh; right:2vw; color:var(--muted);
+       font:600 .7rem ui-monospace, Menlo, Consolas, monospace; z-index:10; }
+#hint { position:fixed; bottom:1.4vh; left:2vw; color:var(--muted);
+        font:.68rem -apple-system, "Segoe UI", sans-serif; z-index:10; opacity:.75; }
+
+@media print {
+  #bar, #num, #hint { display:none; }
+  .slide { display:flex !important; min-height:auto; page-break-after:always;
+           padding:6% 8%; border-bottom:none; }
+  body { font-size:15px; }
+  h1 { font-size:2rem; } h2 { font-size:1.6rem; }
+}
+@media (max-width:820px) { body { font-size:17px; } h2 { font-size:1.6rem; } }
+</style></head><body>
+<div id='bar'></div>
+<section class='slide title-slide'><h1>Week 5</h1><div class='sub'>FIN 69000-003 · Financial Analytics with Python (with AI)</div></section>
+<section class='slide'><h2>A portfolio you have to hand over</h2>
+<ul><li>Weights, and the constraints you chose</li><li>A gross leverage number</li><li>A diagnosis of why the unconstrained version could not be trusted</li></ul>
+<p>Today you hand it to someone.</p>
+<p><strong>The document that goes with it is the artefact.</strong></p></section>
+<section class='slide'><h2>What a committee actually asks</h2>
+<p>Not your Sharpe ratio.</p>
+<ul><li>What can go wrong?</li><li>How badly?</li><li>How often?</li><li><strong>What will you do about it?</strong></li></ul>
+<blockquote>A risk report that overstates confidence is worse than none — it displaces the caution that would otherwise be there.</blockquote></section>
+<section class='slide'><h2>VaR, three ways</h2>
+<p>A 1-day 99% VaR of −3% says:</p>
+<ul><li>on <strong>99%</strong> of days, the loss should be no worse than 3%</li><li>on <strong>1%</strong> of days it will be worse — and VaR says <strong>nothing</strong> about how much</li></ul>
+<table><thead><tr><th>Method</th><th>Assumes</th></tr></thead><tbody><tr><td>Historical</td><td>the future resembles the sampled past</td></tr><tr><td>Parametric</td><td>returns are normally distributed</td></tr><tr><td>Monte Carlo</td><td>your assumed process is right</td></tr></tbody></table>
+<p>All three assume something false. Which failure can you live with — and did you measure it?</p></section>
+<section class='slide'><h2>Backtest it</h2>
+<pre><code>var99  = returns.rolling(250).quantile(0.01).shift(1)
+breach = returns &lt; var99</code></pre>
+<p>That <code>.shift(1)</code> is Week 2 returning. Without it: look-ahead bias in a risk-management hat.</p>
+<pre><code>window 2005-12-30 -&gt; 2025-06-27, 4903 days
+
+expected breaches at 1% :  49
+actual breaches         :  87      (1.77%)
+ratio                   :  1.77x</code></pre>
+<p><strong>Breached nearly twice as often as advertised.</strong></p></section>
+<section class='slide'><h2>The breaches cluster</h2>
+<pre><code>2006:3   2007:11  2008:12  2010:3   2011:6   2012:1  2013:2  2014:3
+2015:5   2016:1   2017:3   2018:7   2019:1   2020:8  2021:1  2022:10
+2024:6   2025:4</code></pre>
+<p>Expectation: about <strong>2.5 per year</strong>.</p>
+<p>Does that look like independent events?</p>
+<blockquote>You do not experience the average. You experience the cluster.</blockquote></section>
+<section class='slide'><h2>The tail past the limit</h2>
+<pre><code>worst 5 breaches       actual      VaR      excess
+2020-03-16            -10.94%   -4.69%    -6.26pp
+2020-03-12             -9.57%   -3.92%    -5.65pp
+2008-10-15             -9.84%   -4.93%    -4.92pp
+2008-09-29             -7.84%   -3.10%    -4.73pp
+2020-03-09             -7.81%   -3.18%    -4.63pp</code></pre>
+<p>Model said 4.69%. Actual was 10.94% — <strong>more than double</strong>.</p>
+<p>4.7% is not near the worst case. <strong>It is where the worst case starts.</strong></p>
+<p>CVaR asks the better question — from the same history. Better number, not a safe one.</p></section>
+<section class='slide'><h2>Rebalancing has a price</h2>
+<table><thead><tr><th>Cost</th><th></th></tr></thead><tbody><tr><td>Commission</td><td>explicit, small</td></tr><tr><td>Spread and market impact</td><td>implicit, larger, grows with size</td></tr><tr><td><strong>Tax</strong></td><td>often the biggest, and the one juniors forget</td></tr></tbody></table>
+<pre><code> 40% turnover x 10bp round trip =  4bp/yr
+400% turnover x 10bp round trip = 40bp/yr</code></pre>
+<p>At 400%, you must beat the benchmark by 0.4% before you have done anything for anyone.</p>
+<p><strong>Calendar · Threshold · Never.</strong> &quot;Never&quot; is a real policy.</p></section>
+<section class='slide'><h2>What a risk system cannot see</h2>
+<p>Position and exposure data is <strong>not public</strong>. It comes from your own books. Its quality is your own problem.</p>
+<table><thead><tr><th>Blind spot</th><th>Why</th></tr></thead><tbody><tr><td>Liquidity</td><td>size relative to volume is not in price history</td></tr><tr><td>Crowding</td><td>you cannot see who else holds what you hold</td></tr><tr><td>Counterparty, collateral</td><td>usually a different system</td></tr><tr><td>Off-balance-sheet</td><td>not a position until it is</td></tr><tr><td><strong>Model risk</strong></td><td>the risk system cannot report that it is wrong</td></tr></tbody></table>
+<p>You measured model risk this morning: <strong>1.77x</strong>.</p>
+<blockquote>Its silences are not reassurance.</blockquote></section>
+<section class='slide'><h2>The report a committee would accept</h2>
+<ol><li>The number — VaR and CVaR, with horizon, confidence, method</li><li><strong>The backtest</strong> — how often this method was wrong</li><li>The concentration — where risk actually sits</li><li>The leverage — gross and net</li><li>What would have to happen to lose a stated amount</li><li><strong>The limitations</strong> — named specifically</li><li><strong>The action</strong> — decided in advance</li></ol>
+<p>6 is your Week 2 catalog. 7 is the one juniors omit and committees care most about.</p>
+<blockquote>A risk report is judged by what it admits, not what it claims.</blockquote></section>
+<section class='slide'><h2>Your policy, your defence</h2>
+<blockquote><em>&quot;Your limit is where it is because it is comfortable, not because it is right. A tighter limit would have caught the drawdown you just showed us.&quot;</em></blockquote>
+<p>Strongest version — <strong>with the number behind it</strong>.</p>
+<p>Then answer it, or concede it. <strong>Conceding earns full marks.</strong></p>
+<blockquote><strong>What did you notice that I did not ask about?</strong></blockquote></section>
+<section class='slide'><h2>Before next week — do these</h2>
+<blockquote><strong>Two sources minimum — and one of them professional where you have access.</strong> Pending access is documented, never penalised. The attempt counts; the outcome does not.</blockquote>
+<ol><li>Compute VaR three ways. State which you carry forward, and why.</li><li><strong>Backtest it.</strong> Expected, actual, ratio, by year. Check your shift.</li><li>Table your five worst breaches. Compute CVaR.</li><li>Price your rebalancing policy against one alternative.</li><li>Write the limitations section — <strong>including measured model risk</strong>.</li><li>Decide the action in advance, and name when following it would be wrong.</li><li><strong>Pick your Week 6 company</strong> and confirm you can reach its filings.</li></ol>
+<p><strong>Lab 6 preview:</strong> value a company where every input traces to a sourced, dated figure — and discover the same company reported two different numbers for the same year, both correct.</p></section>
+<div id='num'></div><div id='hint'>← → or space to navigate</div><script>var s=[].slice.call(document.querySelectorAll('.slide')),i=0;function go(n){i=Math.max(0,Math.min(s.length-1,n));s.forEach(function(e,k){e.classList.toggle('current',k===i);});document.getElementById('num').textContent=(i+1)+' / '+s.length;document.getElementById('bar').style.width=((i)/(s.length-1)*100)+'%';if(location.hash!=='#'+(i+1)){history.replaceState(null,'','#'+(i+1));}}document.addEventListener('keydown',function(e){if(e.key==='ArrowRight'||e.key===' '||e.key==='PageDown'){e.preventDefault();go(i+1);}else if(e.key==='ArrowLeft'||e.key==='PageUp'){e.preventDefault();go(i-1);}else if(e.key==='Home'){go(0);}else if(e.key==='End'){go(s.length-1);}});document.addEventListener('click',function(e){if(e.target.closest('a,pre,table'))return;go(i+1);});go(parseInt((location.hash||'#1').slice(1),10)-1||0);</script></body></html>

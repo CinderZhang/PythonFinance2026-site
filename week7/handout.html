@@ -1,0 +1,140 @@
+<!doctype html><html lang='en'><head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width,initial-scale=1'>
+<title>Week 7 — Handout</title><style>
+:root { --bg:#ffffff; --fg:#14181d; --muted:#5a6572; --rule:#dfe3e8;
+        --accent:#0b5fa5; --code-bg:#f4f6f8; }
+@media (prefers-color-scheme: dark) {
+  :root { --bg:#0f1419; --fg:#e9ecf0; --muted:#9aa4b2; --rule:#2a323c;
+          --accent:#6fb3f2; --code-bg:#182029; } }
+* { box-sizing: border-box; }
+html, body { height:100%; }
+body { margin:0; background:var(--bg); color:var(--fg);
+       font: 22px/1.5 -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+
+.slide { display:none; min-height:100vh; padding:5vh 7vw 9vh;
+         flex-direction:column; justify-content:center; }
+.slide.current { display:flex; }
+.slide > *:first-child { margin-top:0; }
+
+h1 { font-size:2.8rem; line-height:1.15; margin:0 0 1rem; letter-spacing:-.01em; }
+h2 { font-size:2.1rem; line-height:1.2; margin:0 0 1.4rem; letter-spacing:-.01em; }
+h3 { font-size:1.4rem; margin:1.2rem 0 .6rem; color:var(--muted); }
+p, li { max-width:52ch; }
+li { margin:.45rem 0; }
+strong { font-weight:650; }
+blockquote { margin:1.3rem 0; padding:.7rem 0 .7rem 1.2rem;
+             border-left:4px solid var(--accent); color:var(--muted); }
+pre { background:var(--code-bg); border:1px solid var(--rule); border-radius:8px;
+      padding:1rem 1.2rem; overflow-x:auto; max-width:100%;
+      font:.72em/1.5 ui-monospace, Menlo, Consolas, monospace; }
+code { font:.88em ui-monospace, Menlo, Consolas, monospace; }
+table { border-collapse:collapse; margin:1.1rem 0; font-size:.78em; max-width:100%;
+        display:block; overflow-x:auto; }
+th, td { border:1px solid var(--rule); padding:.5rem .8rem; text-align:left; }
+th { background:var(--code-bg); }
+.math { background:var(--code-bg); border:1px solid var(--rule); border-radius:8px;
+        padding:.8rem 1.1rem; margin:1.1rem 0; font-size:.8em;
+        font-family:ui-monospace, Menlo, Consolas, monospace; }
+
+.title-slide h1 { font-size:3.4rem; }
+.title-slide .sub { color:var(--muted); font-size:1.3rem; margin-top:.6rem; }
+
+#bar { position:fixed; top:0; left:0; height:3px; background:var(--accent);
+       width:0; transition:width .15s ease; z-index:10; }
+#num { position:fixed; bottom:1.4vh; right:2vw; color:var(--muted);
+       font:600 .7rem ui-monospace, Menlo, Consolas, monospace; z-index:10; }
+#hint { position:fixed; bottom:1.4vh; left:2vw; color:var(--muted);
+        font:.68rem -apple-system, "Segoe UI", sans-serif; z-index:10; opacity:.75; }
+
+@media print {
+  #bar, #num, #hint { display:none; }
+  .slide { display:flex !important; min-height:auto; page-break-after:always;
+           padding:6% 8%; border-bottom:none; }
+  body { font-size:15px; }
+  h1 { font-size:2rem; } h2 { font-size:1.6rem; }
+}
+@media (max-width:820px) { body { font-size:17px; } h2 { font-size:1.6rem; } }
+
+.nav { margin: 0 0 1.5rem; font-size:.9rem; }
+.nav a { color: var(--accent); text-decoration: none; }
+.nav a:hover { text-decoration: underline; }
+.wk { border:1px solid var(--rule); border-radius:10px; padding:1.1rem 1.4rem; margin:0 0 1rem; }
+.wk h3 { margin:.1rem 0 .5rem; font-size:1.05rem; }
+.wk .num { color:var(--muted); font:600 11px/1 ui-monospace,Menlo,Consolas,monospace;
+           letter-spacing:.1em; text-transform:uppercase; }
+.surfaces a { display:inline-block; margin:.3rem .4rem .3rem 0; padding:.3rem .65rem;
+              border:1px solid var(--accent); border-radius:999px; font-size:.85rem;
+              color:var(--accent); text-decoration:none; }
+.surfaces a:hover { background:var(--code-bg); }
+.surfaces span.held { display:inline-block; margin:.3rem .4rem .3rem 0; padding:.3rem .65rem;
+                      border:1px dashed var(--rule); border-radius:999px; font-size:.85rem;
+                      color:var(--muted); }
+.lede { color:var(--muted); margin:0 0 2rem; }
+</style></head>
+<body><main>
+<div class='nav'><a href='../index.html'>MSF Financial Modeling</a></div>
+<h1>Week 7 — Handout</h1><h1>Week 7 — Handout</h1>
+<blockquote><strong>Register: TEACH.</strong> Narrative and worked examples. The deliverable spec is in <code>lab.md</code>; conventions in <code>rules.md</code>.</blockquote>
+<p><strong>You arrive with:</strong> a reconciled security master, a panel with a data-quality catalog, verified metrics against a benchmark you defended, a portfolio with constraints you chose, a risk report carrying its own failure rate, and a valuation where every input is dated.</p>
+<p>This week you do not build anything new. You assemble what you have into one thing, and then you defend it.</p>
+<p>---</p>
+<h2>Why this matters</h2>
+<p>Everything you have made so far exists in notebooks. Notebooks are where analysis happens and where it also quietly dies — six weeks from now, on a different machine, half of them will not run and nobody will know which half.</p>
+<p>The deliverable is what survives. It is also the only part anyone outside this room will ever see, and it is what an employer means when they ask for a work sample.</p>
+<p>Two standards, and they are the whole assessment:</p>
+<ol><li><strong>A colleague can pick it up and rerun it</strong> without asking you anything.</li><li><strong>You can defend a key assumption on a data point you have not seen before</strong>, unaided.</li></ol>
+<p>The first is about the artefact. The second is about whether the artefact is actually yours.</p>
+<p>---</p>
+<h2>Part 1 — What &quot;reproducible by a colleague&quot; actually means</h2>
+<p>Not &quot;the code runs.&quot; Something stricter, and you can test it precisely.</p>
+<p>A colleague who has never seen your work should be able to:</p>
+<ul><li>Understand what question you were answering, from the document alone</li><li>Find every input, with its source and as-of date</li><li>Rerun the analysis and get your numbers</li><li>See what you chose, and why, at every point a choice existed</li><li>Find out what your work cannot support, without having to ask</li></ul>
+<p>The last two are what people skip. A reproducible calculation with hidden judgment calls is still not reproducible work — the reader can regenerate your arithmetic and has no idea whether they would have made the same decisions.</p>
+<h3>The cold-read test</h3>
+<p>Give your deliverable to someone with no context. Watch them read it. Every time they ask a question, that question is a defect in the document, not in them.</p>
+<p>Their first three questions are usually:</p>
+<ol><li><em>What was the actual question here?</em></li><li><em>Where did this number come from?</em></li><li><em>Why did you do it this way and not the obvious other way?</em></li></ol>
+<p>If your deliverable answers those three before they are asked, it is in better shape than most professional work.</p>
+<p>---</p>
+<h2>Part 2 — What the deliverable says first</h2>
+<p>Analysts bury the answer. Reports that get read do not.</p>
+<p>Open with what you found and what it means. Then support it. The reader who stops after the first page should still have received your conclusion — and readers stop after the first page constantly, including the ones deciding whether to act on it.</p>
+<p>A structure that works:</p>
+<table><thead><tr><th>Section</th><th>Does what</th></tr></thead><tbody><tr><td><strong>The finding</strong></td><td>your conclusion, with its range and confidence, in a short paragraph</td></tr><tr><td><strong>What it rests on</strong></td><td>the two or three assumptions that actually drive it</td></tr><tr><td><strong>What would change it</strong></td><td>the sensitivity, translated into statements about the world</td></tr><tr><td><strong>How it was built</strong></td><td>data, method, choices made, in that order</td></tr><tr><td><strong>What it cannot support</strong></td><td>your limitations, specifically</td></tr><tr><td><strong>Reproduce it</strong></td><td>the source ledger and how to run the code</td></tr></tbody></table>
+<p>Notice that limitations come <em>before</em> the appendix and are not hidden in it. That placement is a signal about the work: an analyst who leads with confidence and buries the caveats is managing an impression, and experienced readers know it.</p>
+<p>---</p>
+<h2>Part 3 — The limitations section is an asset, not a confession</h2>
+<p>Students consistently treat limitations as damage. They are the opposite, for a practical reason: <strong>the limitations section is the only part of your work that proves you understood it.</strong></p>
+<p>Anyone can produce a number. Only someone who understands the analysis can say precisely where it fails. That is why interviewers ask what is wrong with your model, and why the answer &quot;nothing really&quot; ends the conversation badly.</p>
+<p>You have been building this section for six weeks:</p>
+<ul><li>Week 1 — sources disagree, and which differences you adjudicated how</li><li>Week 2 — what your panel is contaminated by, with severities you assigned</li><li>Week 3 — what your catalog forbids you from claiming</li><li>Week 4 — that your optimizer output is a statement about your sample</li><li>Week 5 — your risk model&#x27;s measured failure rate</li><li>Week 6 — the vintage of your inputs and the assumption driving your valuation</li></ul>
+<p>That is a complete, specific, evidence-backed account of what your work cannot do. Almost nobody at your career stage has one.</p>
+<blockquote><strong>The rule this gives you.</strong> Never write &quot;this analysis has limitations.&quot; Write the limitation, its evidence, and what the reader should therefore not conclude.</blockquote>
+<p>---</p>
+<h2>Part 4 — The defense</h2>
+<p>You will defend a key assumption on video, using a data point you have not seen before.</p>
+<p>This is not a presentation. It is the part of a job that happens when a managing director asks you something you did not prepare for, and the whole point is to find out whether the understanding is real.</p>
+<p><strong>What a good defense does:</strong></p>
+<ol><li>States the assumption plainly, and why you made it</li><li>Says what evidence supports it and how strong that evidence is</li><li>Takes the fresh data point seriously — actually engages with what it implies</li><li>Says whether it changes the conclusion, and by how much</li><li>If it does change it, <strong>says so</strong></li></ol>
+<p>Point 5 is the one being tested. An analyst who updates on evidence in front of you is someone you can trust with a decision. An analyst who defends a position regardless of what arrives is not, and it takes about ninety seconds to tell which you are dealing with.</p>
+<p><strong>What a bad defense does:</strong> restates the assumption more confidently, explains why the new data point is not really relevant, or retreats into method detail. All three are recognisable and all three are read the same way.</p>
+<blockquote><strong>The rule this gives you.</strong> &quot;That changes my answer, and here is how&quot; is the strongest sentence available to you. It is not a concession. It is the demonstration.</blockquote>
+<p>---</p>
+<h2>Part 5 — What you can now say you can do</h2>
+<p>Worth being concrete, because you will be asked, and because most of it is not obvious from a transcript.</p>
+<p>You can take a security or a company and produce a defensible analysis where every number is sourced and dated. Specifically, you can:</p>
+<ul><li>Reconcile two data sources and tell a defect from a convention difference</li><li>Key work on a permanent identifier and explain what breaks without one</li><li>Detect survivorship and look-ahead contamination that produces clean-looking output</li><li>Maintain a data-quality catalog that constrains what you are willing to claim</li><li>Compute performance and risk metrics, state their conventions, and verify them independently</li><li>Construct a portfolio and demonstrate where its optimizer breaks</li><li>Produce a risk report that states its own measured failure rate</li><li>Value a company with every input dated, reported as a range</li><li>Say precisely what your work cannot support</li></ul>
+<p>That last one is the one that gets you hired, and it is the one your competition cannot do.</p>
+<p>---</p>
+<h2>This week&#x27;s sources</h2>
+<p>Register: [the source register](../sources.html).</p>
+<p>This week works with everything you have already gathered. No new source.</p>
+<p><strong>The limitations section is the part nobody else can write for you.</strong> Generic limitations — &quot;data quality may vary&quot;, &quot;past performance does not guarantee future results&quot; — could be attached to any analysis ever produced, which is exactly why they are worthless.</p>
+<p>Yours are specific: the names that returned zero rows, your measured VaR breach ratio, the vintage of your valuation inputs, the assumption your conclusion turns on. Every one of those came from work you did. That is what makes the section evidence.</p>
+<p>---</p>
+<p><strong>Two sources, minimum — and where you have professional access, one of them is the professional source.</strong> This week that is <strong>whichever your figures came from — named, with IBES named wherever a forward estimate appears</strong>, for the ledger is the deliverable; an untraced figure is an unsupported one.</p>
+<p>Pending access is neither an excuse nor a penalty. Document the attempt — source, route tried, date, barrier, and why that source would have been independent — and use a second free source instead. <strong>The attempt counts; the outcome never does.</strong></p>
+<h2>Before the session — do these</h2>
+<ol><li>Assemble every artefact from Weeks 1 through 6 in one directory.</li><li>Run everything, start to finish, on a fresh kernel. Note what breaks.</li><li>Identify the single assumption most load-bearing in your work. You will defend that one.</li></ol>
+<p><strong>Next: Lab 7</strong> is the deliverable and the defense. There is no new analysis in it — if something is missing, it is missing because it was not built, and this is not the week to build it.</p>
+</main></body></html>

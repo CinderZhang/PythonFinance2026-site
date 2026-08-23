@@ -1,0 +1,120 @@
+<!doctype html><html lang='en'><head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width,initial-scale=1'>
+<title>Week 6</title><style>
+:root { --bg:#ffffff; --fg:#14181d; --muted:#5a6572; --rule:#dfe3e8;
+        --accent:#0b5fa5; --code-bg:#f4f6f8; }
+@media (prefers-color-scheme: dark) {
+  :root { --bg:#0f1419; --fg:#e9ecf0; --muted:#9aa4b2; --rule:#2a323c;
+          --accent:#6fb3f2; --code-bg:#182029; } }
+* { box-sizing: border-box; }
+html, body { height:100%; }
+body { margin:0; background:var(--bg); color:var(--fg);
+       font: 22px/1.5 -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+
+.slide { display:none; min-height:100vh; padding:5vh 7vw 9vh;
+         flex-direction:column; justify-content:center; }
+.slide.current { display:flex; }
+.slide > *:first-child { margin-top:0; }
+
+h1 { font-size:2.8rem; line-height:1.15; margin:0 0 1rem; letter-spacing:-.01em; }
+h2 { font-size:2.1rem; line-height:1.2; margin:0 0 1.4rem; letter-spacing:-.01em; }
+h3 { font-size:1.4rem; margin:1.2rem 0 .6rem; color:var(--muted); }
+p, li { max-width:52ch; }
+li { margin:.45rem 0; }
+strong { font-weight:650; }
+blockquote { margin:1.3rem 0; padding:.7rem 0 .7rem 1.2rem;
+             border-left:4px solid var(--accent); color:var(--muted); }
+pre { background:var(--code-bg); border:1px solid var(--rule); border-radius:8px;
+      padding:1rem 1.2rem; overflow-x:auto; max-width:100%;
+      font:.72em/1.5 ui-monospace, Menlo, Consolas, monospace; }
+code { font:.88em ui-monospace, Menlo, Consolas, monospace; }
+table { border-collapse:collapse; margin:1.1rem 0; font-size:.78em; max-width:100%;
+        display:block; overflow-x:auto; }
+th, td { border:1px solid var(--rule); padding:.5rem .8rem; text-align:left; }
+th { background:var(--code-bg); }
+.math { background:var(--code-bg); border:1px solid var(--rule); border-radius:8px;
+        padding:.8rem 1.1rem; margin:1.1rem 0; font-size:.8em;
+        font-family:ui-monospace, Menlo, Consolas, monospace; }
+
+.title-slide h1 { font-size:3.4rem; }
+.title-slide .sub { color:var(--muted); font-size:1.3rem; margin-top:.6rem; }
+
+#bar { position:fixed; top:0; left:0; height:3px; background:var(--accent);
+       width:0; transition:width .15s ease; z-index:10; }
+#num { position:fixed; bottom:1.4vh; right:2vw; color:var(--muted);
+       font:600 .7rem ui-monospace, Menlo, Consolas, monospace; z-index:10; }
+#hint { position:fixed; bottom:1.4vh; left:2vw; color:var(--muted);
+        font:.68rem -apple-system, "Segoe UI", sans-serif; z-index:10; opacity:.75; }
+
+@media print {
+  #bar, #num, #hint { display:none; }
+  .slide { display:flex !important; min-height:auto; page-break-after:always;
+           padding:6% 8%; border-bottom:none; }
+  body { font-size:15px; }
+  h1 { font-size:2rem; } h2 { font-size:1.6rem; }
+}
+@media (max-width:820px) { body { font-size:17px; } h2 { font-size:1.6rem; } }
+</style></head><body>
+<div id='bar'></div>
+<section class='slide title-slide'><h1>Week 6</h1><div class='sub'>FIN 69000-003 · Financial Analytics with Python (with AI)</div></section>
+<section class='slide'><h2>From a portfolio to one company</h2>
+<p>Five weeks of panels, portfolios, and risk reports.</p>
+<p>Now: one company, a handful of inputs.</p>
+<p>Not <em>&quot;what is your target price.&quot;</em></p>
+<blockquote><strong>&quot;Where did that number come from, and as of when?&quot;</strong></blockquote></section>
+<section class='slide'><h2>What is Apple&#x27;s FY2017 operating cash flow?</h2>
+<p>A factual question.</p>
+<p>Look it up. Give me the number.</p>
+<p>Now — <strong>where did you get it, and when did that source pull it?</strong></p></section>
+<section class='slide'><h2>Two answers, both correct</h2>
+<pre><code>period 2016-09-25 -&gt; 2017-09-30
+
+10-K filed 2017-11-03      63,598,000,000
+10-K filed 2018-11-05      64,225,000,000
+10-K filed 2019-10-31      64,225,000,000</code></pre>
+<p>Same period. Same company. Same line item.</p>
+<p><strong>$627 million apart — about 1%.</strong></p>
+<p>Nobody did anything wrong. Standards change; comparatives get restated.</p>
+<blockquote>It is not a single fact. It is a fact <strong>with a vintage</strong>.</blockquote></section>
+<section class='slide'><h2>Three things routinely confused</h2>
+<table><thead><tr><th>Term</th><th>Means</th><th>Use for</th></tr></thead><tbody><tr><td><strong>As first reported</strong></td><td>the figure in the original filing</td><td>what the market saw at the time</td></tr><tr><td><strong>As-reported (current)</strong></td><td>as it stands now, restatements included</td><td>current-state analysis</td></tr><tr><td><strong>Point-in-time</strong></td><td>as known on a specified date</td><td>anything time-sensitive</td></tr></tbody></table>
+<p>Week 2: a fundamental has a <strong>knowability date</strong>.</p>
+<p>This week: it also has a <strong>value that changes</strong>.</p>
+<p>A backtest on data pulled today is biased toward whoever was revised upward.</p></section>
+<section class='slide'><h2>The year that had fifty-three weeks</h2>
+<pre><code>2021-09-26 -&gt; 2022-09-24    364 days = 52.00 weeks
+2022-09-25 -&gt; 2023-09-30    371 days = 53.00 weeks   &lt;-- extra week
+2023-10-01 -&gt; 2024-09-28    364 days = 52.00 weeks</code></pre>
+<p>FY2023 had ~1.9% more selling days.</p>
+<p>So FY2023 growth is <strong>inflated</strong> by a week — and FY2024 growth is <strong>depressed</strong> by the same week going away.</p>
+<p>Two artefacts, opposite signs. Both look exactly like business trends.</p></section>
+<section class='slide'><h2>Why two platforms disagree</h2>
+<table><thead><tr><th>Cause</th><th>What is happening</th></tr></thead><tbody><tr><td>Vintage</td><td>pulled before vs after a restatement</td></tr><tr><td>Fiscal alignment</td><td>calendarised, or not</td></tr><tr><td><strong>Standardisation</strong></td><td>mapped onto the vendor&#x27;s own schema</td></tr><tr><td>Classification</td><td>discontinued ops, one-offs, segments</td></tr><tr><td>GAAP vs non-GAAP</td><td>statutory, or management&#x27;s adjusted</td></tr></tbody></table>
+<p>Compustat does not copy filings. It <strong>maps</strong> them, so thousands of companies compare.</p>
+<p>The expensive platform is often <em>deliberately less faithful</em> to any one filing.</p>
+<p><strong>Knowing which you need is the skill.</strong></p></section>
+<section class='slide'><h2>The recurring one-off</h2>
+<p>Adjusted figures exclude what management considers unrepresentative.</p>
+<p>Sometimes informative. Sometimes the same &quot;one-off&quot; charge for six straight years.</p>
+<ol><li>Non-GAAP is <strong>not standardised</strong> — two companies&#x27; &quot;adjusted EBITDA&quot; are not comparable</li><li>The reconciliation is <strong>published</strong> — read it</li><li>A recurring adjustment <strong>is not an adjustment</strong></li></ol>
+<p>State which basis you used.</p></section>
+<section class='slide'><h2>The source ledger</h2>
+<blockquote><strong>Input:</strong> FY2017 operating cash flow <strong>Value:</strong> $63.598bn <strong>Source:</strong> Apple 10-K FY2017, filed 2017-11-03, via SEC EDGAR XBRL <strong>As-of:</strong> as first reported, 2017-11-03 <strong>Basis:</strong> GAAP, fiscal year (52/53-week, ends last Saturday of September) <strong>Note:</strong> Revised to $64.225bn in the FY2018 10-K. I use as-first-reported because this analysis reconstructs what was knowable at the time. A current-state analysis should use $64.225bn.</blockquote>
+<p>The <strong>note</strong> is the difference between an analyst and a spreadsheet.</p>
+<blockquote>Any link you cannot date is a link you cannot defend.</blockquote></section>
+<section class='slide'><h2>The model is the easy part</h2>
+<p>AI builds a DCF in seconds. That is not where the value is.</p>
+<p>Where valuations actually go wrong:</p>
+<ul><li><strong>Terminal value</strong> — usually most of the answer</li><li>Discount rate components, each with estimation error</li><li>Growth extrapolated from a 53-week year</li><li>Comparables chosen to fit a conclusion</li><li>Inputs of unknown vintage</li></ul>
+<p>Only one of those is arithmetic.</p>
+<p><strong>Report a range.</strong> A point estimate claims precision you do not have.</p></section>
+<section class='slide'><h2>Your company, your judgment</h2>
+<blockquote><em>&quot;Your valuation is really just your terminal growth assumption wearing a spreadsheet.&quot;</em></blockquote>
+<p><strong>They are probably right about the arithmetic.</strong></p>
+<p>The difference is not the number. It is whether the assumption is <strong>stated, sourced, and sensitivity-tested</strong> — or buried.</p>
+<blockquote><strong>What did you notice that I did not ask about?</strong></blockquote></section>
+<section class='slide'><h2>Before next week — do these</h2>
+<blockquote><strong>Two sources minimum — and one of them professional where you have access.</strong> Pending access is documented, never penalised. The attempt counts; the outcome does not.</blockquote>
+<ol><li>Find a <strong>revision</strong> in your own company — or report a negative result you actually looked for.</li><li>Establish the <strong>fiscal calendar</strong>. Any 53-week years?</li><li>Get one figure from <strong>two sources</strong>; diagnose the difference.</li><li>Build the valuation. <strong>Report a range.</strong> State the terminal-value share.</li><li>Complete the <strong>source ledger</strong> — every input dated, with notes.</li><li>Translate sensitivity into statements about the business.</li><li><strong>Gather every artefact from Weeks 1–6.</strong></li></ol>
+<p><strong>Week 7 assembles. It does not rebuild.</strong> Anything missing arrives missing.</p></section>
+<div id='num'></div><div id='hint'>← → or space to navigate</div><script>var s=[].slice.call(document.querySelectorAll('.slide')),i=0;function go(n){i=Math.max(0,Math.min(s.length-1,n));s.forEach(function(e,k){e.classList.toggle('current',k===i);});document.getElementById('num').textContent=(i+1)+' / '+s.length;document.getElementById('bar').style.width=((i)/(s.length-1)*100)+'%';if(location.hash!=='#'+(i+1)){history.replaceState(null,'','#'+(i+1));}}document.addEventListener('keydown',function(e){if(e.key==='ArrowRight'||e.key===' '||e.key==='PageDown'){e.preventDefault();go(i+1);}else if(e.key==='ArrowLeft'||e.key==='PageUp'){e.preventDefault();go(i-1);}else if(e.key==='Home'){go(0);}else if(e.key==='End'){go(s.length-1);}});document.addEventListener('click',function(e){if(e.target.closest('a,pre,table'))return;go(i+1);});go(parseInt((location.hash||'#1').slice(1),10)-1||0);</script></body></html>

@@ -1,0 +1,178 @@
+<!doctype html><html lang='en'><head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width,initial-scale=1'>
+<title>Week 5 — Handout</title><style>
+:root { --bg:#ffffff; --fg:#14181d; --muted:#5a6572; --rule:#dfe3e8;
+        --accent:#0b5fa5; --code-bg:#f4f6f8; }
+@media (prefers-color-scheme: dark) {
+  :root { --bg:#0f1419; --fg:#e9ecf0; --muted:#9aa4b2; --rule:#2a323c;
+          --accent:#6fb3f2; --code-bg:#182029; } }
+* { box-sizing: border-box; }
+html, body { height:100%; }
+body { margin:0; background:var(--bg); color:var(--fg);
+       font: 22px/1.5 -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+
+.slide { display:none; min-height:100vh; padding:5vh 7vw 9vh;
+         flex-direction:column; justify-content:center; }
+.slide.current { display:flex; }
+.slide > *:first-child { margin-top:0; }
+
+h1 { font-size:2.8rem; line-height:1.15; margin:0 0 1rem; letter-spacing:-.01em; }
+h2 { font-size:2.1rem; line-height:1.2; margin:0 0 1.4rem; letter-spacing:-.01em; }
+h3 { font-size:1.4rem; margin:1.2rem 0 .6rem; color:var(--muted); }
+p, li { max-width:52ch; }
+li { margin:.45rem 0; }
+strong { font-weight:650; }
+blockquote { margin:1.3rem 0; padding:.7rem 0 .7rem 1.2rem;
+             border-left:4px solid var(--accent); color:var(--muted); }
+pre { background:var(--code-bg); border:1px solid var(--rule); border-radius:8px;
+      padding:1rem 1.2rem; overflow-x:auto; max-width:100%;
+      font:.72em/1.5 ui-monospace, Menlo, Consolas, monospace; }
+code { font:.88em ui-monospace, Menlo, Consolas, monospace; }
+table { border-collapse:collapse; margin:1.1rem 0; font-size:.78em; max-width:100%;
+        display:block; overflow-x:auto; }
+th, td { border:1px solid var(--rule); padding:.5rem .8rem; text-align:left; }
+th { background:var(--code-bg); }
+.math { background:var(--code-bg); border:1px solid var(--rule); border-radius:8px;
+        padding:.8rem 1.1rem; margin:1.1rem 0; font-size:.8em;
+        font-family:ui-monospace, Menlo, Consolas, monospace; }
+
+.title-slide h1 { font-size:3.4rem; }
+.title-slide .sub { color:var(--muted); font-size:1.3rem; margin-top:.6rem; }
+
+#bar { position:fixed; top:0; left:0; height:3px; background:var(--accent);
+       width:0; transition:width .15s ease; z-index:10; }
+#num { position:fixed; bottom:1.4vh; right:2vw; color:var(--muted);
+       font:600 .7rem ui-monospace, Menlo, Consolas, monospace; z-index:10; }
+#hint { position:fixed; bottom:1.4vh; left:2vw; color:var(--muted);
+        font:.68rem -apple-system, "Segoe UI", sans-serif; z-index:10; opacity:.75; }
+
+@media print {
+  #bar, #num, #hint { display:none; }
+  .slide { display:flex !important; min-height:auto; page-break-after:always;
+           padding:6% 8%; border-bottom:none; }
+  body { font-size:15px; }
+  h1 { font-size:2rem; } h2 { font-size:1.6rem; }
+}
+@media (max-width:820px) { body { font-size:17px; } h2 { font-size:1.6rem; } }
+
+.nav { margin: 0 0 1.5rem; font-size:.9rem; }
+.nav a { color: var(--accent); text-decoration: none; }
+.nav a:hover { text-decoration: underline; }
+.wk { border:1px solid var(--rule); border-radius:10px; padding:1.1rem 1.4rem; margin:0 0 1rem; }
+.wk h3 { margin:.1rem 0 .5rem; font-size:1.05rem; }
+.wk .num { color:var(--muted); font:600 11px/1 ui-monospace,Menlo,Consolas,monospace;
+           letter-spacing:.1em; text-transform:uppercase; }
+.surfaces a { display:inline-block; margin:.3rem .4rem .3rem 0; padding:.3rem .65rem;
+              border:1px solid var(--accent); border-radius:999px; font-size:.85rem;
+              color:var(--accent); text-decoration:none; }
+.surfaces a:hover { background:var(--code-bg); }
+.surfaces span.held { display:inline-block; margin:.3rem .4rem .3rem 0; padding:.3rem .65rem;
+                      border:1px dashed var(--rule); border-radius:999px; font-size:.85rem;
+                      color:var(--muted); }
+.lede { color:var(--muted); margin:0 0 2rem; }
+</style></head>
+<body><main>
+<div class='nav'><a href='../index.html'>MSF Financial Modeling</a></div>
+<h1>Week 5 — Handout</h1><h1>Week 5 — Handout</h1>
+<blockquote><strong>Register: TEACH.</strong> Narrative and worked examples. Graded steps in <code>lab.md</code>; conventions in <code>rules.md</code>.</blockquote>
+<p><strong>You arrive with:</strong> a portfolio, the constraints that produced it, its gross leverage, and a diagnosis of why the unconstrained version could not be trusted.</p>
+<p>Now you have to hand it to someone. This week is about the document that goes with it.</p>
+<p>---</p>
+<h2>Why this matters</h2>
+<p>An investment committee does not want your Sharpe ratio. They want to know what can go wrong, how badly, how often, and what you will do about it.</p>
+<p>The document that answers those questions is the risk report, and it is the most consequential thing a junior analyst produces — because it is the artefact people rely on when they are deciding how much to lose. A risk report that overstates confidence is worse than no risk report, because it displaces the caution that would otherwise be there.</p>
+<p>You are going to build one, then find out how often the standard number in it would have been wrong.</p>
+<p>---</p>
+<h2>Part 1 — Value at Risk, stated properly</h2>
+<p><strong>Value at Risk</strong> answers: over a given horizon, at a given confidence level, what loss will not be exceeded?</p>
+<p>A 1-day 99% VaR of −3% says: <em>on 99% of days, the loss should be no worse than 3%.</em></p>
+<p>Which means it also says: <strong>on 1% of days, it should be worse — and VaR says nothing at all about how much worse.</strong> Both halves of that sentence are load-bearing.</p>
+<p>Three standard ways to compute it:</p>
+<table><thead><tr><th>Method</th><th>How</th><th>Assumes</th></tr></thead><tbody><tr><td><strong>Historical</strong></td><td>the 1st percentile of actual past returns</td><td>the future resembles the sampled past</td></tr><tr><td><strong>Parametric</strong></td><td>mean − <em>z</em> × σ, with <em>z</em> from the normal distribution</td><td>returns are normally distributed</td></tr><tr><td><strong>Monte Carlo</strong></td><td>simulate from an assumed process, take the percentile</td><td>your assumed process is right</td></tr></tbody></table>
+<p>Every one of them assumes something that is not true. The professional question is not which is correct — it is which failure you can live with, and whether you have measured it.</p>
+<p>---</p>
+<h2>Part 2 — Backtest it, because otherwise it is decoration</h2>
+<p>A VaR number that has never been checked against history is a decoration. Checking it is mechanical: compute the VaR each day using only data available before that day, then count how often the next day&#x27;s actual loss exceeded it.</p>
+<p>If the model is well calibrated, a 99% VaR should be breached about 1% of the time.</p>
+<pre><code>W = 250
+var99 = returns.rolling(W).quantile(0.01).shift(1)   # shift: only past data
+breach = returns &lt; var99</code></pre>
+<p>The <code>.shift(1)</code> is the whole discipline of Week 2 reappearing. Without it you are using today&#x27;s return to set today&#x27;s limit, which is look-ahead bias wearing a risk-management hat.</p>
+<p>Run over twenty years of daily S&amp;P 500 returns:</p>
+<pre><code>window 2005-12-30 -&gt; 2025-06-27, 4903 days, 250-day lookback
+
+expected breaches at 1% : 49
+actual breaches         : 87        (1.77% of days)
+ratio actual/expected   : 1.77x</code></pre>
+<p><strong>The 99% VaR was breached nearly twice as often as advertised.</strong></p>
+<p>Not because the arithmetic is wrong — the percentile is computed correctly. Because the assumption underneath it, that the recent past describes the near future, fails precisely when it matters.</p>
+<p>---</p>
+<h2>Part 3 — The two things the breach count hides</h2>
+<p>The headline &quot;1.77x too often&quot; is bad. The detail is worse, in two specific ways that a committee will ask about.</p>
+<h3>Breaches cluster</h3>
+<p>If breaches were independent events at a 1% rate, they would be scattered thinly across twenty years. They are not:</p>
+<pre><code>breaches by year
+2006:3   2007:11  2008:12  2010:3   2011:6   2012:1  2013:2  2014:3
+2015:5   2016:1   2017:3   2018:7   2019:1   2020:8  2021:1  2022:10
+2024:6   2025:4</code></pre>
+<p>Twelve breaches in 2008. Eleven in 2007. Ten in 2022. Eight in 2020. Against an expectation of roughly two and a half per year.</p>
+<p>Bad days arrive together. A risk model that assumes independence will tell you an event is a once-a-century occurrence on the same week it happens three times. <strong>Clustering is why a number that looks acceptable on average is dangerous in practice</strong> — you do not experience the average, you experience the cluster.</p>
+<h3>The size beyond VaR is unbounded</h3>
+<p>VaR tells you a threshold. It says nothing about what happens past it:</p>
+<pre><code>worst 5 breaches       actual      VaR      excess
+2020-03-16            -10.94%   -4.69%    -6.26pp
+2020-03-12             -9.57%   -3.92%    -5.65pp
+2008-10-15             -9.84%   -4.93%    -4.92pp
+2008-09-29             -7.84%   -3.10%    -4.73pp
+2020-03-09             -7.81%   -3.18%    -4.63pp</code></pre>
+<p>On 2020-03-16 the model said the loss should not exceed 4.69%. The actual loss was 10.94% — <strong>more than double</strong>, and 6.26 percentage points past the limit.</p>
+<p>A committee told &quot;our 99% VaR is 4.7%&quot; and not told this will size positions as though 4.7% is close to the worst case. It is not close to the worst case. It is the <em>start</em> of the worst case.</p>
+<h3>The fix that is not a fix</h3>
+<p><strong>Conditional VaR</strong> — also called expected shortfall — answers the question VaR ducks: given that you breach, what is the average loss? It is strictly more informative, and it is what modern regulation moved toward.</p>
+<p>It is still estimated from the same history, and it still fails when the future does not resemble the past. It is a better number, not a safe one.</p>
+<blockquote><strong>The rule this gives you.</strong> Never report a risk number without its backtest. &quot;Our 99% VaR is X&quot; is incomplete. &quot;Our 99% VaR is X, and over the last twenty years this method was breached 1.77 times more often than advertised, with breaches clustered in stress periods, and the worst breach exceeded the limit by 6.3 percentage points&quot; is a risk report.</blockquote>
+<p>---</p>
+<h2>Part 4 — Rebalancing has a price, and it is not zero</h2>
+<p>Your Week 4 portfolio has weights. Markets move, so the weights drift. Rebalancing pulls them back — and every rebalance is a set of trades, and every trade costs.</p>
+<p>The cost has three parts, and the one people forget is the largest:</p>
+<table><thead><tr><th>Cost</th><th>What it is</th></tr></thead><tbody><tr><td>Commission</td><td>explicit, small, easy to find</td></tr><tr><td><strong>Spread and market impact</strong></td><td>implicit, larger, and it grows with your size</td></tr><tr><td>Tax</td><td>on realised gains, in taxable accounts, and often the biggest of all</td></tr></tbody></table>
+<p>The arithmetic is simple enough to do in your head, which is why there is no excuse for ignoring it. A strategy with 40% annual turnover and a 10 basis point round-trip cost gives up 4 basis points a year. Modest. The same strategy at 400% turnover gives up 40 basis points, and now it needs to beat its benchmark by 0.4% before it has done anything for anyone.</p>
+<p><strong>Rebalancing policy is a real decision with a real price:</strong></p>
+<ul><li><strong>Calendar</strong> — rebalance every quarter, say. Simple, predictable, ignores whether it is</li></ul>
+<p>needed.</p>
+<ul><li><strong>Threshold</strong> — rebalance when a weight drifts more than some band. Trades only when it</li></ul>
+<p>matters; the band is a free parameter you must choose and defend.</p>
+<ul><li><strong>Never</strong> — let it drift. Zero cost, and your portfolio slowly becomes a different portfolio.</li></ul>
+<p>There is no correct answer. There is a stated policy with its cost estimated, and there is an unstated one.</p>
+<p>---</p>
+<h2>Part 5 — What a risk system sees, and what it cannot</h2>
+<p>The professional-data question this week.</p>
+<p>A risk system runs on <strong>position and exposure data</strong> — what you hold, in what size, valued how, with what sensitivities. That is a different kind of dataset from anything you have used so far. Prices are public; positions are not. They come from your own books, and their quality is your own problem.</p>
+<p>What position data makes possible: exposure by sector, geography, currency, factor; netting across accounts; look-through into funds you hold; sensitivities to rate and spread moves.</p>
+<p><strong>What it structurally cannot see</strong> — and every one of these has caused a real loss:</p>
+<table><thead><tr><th>Blind spot</th><th>Why</th></tr></thead><tbody><tr><td>Liquidity</td><td>a position&#x27;s <em>size</em> relative to daily volume is not in its price history</td></tr><tr><td>Crowding</td><td>you cannot see who else holds what you hold, and they will sell when you do</td></tr><tr><td>Counterparty and collateral</td><td>often in a different system from the risk system</td></tr><tr><td>Off-balance-sheet and contingent exposure</td><td>not a position until it is</td></tr><tr><td>Model risk</td><td>the risk system cannot report the risk that the risk system is wrong</td></tr></tbody></table>
+<p>That last row deserves the emphasis. Your VaR backtest measured model risk directly — it found the model wrong by a factor of 1.77 — and no risk system reports that number unless someone computes it deliberately.</p>
+<p><strong>This is the week&#x27;s professional-data point.</strong> A risk report built only from market data answers only the questions market data can answer. Its silences are not reassurance.</p>
+<p>---</p>
+<h2>Part 6 — What a committee actually needs</h2>
+<p>A report they would accept states, on its face:</p>
+<ol><li><strong>The number</strong> — VaR and CVaR, with horizon, confidence, and method</li><li><strong>The backtest</strong> — how often this method was wrong, historically, on this kind of data</li><li><strong>The concentration</strong> — where the risk actually sits, not the average</li><li><strong>The leverage</strong> — gross and net, always</li><li><strong>What would have to happen</strong> for the portfolio to lose a specified amount</li><li><strong>The limitations</strong> — what this report cannot see, named specifically</li><li><strong>The action</strong> — what you will do if a limit is breached, decided in advance</li></ol>
+<p>Item 7 is the one juniors leave out and the one committees care most about. A risk report that identifies a risk and proposes nothing has told the committee something they can do nothing with.</p>
+<p>Item 6 is where your Week 2 catalog reappears. The limitations of the data are limitations of the report, and by now you have them written down.</p>
+<blockquote><strong>The rule this gives you.</strong> A risk report is judged by what it admits, not by what it claims. The strongest one on the table is usually the one that states its own failure rate.</blockquote>
+<p>---</p>
+<h2>This week&#x27;s sources</h2>
+<p>Register: [the source register](../sources.html).</p>
+<table><thead><tr><th>Working with</th><th>For</th></tr></thead><tbody><tr><td>Your Week 4 portfolio</td><td>the risk report</td></tr><tr><td>Market data (guaranteed lane)</td><td>the VaR backtest</td></tr><tr><td>Position and exposure data</td><td>conceptually — <strong>this one is not public.</strong> It comes from your own books, and its quality is your own problem</td></tr><tr><td>Cited transaction-cost estimates</td><td>pricing your rebalancing policy</td></tr></tbody></table>
+<p><strong>One line of code decides whether your risk model can see tomorrow.</strong> A VaR computed without shifting the estimate looks beautifully calibrated and is worthless. It is the single most consequential line you will write this week, and it is one character of difference from the version that lies to you.</p>
+<p>A risk model that looks well calibrated is more likely to be look-ahead contaminated than correct. Suspect it first.</p>
+<p>---</p>
+<p><strong>Two sources, minimum — and where you have professional access, one of them is the professional source.</strong> This week that is <strong>WRDS / CRSP, and TRACE if your portfolio carries credit</strong>, for long history for tail estimates, and transaction-level bond data a free feed does not hold.</p>
+<p>Pending access is neither an excuse nor a penalty. Document the attempt — source, route tried, date, barrier, and why that source would have been independent — and use a second free source instead. <strong>The attempt counts; the outcome never does.</strong></p>
+<h2>Before the lab — do these</h2>
+<ol><li>Reproduce the VaR backtest on a series of your choice. Confirm you get a breach rate above</li></ol>
+<p>1%; if you get one below, look at your <code>.shift(1)</code>.</p>
+<ol><li>Have your Week 4 portfolio weights and gross leverage loaded.</li><li>Decide your rebalancing policy — calendar, threshold, or never — and write one sentence on</li></ol>
+<p>why, before you price it.</p>
+<p><strong>Next: Lab 5</strong> builds the risk report for <em>your</em> portfolio, backtests your own VaR, prices your rebalancing policy, and asks you to state in advance what you would do when a limit breaks.</p>
+</main></body></html>

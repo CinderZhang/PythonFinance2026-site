@@ -1,0 +1,130 @@
+<!doctype html><html lang='en'><head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width,initial-scale=1'>
+<title>Week 6 — Lab</title><style>
+:root { --bg:#ffffff; --fg:#14181d; --muted:#5a6572; --rule:#dfe3e8;
+        --accent:#0b5fa5; --code-bg:#f4f6f8; }
+@media (prefers-color-scheme: dark) {
+  :root { --bg:#0f1419; --fg:#e9ecf0; --muted:#9aa4b2; --rule:#2a323c;
+          --accent:#6fb3f2; --code-bg:#182029; } }
+* { box-sizing: border-box; }
+html, body { height:100%; }
+body { margin:0; background:var(--bg); color:var(--fg);
+       font: 22px/1.5 -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+
+.slide { display:none; min-height:100vh; padding:5vh 7vw 9vh;
+         flex-direction:column; justify-content:center; }
+.slide.current { display:flex; }
+.slide > *:first-child { margin-top:0; }
+
+h1 { font-size:2.8rem; line-height:1.15; margin:0 0 1rem; letter-spacing:-.01em; }
+h2 { font-size:2.1rem; line-height:1.2; margin:0 0 1.4rem; letter-spacing:-.01em; }
+h3 { font-size:1.4rem; margin:1.2rem 0 .6rem; color:var(--muted); }
+p, li { max-width:52ch; }
+li { margin:.45rem 0; }
+strong { font-weight:650; }
+blockquote { margin:1.3rem 0; padding:.7rem 0 .7rem 1.2rem;
+             border-left:4px solid var(--accent); color:var(--muted); }
+pre { background:var(--code-bg); border:1px solid var(--rule); border-radius:8px;
+      padding:1rem 1.2rem; overflow-x:auto; max-width:100%;
+      font:.72em/1.5 ui-monospace, Menlo, Consolas, monospace; }
+code { font:.88em ui-monospace, Menlo, Consolas, monospace; }
+table { border-collapse:collapse; margin:1.1rem 0; font-size:.78em; max-width:100%;
+        display:block; overflow-x:auto; }
+th, td { border:1px solid var(--rule); padding:.5rem .8rem; text-align:left; }
+th { background:var(--code-bg); }
+.math { background:var(--code-bg); border:1px solid var(--rule); border-radius:8px;
+        padding:.8rem 1.1rem; margin:1.1rem 0; font-size:.8em;
+        font-family:ui-monospace, Menlo, Consolas, monospace; }
+
+.title-slide h1 { font-size:3.4rem; }
+.title-slide .sub { color:var(--muted); font-size:1.3rem; margin-top:.6rem; }
+
+#bar { position:fixed; top:0; left:0; height:3px; background:var(--accent);
+       width:0; transition:width .15s ease; z-index:10; }
+#num { position:fixed; bottom:1.4vh; right:2vw; color:var(--muted);
+       font:600 .7rem ui-monospace, Menlo, Consolas, monospace; z-index:10; }
+#hint { position:fixed; bottom:1.4vh; left:2vw; color:var(--muted);
+        font:.68rem -apple-system, "Segoe UI", sans-serif; z-index:10; opacity:.75; }
+
+@media print {
+  #bar, #num, #hint { display:none; }
+  .slide { display:flex !important; min-height:auto; page-break-after:always;
+           padding:6% 8%; border-bottom:none; }
+  body { font-size:15px; }
+  h1 { font-size:2rem; } h2 { font-size:1.6rem; }
+}
+@media (max-width:820px) { body { font-size:17px; } h2 { font-size:1.6rem; } }
+
+.nav { margin: 0 0 1.5rem; font-size:.9rem; }
+.nav a { color: var(--accent); text-decoration: none; }
+.nav a:hover { text-decoration: underline; }
+.wk { border:1px solid var(--rule); border-radius:10px; padding:1.1rem 1.4rem; margin:0 0 1rem; }
+.wk h3 { margin:.1rem 0 .5rem; font-size:1.05rem; }
+.wk .num { color:var(--muted); font:600 11px/1 ui-monospace,Menlo,Consolas,monospace;
+           letter-spacing:.1em; text-transform:uppercase; }
+.surfaces a { display:inline-block; margin:.3rem .4rem .3rem 0; padding:.3rem .65rem;
+              border:1px solid var(--accent); border-radius:999px; font-size:.85rem;
+              color:var(--accent); text-decoration:none; }
+.surfaces a:hover { background:var(--code-bg); }
+.surfaces span.held { display:inline-block; margin:.3rem .4rem .3rem 0; padding:.3rem .65rem;
+                      border:1px dashed var(--rule); border-radius:999px; font-size:.85rem;
+                      color:var(--muted); }
+.lede { color:var(--muted); margin:0 0 2rem; }
+</style></head>
+<body><main>
+<div class='nav'><a href='../index.html'>MSF Financial Modeling</a></div>
+<h1>Week 6 — Lab</h1><h1>Lab 6 — A Valuation You Can Date</h1>
+<blockquote><strong>Register: DO.</strong> Teaching is in <code>handout.md</code>; conventions in <code>rules.md</code>.</blockquote>
+<p><strong>You arrive with:</strong> a company you chose, a risk report with its own failure rate on it, a limitations section, and five weeks of habits about provenance. From the session you have the Apple restatement, the 53-week year, and the source ledger format.</p>
+<p><strong>Where this goes next:</strong> Week 7 assembles everything into one deliverable and you defend it on video. This valuation is its centrepiece, and the source ledger is what makes it reproducible by someone else.</p>
+<p>---</p>
+<h2>Step 1 — Find a revision in your own company</h2>
+<p>Run the XBRL company-concept query on your company for at least two line items.</p>
+<p>Look for any period reported with more than one value across filings. Report what you find.</p>
+<p><strong>If you find nothing, that is a legitimate result</strong> — report it as &quot;no revisions found across N filings for these concepts,&quot; and say which concepts you checked. A negative result you actually looked for is worth full marks. A negative result you assumed is worth none.</p>
+<h2>Step 2 — Establish the fiscal calendar</h2>
+<p>For your company, report:</p>
+<ul><li>fiscal year end, and whether it is a calendar year</li><li>period lengths for the last five to eight annual periods, in days and weeks</li><li>any 53-week year, or any change of fiscal year end</li></ul>
+<p>Then state: <strong>does any growth rate you intend to compute span a period of unequal length?</strong> If so, say what you will do about it.</p>
+<h2>Step 3 — Two sources, one number</h2>
+<p>Pick one fundamental figure. Get it from <strong>two</strong> sources — the filings themselves plus one other, or two platforms if you have access.</p>
+<p>Report both, the difference, and your diagnosis using the handout&#x27;s Part 4 table: vintage, fiscal alignment, standardisation, classification, or GAAP/non-GAAP.</p>
+<p>You have done this exercise before, in Week 1, on prices. It is the same skill on harder data.</p>
+<h2>Step 4 — Build the valuation</h2>
+<p>Value your company. DCF, multiples, or both — your choice, stated and justified.</p>
+<p>Requirements:</p>
+<ul><li>Every input appears in the source ledger with its as-of date and basis</li><li>The discount rate&#x27;s components are each sourced or explicitly assumed</li><li>Terminal value assumptions are stated separately and prominently</li><li><strong>Report a range, not a point.</strong> A single number implies a precision you do not have</li></ul>
+<p>State what fraction of your valuation comes from the terminal value. If it is most of it — it usually is — say so plainly.</p>
+<h2>Step 5 — The source ledger</h2>
+<p>Complete the ledger for every input: input, value, source, as-of date, basis, note.</p>
+<p>The test: <strong>someone who has never seen your work should be able to rebuild your valuation from the ledger alone.</strong> That is also the Week 7 standard, so getting it right now saves you later.</p>
+<p>Any input you cannot date goes in the ledger marked as undated, with a note saying what you would need. Do not quietly leave it out.</p>
+<h2>Step 6 — Sensitivity: what would have to be true</h2>
+<p>Pick the two assumptions your valuation is most sensitive to. For each:</p>
+<ul><li>How much does the valuation move over a plausible range?</li><li><strong>What would have to be true about the business</strong> for the high end to be right? For the low</li></ul>
+<p>end?</p>
+<p>The second question is the one that matters. A sensitivity table is arithmetic. Translating it into statements about the world is analysis, and it is what someone reading your work actually needs.</p>
+<h2>Step 7 — Your company, your judgment</h2>
+<p>You chose the company and every assumption in the model.</p>
+<blockquote>A colleague says your valuation is really just your terminal growth assumption wearing a spreadsheet, and that with a different assumption — equally defensible — you would get a materially different answer.</blockquote>
+<p><strong>They are very likely right about the arithmetic.</strong> Write the strongest version of their case, including the number that supports it. Then answer it or concede it.</p>
+<p><strong>Conceding earns full marks.</strong> So does a good answer about why your assumption is better supported than the alternative. What earns nothing is pretending the sensitivity is small when your own Step 6 table says it is not.</p>
+<h2>Step 8 — What did you notice that I did not ask about?</h2>
+<p>The standing question.</p>
+<p>Something in your company&#x27;s filings or data was odd. A line item that moved without explanation. A segment definition that changed. A disclosure that answered a question nobody asked. A difference between what management emphasised and what the statements showed.</p>
+<p>Write it down with evidence.</p>
+<p><strong>Graded on genuineness and evidence, never on whether it was the right thing to notice.</strong> This is the week where the finding slot most often produces something genuinely interesting, because you are reading one company closely rather than a panel broadly.</p>
+<h2>If you want to do this differently</h2>
+<p>You may depart from the method above — a different valuation approach, a different treatment of the terminal value, a decision not to produce a point estimate at all. <strong>A defended departure earns full marks.</strong> State what you did instead, why, and what you gave up.</p>
+<p>A well-argued &quot;this company cannot be responsibly valued with the information available to me, and here is why&quot; is a legitimate and sometimes excellent answer.</p>
+<p><strong>Two sources, minimum — and where you have professional access, one of them is the professional source.</strong> This week that is <strong>Compustat, beside SEC EDGAR as-filed — and IBES for any forward growth</strong>, for standardisation is a choice, not a fact, and no filing contains a forward estimate.</p>
+<p>Pending access is neither an excuse nor a penalty. Document the attempt — source, route tried, date, barrier, and why that source would have been independent — and use a second free source instead. <strong>The attempt counts; the outcome never does.</strong></p>
+<h2>Submit</h2>
+<ul><li>Your notebook or model, runnable start to finish</li><li>Your revision finding from Step 1, including a negative result if that is what you got</li><li>The fiscal calendar table</li><li>Your two-source comparison and diagnosis</li><li>The valuation, as a range, with terminal-value share stated</li><li><strong>The complete source ledger</strong></li><li>Your sensitivity translation from Step 6</li><li>Your Step 7 defence and Step 8 finding</li></ul>
+<h2>Before Week 7 — do these</h2>
+<ol><li>Collect every artefact from Weeks 1 through 6 in one place. Week 7 assembles, it does not</li></ol>
+<p>rebuild.</p>
+<ol><li>Reread your Week 5 limitations section and extend it with what you learned this week.</li><li>Watch your own work as a stranger would: pick the one number a sceptical reader would</li></ol>
+<p>challenge first, and be ready for it.</p>
+<p><strong>Lab 7 preview:</strong> assemble the term&#x27;s work into a deliverable a colleague could pick up and rerun, then defend a key assumption on a fresh data point, on video, unaided.</p>
+</main></body></html>

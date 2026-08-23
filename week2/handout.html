@@ -1,0 +1,195 @@
+<!doctype html><html lang='en'><head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width,initial-scale=1'>
+<title>Week 2 — Handout</title><style>
+:root { --bg:#ffffff; --fg:#14181d; --muted:#5a6572; --rule:#dfe3e8;
+        --accent:#0b5fa5; --code-bg:#f4f6f8; }
+@media (prefers-color-scheme: dark) {
+  :root { --bg:#0f1419; --fg:#e9ecf0; --muted:#9aa4b2; --rule:#2a323c;
+          --accent:#6fb3f2; --code-bg:#182029; } }
+* { box-sizing: border-box; }
+html, body { height:100%; }
+body { margin:0; background:var(--bg); color:var(--fg);
+       font: 22px/1.5 -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+
+.slide { display:none; min-height:100vh; padding:5vh 7vw 9vh;
+         flex-direction:column; justify-content:center; }
+.slide.current { display:flex; }
+.slide > *:first-child { margin-top:0; }
+
+h1 { font-size:2.8rem; line-height:1.15; margin:0 0 1rem; letter-spacing:-.01em; }
+h2 { font-size:2.1rem; line-height:1.2; margin:0 0 1.4rem; letter-spacing:-.01em; }
+h3 { font-size:1.4rem; margin:1.2rem 0 .6rem; color:var(--muted); }
+p, li { max-width:52ch; }
+li { margin:.45rem 0; }
+strong { font-weight:650; }
+blockquote { margin:1.3rem 0; padding:.7rem 0 .7rem 1.2rem;
+             border-left:4px solid var(--accent); color:var(--muted); }
+pre { background:var(--code-bg); border:1px solid var(--rule); border-radius:8px;
+      padding:1rem 1.2rem; overflow-x:auto; max-width:100%;
+      font:.72em/1.5 ui-monospace, Menlo, Consolas, monospace; }
+code { font:.88em ui-monospace, Menlo, Consolas, monospace; }
+table { border-collapse:collapse; margin:1.1rem 0; font-size:.78em; max-width:100%;
+        display:block; overflow-x:auto; }
+th, td { border:1px solid var(--rule); padding:.5rem .8rem; text-align:left; }
+th { background:var(--code-bg); }
+.math { background:var(--code-bg); border:1px solid var(--rule); border-radius:8px;
+        padding:.8rem 1.1rem; margin:1.1rem 0; font-size:.8em;
+        font-family:ui-monospace, Menlo, Consolas, monospace; }
+
+.title-slide h1 { font-size:3.4rem; }
+.title-slide .sub { color:var(--muted); font-size:1.3rem; margin-top:.6rem; }
+
+#bar { position:fixed; top:0; left:0; height:3px; background:var(--accent);
+       width:0; transition:width .15s ease; z-index:10; }
+#num { position:fixed; bottom:1.4vh; right:2vw; color:var(--muted);
+       font:600 .7rem ui-monospace, Menlo, Consolas, monospace; z-index:10; }
+#hint { position:fixed; bottom:1.4vh; left:2vw; color:var(--muted);
+        font:.68rem -apple-system, "Segoe UI", sans-serif; z-index:10; opacity:.75; }
+
+@media print {
+  #bar, #num, #hint { display:none; }
+  .slide { display:flex !important; min-height:auto; page-break-after:always;
+           padding:6% 8%; border-bottom:none; }
+  body { font-size:15px; }
+  h1 { font-size:2rem; } h2 { font-size:1.6rem; }
+}
+@media (max-width:820px) { body { font-size:17px; } h2 { font-size:1.6rem; } }
+
+.nav { margin: 0 0 1.5rem; font-size:.9rem; }
+.nav a { color: var(--accent); text-decoration: none; }
+.nav a:hover { text-decoration: underline; }
+.wk { border:1px solid var(--rule); border-radius:10px; padding:1.1rem 1.4rem; margin:0 0 1rem; }
+.wk h3 { margin:.1rem 0 .5rem; font-size:1.05rem; }
+.wk .num { color:var(--muted); font:600 11px/1 ui-monospace,Menlo,Consolas,monospace;
+           letter-spacing:.1em; text-transform:uppercase; }
+.surfaces a { display:inline-block; margin:.3rem .4rem .3rem 0; padding:.3rem .65rem;
+              border:1px solid var(--accent); border-radius:999px; font-size:.85rem;
+              color:var(--accent); text-decoration:none; }
+.surfaces a:hover { background:var(--code-bg); }
+.surfaces span.held { display:inline-block; margin:.3rem .4rem .3rem 0; padding:.3rem .65rem;
+                      border:1px dashed var(--rule); border-radius:999px; font-size:.85rem;
+                      color:var(--muted); }
+.lede { color:var(--muted); margin:0 0 2rem; }
+</style></head>
+<body><main>
+<div class='nav'><a href='../index.html'>MSF Financial Modeling</a></div>
+<h1>Week 2 — Handout</h1><h1>Week 2 — Handout</h1>
+<blockquote><strong>Register: TEACH.</strong> Narrative and worked examples. The graded steps are in <code>lab.md</code>; the conventions are in <code>rules.md</code>.</blockquote>
+<p><strong>You arrive with:</strong> a reconciled security master for one security, keyed on a permanent identifier, and a source log recording every adjudication you made. You know that two sources can disagree, and you can tell a defect from a convention.</p>
+<p>This week the data does something worse than disagree. It agrees with itself, looks clean, and is wrong.</p>
+<p>---</p>
+<h2>Why this matters</h2>
+<p>Last week&#x27;s failures announced themselves. A high of 195.95 next to a close of 121.79 is visibly absurd — you found it in two minutes with arithmetic.</p>
+<p>This week&#x27;s failures do not announce themselves. There is no impossible number. There are no nulls. Nothing errors. The dataframe has the right shape, the right columns, and plausible values in every cell, and the analysis built on it is wrong by an amount large enough to change a recommendation.</p>
+<p>Every one of the three demonstrations below runs on <strong>free data you already have</strong>. You will reproduce all of them yourself.</p>
+<p>---</p>
+<h2>Part 1 — The companies that are not there</h2>
+<p>Ask for the price history of four companies that were, until recently, large and heavily traded:</p>
+<pre><code>import yfinance as yf
+
+for tk in [&quot;FRC&quot;, &quot;SIVBQ&quot;, &quot;CS&quot;, &quot;SBNY&quot;]:
+    df = yf.download(tk, start=&quot;2022-06-01&quot;, end=&quot;2026-08-01&quot;,
+                     auto_adjust=False, progress=False, threads=False)
+    print(tk, &quot;-&gt;&quot;, &quot;EMPTY&quot; if df.empty else f&quot;{len(df)} rows, first {df.index[0].date()}&quot;)</code></pre>
+<p>Result:</p>
+<pre><code>FRC    -&gt; EMPTY
+SIVBQ  -&gt; EMPTY
+CS     -&gt; EMPTY
+SBNY   -&gt; 500+ rows, first 2024-08-15</code></pre>
+<p><em>(Row counts and the last date grow every trading day. The number that matters and does not move is the</em> <strong>first</strong> <em>date.)</em></p>
+<p>First Republic Bank. Silicon Valley Bank. Credit Suisse. Three of the most consequential financial institutions of the 2023 banking stress, and the source returns <strong>nothing at all</strong>. Not a truncated series. Not a series of nulls. No rows.</p>
+<h3>Why this is the most dangerous failure in finance data</h3>
+<p>Suppose you build a panel of bank stocks to study the 2023 stress. You take the current list of publicly traded US banks and pull their histories. Your panel is complete, dense, and free of missing values.</p>
+<p><strong>Every bank that failed is absent from it.</strong> You have assembled a sample selected on the condition of having survived, and then used it to measure what happened to banks. Whatever you compute — average return, volatility, drawdown, the effect of anything on anything — is conditioned on survival.</p>
+<p>The result will look reasonable. It will be badly wrong, and in a known direction: too good.</p>
+<p>This is <strong>survivorship bias</strong>, and the reason it survives in professional work is exactly what you just saw. It does not produce an error. It produces an absence, and absences are invisible in a dataframe that never had the row.</p>
+<blockquote><strong>The rule this gives you.</strong> A panel is defined by the list you used to build it, not by the rows that came back. Before you trust any panel, ask: <em>where did my list of names come from, and was that list constructed at the start of my sample or at the end?</em></blockquote>
+<p>---</p>
+<h2>Part 2 — The label that lies</h2>
+<p>SBNY returned data. 502 rows. Let us look at it.</p>
+<pre><code>import yfinance as yf
+t = yf.Ticker(&quot;SBNY&quot;)
+info = t.info
+print(info[&quot;longName&quot;], &quot;|&quot;, info[&quot;exchange&quot;], &quot;| market cap&quot;, info[&quot;marketCap&quot;])
+h = t.history(period=&quot;max&quot;, auto_adjust=False)
+print(&quot;first:&quot;, h.index[0].date(), &quot; last:&quot;, h.index[-1].date())</code></pre>
+<pre><code>Signature Bank | PNK | market cap ~60,000,000
+first: 2024-08-15   last: (today)</code></pre>
+<p>Read that carefully.</p>
+<p>The name says <strong>Signature Bank</strong>. The data is real. Nothing errored. And the series <strong>begins in August 2024</strong> — on <code>PNK</code>, the over-the-counter Pink Sheets market — at a market capitalisation of tens of millions rather than the tens of billions the bank once carried.</p>
+<p>Signature Bank was closed by regulators in <strong>March 2023</strong>.</p>
+<p>So the series you were handed under the label &quot;Signature Bank&quot; contains no trace of the event that defines Signature Bank. The collapse is not in there. The NYSE listing is not in there. What is in there is an over-the-counter listing that began more than a year after the bank was closed.</p>
+<h3>The failure mode</h3>
+<p>A researcher studying the 2023 regional banking crisis pulls <code>SBNY</code>, gets a labelled series with hundreds of clean rows, and proceeds. Nothing in the output says &quot;this excludes the crisis.&quot; The label agreed. The data was there. The analysis is worthless, and it will pass every check that does not specifically ask <em>what period does this series actually cover, and does it contain the event I am studying?</em></p>
+<p>This is why Week 1 spent a slide on identifiers. A ticker is a label on a listing. When the listing changes, the label can follow while the thing underneath does not.</p>
+<blockquote><strong>The rule this gives you.</strong> Never accept a series because the ticker resolved. Check the <strong>coverage window</strong> against the event you care about, every time. A series that does not span your question cannot answer it, no matter how clean it looks.</blockquote>
+<p>---</p>
+<h2>Part 3 — What a professional dataset records that a free one cannot</h2>
+<p>When a company is delisted, its holders do not receive zero and they do not receive nothing. They receive <em>something</em> — a liquidation distribution, an acquisition payment, a residual equity claim, or in the worst case an actual total loss.</p>
+<p>That final outcome is the <strong>delisting return</strong>, and it is often the single most important observation in the security&#x27;s entire history. It is the difference between &quot;this position went to zero&quot; and &quot;this position returned 40% of book on liquidation.&quot; A portfolio study that drops the last observation of every delisted holding has systematically deleted its own worst and sometimes best outcomes.</p>
+<p><strong>CRSP records delisting returns.</strong> It has a dedicated field for them, precisely because academic finance learned the hard way what happens when you omit them. The free lane does not have this at all — as you just saw, it does not even keep the rows.</p>
+<p>This is the clearest single answer to &quot;why does the university pay for WRDS when Yahoo Finance is free.&quot; Not better prices. <strong>The observations that free data structurally cannot contain.</strong></p>
+<p>If you have WRDS: the CRSP daily and monthly stock files carry <code>DLRET</code> and <code>DLSTCD</code>, and a delisting code tells you <em>why</em> the security disappeared. If you do not have WRDS: you now know what you are missing and can say so in your limitations section, which is itself the professional behaviour.</p>
+<p>---</p>
+<h2>Part 4 — Point in time: the thirty-four days nobody had the data</h2>
+<p>Fundamentals carry two dates and they are not the same date.</p>
+<ul><li><strong>Period end</strong> — the date the financials describe.</li><li><strong>Filing date</strong> — the date the figures actually became public.</li></ul>
+<p>Everything between those two dates is a window in which the numbers existed in the world but not in anyone&#x27;s hands. Check it yourself:</p>
+<pre><code>import json, urllib.request, datetime as dt
+
+req = urllib.request.Request(
+    &quot;https://data.sec.gov/submissions/CIK0000320193.json&quot;,
+    headers={&quot;User-Agent&quot;: &quot;your.name@purdue.edu&quot;})
+d = json.load(urllib.request.urlopen(req))
+r = d[&quot;filings&quot;][&quot;recent&quot;]
+
+for form, rep, fil in zip(r[&quot;form&quot;], r[&quot;reportDate&quot;], r[&quot;filingDate&quot;]):
+    if form in (&quot;10-K&quot;, &quot;10-Q&quot;) and rep:
+        lag = (dt.date.fromisoformat(fil) - dt.date.fromisoformat(rep)).days
+        print(f&quot;{form:5} period end {rep}  filed {fil}  lag {lag} days&quot;)</code></pre>
+<pre><code>10-Q  period end 2026-06-27  filed 2026-07-31  lag 34 days
+10-Q  period end 2026-03-28  filed 2026-05-01  lag 34 days
+10-Q  period end 2025-12-27  filed 2026-01-30  lag 34 days
+10-K  period end 2025-09-27  filed 2025-10-31  lag 34 days
+10-Q  period end 2025-06-28  filed 2025-08-01  lag 34 days</code></pre>
+<p>Thirty-four days, every quarter, consistently.</p>
+<h3>What this costs</h3>
+<p>Build a strategy that ranks companies on a fundamental ratio and rebalances at each period end. Date each fundamental at period end, because that is the date on the row.</p>
+<p>Your strategy is trading on information that did not exist for another thirty-four days. It will backtest beautifully. It has no chance of working, because it is not a strategy — it is a measurement of how well knowing the future predicts the future.</p>
+<p>This is <strong>look-ahead bias</strong>. The distinction professionals draw:</p>
+<table><thead><tr><th></th><th>Means</th></tr></thead><tbody><tr><td><strong>As-reported</strong></td><td>The figure as it stands now, including every later restatement</td></tr><tr><td><strong>Point-in-time</strong></td><td>The figure as it was known on a given date, restatements excluded</td></tr></tbody></table>
+<p>A backtest needs point-in-time. Almost every convenient data source gives you as-reported. That mismatch is one of the most common reasons a strategy that works on paper fails in production.</p>
+<blockquote><strong>The rule this gives you.</strong> Every fundamental figure has a <strong>knowability date</strong>. Until you can state it, you cannot use the figure in anything time-sensitive.</blockquote>
+<p>---</p>
+<h2>Part 5 — When the vendor changes the data before you see it</h2>
+<p>The three failures above are all failures of <em>omission</em>. Here is one of <em>commission</em>.</p>
+<p>WRDS publishes a Corporate Bond Returns database, widely used in fixed income research. Its documentation records that monthly returns are <strong>truncated at +100%</strong> before publication.</p>
+<p>Consider what that means. The cap is applied only to the upside — a return of +150% is recorded as +100%, while a return of −90% is recorded as −90%. The filter is <strong>asymmetric</strong>. Any moment of the return distribution computed from that data is biased: means understated, skewness distorted, and the distortion concentrated exactly in the distressed and recovering bonds that most fixed income research is about.</p>
+<p>Nothing in the delivered data indicates this happened. There is no flag column. The returns look like returns. The only way to know is to <strong>read the provider&#x27;s documentation</strong> — in this case, the Open Source Bond Asset Pricing project&#x27;s DRR-README, which documents the behaviour and exists partly because researchers kept not noticing.</p>
+<blockquote><strong>The rule this gives you.</strong> Read the data dictionary and the README before you compute anything. A provider&#x27;s filtering rules are part of the data, and they are frequently not visible in it. Your training intuitions about a dataset are not a substitute for its documentation.</blockquote>
+<p>---</p>
+<h2>Part 6 — The catalog, and why it has teeth</h2>
+<p>You now have four categories of failure and no way to keep track of them. That is what the data quality catalog is for. One file, <code>data_quality_issues.md</code>, living in the project, one entry per issue:</p>
+<table><thead><tr><th>Field</th><th>What goes in it</th></tr></thead><tbody><tr><td>Issue</td><td>One line, concrete</td></tr><tr><td>Severity</td><td>Blocker / High / Medium / Low / Resolved</td></tr><tr><td>Evidence</td><td>Counts and percentages, never adjectives</td></tr><tr><td>Code reference</td><td>Where it shows up</td></tr><tr><td>Current state</td><td>What is true right now</td></tr><tr><td>Proposed handling</td><td>What you intend to do, and what it costs</td></tr></tbody></table>
+<p><strong>The shape, not your answer</strong> — one filled entry:</p>
+<blockquote><strong>Issue:</strong> Panel built from current index membership; failed institutions return no rows. <strong>Severity:</strong> Blocker <strong>Evidence:</strong> 4 tickers requested from the 2023 stress period; 3 returned 0 rows (FRC, SIVBQ, CS). The 4th (SBNY) returned 502 rows beginning 2024-08-15, after the event. <strong>Code reference:</strong> the panel build cell. <strong>Current state:</strong> Panel is survivor-only. Any cross-sectional statistic is conditioned on survival. <strong>Proposed handling:</strong> Rebuild the name list from a point-in-time membership source. If unavailable, the survivorship limitation is stated on the face of every result and no cross-sectional claim is made.</blockquote>
+<h3>The rule that makes it more than paperwork</h3>
+<p><strong>A Blocker open means no headline result.</strong> Not &quot;a result with a caveat.&quot; No result.</p>
+<p>Logging an issue is not clearing it. The catalog exists so that the moment you are tempted to report a number you know is contaminated, there is a written record saying you knew. That is uncomfortable by design — it is the mechanism that keeps a deadline from quietly becoming a decision to ship something wrong.</p>
+<p>Severity is <strong>your</strong> call. Two analysts can rate the same issue differently and both be defensible, because severity depends on what the data is being used for. What is not defensible is not rating it.</p>
+<p>---</p>
+<h2>This week&#x27;s sources</h2>
+<p>Register: [the source register](../sources.html).</p>
+<table><thead><tr><th>Working with</th><th>For</th></tr></thead><tbody><tr><td><code>yfinance</code> (guaranteed lane)</td><td>the absent-failures and label-trap demonstrations</td></tr><tr><td>SEC EDGAR (Gen 2)</td><td>the filing lag, and knowability dates</td></tr><tr><td>WRDS / CRSP (Gen 1)</td><td>delisting returns — <code>DLRET</code>, <code>DLSTCD</code>. Nothing free holds these</td></tr><tr><td>Databento (Gen 2)</td><td>point-in-time symbology, if you have credits — a vendor that solved this deliberately</td></tr></tbody></table>
+<p><strong>The defect no tool reports.</strong> Every check you can run — a null count, a dtype summary, a describe, a linter — operates on the rows that came back. None of them can see a row that never arrived, because there is nothing there to inspect.</p>
+<p>That is why this week&#x27;s contamination is dangerous and last week&#x27;s was not. A high of 195.95 announces itself to anyone who looks. A missing company announces itself to nobody, and no amount of tooling changes that. <strong>The only defence is knowing where your name list came from.</strong></p>
+<p>---</p>
+<p><strong>Two sources, minimum — and where you have professional access, one of them is the professional source.</strong> This week that is <strong>WRDS / CRSP</strong>, for delisting returns and survivorship-free membership — the companies a free feed can no longer see.</p>
+<p>Pending access is neither an excuse nor a penalty. Document the attempt — source, route tried, date, barrier, and why that source would have been independent — and use a second free source instead. <strong>The attempt counts; the outcome never does.</strong></p>
+<h2>Before the lab — do these</h2>
+<ol><li>Re-run all three demonstrations above yourself. They are live data and may have drifted</li></ol>
+<p>since this was written — <strong>if your numbers differ from the printed ones, that is a finding, and you should bring it.</strong></p>
+<ol><li>Have your Week 1 <code>security_master.csv</code> and <code>source_log.md</code> open. You are extending them.</li><li>Decide, before class, what universe your panel is going to cover, and be ready to say how</li></ol>
+<p>you would build the name list.</p>
+<p><strong>Next: Lab 2</strong> extends your single security into a panel, finds what is contaminating it, assigns severities you can defend, and hands Week 3 a panel whose limitations are written down.</p>
+</main></body></html>

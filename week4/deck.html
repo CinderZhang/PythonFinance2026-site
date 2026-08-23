@@ -1,0 +1,128 @@
+<!doctype html><html lang='en'><head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width,initial-scale=1'>
+<title>Week 4</title><style>
+:root { --bg:#ffffff; --fg:#14181d; --muted:#5a6572; --rule:#dfe3e8;
+        --accent:#0b5fa5; --code-bg:#f4f6f8; }
+@media (prefers-color-scheme: dark) {
+  :root { --bg:#0f1419; --fg:#e9ecf0; --muted:#9aa4b2; --rule:#2a323c;
+          --accent:#6fb3f2; --code-bg:#182029; } }
+* { box-sizing: border-box; }
+html, body { height:100%; }
+body { margin:0; background:var(--bg); color:var(--fg);
+       font: 22px/1.5 -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+
+.slide { display:none; min-height:100vh; padding:5vh 7vw 9vh;
+         flex-direction:column; justify-content:center; }
+.slide.current { display:flex; }
+.slide > *:first-child { margin-top:0; }
+
+h1 { font-size:2.8rem; line-height:1.15; margin:0 0 1rem; letter-spacing:-.01em; }
+h2 { font-size:2.1rem; line-height:1.2; margin:0 0 1.4rem; letter-spacing:-.01em; }
+h3 { font-size:1.4rem; margin:1.2rem 0 .6rem; color:var(--muted); }
+p, li { max-width:52ch; }
+li { margin:.45rem 0; }
+strong { font-weight:650; }
+blockquote { margin:1.3rem 0; padding:.7rem 0 .7rem 1.2rem;
+             border-left:4px solid var(--accent); color:var(--muted); }
+pre { background:var(--code-bg); border:1px solid var(--rule); border-radius:8px;
+      padding:1rem 1.2rem; overflow-x:auto; max-width:100%;
+      font:.72em/1.5 ui-monospace, Menlo, Consolas, monospace; }
+code { font:.88em ui-monospace, Menlo, Consolas, monospace; }
+table { border-collapse:collapse; margin:1.1rem 0; font-size:.78em; max-width:100%;
+        display:block; overflow-x:auto; }
+th, td { border:1px solid var(--rule); padding:.5rem .8rem; text-align:left; }
+th { background:var(--code-bg); }
+.math { background:var(--code-bg); border:1px solid var(--rule); border-radius:8px;
+        padding:.8rem 1.1rem; margin:1.1rem 0; font-size:.8em;
+        font-family:ui-monospace, Menlo, Consolas, monospace; }
+
+.title-slide h1 { font-size:3.4rem; }
+.title-slide .sub { color:var(--muted); font-size:1.3rem; margin-top:.6rem; }
+
+#bar { position:fixed; top:0; left:0; height:3px; background:var(--accent);
+       width:0; transition:width .15s ease; z-index:10; }
+#num { position:fixed; bottom:1.4vh; right:2vw; color:var(--muted);
+       font:600 .7rem ui-monospace, Menlo, Consolas, monospace; z-index:10; }
+#hint { position:fixed; bottom:1.4vh; left:2vw; color:var(--muted);
+        font:.68rem -apple-system, "Segoe UI", sans-serif; z-index:10; opacity:.75; }
+
+@media print {
+  #bar, #num, #hint { display:none; }
+  .slide { display:flex !important; min-height:auto; page-break-after:always;
+           padding:6% 8%; border-bottom:none; }
+  body { font-size:15px; }
+  h1 { font-size:2rem; } h2 { font-size:1.6rem; }
+}
+@media (max-width:820px) { body { font-size:17px; } h2 { font-size:1.6rem; } }
+</style></head><body>
+<div id='bar'></div>
+<section class='slide title-slide'><h1>Week 4</h1><div class='sub'>FIN 69000-003 · Financial Analytics with Python (with AI)</div></section>
+<section class='slide'><h2>The estimates you built</h2>
+<ul><li>A panel, identifiers, a catalog</li><li>Stated conventions</li><li>Verified metrics, a chosen benchmark</li><li><strong>A covariance estimate</strong></li></ul>
+<p>Today you feed real estimates into a theory that assumes you know the truth.</p>
+<p><em>Your code will be correct. It will fail.</em></p></section>
+<section class='slide'><h2>The most taught idea in finance</h2>
+<p>Who can derive the efficient frontier?</p>
+<p>Now — <strong>why does the desk you are joining not run the optimizer you were taught?</strong></p></section>
+<section class='slide'><h2>Build it, and it works</h2>
+<div class="math">w \propto \Sigma^{-1}\mu</div>
+<pre><code>mu = returns.mean().values * 252
+S  = returns.cov().values * 252
+w  = np.linalg.solve(S, mu)
+w  = w / w.sum()</code></pre>
+<p>Correct mathematics. Correct implementation.</p>
+<p>The highest Sharpe ratio achievable from these assets — <strong>in-sample</strong>.</p></section>
+<section class='slide'><h2>Now move the window</h2>
+<pre><code>            2015-2020    2020-2025        swing
+AAPL            22.0%        -5.5%      -27.6pp
+MSFT           152.6%        19.9%     -132.7pp
+JNJ              3.0%       -15.0%      -18.0pp
+KO             -19.7%        18.7%      +38.4pp
+XOM           -124.6%        19.4%     +143.9pp
+JPM             10.5%        24.8%      +14.3pp
+PG              29.4%         2.3%      -27.1pp
+WMT             26.7%        35.4%       +8.7pp
+
+gross leverage   3.89         1.41</code></pre>
+<p>Same code. Same universe. Same conventions.</p></section>
+<section class='slide'><h2>Read the XOM row again</h2>
+<p><strong>Short 125% of the portfolio</strong> on one window.</p>
+<p><strong>Hold 19% long</strong> on the next.</p>
+<p>Not a different size — the opposite direction. 144 percentage points.</p>
+<p>Did anything about Exxon change discontinuously? No. Only which five years were measured.</p>
+<blockquote><strong>This is not a coding error.</strong> The code is right. The optimizer believes its inputs.</blockquote></section>
+<section class='slide'><h2>Out of sample</h2>
+<p>Estimate on window A. Hold, untouched, through window B.</p>
+<p>Against equal weights — no estimation at all.</p>
+<p><em>Which wins?</em></p>
+<pre><code>tangency (MVO)      return 14.43%   vol 58.16%   sharpe 0.248
+1/N equal weight    return 18.68%   vol 13.91%   sharpe 1.343</code></pre>
+<p>Less return. Four times the volatility.</p>
+<p><strong>Beaten by a factor of 5.4.</strong></p></section>
+<section class='slide'><h2>Why: the matrix you inverted</h2>
+<p>8 assets → <strong>36 distinct covariance entries</strong>, every one estimated with error.</p>
+<p>Expected returns: worse.</p>
+<p>Inverting a noisy matrix <strong>amplifies</strong> the noise — it does not average it out.</p>
+<p>The optimizer finds where assets look most reliably different. That is exactly where the estimate is least trustworthy. Then it bets there.</p>
+<blockquote>The optimizer is an <strong>error-maximiser</strong>.</blockquote>
+<p>1/N wins because it estimated nothing.</p></section>
+<section class='slide'><h2>What practitioners actually do</h2>
+<table><thead><tr><th>Response</th><th>Addresses</th></tr></thead><tbody><tr><td>Constraints — long-only, position caps</td><td>bounds the damage directly</td></tr><tr><td>Shrinkage of the covariance</td><td>reduces inversion instability</td></tr><tr><td>Minimum variance</td><td>drops the noisiest input entirely</td></tr><tr><td>Risk parity</td><td>no expected returns at all</td></tr><tr><td>Black–Litterman</td><td>tilts only where you have a view</td></tr><tr><td>Resampling</td><td>averages over estimation draws</td></tr></tbody></table>
+<p><strong>What do these have in common?</strong></p></section>
+<section class='slide'><h2>What better data does — and does not — fix</h2>
+<p><strong>Helps.</strong> Longer, cleaner history. More observations per parameter. CRSP includes the delisted names, so your covariance is not conditioned on survival.</p>
+<p><em>Your Week 2 problem propagates straight into Σ.</em></p>
+<p><strong>Does not save you.</strong> The covariance structure itself changes.</p>
+<p>2015–2020 and 2020–2025 are not two samples from one distribution. They are two <strong>regimes</strong>.</p>
+<blockquote>Better data makes your estimate honest. It does not make it certain.</blockquote></section>
+<section class='slide'><h2>Your constraints, your defence</h2>
+<blockquote><em>&quot;Your constraints are arbitrary. You picked that cap. A different one gives a different portfolio — so this is your choice, not the data&#x27;s.&quot;</em></blockquote>
+<p><strong>They are right that it is your choice.</strong></p>
+<p>That is not the same as being wrong.</p>
+<p>Owning a stated choice is stronger than pretending the data decided.</p>
+<blockquote><strong>What did you notice that I did not ask about?</strong></blockquote></section>
+<section class='slide'><h2>Before next week — do these</h2>
+<blockquote><strong>Two sources minimum — and one of them professional where you have access.</strong> Pending access is documented, never penalised. The attempt counts; the outcome does not.</blockquote>
+<ol><li>Build the unconstrained optimizer. Report gross leverage, largest long, largest short.</li><li>Move the window. Table the swings.</li><li>Run the out-of-sample test against 1/N.</li><li>Diagnose it <strong>with your own numbers</strong> — parameters estimated, observations per parameter.</li><li>Apply <strong>one</strong> remedy, and name what it cost you.</li><li>Save your weights and constraints. Bring your <strong>gross leverage</strong> number.</li></ol>
+<p><strong>Lab 5 preview:</strong> turn this portfolio into an allocation policy with rebalancing costs attached, then build the risk report — and find out how often the risk model would have been wrong.</p></section>
+<div id='num'></div><div id='hint'>← → or space to navigate</div><script>var s=[].slice.call(document.querySelectorAll('.slide')),i=0;function go(n){i=Math.max(0,Math.min(s.length-1,n));s.forEach(function(e,k){e.classList.toggle('current',k===i);});document.getElementById('num').textContent=(i+1)+' / '+s.length;document.getElementById('bar').style.width=((i)/(s.length-1)*100)+'%';if(location.hash!=='#'+(i+1)){history.replaceState(null,'','#'+(i+1));}}document.addEventListener('keydown',function(e){if(e.key==='ArrowRight'||e.key===' '||e.key==='PageDown'){e.preventDefault();go(i+1);}else if(e.key==='ArrowLeft'||e.key==='PageUp'){e.preventDefault();go(i-1);}else if(e.key==='Home'){go(0);}else if(e.key==='End'){go(s.length-1);}});document.addEventListener('click',function(e){if(e.target.closest('a,pre,table'))return;go(i+1);});go(parseInt((location.hash||'#1').slice(1),10)-1||0);</script></body></html>

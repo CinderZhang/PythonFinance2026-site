@@ -1,0 +1,272 @@
+<!doctype html><html lang='en'><head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width,initial-scale=1'>
+<title>Week 1 — Handout</title><style>
+:root { --bg:#ffffff; --fg:#14181d; --muted:#5a6572; --rule:#dfe3e8;
+        --accent:#0b5fa5; --code-bg:#f4f6f8; }
+@media (prefers-color-scheme: dark) {
+  :root { --bg:#0f1419; --fg:#e9ecf0; --muted:#9aa4b2; --rule:#2a323c;
+          --accent:#6fb3f2; --code-bg:#182029; } }
+* { box-sizing: border-box; }
+html, body { height:100%; }
+body { margin:0; background:var(--bg); color:var(--fg);
+       font: 22px/1.5 -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+
+.slide { display:none; min-height:100vh; padding:5vh 7vw 9vh;
+         flex-direction:column; justify-content:center; }
+.slide.current { display:flex; }
+.slide > *:first-child { margin-top:0; }
+
+h1 { font-size:2.8rem; line-height:1.15; margin:0 0 1rem; letter-spacing:-.01em; }
+h2 { font-size:2.1rem; line-height:1.2; margin:0 0 1.4rem; letter-spacing:-.01em; }
+h3 { font-size:1.4rem; margin:1.2rem 0 .6rem; color:var(--muted); }
+p, li { max-width:52ch; }
+li { margin:.45rem 0; }
+strong { font-weight:650; }
+blockquote { margin:1.3rem 0; padding:.7rem 0 .7rem 1.2rem;
+             border-left:4px solid var(--accent); color:var(--muted); }
+pre { background:var(--code-bg); border:1px solid var(--rule); border-radius:8px;
+      padding:1rem 1.2rem; overflow-x:auto; max-width:100%;
+      font:.72em/1.5 ui-monospace, Menlo, Consolas, monospace; }
+code { font:.88em ui-monospace, Menlo, Consolas, monospace; }
+table { border-collapse:collapse; margin:1.1rem 0; font-size:.78em; max-width:100%;
+        display:block; overflow-x:auto; }
+th, td { border:1px solid var(--rule); padding:.5rem .8rem; text-align:left; }
+th { background:var(--code-bg); }
+.math { background:var(--code-bg); border:1px solid var(--rule); border-radius:8px;
+        padding:.8rem 1.1rem; margin:1.1rem 0; font-size:.8em;
+        font-family:ui-monospace, Menlo, Consolas, monospace; }
+
+.title-slide h1 { font-size:3.4rem; }
+.title-slide .sub { color:var(--muted); font-size:1.3rem; margin-top:.6rem; }
+
+#bar { position:fixed; top:0; left:0; height:3px; background:var(--accent);
+       width:0; transition:width .15s ease; z-index:10; }
+#num { position:fixed; bottom:1.4vh; right:2vw; color:var(--muted);
+       font:600 .7rem ui-monospace, Menlo, Consolas, monospace; z-index:10; }
+#hint { position:fixed; bottom:1.4vh; left:2vw; color:var(--muted);
+        font:.68rem -apple-system, "Segoe UI", sans-serif; z-index:10; opacity:.75; }
+
+@media print {
+  #bar, #num, #hint { display:none; }
+  .slide { display:flex !important; min-height:auto; page-break-after:always;
+           padding:6% 8%; border-bottom:none; }
+  body { font-size:15px; }
+  h1 { font-size:2rem; } h2 { font-size:1.6rem; }
+}
+@media (max-width:820px) { body { font-size:17px; } h2 { font-size:1.6rem; } }
+
+.nav { margin: 0 0 1.5rem; font-size:.9rem; }
+.nav a { color: var(--accent); text-decoration: none; }
+.nav a:hover { text-decoration: underline; }
+.wk { border:1px solid var(--rule); border-radius:10px; padding:1.1rem 1.4rem; margin:0 0 1rem; }
+.wk h3 { margin:.1rem 0 .5rem; font-size:1.05rem; }
+.wk .num { color:var(--muted); font:600 11px/1 ui-monospace,Menlo,Consolas,monospace;
+           letter-spacing:.1em; text-transform:uppercase; }
+.surfaces a { display:inline-block; margin:.3rem .4rem .3rem 0; padding:.3rem .65rem;
+              border:1px solid var(--accent); border-radius:999px; font-size:.85rem;
+              color:var(--accent); text-decoration:none; }
+.surfaces a:hover { background:var(--code-bg); }
+.surfaces span.held { display:inline-block; margin:.3rem .4rem .3rem 0; padding:.3rem .65rem;
+                      border:1px dashed var(--rule); border-radius:999px; font-size:.85rem;
+                      color:var(--muted); }
+.lede { color:var(--muted); margin:0 0 2rem; }
+</style></head>
+<body><main>
+<div class='nav'><a href='../index.html'>MSF Financial Modeling</a></div>
+<h1>Week 1 — Handout</h1><h1>Week 1 — Handout</h1>
+<blockquote><strong>Register: TEACH.</strong> Narrative and worked examples. The steps you hand in are in <code>lab.md</code>; conventions and licence rules are in <code>rules.md</code>.</blockquote>
+<p><strong>You arrive with:</strong> a finance background, mixed programming experience, the names of some professional platforms, and whatever coding tools you already use. Nothing here assumes you can write Python from scratch.</p>
+<p>---</p>
+<h2>Why this matters</h2>
+<p>An associate asks for a company&#x27;s revenue history and a security&#x27;s returns. Your university pays for research databases most people never open, and there are free sources that will answer in ninety seconds.</p>
+<p>Ten minutes later you have a number. What decides whether you are useful is not that you got one — it is whether you can say where it came from, whether that source was the right one to ask, and whether the code actually did what you think it did.</p>
+<p>Two things will happen today. Two sources will disagree about the same security, and only one of them is wrong. And you will find a defect in a commercial data feed using nothing but arithmetic.</p>
+<p>---</p>
+<h2>Part 1 — Two generations of professional data</h2>
+<p>The data an analyst can reach has split into two kinds. Not better and worse — different, and the skill required in each is different.</p>
+<table><thead><tr><th></th><th><strong>Generation 1 — institutional</strong></th><th><strong>Generation 2 — API-native</strong></th></tr></thead><tbody><tr><td>Examples</td><td>WRDS, LSEG Workspace, Capital IQ, PitchBook</td><td>SEC EDGAR, Financial Datasets, Databento</td></tr><tr><td>Access</td><td>licence, seat, approval queue</td><td>an API key, in minutes</td></tr><tr><td>Cost to you</td><td>free via the university</td><td>free tier, credits, or cents per call</td></tr><tr><td>History</td><td>decades, survivorship-free</td><td>shallow — often a few years</td></tr><tr><td>Built for</td><td>humans and batch research</td><td>machines</td></tr><tr><td>Documentation</td><td>manuals, per-dataset, uneven</td><td>API reference, versioned, sometimes an MCP server</td></tr><tr><td>Vendor age</td><td>decades</td><td>sometimes four years</td></tr><tr><td><strong>Automating against it</strong></td><td><strong>hard</strong> — private schema, no public reference</td><td><strong>easy</strong> — documented for machines</td></tr></tbody></table>
+<p>Full register — access routes, packages, exact costs, coverage, licence constraints — in [the source register](../sources.html). Read it once properly; everything this term links back to it.</p>
+<p><strong>What each is genuinely for.</strong> Generation 1 holds observations Generation 2 structurally cannot: delisting returns, point-in-time index membership, four decades of clean history. Generation 2 gives you something Generation 1 never will — an answer in ninety seconds, from a laptop, with documentation a machine can read.</p>
+<p>An analyst who knows only one of these is limited in a way that shows quickly.</p>
+<p>---</p>
+<h2>Part 2 — Generation 2, in two minutes, for free</h2>
+<p>Start here, because you can do it right now with no account at all.</p>
+<p>The SEC publishes every filing plus a structured data API. No key, no login — just a <code>User-Agent</code> header identifying you.</p>
+<pre><code>import json, urllib.request
+
+req = urllib.request.Request(
+    &quot;https://data.sec.gov/submissions/CIK0001326801.json&quot;,
+    headers={&quot;User-Agent&quot;: &quot;your.name@purdue.edu&quot;})   # SEC requires a real contact
+d = json.load(urllib.request.urlopen(req))
+
+print(d[&quot;name&quot;], d[&quot;tickers&quot;])
+for f in d.get(&quot;formerNames&quot;, []):
+    print(f[&quot;name&quot;], f[&quot;from&quot;][:10], &quot;-&gt;&quot;, f[&quot;to&quot;][:10])</code></pre>
+<pre><code>Meta Platforms, Inc. [&#x27;META&#x27;]
+Facebook Inc 2005-05-06 -&gt; 2021-10-27</code></pre>
+<h3>What just happened</h3>
+<p><code>0001326801</code> is a <strong>CIK</strong> — a permanent identifier. The ticker changed from FB to META. The CIK did not.</p>
+<p>This is the idea professional data is built around, and it is the first genuinely professional habit to acquire: <strong>a ticker is a display label on an exchange, not an identity.</strong> Tickers get reassigned, reused, and changed. A ten-year series keyed on ticker would find no FB data after the changeover and no META data before it — two truncated series, neither of which looks broken.</p>
+<p>Every professional dataset has its own permanent key: CRSP uses <code>PERMNO</code>, Compustat uses <code>GVKEY</code>, bond data uses <code>CUSIP</code>, the SEC uses <code>CIK</code>. Different key per dataset, which is why joining across them needs a link table rather than a ticker match.</p>
+<p>Note the cost: nothing, and about ninety seconds.</p>
+<p>---</p>
+<h2>Part 3 — Generation 1, and why it resists automation</h2>
+<p><strong>WRDS</strong> is not a ticker API. It is a library of named research datasets on a PostgreSQL database, and you choose the dataset before the variable:</p>
+<table><thead><tr><th>Dataset</th><th>Holds</th><th>Keyed on</th></tr></thead><tbody><tr><td>CRSP</td><td>US stock prices, returns, delistings, share counts</td><td><code>PERMNO</code></td></tr><tr><td>Compustat</td><td>company fundamentals from filings</td><td><code>GVKEY</code></td></tr><tr><td>TRACE</td><td>corporate bond transactions</td><td><code>CUSIP</code></td></tr><tr><td>IBES</td><td>analyst estimates</td><td>its own ticker</td></tr></tbody></table>
+<p>You reach it with <code>pip install wrds</code>, and mostly with SQL.</p>
+<p><strong>LSEG Workspace</strong> is Purdue&#x27;s other institutional holding, available to every Purdue user. Its coding route is <strong>CodeBook</strong> — a Jupyter environment that runs as an app <em>inside</em> Workspace, in LSEG&#x27;s cloud. Which programmatic access our licence includes is an open question, and Part 6 turns that into an exercise rather than an obstacle.</p>
+<h3>The extreme case: a source with no machine interface at all</h3>
+<p>Purdue&#x27;s LSEG subscription includes <strong>Datastream</strong> as an add-on — over a century of historical time series, genuinely irreplaceable for long-horizon work.</p>
+<p>Its interface is <strong>Excel</strong>. An add-in that puts a Workspace tab in your ribbon. Purdue describes no Python route, no API, no programmatic access of any kind. Downloads are capped at 30,000 values per request. Licences are scarce — faculty, graduate students, and research collaborators — and they are removed for inactivity.</p>
+<p>So: a century of excellent data, reachable only by hand.</p>
+<p><strong>You cannot automate it at all.</strong> Not because the tooling is inadequate — because there is no interface to automate. That is a real constraint and you will meet it repeatedly, because a great deal of valuable institutional data lives behind interfaces built for humans.</p>
+<p>The professional response is not to complain and not to pretend the source does not exist. It is to use it for what it is uniquely good at, work within the stated limits, and <strong>write down the manual procedure so someone else can repeat it.</strong> A hand extraction with a written procedure is reproducible. A hand extraction with no record is not, and the difference is entirely up to you.</p>
+<h3>Why it resists automation</h3>
+<p>SQL is the easy part. The hard part is <strong>the schema</strong> — the table names, the column names, the entitlements your institution actually bought. None of that is public. There is no reference you can look it up in from outside, which means anything writing a CRSP query without access to your WRDS instance is guessing, however well-formed the result looks.</p>
+<p><strong>Generation 1 was designed before machines were expected to drive it, and it shows.</strong> That is not a criticism of the data, which is often irreplaceable. It is a description of the work.</p>
+<p>---</p>
+<h2>Part 4 — Source discipline</h2>
+<p>One habit, and it is not about any particular tool.</p>
+<p><strong>A claim about a data source is not documentation.</strong> Package names change, endpoints move, schemas get reorganised, coverage windows are narrower than advertised, and licence terms restrict things you would assume were fine. Anything can tell you otherwise with complete confidence — a blog post, a StackOverflow answer from 2019, a colleague, an assistant, your own memory of how it worked last term.</p>
+<p>Before you rely on generated or remembered code against a source, check five things against the vendor&#x27;s current documentation:</p>
+<ol><li><strong>Package</strong> — does it still exist under that name?</li><li><strong>Endpoint or table</strong> — is it in the current reference?</li><li><strong>Fields</strong> — do those column names exist?</li><li><strong>Coverage</strong> — does the source hold the period you asked for?</li><li><strong>Licence</strong> — does your agreement permit what this code does?</li></ol>
+<p>Step 5 is the one nobody runs, and it is the one with consequences. Nothing else on the list can get your institution&#x27;s access revoked.</p>
+<p>Worth trying once, because it is concrete: Thomson Reuters became Refinitiv, Refinitiv was acquired by LSEG, and the Python package was renamed <code>refinitiv-data</code> → <code>lseg-data</code>. The internet is full of code using the retired names. Search for &quot;Refinitiv Python&quot; and see how much of what you find is current — then check the vendor&#x27;s documentation and see how long that takes. It is about two minutes, and it is the whole habit.</p>
+<blockquote><strong>The rule.</strong> Verify the claim, not the claimant. This is true of every source of claims you will ever have, and it does not become less true when the claim is well written.</blockquote>
+<p>---</p>
+<h2>Part 5 — Find out what you are actually entitled to</h2>
+<p>Here is a real problem, unsolved, from this course&#x27;s own preparation.</p>
+<p>Your instructor wrote to the library asking exactly which programmatic access Purdue&#x27;s LSEG licence includes — Data Library, Desktop Session, Platform Session with App Key or Service ID, the MCP connector, and which content entitlements.</p>
+<p><strong>No reply came.</strong> That is not unusual. It is the normal case.</p>
+<p>So you diagnose it yourself. From Workspace web, search the app bar for <code>APPKEY</code> — if the App Key Generator opens, the APIs it offers to select <em>are</em> your answer. Search for <code>CODEBOOK</code> — if it opens, the hosted Python environment is entitled. Then check MyAccount, which holds the authoritative record of product, data, and exchange entitlements. Full procedure in [the source register](../sources.html).</p>
+<p><strong>Three things get conflated and they are separate:</strong></p>
+<table><thead><tr><th></th><th></th></tr></thead><tbody><tr><td><strong>App Key</strong></td><td>identifies your application</td></tr><tr><td><strong>Session type</strong></td><td>Desktop Session needs the desktop app running; Platform Session needs cloud credentials and is usually a separate enterprise entitlement</td></tr><tr><td><strong>Content entitlements</strong></td><td>which data you may actually pull</td></tr></tbody></table>
+<p>You can hold a valid App Key and still be refused the content.</p>
+<p><strong>Why this is in the course rather than smoothed over.</strong> &quot;What does my licence permit?&quot; is a real professional question that routinely has no fast answer. The competent behaviour is to ask precisely and in writing, diagnose what you can yourself, keep the record, and <strong>design so you are not blocked while you wait.</strong> Nothing you are graded on this term depends on the answer.</p>
+<p>---</p>
+<h2>Part 6 — Compute something, and state how</h2>
+<p>Data you cannot compute with is trivia. The quantity used all term:</p>
+<div class="math">\text{Total Return} = \frac{P_t - P_0 + \sum D_i}{P_0} = \underbrace{\frac{P_t - P_0}{P_0}}_{\text{price}} + \underbrace{\frac{\sum D_i}{P_0}}_{\text{income}}</div>
+<p><strong>NVDA</strong>, one year from 2024-06-10:</p>
+<pre><code>P0 = 121.79   (close, 2024-06-10)        dividends, by ex-date
+Pt = 143.96   (close, 2025-06-10)          2024-06-11   0.01
+                                           2024-09-12   0.01
+price return  = (143.96-121.79)/121.79     2024-12-05   0.01
+              = 0.182035 = 18.20%          2025-03-12   0.01
+income return = 0.04/121.79                ------------------
+              = 0.000328 =  0.03%          sum D   =    0.04
+total return  = 0.182363 = 18.24%</code></pre>
+<p>Three basis points of income — exactly why you should not learn this formula on one security. Same window, two others:</p>
+<pre><code>                 P0        Pt     sum D    price     income     total
+NVDA          121.79    143.96     0.04   18.20%      0.03%    18.24%
+JNJ           147.13    156.45     5.02    6.33%      3.41%     9.75%
+KO             63.59     72.35     1.97   13.78%      3.09%    16.87%</code></pre>
+<p>For JNJ, income is <strong>3.41 of the 9.75 percentage points</strong> — over a third of what the holder earned. Quote price return on a dividend payer and call it performance, and you have understated the result by a third.</p>
+<h3>Two methods, and a gap that means something</h3>
+<p>Vendors publish an <strong>adjusted close</strong> that already contains income, so a simple ratio gives total return. Run both:</p>
+<pre><code>              price + dividends    adjusted close      gap
+NVDA                    18.24%            18.24%     0.6 bp
+JNJ                      9.75%             9.80%     5   bp
+KO                      16.87%            17.18%    31   bp</code></pre>
+<p>They disagree, always in the same direction, and <strong>the gap grows with dividend yield.</strong> That pattern is the tell: the adjustment assumes each dividend is reinvested on its ex-date; the simple formula assumes it sits in cash. Reinvested income compounds.</p>
+<p>Neither is wrong. A professional states which they used.</p>
+<blockquote><strong>Reading the gap.</strong> A few basis points scaling with yield is the method difference, expected. A gap of two percent is a bug in your code.</blockquote>
+<p>---</p>
+<h2>Part 7 — Two sources, one security, one bad number</h2>
+<p>Now the judgment call, which no amount of tooling makes for you.</p>
+<p>Same security, same six days, two independent sources. Source A is a commercial API (Financial Datasets). Source B is <code>yfinance</code>.</p>
+<pre><code>SOURCE A                                          SOURCE B
+date         open    high     low   close         open      high      low     close
+2024-06-07 119.77  121.69  118.02  120.89       119.770   121.692  118.022  120.888
+2024-06-10 120.37  195.95  117.01  121.79       120.370   123.100  117.010  121.790
+2024-06-11 121.77  122.87  118.74  120.91       121.770   122.870  118.740  120.910</code></pre>
+<p>Every open, low, and close agrees to the penny. <strong>One field, on one day, does not.</strong> Source A reports a high of <strong>195.95</strong>; Source B reports <strong>123.10</strong>.</p>
+<h3>Catch it with arithmetic alone</h3>
+<p>You will not always have a second source. This row contradicts itself:</p>
+<pre><code>high / max(open, close) = 195.95 / 121.79           = 1.609   -&gt; 61% above the close
+(high - low) / low      = (195.95-117.01) / 117.01  = 0.675   -&gt; a 67% intraday range
+open-to-close move      = (121.79-120.37) / 120.37  = 0.012   -&gt; the stock moved 1.2%</code></pre>
+<p>A security does not trade in a 67% range on a day it closes 1.2% from its open. No external source was needed to know that.</p>
+<p><strong>Where it sits matters.</strong> 2024-06-10 is NVDA&#x27;s 10-for-1 split date. Vendor pipelines break where the adjustment logic runs. When hunting bad data, look at split, spin-off, and merger dates first.</p>
+<h3>The difference that is <em>not</em> an error</h3>
+<p>Volume the same day: 314,162,650 against 313,434,100 — a gap of <strong>0.23%</strong>, and every other day differs slightly too.</p>
+<p>Not a defect. US equities trade across many venues and vendors differ in which prints they consolidate. Two honest sources routinely disagree about volume by fractions of a percent.</p>
+<p><strong>This is the whole skill.</strong> One disagreement you must reject; one you must document and move on from. They look identical in a diff.</p>
+<p>---</p>
+<h2>Part 8 — Writing it down so it runs again</h2>
+<p>You will produce a number today. In six weeks you will need to produce it again, on a different machine, and explain how you got it. That is not a documentation chore bolted on at the end — it is a property of how you write the code in the first place.</p>
+<p>Four habits, starting this week. They cost nothing now and are expensive to retrofit.</p>
+<p><strong>Fresh kernel, top to bottom.</strong> A notebook that only runs because of a variable defined in a cell you later deleted is not a result, it is a memory of one. Restart and run all before you believe anything.</p>
+<p><strong>No hand-typed numbers.</strong> Every figure in a write-up traces to a line of code that produced it. The moment you copy a number out of an output cell and paste it into prose, it stops being connected to the data and starts being a claim about the past.</p>
+<p><strong>Keys never go in code.</strong> Use an environment variable or Colab&#x27;s secrets. An API key committed to a notebook is a security incident, and the fix is to rotate the key, not to delete the cell.</p>
+<p><strong>A function the second time you need it.</strong> The first copy-paste is efficient. The third is how a bug gets into your work three times and fixed once.</p>
+<pre><code>def total_return(p0, pt, dividends):
+    &quot;&quot;&quot;Total return over a holding period. Dividends assumed held in cash.&quot;&quot;&quot;
+    return (pt - p0 + sum(dividends)) / p0</code></pre>
+<p>That docstring is doing real work: it records the convention. Six weeks from now, when your number disagrees with someone else&#x27;s, the first question will be which assumption each of you made — and one of you will be able to answer immediately.</p>
+<blockquote><strong>The rule.</strong> Write it so it runs again. Every week of this course consumes the previous week&#x27;s output, and Week 7 is graded on whether a colleague can rerun the whole thing.</blockquote>
+<p>---</p>
+<h2>Part 9 — Directing an assistant, and the four choices hiding in one number</h2>
+<p>Ask an assistant for &quot;ABG&#x27;s PEG ratio&quot; and you get one number. Ask four analysts and you get four, all defensible. The difference is not skill. It is that <strong>PEG is not a measurement — it is the output of four choices you make before you compute anything</strong>, and most published versions never tell you which four.</p>
+<p>This part teaches the method you will use for the rest of the term. Four mechanisms.</p>
+<h3>1. Decompose before you source</h3>
+<p><strong>PEG = P/E divided by a growth rate.</strong> That is not one data problem, it is three: a <strong>price</strong>, an <strong>earnings</strong> figure, and a <strong>growth</strong> figure.</p>
+<p>Three terms, in case they are not yet second nature. <strong>EPS</strong> is earnings per share — net income divided by the share count. <strong>Diluted EPS</strong> uses a larger share count that assumes options and convertibles are exercised, so it is the more conservative of the two; use it consistently. A <strong>buyback</strong> is a company purchasing its own shares, which reduces the share count and therefore raises EPS even when total earnings are flat. Each comes from somewhere different, each has its own conventions, and each can be wrong on its own.</p>
+<p>Naming a source before decomposing is how you end up with a number you cannot defend. Decompose first, then source each primitive separately.</p>
+<h3>2. Know where each primitive lives — and where it <em>cannot</em> come from</h3>
+<p>Everything below is the guaranteed lane: a price from <code>yfinance</code>, earnings from the company&#x27;s own filing through SEC EDGAR. No account, no cost.</p>
+<p><strong>Price.</strong> ABG, close of 2026-08-21: <strong>$214.75</strong>.</p>
+<p><strong>Earnings.</strong> From ABG&#x27;s FY2025 10-K (accession <code>0001144980-26-000051</code>, filed 2026-02-20):</p>
+<pre><code>FY2025   net income   $492.0m    diluted EPS   25.13    diluted shares   19.6m
+FY2024   net income   $430.3m    diluted EPS   21.50    diluted shares   20.0m
+FY2023   net income   $602.5m    diluted EPS   28.74    diluted shares   21.0m</code></pre>
+<p><strong>Growth.</strong> Here is the one that matters: <strong>no filing contains forward growth.</strong> A 10-K reports what happened. It has no field for what will happen. So if a data feed hands you a growth rate, something <em>estimated</em> it — and unless the feed says whose estimate, over what horizon, on what basis, you cannot defend the number that comes out.</p>
+<p>That is the structural limit. EDGAR can give you <strong>E</strong> and can never give you <strong>G</strong>. Say that out loud, because an assistant will not volunteer it.</p>
+<h3>3. Cross-check a fixed minimum</h3>
+<p><strong>Two independent sources per primitive, minimum, every time — on any lane.</strong> Record each with its retrieval date and its definitional choices. Not &quot;as many as you can get&quot;: a fixed floor, so your work is comparable to everyone else&#x27;s regardless of what you have access to.</p>
+<p>Where a second source is unavailable to you, that attempt is documented and counts. An unavailable source is a finding about the source, not a gap in your work.</p>
+<h3>4. Recompute, then compare</h3>
+<p>Compute the headline figure from your own primitives. <em>Then</em> look at any published version. Where they disagree, the disagreement is the finding.</p>
+<p><strong>The percentage-point convention, because it eats people.</strong> A growth rate of 16.88% enters the PEG formula as <strong>16.88</strong>, not as 0.1688. Feeds store it as a decimal; the formula wants points. Get this backwards and your PEG is off by a factor of 100 and still looks like a number.</p>
+<h3>The cross-check, worked</h3>
+<p>Mechanism 3 says two independent sources per primitive. Here is what that actually looks like, with the digits, before you are asked to do it.</p>
+<table><thead><tr><th>Primitive</th><th>Source 1</th><th>Source 2</th><th>Verdict</th></tr></thead><tbody><tr><td><strong>Price</strong></td><td>Market quote, 2026-08-21 19:59:58Z: <strong>214.75</strong></td><td>The same feed&#x27;s market capitalisation, <strong>$3,855.2m</strong></td><td>Consistent — but read on</td></tr><tr><td><strong>Earnings per share</strong></td><td>ABG FY2025 10-K, filed 2026-02-20, <strong>diluted EPS 25.13</strong></td><td>A commercial feed&#x27;s standardised <strong>TTM EPS 27.84</strong></td><td>Differ, and neither is wrong</td></tr><tr><td><strong>Growth</strong></td><td>Computed from the 10-K: <strong>+16.88%</strong> one-year EPS</td><td>The same feed&#x27;s growth field: <strong>+1.57%</strong></td><td>Differ on basis</td></tr></tbody></table>
+<p><strong>The price row is the interesting one.</strong> Divide the market capitalisation by the price: <code>3,855.2m / 214.75 = 17.95m shares</code>. But the 10-K reports <strong>19.6m</strong> weighted-average diluted shares. Those do not match, and that is not an error either: weighted-average diluted shares are an <em>average across the fiscal year</em>, while market capitalisation uses shares outstanding <em>today</em> — and ABG has gone on buying its own shares. The cross-check did not find a defect. It surfaced a definitional difference that would have silently corrupted any per-share figure built from the wrong one. <strong>That is what cross-checks are for.</strong></p>
+<p><strong>A third source for growth does not exist on the free lane.</strong> Forward growth needs an estimates database — IBES, reachable through WRDS. If your account is still queued, that attempt is recorded, not skipped:</p>
+<blockquote><strong>Source:</strong> IBES consensus long-term growth, via WRDS <strong>Route attempted:</strong> Purdue Libraries WRDS request form, submitted 2026-08-20 <strong>Date of attempt:</strong> 2026-08-24 <strong>Barrier observed:</strong> account pending departmental approval; no data access <strong>Why it would have been independent:</strong> IBES aggregates sell-side analyst estimates, which are forward-looking and produced outside the company — unlike every figure above, all of which derive from ABG&#x27;s own filing or from one vendor&#x27;s processing of it.</blockquote>
+<p>A record like that <strong>counts as a source attempt</strong>. A bare &quot;could not access WRDS&quot; does not — it tells the reader nothing about what was missed or how much it mattered.</p>
+<h3>The same company, the same day, four answers</h3>
+<p>P/E from our primitives: <strong>214.75 / 25.13 = 8.546</strong>.</p>
+<table><thead><tr><th>Which growth, from the filings</th><th>Growth</th><th>PEG</th></tr></thead><tbody><tr><td>One-year <strong>EPS</strong> growth, FY2024 → FY2025</td><td>+16.88%</td><td><strong>0.51</strong></td></tr><tr><td>One-year <strong>net income</strong> growth, FY2024 → FY2025</td><td>+14.34%</td><td><strong>0.60</strong></td></tr><tr><td>Two-year <strong>EPS</strong> CAGR (compound annual growth rate), FY2023 → FY2025</td><td>−6.49%</td><td><strong>−1.32</strong></td></tr><tr><td>A commercial feed&#x27;s published PEG, same day — <strong>supplied below, not computed by you</strong></td><td>1.57%</td><td><strong>4.91</strong></td></tr></tbody></table>
+<p>Work through what each row is telling you.</p>
+<p><strong>Rows 1 and 2 differ because of buybacks.</strong> Net income grew 14.34%, EPS grew 16.88%. EPS grew faster because the diluted share count fell from 20.0m to 19.6m — the same earnings spread over fewer shares. Neither figure is wrong. They answer different questions: row 2 asks how the business did, row 1 asks how a shareholder did.</p>
+<p><strong>Row 3 is a different window, and it changes the sign.</strong> FY2023 diluted EPS was 28.74; FY2025 was 25.13. A <strong>CAGR</strong> — compound annual growth rate — is the single yearly rate that would take you from the first figure to the last over that many years. Over two years: <code>(25.13 / 28.74) <strong> (1/2) - 1 = -0.0649</code>, or </strong>−6.49% a year**. Over two years, EPS <em>fell</em>. Over the last one, it rose sharply. Both are true, and the growth window alone decides whether ABG looks cheap or looks like a company in decline. PEG on a negative growth rate is meaningless — which is why you will rarely see row 3 published.</p>
+<p><strong>Row 4 is the one to interrogate — and it is handed to you.</strong> These three figures come from a commercial data feed (Financial Datasets, retrieved 2026-08-22). They are <strong>supplied evidence</strong>: reproducing them needs an API key, so nothing in this course requires you to obtain them. What the course does require is that you can interrogate a number someone hands you.</p>
+<p>Its PEG is 4.91 and its P/E is <strong>7.7133</strong> — the feed&#x27;s own unrounded figure, which is why we can invert it precisely — against our 8.546. Invert it: <strong>214.75 / 7.7133 = 27.84</strong>. So that feed&#x27;s earnings figure is 27.84 per share, not the filed 25.13 — it is using a trailing-twelve-month EPS that spans parts of two fiscal years, while we used the fiscal year as filed. Its growth input, 1.57%, matches none of the filed figures for the same reason.</p>
+<p><strong>Nothing here is a defect.</strong> Every number is correctly computed from a stated basis. The defect would be reporting any one of them without saying which basis — and that is what an assistant does by default.</p>
+<h3>What this makes you able to do</h3>
+<p>An assistant told <em>&quot;get me ABG&#x27;s PEG&quot;</em> returns 4.91 and stops. An assistant directed with the four mechanisms above returns 0.51, 0.60, −1.32 and 4.91, says which choice produced each, and names the one thing none of them can supply from a filing: forward growth.</p>
+<p><strong>That difference is the whole course in one number.</strong> Lab Step 8 asks you to write the instructions that produce the second behaviour.</p>
+<p>---</p>
+<h2>The wider landscape — what exists beyond what you can reach</h2>
+<p>Two generations is the distinction that organises this course. It is not the whole market, and you should not leave Week 1 believing Purdue&#x27;s licences are the boundary of what exists. The seat you take next year will have a different set, and part of being useful in it is knowing what to ask for.</p>
+<p>The full register is in [the source register](../sources.html). The shape of it:</p>
+<p><strong>The institutional tier</strong> — Bloomberg, FactSet, S&amp;P Capital IQ, MSCI, Morningstar Direct, PitchBook, Preqin, ICE, Moody&#x27;s, BlackRock&#x27;s Aladdin. Some Purdue has, most it does not. These are sold to institutions, priced accordingly, and several are not scriptable at all. Knowing what each is <em>for</em> is worth more to you right now than access to any of them.</p>
+<p><strong>The API-native tier</strong> — Polygon, Tiingo, Alpha Vantage, Financial Modeling Prep, Intrinio, Finnhub, Nasdaq Data Link, Databento, Alpaca. <strong>Purdue does not need to license these; you can hold a key yourself</strong>, and most have a free tier. This is the tier where a student can build something real without an institution behind them.</p>
+<p><strong>The free and open tier</strong> — and the one most students under-use. The <strong>Ken French Data Library</strong> holds the canonical factor returns that most published research runs on. <strong>Open Source Asset Pricing</strong> publishes replicated cross-sectional predictors with the code. FRED holds the macro and the risk-free series behind every Sharpe ratio you will compute. None of it costs anything, and none of it is lower quality than the paid tiers for what it covers.</p>
+<h3>A source is a counterparty, not a fact of nature</h3>
+<p><strong>IEX Cloud</strong> was a popular, developer-friendly market-data API that a great many people built on. It announced retirement on 31 May 2024 and shut down on 31 August 2024. The exchange still operates; the data subsidiary does not.</p>
+<p>Two consequences worth carrying out of this week.</p>
+<p><strong>Code written against one vendor inherits that vendor&#x27;s business decisions.</strong> Anything you intend to rerun in a year should survive its source disappearing — which in practice means a documented second source you could switch to. That is a second reason for the two-source rule, beyond catching errors.</p>
+<p><strong>Tutorials outlive the services they teach.</strong> Search for market-data examples today and you will still find IEX Cloud code, confidently written, that cannot run. An assistant trained on that corpus will reproduce it for you without hesitating. This is the concrete form of the rule you will meet all term: <strong>an AI&#x27;s knowledge of a data source is a claim, not documentation.</strong></p>
+<p>---</p>
+<h2>This week&#x27;s sources</h2>
+<p>Register: [the source register](../sources.html).</p>
+<table><thead><tr><th>Working with</th><th>For</th></tr></thead><tbody><tr><td><code>yfinance</code> (guaranteed lane)</td><td>prices for the training case and your own security</td></tr><tr><td>SEC EDGAR (guaranteed lane)</td><td>the filing, the CIK, and former names</td></tr><tr><td>WRDS / CRSP (Gen 1)</td><td><code>PERMNO</code>, and a survivorship-free history</td></tr></tbody></table>
+<p><strong>Two sources, minimum — and where you have professional access, one of them is the professional source.</strong> This week that is <strong>WRDS / CRSP</strong>, for a permanent identifier and a survivorship-free price history behind the ticker you pulled.</p>
+<p>Pending access is neither an excuse nor a penalty. Document the attempt — source, route tried, date, barrier, and why that source would have been independent — and use a second free source instead. <strong>The attempt counts; the outcome never does.</strong></p>
+<p>---</p>
+<h2>Before the lab — do these</h2>
+<ol><li>Run the EDGAR call in Part 2. It costs nothing and needs no account.</li><li>Run the Part 5 entitlement diagnostic on your own Workspace account.</li><li>Complete <code>prework.md</code>, including your first Generation 2 API key.</li></ol>
+<p><strong>Next: Lab 1</strong> gets a first pull from each generation, reconciles two sources on one security, asks you to adjudicate every difference in writing, and keys the result on a permanent identifier.</p>
+</main></body></html>

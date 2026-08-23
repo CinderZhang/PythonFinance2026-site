@@ -1,0 +1,126 @@
+<!doctype html><html lang='en'><head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width,initial-scale=1'>
+<title>Week 4 — Lab</title><style>
+:root { --bg:#ffffff; --fg:#14181d; --muted:#5a6572; --rule:#dfe3e8;
+        --accent:#0b5fa5; --code-bg:#f4f6f8; }
+@media (prefers-color-scheme: dark) {
+  :root { --bg:#0f1419; --fg:#e9ecf0; --muted:#9aa4b2; --rule:#2a323c;
+          --accent:#6fb3f2; --code-bg:#182029; } }
+* { box-sizing: border-box; }
+html, body { height:100%; }
+body { margin:0; background:var(--bg); color:var(--fg);
+       font: 22px/1.5 -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+
+.slide { display:none; min-height:100vh; padding:5vh 7vw 9vh;
+         flex-direction:column; justify-content:center; }
+.slide.current { display:flex; }
+.slide > *:first-child { margin-top:0; }
+
+h1 { font-size:2.8rem; line-height:1.15; margin:0 0 1rem; letter-spacing:-.01em; }
+h2 { font-size:2.1rem; line-height:1.2; margin:0 0 1.4rem; letter-spacing:-.01em; }
+h3 { font-size:1.4rem; margin:1.2rem 0 .6rem; color:var(--muted); }
+p, li { max-width:52ch; }
+li { margin:.45rem 0; }
+strong { font-weight:650; }
+blockquote { margin:1.3rem 0; padding:.7rem 0 .7rem 1.2rem;
+             border-left:4px solid var(--accent); color:var(--muted); }
+pre { background:var(--code-bg); border:1px solid var(--rule); border-radius:8px;
+      padding:1rem 1.2rem; overflow-x:auto; max-width:100%;
+      font:.72em/1.5 ui-monospace, Menlo, Consolas, monospace; }
+code { font:.88em ui-monospace, Menlo, Consolas, monospace; }
+table { border-collapse:collapse; margin:1.1rem 0; font-size:.78em; max-width:100%;
+        display:block; overflow-x:auto; }
+th, td { border:1px solid var(--rule); padding:.5rem .8rem; text-align:left; }
+th { background:var(--code-bg); }
+.math { background:var(--code-bg); border:1px solid var(--rule); border-radius:8px;
+        padding:.8rem 1.1rem; margin:1.1rem 0; font-size:.8em;
+        font-family:ui-monospace, Menlo, Consolas, monospace; }
+
+.title-slide h1 { font-size:3.4rem; }
+.title-slide .sub { color:var(--muted); font-size:1.3rem; margin-top:.6rem; }
+
+#bar { position:fixed; top:0; left:0; height:3px; background:var(--accent);
+       width:0; transition:width .15s ease; z-index:10; }
+#num { position:fixed; bottom:1.4vh; right:2vw; color:var(--muted);
+       font:600 .7rem ui-monospace, Menlo, Consolas, monospace; z-index:10; }
+#hint { position:fixed; bottom:1.4vh; left:2vw; color:var(--muted);
+        font:.68rem -apple-system, "Segoe UI", sans-serif; z-index:10; opacity:.75; }
+
+@media print {
+  #bar, #num, #hint { display:none; }
+  .slide { display:flex !important; min-height:auto; page-break-after:always;
+           padding:6% 8%; border-bottom:none; }
+  body { font-size:15px; }
+  h1 { font-size:2rem; } h2 { font-size:1.6rem; }
+}
+@media (max-width:820px) { body { font-size:17px; } h2 { font-size:1.6rem; } }
+
+.nav { margin: 0 0 1.5rem; font-size:.9rem; }
+.nav a { color: var(--accent); text-decoration: none; }
+.nav a:hover { text-decoration: underline; }
+.wk { border:1px solid var(--rule); border-radius:10px; padding:1.1rem 1.4rem; margin:0 0 1rem; }
+.wk h3 { margin:.1rem 0 .5rem; font-size:1.05rem; }
+.wk .num { color:var(--muted); font:600 11px/1 ui-monospace,Menlo,Consolas,monospace;
+           letter-spacing:.1em; text-transform:uppercase; }
+.surfaces a { display:inline-block; margin:.3rem .4rem .3rem 0; padding:.3rem .65rem;
+              border:1px solid var(--accent); border-radius:999px; font-size:.85rem;
+              color:var(--accent); text-decoration:none; }
+.surfaces a:hover { background:var(--code-bg); }
+.surfaces span.held { display:inline-block; margin:.3rem .4rem .3rem 0; padding:.3rem .65rem;
+                      border:1px dashed var(--rule); border-radius:999px; font-size:.85rem;
+                      color:var(--muted); }
+.lede { color:var(--muted); margin:0 0 2rem; }
+</style></head>
+<body><main>
+<div class='nav'><a href='../index.html'>MSF Financial Modeling</a></div>
+<h1>Week 4 — Lab</h1><h1>Lab 4 — Build the Optimizer, Then Break It</h1>
+<blockquote><strong>Register: DO.</strong> Teaching is in <code>handout.md</code>; conventions in <code>rules.md</code>.</blockquote>
+<p><strong>You arrive with:</strong> your panel, stated conventions, a covariance estimate, a benchmark, and your statement of what your numbers can and cannot support. From the session you have the two-window weight swing, the out-of-sample comparison against 1/N, and the list of practitioner remedies.</p>
+<p><strong>Where this goes next:</strong> Week 5 turns your portfolio into an allocation policy with a risk report. The constraints you choose here are the ones you will have to justify to a committee.</p>
+<p>---</p>
+<h2>Step 1 — Build the unconstrained optimizer</h2>
+<p>Using your Week 3 estimates, compute tangency weights on your panel.</p>
+<p>Report the weights, the gross leverage (sum of absolute weights), the largest long, and the largest short. State the in-sample Sharpe ratio.</p>
+<p>Do not fix anything yet. If the weights look absurd, that is the assignment working.</p>
+<h2>Step 2 — Move the window</h2>
+<p>Split your history into two adjacent windows. Re-estimate and re-optimize on each.</p>
+<p>Produce the weight comparison table: each asset, weight in window A, weight in window B, and the swing in percentage points. Report gross leverage for both.</p>
+<p>Then answer: <strong>which asset moved most, and did anything about that company plausibly change by that much between the two windows?</strong></p>
+<h2>Step 3 — The out-of-sample test</h2>
+<p>Estimate on the earlier window. Hold those weights, unchanged, through the later window. Compare against 1/N on the same later window.</p>
+<p>Report for both: annualized return, annualized volatility, Sharpe ratio.</p>
+<p>State plainly which won and by how much. <strong>If your optimizer beat 1/N, that is an interesting result and you should say why you think it happened</strong> — a short window, a particular universe, or luck. Do not assume you made a mistake, and do not assume you did not.</p>
+<h2>Step 4 — Diagnose it</h2>
+<p>In a short paragraph, explain <em>mechanically</em> why the unconstrained optimizer behaved as it did on your panel. Refer to your own numbers, not the handout&#x27;s.</p>
+<p>At minimum address: how many parameters you estimated, how many observations you had per parameter, and where the optimizer concentrated its bets.</p>
+<h2>Step 5 — Choose one remedy and apply it</h2>
+<p>Pick <strong>one</strong> response from the handout&#x27;s table — or one it does not list, if you can defend it — and apply it to your panel.</p>
+<p>Report: the new weights, the new gross leverage, the new out-of-sample comparison against 1/N.</p>
+<p>Then state what your remedy <strong>cost</strong> you. Every one of them gives up something — in-sample Sharpe, flexibility, the ability to express a view. Name what yours gave up.</p>
+<p><strong>A remedy applied without naming its cost is a remedy you do not understand.</strong></p>
+<h2>Step 6 — Your constraints, your defence</h2>
+<p>You chose the constraints in Step 5. Now defend them.</p>
+<blockquote>A colleague says your constraints are arbitrary — that you capped positions at some number you picked, and a different cap would give a different portfolio, so the result is really your choice rather than the data&#x27;s.</blockquote>
+<p><strong>They are right that it is your choice.</strong> That is not the same as being wrong. Write the strongest version of their objection, then answer it or concede it.</p>
+<p><strong>Conceding earns full marks.</strong> So does answering it well. Pretending the choice was not a choice earns nothing.</p>
+<h2>Step 7 — What did you notice that I did not ask about?</h2>
+<p>The standing question.</p>
+<p>Something in this week&#x27;s optimization behaved unexpectedly. An asset that never gets weight regardless of window. A remedy that helped less than you thought. A pattern in which assets the optimizer loves. Something about how your covariance estimate changes with frequency.</p>
+<p>Write it down with evidence.</p>
+<p><strong>Graded on genuineness and evidence, never on whether it was the right thing to notice.</strong></p>
+<h2>If you want to do this differently</h2>
+<p>You may depart from the method above — a different objective function, a different remedy, a different way of testing out-of-sample. <strong>A defended departure earns full marks.</strong> State what you did instead, why, and what you gave up.</p>
+<p>If you believe the 1/N comparison in the handout is unfair to the optimizer and can argue it, this is the place. That argument exists in the literature and it is worth making well.</p>
+<p><strong>Two sources, minimum — and where you have professional access, one of them is the professional source.</strong> This week that is <strong>WRDS / CRSP</strong>, for deep history — estimation error is a function of how much of it you have.</p>
+<p>Pending access is neither an excuse nor a penalty. Document the attempt — source, route tried, date, barrier, and why that source would have been independent — and use a second free source instead. <strong>The attempt counts; the outcome never does.</strong></p>
+<h2>Submit</h2>
+<ul><li>Your notebook, runnable start to finish</li><li>The two-window weight comparison table</li><li>The out-of-sample comparison against 1/N</li><li>Your Step 4 diagnosis, referring to your own numbers</li><li>Your remedy, its result, and what it cost</li><li>Your Step 6 defence and Step 7 finding</li></ul>
+<h2>Before Week 5 — do these</h2>
+<ol><li>Save your final portfolio weights and the constraints that produced them. Week 5 builds a</li></ol>
+<p>risk report on this exact portfolio.</p>
+<ol><li>Write one sentence stating how often you intend the portfolio to be rebalanced. You will</li></ol>
+<p>be asked to justify it and to price it.</p>
+<ol><li>Bring your gross leverage number. It determines whether next week&#x27;s risk conversation is</li></ol>
+<p>routine or interesting.</p>
+<p><strong>Lab 5 preview:</strong> turn this portfolio into an allocation policy with rebalancing costs attached, then build the risk report — and find out how often the risk model would have been wrong.</p>
+</main></body></html>
