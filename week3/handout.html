@@ -7,53 +7,32 @@
   :root { --bg:#0f1419; --fg:#e9ecf0; --muted:#9aa4b2; --rule:#2a323c;
           --accent:#6fb3f2; --code-bg:#182029; } }
 * { box-sizing: border-box; }
-html, body { height:100%; }
 body { margin:0; background:var(--bg); color:var(--fg);
-       font: 22px/1.5 -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
-
-.slide { display:none; min-height:100vh; padding:5vh 7vw 9vh;
-         flex-direction:column; justify-content:center; }
-.slide.current { display:flex; }
-.slide > *:first-child { margin-top:0; }
-
-h1 { font-size:2.8rem; line-height:1.15; margin:0 0 1rem; letter-spacing:-.01em; }
-h2 { font-size:2.1rem; line-height:1.2; margin:0 0 1.4rem; letter-spacing:-.01em; }
-h3 { font-size:1.4rem; margin:1.2rem 0 .6rem; color:var(--muted); }
-p, li { max-width:52ch; }
-li { margin:.45rem 0; }
+       font: 17px/1.6 -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+main { max-width: 46rem; margin: 0 auto; padding: 2.25rem 1.25rem 4.5rem; }
+h1 { font-size:1.9rem; line-height:1.2; margin:0 0 1rem; letter-spacing:-.01em; }
+h2 { font-size:1.4rem; line-height:1.25; margin:2.2rem 0 .8rem; }
+h3 { font-size:1.1rem; margin:1.8rem 0 .6rem; }
+p, li { margin:.7rem 0; }
+li { margin:.35rem 0; }
 strong { font-weight:650; }
-blockquote { margin:1.3rem 0; padding:.7rem 0 .7rem 1.2rem;
-             border-left:4px solid var(--accent); color:var(--muted); }
+a { color:var(--accent); }
+blockquote { margin:1.1rem 0; padding:.5rem 0 .5rem 1.1rem;
+             border-left:3px solid var(--accent); color:var(--muted); }
 pre { background:var(--code-bg); border:1px solid var(--rule); border-radius:8px;
-      padding:1rem 1.2rem; overflow-x:auto; max-width:100%;
-      font:.72em/1.5 ui-monospace, Menlo, Consolas, monospace; }
-code { font:.88em ui-monospace, Menlo, Consolas, monospace; }
-table { border-collapse:collapse; margin:1.1rem 0; font-size:.78em; max-width:100%;
+      padding:.9rem 1.1rem; overflow-x:auto; font:13.5px/1.55 ui-monospace, Menlo, Consolas, monospace; }
+code { font:.9em ui-monospace, Menlo, Consolas, monospace; background:var(--code-bg);
+       padding:.08em .3em; border-radius:4px; }
+pre code { background:none; padding:0; }
+table { border-collapse:collapse; margin:1.1rem 0; font-size:.92rem; max-width:100%;
         display:block; overflow-x:auto; }
-th, td { border:1px solid var(--rule); padding:.5rem .8rem; text-align:left; }
+th, td { border:1px solid var(--rule); padding:.45rem .7rem; text-align:left; }
 th { background:var(--code-bg); }
+hr { border:0; border-top:1px solid var(--rule); margin:2rem 0; }
 .math { background:var(--code-bg); border:1px solid var(--rule); border-radius:8px;
-        padding:.8rem 1.1rem; margin:1.1rem 0; font-size:.8em;
-        font-family:ui-monospace, Menlo, Consolas, monospace; }
-
-.title-slide h1 { font-size:3.4rem; }
-.title-slide .sub { color:var(--muted); font-size:1.3rem; margin-top:.6rem; }
-
-#bar { position:fixed; top:0; left:0; height:3px; background:var(--accent);
-       width:0; transition:width .15s ease; z-index:10; }
-#num { position:fixed; bottom:1.4vh; right:2vw; color:var(--muted);
-       font:600 .7rem ui-monospace, Menlo, Consolas, monospace; z-index:10; }
-#hint { position:fixed; bottom:1.4vh; left:2vw; color:var(--muted);
-        font:.68rem -apple-system, "Segoe UI", sans-serif; z-index:10; opacity:.75; }
-
-@media print {
-  #bar, #num, #hint { display:none; }
-  .slide { display:flex !important; min-height:auto; page-break-after:always;
-           padding:6% 8%; border-bottom:none; }
-  body { font-size:15px; }
-  h1 { font-size:2rem; } h2 { font-size:1.6rem; }
-}
-@media (max-width:820px) { body { font-size:17px; } h2 { font-size:1.6rem; } }
+        padding:.7rem 1rem; margin:1rem 0; font-family:ui-monospace, Menlo, Consolas, monospace;
+        font-size:.92rem; }
+@media (max-width:600px) { body { font-size:16px; } h1 { font-size:1.6rem; } }
 
 .nav { margin: 0 0 1.5rem; font-size:.9rem; }
 .nav a { color: var(--accent); text-decoration: none; }
@@ -77,12 +56,12 @@ th { background:var(--code-bg); }
 <blockquote><strong>Register: TEACH.</strong> Narrative and worked examples. Graded steps are in <code>lab.md</code>; conventions are in <code>rules.md</code>.</blockquote>
 <p><strong>You arrive with:</strong> a panel, a permanent identifier on every row, a data-quality catalog with severities you assigned, and a written statement of what your panel cannot be used for.</p>
 <p>Now you compute something. This is where the previous two weeks start collecting.</p>
-<p>---</p>
+<hr>
 <h2>Why this matters</h2>
 <p>You will be asked, more than once in your career, what something returned. It sounds like a question with an answer.</p>
 <p>It is a question with several answers, all defensible, differing by amounts large enough to change a decision. The professional skill is not producing a number. It is producing a number <strong>and being able to say exactly which question it answers</strong> — which convention, which window, which benchmark, which assumption about the risk-free rate.</p>
 <p>An analyst who reports 13.53% and an analyst who reports 10.42% can both be right about the same index over the same decade. Here is how.</p>
-<p>---</p>
+<hr>
 <h2>Part 1 — What did the S&amp;P 500 return?</h2>
 <p>Two funds. Both track the S&amp;P 500. Both hold the same five hundred companies. Ten years, same window.</p>
 <pre><code>import yfinance as yf, numpy as np
@@ -109,7 +88,7 @@ RSP: total  168.78%  annualized 10.42%  vol 18.78%  sharpe 0.555</code></pre>
 <ul><li><em>&quot;What did the market&#x27;s capital actually earn?&quot;</em> → cap-weighted</li><li><em>&quot;What did the average member company return?&quot;</em> → equal-weighted</li></ul>
 <p>If you report one without saying which, you have not reported a number. You have reported a number and hidden the question.</p>
 <blockquote><strong>The rule this gives you.</strong> Every performance number is downstream of a construction choice. Name the choice when you report the number, every time.</blockquote>
-<p>---</p>
+<hr>
 <h2>Part 2 — The same series, two volatilities</h2>
 <p>Now something more uncomfortable. Take one series — <code>SPY</code> — and compute its annualized volatility. Nothing about the data changes. Only the convention:</p>
 <pre><code>daily vol × sqrt(252)  = 18.31%     [252 trading days per year]
@@ -118,7 +97,7 @@ daily vol × sqrt(365)  = 22.03%     [365 calendar days per year]</code></pre>
 <p>Both conventions exist in real use. Equities typically annualize on 252 trading days, because that is how many days the market is actually open. Some fixed income and derivatives conventions use 360 or 365. If you take a daily equity volatility and scale it by √365, you have implicitly claimed the market moves on weekends.</p>
 <p>Every metric with a time dimension has this property. Annualized return, volatility, Sharpe ratio, tracking error, information ratio — all of them carry a convention, and the convention is usually invisible in the output.</p>
 <blockquote><strong>The rule this gives you.</strong> When your number disagrees with someone else&#x27;s, check the convention <strong>before</strong> you check the data. It is the more common explanation and the faster one to test.</blockquote>
-<p>---</p>
+<hr>
 <h2>Part 3 — An index is a membership dataset, not a price series</h2>
 <p>Here is the thing that makes this a professional-data week.</p>
 <p>You just downloaded <code>SPY</code> and <code>RSP</code> and got price series. That is what a free source gives you: the <em>level</em> of a thing, over time. It is enough to answer &quot;what did it return.&quot;</p>
@@ -129,7 +108,7 @@ daily vol × sqrt(365)  = 22.03%     [365 calendar days per year]</code></pre>
 <table><thead><tr><th>Question</th><th>Needs</th></tr></thead><tbody><tr><td>What did the index return?</td><td>the price series</td></tr><tr><td>What was in the index in March 2023?</td><td>the point-in-time membership file</td></tr><tr><td>Did this manager beat their benchmark because of stock picking or sector tilt?</td><td>membership + weights</td></tr><tr><td>Would my strategy have been investable at the time?</td><td>membership, as it stood then</td></tr><tr><td>Is my panel survivorship-biased?</td><td>membership as of the <em>start</em> of the sample</td></tr></tbody></table>
 <p>That last row should look familiar. <strong>This is your Week 2 problem, and the membership file is the fix.</strong> When you asked where your list of names came from, the professional answer is: from a point-in-time membership file, constructed as of the start of the sample, not from today&#x27;s constituent list.</p>
 <p>If you have WRDS, this is available. If you do not, the honest move is the same one as last week: state the limitation, and say what you would have used.</p>
-<p>---</p>
+<hr>
 <h2>Part 4 — Verify against something you did not compute</h2>
 <p>You have a number. Before it goes anywhere, check it against a source that did not come from your code.</p>
 <p>For a fund, the fact sheet or the issuer&#x27;s own site publishes returns and often volatility. For an index, the index provider publishes factsheets. For a security, several vendors publish computed metrics.</p>
@@ -139,7 +118,7 @@ daily vol × sqrt(365)  = 22.03%     [365 calendar days per year]</code></pre>
 <p><strong>The shape, not your answer</strong> — a filled verification entry:</p>
 <blockquote><strong>Metric:</strong> SPY annualized volatility, 10 years to 2025-06-27 <strong>Mine:</strong> 18.31% (daily log-free simple returns, ×√252) <strong>Independent source:</strong> issuer factsheet, 3-year standard deviation — <strong>not comparable</strong>, different window. <strong>Resolution:</strong> could not verify directly; the published figure uses a 3-year window and I used 10. Recomputed mine on a matched 3-year window to compare, and report the 10-year figure with its window stated on the face of the result. <strong>Status:</strong> verified on a matched window; the headline figure&#x27;s window is stated.</blockquote>
 <p>Notice what that entry does: it fails to verify directly, says so, and does something about it. That is a complete and professional answer. &quot;Verified ✓&quot; with nothing behind it is not.</p>
-<p>---</p>
+<hr>
 <h2>Part 5 — What your Week 2 catalog now forbids</h2>
 <p>Your data-quality catalog said what your panel cannot be used for. This is the week that starts to bite.</p>
 <p>If your panel is survivor-only, then any cross-sectional statistic you compute from it — average return, dispersion, the fraction of names that beat something — is conditioned on survival, and you may not report it as though it were not.</p>
@@ -150,13 +129,13 @@ daily vol × sqrt(365)  = 22.03%     [365 calendar days per year]</code></pre>
 <p>is a statement about survivors, which is a real thing to say as long as you say it.</p>
 <p>What is not an option is computing the number, knowing what is wrong with it, and reporting it plainly. The catalog exists precisely so that this moment has a written record.</p>
 <blockquote><strong>The rule this gives you.</strong> The limitations you wrote down last week are not a disclaimer. They are a constraint on what you are allowed to say this week.</blockquote>
-<p>---</p>
+<hr>
 <h2>This week&#x27;s sources</h2>
 <p>Register: [the source register](../sources.html).</p>
 <table><thead><tr><th>Working with</th><th>For</th></tr></thead><tbody><tr><td><code>yfinance</code> (guaranteed lane)</td><td>the SPY/RSP comparison, and your own metrics</td></tr><tr><td>Index provider methodology documents</td><td>the membership rules behind your benchmark</td></tr><tr><td>WRDS / CRSP (Gen 1)</td><td>point-in-time index membership, if entitled</td></tr></tbody></table>
 <p><strong>Read the methodology, do not infer it.</strong> An index&#x27;s construction rules are published, and they change. What a fund was in 2015 is not necessarily what it is now, and no summary of it — yours, a textbook&#x27;s, or anyone else&#x27;s — substitutes for the current document.</p>
 <p>The same applies to the conventions inside your own code. A function that annualizes has made a choice about what a year is. If you did not make that choice deliberately, something else did.</p>
-<p>---</p>
+<hr>
 <p><strong>Two sources, minimum — and where you have professional access, one of them is the professional source.</strong> This week that is <strong>WRDS / CRSP</strong>, for point-in-time index membership, so your benchmark carries no look-ahead.</p>
 <p>Pending access is neither an excuse nor a penalty. Document the attempt — source, route tried, date, barrier, and why that source would have been independent — and use a second free source instead. <strong>The attempt counts; the outcome never does.</strong></p>
 <h2>Before the lab — do these</h2>

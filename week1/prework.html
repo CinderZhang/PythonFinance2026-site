@@ -7,53 +7,32 @@
   :root { --bg:#0f1419; --fg:#e9ecf0; --muted:#9aa4b2; --rule:#2a323c;
           --accent:#6fb3f2; --code-bg:#182029; } }
 * { box-sizing: border-box; }
-html, body { height:100%; }
 body { margin:0; background:var(--bg); color:var(--fg);
-       font: 22px/1.5 -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
-
-.slide { display:none; min-height:100vh; padding:5vh 7vw 9vh;
-         flex-direction:column; justify-content:center; }
-.slide.current { display:flex; }
-.slide > *:first-child { margin-top:0; }
-
-h1 { font-size:2.8rem; line-height:1.15; margin:0 0 1rem; letter-spacing:-.01em; }
-h2 { font-size:2.1rem; line-height:1.2; margin:0 0 1.4rem; letter-spacing:-.01em; }
-h3 { font-size:1.4rem; margin:1.2rem 0 .6rem; color:var(--muted); }
-p, li { max-width:52ch; }
-li { margin:.45rem 0; }
+       font: 17px/1.6 -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+main { max-width: 46rem; margin: 0 auto; padding: 2.25rem 1.25rem 4.5rem; }
+h1 { font-size:1.9rem; line-height:1.2; margin:0 0 1rem; letter-spacing:-.01em; }
+h2 { font-size:1.4rem; line-height:1.25; margin:2.2rem 0 .8rem; }
+h3 { font-size:1.1rem; margin:1.8rem 0 .6rem; }
+p, li { margin:.7rem 0; }
+li { margin:.35rem 0; }
 strong { font-weight:650; }
-blockquote { margin:1.3rem 0; padding:.7rem 0 .7rem 1.2rem;
-             border-left:4px solid var(--accent); color:var(--muted); }
+a { color:var(--accent); }
+blockquote { margin:1.1rem 0; padding:.5rem 0 .5rem 1.1rem;
+             border-left:3px solid var(--accent); color:var(--muted); }
 pre { background:var(--code-bg); border:1px solid var(--rule); border-radius:8px;
-      padding:1rem 1.2rem; overflow-x:auto; max-width:100%;
-      font:.72em/1.5 ui-monospace, Menlo, Consolas, monospace; }
-code { font:.88em ui-monospace, Menlo, Consolas, monospace; }
-table { border-collapse:collapse; margin:1.1rem 0; font-size:.78em; max-width:100%;
+      padding:.9rem 1.1rem; overflow-x:auto; font:13.5px/1.55 ui-monospace, Menlo, Consolas, monospace; }
+code { font:.9em ui-monospace, Menlo, Consolas, monospace; background:var(--code-bg);
+       padding:.08em .3em; border-radius:4px; }
+pre code { background:none; padding:0; }
+table { border-collapse:collapse; margin:1.1rem 0; font-size:.92rem; max-width:100%;
         display:block; overflow-x:auto; }
-th, td { border:1px solid var(--rule); padding:.5rem .8rem; text-align:left; }
+th, td { border:1px solid var(--rule); padding:.45rem .7rem; text-align:left; }
 th { background:var(--code-bg); }
+hr { border:0; border-top:1px solid var(--rule); margin:2rem 0; }
 .math { background:var(--code-bg); border:1px solid var(--rule); border-radius:8px;
-        padding:.8rem 1.1rem; margin:1.1rem 0; font-size:.8em;
-        font-family:ui-monospace, Menlo, Consolas, monospace; }
-
-.title-slide h1 { font-size:3.4rem; }
-.title-slide .sub { color:var(--muted); font-size:1.3rem; margin-top:.6rem; }
-
-#bar { position:fixed; top:0; left:0; height:3px; background:var(--accent);
-       width:0; transition:width .15s ease; z-index:10; }
-#num { position:fixed; bottom:1.4vh; right:2vw; color:var(--muted);
-       font:600 .7rem ui-monospace, Menlo, Consolas, monospace; z-index:10; }
-#hint { position:fixed; bottom:1.4vh; left:2vw; color:var(--muted);
-        font:.68rem -apple-system, "Segoe UI", sans-serif; z-index:10; opacity:.75; }
-
-@media print {
-  #bar, #num, #hint { display:none; }
-  .slide { display:flex !important; min-height:auto; page-break-after:always;
-           padding:6% 8%; border-bottom:none; }
-  body { font-size:15px; }
-  h1 { font-size:2rem; } h2 { font-size:1.6rem; }
-}
-@media (max-width:820px) { body { font-size:17px; } h2 { font-size:1.6rem; } }
+        padding:.7rem 1rem; margin:1rem 0; font-family:ui-monospace, Menlo, Consolas, monospace;
+        font-size:.92rem; }
+@media (max-width:600px) { body { font-size:16px; } h1 { font-size:1.6rem; } }
 
 .nav { margin: 0 0 1.5rem; font-size:.9rem; }
 .nav a { color: var(--accent); text-decoration: none; }
@@ -79,7 +58,7 @@ th { background:var(--code-bg); }
 <p><strong>Honest time budget: about 2 hours 45 minutes here — plus the external Python course</strong> <strong>(hours vary by background; plan for several, done before Tuesday).</strong> 31 minutes of the budget falls after Tuesday.</p>
 <table><thead><tr><th>Part</th><th>What</th><th>Time</th></tr></thead><tbody><tr><td>0</td><td><strong>Two LinkedIn Learning courses</strong> — <em>Getting Started with Python for Finance</em> (Harrison) and <em>Algorithmic Trading and Finance Models…</em> (McDonald); links in the Foundations assignment; before Tuesday</td><td>varies</td></tr><tr><td>A</td><td>Environment — get a notebook running</td><td>25 min</td></tr><tr><td>B</td><td>Generation 1 — start the access requests</td><td>45 min</td></tr><tr><td>C</td><td>Generation 2 — get a key and pull something</td><td>35 min</td></tr><tr><td>D</td><td>Check a source fact against its documentation</td><td>20 min</td></tr><tr><td>E</td><td>One paragraph, before class</td><td>10 min</td></tr><tr><td>F</td><td>Video 1 — before <strong>Thursday</strong>, not Tuesday</td><td>31 min</td></tr></tbody></table>
 <p>Part B is mostly waiting on forms. <strong>Start it first</strong>, then do the rest while requests are pending.</p>
-<p>---</p>
+<hr>
 <h2>Part A — Environment</h2>
 <p>You do not need to install anything. Use Google Colab.</p>
 <ol><li><code>https://colab.research.google.com</code>, sign in with your Purdue account.</li><li><strong>File → New notebook.</strong></li><li>Run:</li></ol>
@@ -88,7 +67,7 @@ import yfinance as yf, pandas as pd
 print(&quot;yfinance&quot;, yf.__version__, &quot;| pandas&quot;, pd.__version__)</code></pre>
 <p>Two version numbers and no red text. If you see red, paste the entire error into your AI and ask <strong>what it means</strong> — do not ask it to fix the code yet. Understanding the error is the skill.</p>
 <p><strong>You are not expected to write Python from scratch in this course.</strong> You are expected to read code, say what it does, find the error in it, and check that it does what it claims.</p>
-<p>---</p>
+<hr>
 <h2>Part B — Generation 1: start the access requests</h2>
 <p>These are slow. Start them now.</p>
 <p><strong>WRDS</strong> — the research platform hosting CRSP, Compustat, IBES and TRACE. <code>https://guides.lib.purdue.edu/wrds</code> Register with your Purdue email. Purdue WRDS accounts are for <strong>faculty and graduate students</strong>, which includes you. The request goes to a local administrator for verification, so expect a queue. <strong>Install the Duo Mobile app first</strong> — WRDS login requires it, and that is the vendor&#x27;s requirement, not Purdue&#x27;s.</p>
@@ -100,7 +79,7 @@ print(&quot;yfinance&quot;, yf.__version__, &quot;| pandas&quot;, pd.__version__
 <p>For each attempt, record: link used, date and time, resulting status, remaining blocker, and one sentence on what the platform is for. <strong>The graded Foundations record needs only WRDS and LSEG Workspace with date/status/barrier; the rest of this note-taking is class preparation.</strong></p>
 <p><strong>A denial or a pending queue costs you nothing.</strong> The documented attempt is what is graded.</p>
 <p><strong>If you are blocked:</strong> contact Purdue business data library support, then the Libraries help channels, then the instructor — <strong>during</strong> prework, not the night before the lab.</p>
-<p>---</p>
+<hr>
 <h2>Part C — Generation 2: get a key and pull something</h2>
 <p>This is the half that works immediately.</p>
 <p><strong>SEC EDGAR needs no account at all.</strong> Run this now:</p>
@@ -114,17 +93,17 @@ print(d[&quot;name&quot;], d[&quot;tickers&quot;])</code></pre>
 <p>Then get <strong>one</strong> API key from a Generation 2 source in [the source register](../sources.html) — Financial Datasets and Databento both have free tiers or credits. Pull something with it.</p>
 <p><strong>Check the cost page before you sign up, and do not spend money.</strong> Nothing in this course requires payment. If a source wants a card before it will issue a key, skip it and use another.</p>
 <p>Record how long Part C took compared with Part B. Bring both numbers.</p>
-<p>---</p>
+<hr>
 <h2>Part D — Check a source fact against its documentation</h2>
 <p>Search for how to pull a price history from Refinitiv in Python. Take the first two or three results you would plausibly have copied.</p>
 <p>Now check them against LSEG&#x27;s <strong>current</strong> documentation. Thomson Reuters became Refinitiv; Refinitiv was acquired by LSEG; the Python package was renamed. How much of what you found is still correct?</p>
 <p><strong>Bring what you found and how long the check took.</strong> That interval — how long it takes to confirm a source fact rather than assume it — is the habit this course runs on.</p>
-<p>---</p>
+<hr>
 <h2>Part E — Write one paragraph</h2>
 <blockquote>You have two sources for the same security and they disagree about one number. What would make you decide the disagreement is a <strong>defect in the data</strong> rather than a <strong>difference in convention</strong>? Give one concrete test you could run.</blockquote>
 <p>Keep it. You will compare it against what you learn in the session, and the comparison is part of Lab 1.</p>
 <p><strong>Bring to Tuesday:</strong> a running notebook, your Generation 1 attempts, a Generation 2 key with something pulled, what your Refinitiv search turned up, and this paragraph.</p>
-<p>---</p>
+<hr>
 <h2>Part F — Before Thursday: watch Video 1</h2>
 <p>Watch this before the Thursday lab — Thursday opens assuming you have seen it. 31 minutes.</p>
 <p><strong>The DRIVER Method: How to Refine Knowledge and Build Skill in the AI Era</strong> — <code>https://youtu.be/gUepTIp11Og</code></p>

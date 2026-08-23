@@ -7,53 +7,32 @@
   :root { --bg:#0f1419; --fg:#e9ecf0; --muted:#9aa4b2; --rule:#2a323c;
           --accent:#6fb3f2; --code-bg:#182029; } }
 * { box-sizing: border-box; }
-html, body { height:100%; }
 body { margin:0; background:var(--bg); color:var(--fg);
-       font: 22px/1.5 -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
-
-.slide { display:none; min-height:100vh; padding:5vh 7vw 9vh;
-         flex-direction:column; justify-content:center; }
-.slide.current { display:flex; }
-.slide > *:first-child { margin-top:0; }
-
-h1 { font-size:2.8rem; line-height:1.15; margin:0 0 1rem; letter-spacing:-.01em; }
-h2 { font-size:2.1rem; line-height:1.2; margin:0 0 1.4rem; letter-spacing:-.01em; }
-h3 { font-size:1.4rem; margin:1.2rem 0 .6rem; color:var(--muted); }
-p, li { max-width:52ch; }
-li { margin:.45rem 0; }
+       font: 17px/1.6 -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+main { max-width: 46rem; margin: 0 auto; padding: 2.25rem 1.25rem 4.5rem; }
+h1 { font-size:1.9rem; line-height:1.2; margin:0 0 1rem; letter-spacing:-.01em; }
+h2 { font-size:1.4rem; line-height:1.25; margin:2.2rem 0 .8rem; }
+h3 { font-size:1.1rem; margin:1.8rem 0 .6rem; }
+p, li { margin:.7rem 0; }
+li { margin:.35rem 0; }
 strong { font-weight:650; }
-blockquote { margin:1.3rem 0; padding:.7rem 0 .7rem 1.2rem;
-             border-left:4px solid var(--accent); color:var(--muted); }
+a { color:var(--accent); }
+blockquote { margin:1.1rem 0; padding:.5rem 0 .5rem 1.1rem;
+             border-left:3px solid var(--accent); color:var(--muted); }
 pre { background:var(--code-bg); border:1px solid var(--rule); border-radius:8px;
-      padding:1rem 1.2rem; overflow-x:auto; max-width:100%;
-      font:.72em/1.5 ui-monospace, Menlo, Consolas, monospace; }
-code { font:.88em ui-monospace, Menlo, Consolas, monospace; }
-table { border-collapse:collapse; margin:1.1rem 0; font-size:.78em; max-width:100%;
+      padding:.9rem 1.1rem; overflow-x:auto; font:13.5px/1.55 ui-monospace, Menlo, Consolas, monospace; }
+code { font:.9em ui-monospace, Menlo, Consolas, monospace; background:var(--code-bg);
+       padding:.08em .3em; border-radius:4px; }
+pre code { background:none; padding:0; }
+table { border-collapse:collapse; margin:1.1rem 0; font-size:.92rem; max-width:100%;
         display:block; overflow-x:auto; }
-th, td { border:1px solid var(--rule); padding:.5rem .8rem; text-align:left; }
+th, td { border:1px solid var(--rule); padding:.45rem .7rem; text-align:left; }
 th { background:var(--code-bg); }
+hr { border:0; border-top:1px solid var(--rule); margin:2rem 0; }
 .math { background:var(--code-bg); border:1px solid var(--rule); border-radius:8px;
-        padding:.8rem 1.1rem; margin:1.1rem 0; font-size:.8em;
-        font-family:ui-monospace, Menlo, Consolas, monospace; }
-
-.title-slide h1 { font-size:3.4rem; }
-.title-slide .sub { color:var(--muted); font-size:1.3rem; margin-top:.6rem; }
-
-#bar { position:fixed; top:0; left:0; height:3px; background:var(--accent);
-       width:0; transition:width .15s ease; z-index:10; }
-#num { position:fixed; bottom:1.4vh; right:2vw; color:var(--muted);
-       font:600 .7rem ui-monospace, Menlo, Consolas, monospace; z-index:10; }
-#hint { position:fixed; bottom:1.4vh; left:2vw; color:var(--muted);
-        font:.68rem -apple-system, "Segoe UI", sans-serif; z-index:10; opacity:.75; }
-
-@media print {
-  #bar, #num, #hint { display:none; }
-  .slide { display:flex !important; min-height:auto; page-break-after:always;
-           padding:6% 8%; border-bottom:none; }
-  body { font-size:15px; }
-  h1 { font-size:2rem; } h2 { font-size:1.6rem; }
-}
-@media (max-width:820px) { body { font-size:17px; } h2 { font-size:1.6rem; } }
+        padding:.7rem 1rem; margin:1rem 0; font-family:ui-monospace, Menlo, Consolas, monospace;
+        font-size:.92rem; }
+@media (max-width:600px) { body { font-size:16px; } h1 { font-size:1.6rem; } }
 
 .nav { margin: 0 0 1.5rem; font-size:.9rem; }
 .nav a { color: var(--accent); text-decoration: none; }
@@ -75,13 +54,13 @@ th { background:var(--code-bg); }
 <div class='nav'><a href='index.html'>MSF Financial Modeling</a></div>
 <h1>Data Source Register</h1><h1>Data Source Register</h1>
 <p><strong>The authoritative home for every fact about a data source.</strong> Module surfaces link here; they never restate an access route, a package name, a price, or a coverage window.</p>
-<p>---</p>
+<hr>
 <h2>The two generations</h2>
 <p>This distinction is the spine of the course. It is not a ranking.</p>
 <p><strong>Generation 1 — institutional.</strong> Licensed, seat-bound or approval-gated, built for humans and for batch research. Deep history, survivorship-free, authoritative. Access is slow and procedural; the interface was never designed for a machine to drive.</p>
 <p><strong>Generation 2 — API-native.</strong> Key-based, metered, documented for machines, often with an MCP server. Access is instant and cheap. History is shallower, coverage narrower, and the vendor may be four years old.</p>
 <p>An analyst in the AI era has to work both, and the skill is different in each.</p>
-<p>---</p>
+<hr>
 <h2>Generation 1 — Purdue&#x27;s institutional holdings</h2>
 <h3>WRDS</h3>
 <table><thead><tr><th></th><th></th></tr></thead><tbody><tr><td>What</td><td>Research platform hosting CRSP, Compustat, TRACE, IBES and many others</td></tr><tr><td>Access</td><td>Purdue library pathway; account request with an approval queue</td></tr><tr><td>Python</td><td><code>pip install wrds</code> — PostgreSQL-backed; <code>db.raw_sql()</code> for arbitrary SQL, plus per-dataset helpers; returns pandas</td></tr><tr><td>Keyed on</td><td>per dataset — CRSP <code>PERMNO</code>, Compustat <code>GVKEY</code>, TRACE <code>CUSIP</code></td></tr><tr><td>Strength</td><td>Deep history, delisting returns, point-in-time membership — observations free sources structurally cannot hold</td></tr><tr><td>AI fit</td><td><strong>Good once oriented, bad cold.</strong> The query language is SQL, which AI writes well. The <em>schema</em> is large, idiosyncratic, and not in the model&#x27;s reliable knowledge — expect invented table and column names.</td></tr></tbody></table>
@@ -146,7 +125,7 @@ th { background:var(--code-bg); }
 <h3>Bloomberg — not used in this course</h3>
 <p>Terminal-seat-bound. There is a <code>blpapi</code> interface, but it requires a live authenticated terminal session on the same machine, which makes it unusable for coursework and unusable for most reproducible analysis.</p>
 <p><strong>Removed from the required list entirely</strong> (owner ruling 2026-08-21). Named once, in Week 1, so students can say why — being able to explain that you cannot build a pipeline on it is the capability. Nothing in this course depends on it.</p>
-<p>---</p>
+<hr>
 <h2>Generation 2 — API-native, AI-era</h2>
 <p>Purdue does not supply these. You obtain your own keys. All are usable at low or zero cost at course scale — but <strong>check the current cost yourself before signing up.</strong> These vendors change pricing often, and this page may be out of date by the time you read it.</p>
 <h3>SEC EDGAR (direct)</h3>
@@ -164,7 +143,7 @@ th { background:var(--code-bg); }
 <h3>sec-api.io</h3>
 <table><thead><tr><th></th><th></th></tr></thead><tbody><tr><td>What</td><td>Commercial SEC layer: full-text search since 2001, XBRL-to-JSON, extractor, streaming</td></tr><tr><td>Python</td><td><code>pip install sec-api</code></td></tr><tr><td>Cost</td><td><strong>Free tier is ~100 API calls total — lifetime, not monthly.</strong> Paid from about $49/mo</td></tr><tr><td>AI fit</td><td>Good — clean SDK, structured JSON</td></tr></tbody></table>
 <p>⚠ <strong>Not viable as a required tool at the free tier.</strong> A student would exhaust it in one lab. Use it as a demonstrated contrast — full-text search across all filings is something raw EDGAR cannot do easily — and never require it.</p>
-<p>---</p>
+<hr>
 <h2>The wider landscape — including what Purdue does not have</h2>
 <p>Everything above is what you can reach. This section is what <strong>exists</strong>, because an analyst seat will not be bounded by one university&#x27;s licences and you should not arrive thinking it is.</p>
 <p><strong>Nothing here is required and nothing is graded on it. This is orientation, and orientation is the point</strong> — the course informs you what exists; it does not fund any of it, and what you choose to pay for is your own business.</p>
