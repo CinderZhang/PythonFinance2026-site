@@ -1,0 +1,1091 @@
+<!doctype html><html lang='en'><head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width,initial-scale=1'>
+
+<title>The Professional Lane</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+:root{
+  --bg:#ffffff; --panel:#f7f9fa; --fg:#14181d; --muted:#5a6572; --rule:#dfe3e8;
+  --accent:#0b5fa5; --accent-soft:#e8f0f8; --code-bg:#f4f6f8; --code-fg:#1d2530;
+  --verify:#8a5a00; --verify-bg:#fdf5e4; --verify-rule:#e2c98a;
+  --apple:#2a78d6; --dell:#eb6834; --dvmt:#1baf7a; --band:rgba(20,24,29,.065);
+  --shadow:0 1px 2px rgba(16,24,40,.05);
+  --sans:-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#0f1419; --panel:#151c23; --fg:#e9ecf0; --muted:#9aa4b2; --rule:#2a323c;
+    --accent:#6fb3f2; --accent-soft:#16283a; --code-bg:#182029; --code-fg:#d7dee7;
+    --verify:#eda100; --verify-bg:#241d0d; --verify-rule:#5c4713;
+    --apple:#3987e5; --dell:#f0794a; --dvmt:#22c98c; --band:rgba(233,236,240,.075);
+    --shadow:0 1px 2px rgba(0,0,0,.4);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0f1419; --panel:#151c23; --fg:#e9ecf0; --muted:#9aa4b2; --rule:#2a323c;
+  --accent:#6fb3f2; --accent-soft:#16283a; --code-bg:#182029; --code-fg:#d7dee7;
+  --verify:#eda100; --verify-bg:#241d0d; --verify-rule:#5c4713;
+  --apple:#3987e5; --dell:#f0794a; --dvmt:#22c98c; --band:rgba(233,236,240,.075);
+  --shadow:0 1px 2px rgba(0,0,0,.4);
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);
+     font:17px/1.62 var(--sans);-webkit-text-size-adjust:100%}
+main{max-width:46rem;margin:0 auto;padding:0 1.25rem 5rem}
+h1,h2,h3,h4{text-wrap:balance;letter-spacing:-.011em}
+h2{font-size:1.34rem;line-height:1.25;margin:3rem 0 .2rem;padding-top:1.4rem;
+   border-top:1px solid var(--rule)}
+h3{font-size:1.06rem;margin:2.1rem 0 .5rem}
+h4{font-size:.95rem;margin:1.5rem 0 .4rem}
+p,li{margin:.7rem 0}
+li{margin:.34rem 0}
+strong{font-weight:650}
+em{font-style:italic}
+a{color:var(--accent);text-underline-offset:2px}
+a:focus-visible,summary:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:3px}
+code{font:.855em/1.5 var(--mono);background:var(--code-bg);color:var(--code-fg);
+     padding:.1em .34em;border-radius:4px}
+.codewrap{margin:1rem 0;border:1px solid var(--rule);border-radius:9px;background:var(--code-bg);
+          overflow:hidden;box-shadow:var(--shadow)}
+pre{margin:0;padding:.95rem 1.1rem;overflow-x:auto;
+    font:13.2px/1.6 var(--mono);color:var(--code-fg)}
+pre code{background:none;padding:0;font-size:inherit;color:inherit}
+pre.lang-out{color:var(--muted)}
+.tablewrap{overflow-x:auto;margin:1.15rem 0;border:1px solid var(--rule);border-radius:9px}
+table{border-collapse:collapse;font-size:.9rem;width:100%;font-variant-numeric:tabular-nums}
+th,td{padding:.5rem .75rem;text-align:left;border-bottom:1px solid var(--rule);vertical-align:top}
+tr:last-child td{border-bottom:0}
+th{background:var(--panel);font-weight:620;white-space:nowrap}
+hr{border:0;margin:1.1rem 0;height:0}
+blockquote{margin:1.15rem 0;padding:.75rem 1rem;border-left:3px solid var(--rule);
+           background:var(--panel);border-radius:0 8px 8px 0;font-size:.96rem}
+blockquote.rule{border-left-color:var(--accent);background:var(--accent-soft)}
+blockquote.register{border-left-color:var(--muted);color:var(--muted);font-size:.9rem;
+                    background:transparent;padding-left:.9rem}
+blockquote.gotcha,blockquote.catalog{border-left-color:var(--verify);background:var(--verify-bg)}
+blockquote.catalog{font:13.4px/1.62 var(--mono)}
+blockquote.catalog code{background:transparent;padding:0}
+
+/* hero */
+.hero{max-width:46rem;margin:0 auto;padding:2.6rem 1.25rem 0}
+.eyebrow{font:600 11px/1 var(--mono);letter-spacing:.13em;text-transform:uppercase;
+         color:var(--muted);display:flex;gap:.6rem;flex-wrap:wrap;align-items:center}
+.eyebrow b{color:var(--accent);font-weight:600}
+.hero h1{font-size:2.05rem;line-height:1.14;margin:.85rem 0 .55rem}
+.hero .lede{color:var(--muted);font-size:1.02rem;margin:0 0 1.3rem;max-width:38rem}
+.meta{display:flex;flex-wrap:wrap;gap:.4rem;margin:0 0 1.6rem}
+.meta span{font:500 11.5px/1 var(--mono);letter-spacing:.04em;color:var(--muted);
+           border:1px solid var(--rule);border-radius:999px;padding:.4rem .6rem}
+nav.toc{border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);
+        padding:.85rem 0;display:flex;flex-wrap:wrap;gap:.15rem .95rem;margin-bottom:.5rem}
+nav.toc a{font:500 12.5px/1.5 var(--mono);color:var(--muted);text-decoration:none}
+nav.toc a:hover{color:var(--accent);text-decoration:underline}
+
+/* CUSIP anatomy */
+.cusip{margin:1.4rem 0;padding:1.1rem 1.15rem .95rem;border:1px solid var(--rule);
+       border-radius:10px;background:var(--panel)}
+.cusip-row{display:flex;gap:.7rem}
+.cusip-seg{display:flex;gap:.28rem}
+.cusip .ch{font:600 20px/1 var(--mono);width:1.45rem;height:2rem;display:grid;place-items:center;
+           background:var(--bg);border:1px solid var(--rule);border-radius:5px}
+.seg-issuer .ch{border-bottom:2px solid var(--apple)}
+.seg-issue .ch{border-bottom:2px solid var(--dell)}
+.seg-check .ch{border-bottom:2px solid var(--muted)}
+.cusip-legend{margin-top:.5rem}
+.cusip-legend .cusip-seg{flex-direction:column;gap:.1rem}
+.cusip-legend .cusip-seg:nth-child(1){width:calc(6*1.45rem + 5*.28rem)}
+.cusip-legend .cusip-seg:nth-child(2){width:calc(2*1.45rem + .28rem)}
+.cusip .lbl{font:600 11px/1 var(--mono);letter-spacing:.09em;text-transform:uppercase}
+.cusip-legend .cusip-seg:nth-child(1) .lbl{color:var(--apple)}
+.cusip-legend .cusip-seg:nth-child(2) .lbl{color:var(--dell)}
+.cusip-legend .cusip-seg:nth-child(3) .lbl{color:var(--muted)}
+.cusip .sub{font-size:11.5px;line-height:1.35;color:var(--muted)}
+.cusip figcaption{margin-top:.85rem;padding-top:.7rem;border-top:1px solid var(--rule);
+                  font-size:.86rem;color:var(--muted)}
+
+/* coverage chart */
+.cov{margin:1.8rem 0;padding:1.15rem 1.2rem 1rem;border:1px solid var(--rule);
+     border-radius:10px;background:var(--panel)}
+.cov-title{font:650 .98rem/1.3 var(--sans);margin:0 0 .95rem;color:var(--fg)}
+.cov-scroll{overflow-x:auto}
+.cov-inner{min-width:29rem}
+.cov-group{font:600 10.5px/1 var(--mono);letter-spacing:.11em;text-transform:uppercase;
+           color:var(--muted);margin:.85rem 0 .45rem}
+.cov-group:first-child{margin-top:0}
+.cov-row{display:grid;grid-template-columns:9.4rem 1fr 4.6rem;align-items:center;gap:.7rem;margin:.34rem 0}
+.cov-lbl{font-size:.79rem;line-height:1.25;text-align:right}
+.cov-lbl span{display:block;color:var(--muted);font-size:.71rem}
+.cov-track{position:relative;height:19px}
+.cov-track .band{position:absolute;left:58.14%;width:16.82%;top:-4px;bottom:-4px;
+                 background:var(--band);border-radius:2px}
+.cov-track .bar{position:absolute;top:3px;height:13px;border-radius:3px;display:block}
+.cov-track .bar.apple{background:var(--apple)}
+.cov-track .bar.dell{background:var(--dell)}
+.cov-track .bar.dvmt{background:var(--dvmt)}
+.cov-track .bar.dashed{background:repeating-linear-gradient(90deg,var(--dell) 0 11px,transparent 11px 14px)}
+.cov-track .bar.private{background:repeating-linear-gradient(45deg,var(--dell) 0 1.5px,transparent 1.5px 5px);
+                        border:1px solid var(--dell);top:2px;height:15px;border-radius:2px;opacity:.9}
+.cov-rng{font:500 10.5px/1.35 var(--mono);color:var(--muted);text-align:right;
+         font-variant-numeric:tabular-nums}
+.cov-rng b{color:var(--fg);font-weight:600}
+
+.cov-axis{position:relative;height:1.2rem;margin:.6rem 5.3rem 0 10.1rem;border-top:1px solid var(--rule)}
+.cov-axis span{position:absolute;top:.28rem;transform:translateX(-50%);
+               font:500 10.5px/1 var(--mono);color:var(--muted)}
+.cov-axis span:first-child{transform:none}
+.cov-axis span:last-child{transform:translateX(-100%)}
+.cov-note{margin:.95rem 0 0;font-size:.84rem;color:var(--muted);line-height:1.55}
+.cov-note .swatch{display:inline-block;width:.85rem;height:.85rem;border-radius:3px;
+                  background:var(--band);border:1px solid var(--rule);
+                  vertical-align:-2px;margin-right:.4rem}
+
+footer{max-width:46rem;margin:0 auto;padding:1.6rem 1.25rem 3rem;border-top:1px solid var(--rule);
+       color:var(--muted);font-size:.85rem}
+@media (max-width:620px){
+  body{font-size:16px}
+  .hero h1{font-size:1.62rem}
+  .cov-row{grid-template-columns:7rem 1fr 4.6rem}
+  .cov-axis{margin-left:7.7rem}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+<style>
+.sitenav{max-width:46rem;margin:0 auto;padding:1.4rem 1.25rem 0;font-size:.9rem}
+.sitenav a{color:var(--accent);text-decoration:none}
+.sitenav a:hover{text-decoration:underline}
+</style></head>
+<body>
+<div class='sitenav'><a href='../index.html'>MSF Financial Modeling</a> &middot; <a href='lab.html'>Week 2 — Lab</a></div>
+<header class="hero">
+  <div class="eyebrow"><b>FIN 69000</b><span>&middot;</span><span>Week 2 &middot; Lab 2 companion</span>
+    <span>&middot;</span><span>Register: walkthrough</span></div>
+  <h1>The professional lane: WRDS from your own Python</h1>
+  <p class="lede">From two CUSIPs to a monthly panel with fundamentals attached &mdash; built on
+     Apple, which never moved, and Dell, which stopped trading in 2013 and came back in 2018 as
+     a different security with the same four letters. Every query below was run against live
+     WRDS on 3&nbsp;September&nbsp;2026; the outputs are real.</p>
+  <div class="meta"><span>Local Python 3.12</span><span>CRSP monthly</span>
+    <span>Compustat annual</span><span>CCM link</span>
+    <span>PERMNO &middot; GVKEY &middot; CUSIP</span></div>
+  <nav class="toc"><a href="#read-this-before-you-write-any-code">Read this before you write any code</a><a href="#section-0-the-two-companies">0 — The two companies</a><a href="#section-1-setup-python-on-your-own-machine">1 — Setup: Python on your own machine</a><a href="#section-2-from-cusip-to-permanent-identifiers">2 — From CUSIP to permanent identifiers</a><a href="#section-3-thirty-years-of-monthly-prices-from-crsp">3 — Thirty years of monthly prices from CRSP</a><a href="#section-4-financials-from-compustat">4 — Financials from Compustat</a><a href="#section-5-ccm-joining-prices-to-fundamentals">5 — CCM: joining prices to fundamentals</a><a href="#section-6-visualise-it">6 — Visualise it</a><a href="#section-7-export-and-how-this-maps-onto-lab-2">7 — Export, and how this maps onto Lab 2</a><a href="#section-8-troubleshooting">8 — Troubleshooting</a><a href="#section-9-irregularities-a-gallery-not-a-to-do-list">9 — Irregularities: a gallery, not a to-do list</a><a href="#appendix-a-code-tables">A — Code tables</a><a href="#appendix-b-what-is-verified-what-is-read-and-what-is-left-to">B — What is verified, what is read, and what is left to you</a><a href="#appendix-c-if-your-wrds-account-has-not-cleared">C — If your WRDS account has not cleared</a></nav>
+</header>
+<main>
+<blockquote class="register"><strong>Register: WALKTHROUGH.</strong> This is mechanism, not teaching and not grading. The teaching is in <code>handout.md</code>, the graded steps are in <code>lab.md</code>, the conventions are in <code>rules.md</code>. Nothing here replaces a step of Lab 2. It shows you how to execute the professional-source half of it without inventing table names.</blockquote>
+<p><strong>You arrive with:</strong> <code>security_master.csv</code> for one security keyed on a permanent identifier, <code>source_log.md</code>, and the three reproduced Week 2 demonstrations.</p>
+<p><strong>What this gets you:</strong> a multi-decade monthly panel for two companies pulled from CRSP, the matching Compustat fundamentals, and the two joined through the CRSP/Compustat Merged (CCM) link — with every identifier discontinuity visible instead of silently repaired.</p>
+<p><strong>And a gallery of things that were odd.</strong> Every query below was run against live WRDS, and plenty of it returned something unexpected. Those are collected in <strong>Section 9</strong> — not as problems to solve, but so you recognise the shape of one when it happens to your company.</p>
+<h3 id="how-much-of-this-are-you-expected-to-do">How much of this are you expected to do?</h3>
+<p>Work through Sections 1–7 once <strong>on Apple and Dell</strong>, which is the worked example — every output below is real, so you can tell immediately whether your setup is right. Then run the same pipeline on <strong>your own panel of 8 to 15 companies</strong>, which is what Lab 2 grades. Section 7.4 covers what changes when you scale up. Short answer: none of the code, and most of the judgement.</p>
+<p>Sections 8 and 9 and the appendices are <strong>reference</strong>. Read Section 9 once for the shape of it, then come back when something in your own data misbehaves. Nothing in it is required, and nothing in it needs an answer from you.</p>
+<p>This is a seven-week exploratory course. The aim is that you can pull professional data, see that something is odd, and say so in writing — not that you can adjudicate every vendor convention. That second thing takes years.</p>
+<p><strong>Why two companies.</strong> Apple is the control: one listing, one ticker, one exchange, thirty unbroken years. Dell is the case. Between 2013 and 2018 Dell common stock did not trade at all, and the thing that started trading in December 2018 is not, by any identifier your code can see, the same thing that stopped trading in October 2013. Every join you are about to write can be made to produce a clean, dense, plausible, wrong answer about Dell. That is the Week 2 lesson executed on professional data.</p>
+<hr>
+<h2 id="read-this-before-you-write-any-code">Read this before you write any code</h2>
+<p>Three constraints, in descending order of how much trouble ignoring them causes.</p>
+<p><strong>1. WRDS data does not leave WRDS in bulk.</strong> Your subscription is a licence to use the data, not to redistribute it. Never publish a <strong>pull</strong> — a cached extract, a panel file, a downloaded table — to a public repository, a shared drive outside Purdue, or a public AI chat. That is the line that matters, and it is the one people cross by committing their <code>raw/</code> folder without thinking.</p>
+<p><strong>Small illustrative extracts inside a document are a different thing</strong>, and are ordinary academic practice: published papers print Compustat tables, and WRDS itself publishes example notebooks showing CRSP output. This page is public and contains perhaps forty rows of real CRSP and Compustat values, because a walkthrough whose outputs are invented teaches you nothing about what the data actually looks like. Forty rows chosen to illustrate a point is not a redistribution of CRSP. Your cached panel is.</p>
+<p>Submit your code, your derived results, and small illustrative extracts. Not the pulls. If you are unsure which side of that line something falls on, ask before you push.</p>
+<p><strong>2. Your model does not know this schema — but WRDS publishes working code.</strong> Before you ask an AI for a query, take the vendor's own example: <strong>WRDS Research Applications → Python Replications</strong>, at <code>https://wrds-www.wharton.upenn.edu/pages/wrds-research/applications/python-replications/</code> (WRDS login required). These are maintained, runnable notebooks against the current schema, and this walkthrough is checked against one of them — <code>ff3_crspCIZ.ipynb</code>, the Fama-French three-factor construction in the new CRSP CIZ format, which is the source for the CIZ column names in Step 3.10 and for the delisting-return behaviour in Step 3.6. Start there, adapt, and cite it. The course source register says the rest plainly: WRDS is <em>"good once oriented, bad cold. The query language is SQL, which AI writes well. The schema is large, idiosyncratic, and not in the model's reliable knowledge — expect invented table and column names."</em> Every table and column name in this document is a name to <strong>verify against your own connection</strong> in Step 1.6, not a name to trust. When your <code>describe_table</code> output and this document disagree, your connection wins and the disagreement goes in your source log.</p>
+<p><strong>3. Access lead time is real.</strong> A WRDS account goes through a Purdue approval queue. Lab 2's own rule governs: <em>"Pending access is neither an excuse nor a penalty. Document the attempt — source, route tried, date, barrier, and why that source would have been independent — and use a second free source instead."</em> If you are still waiting, read this document anyway, then do Appendix C, which is the free-lane version of the same exercise and makes the gap explicit.</p>
+<hr>
+<h2 id="section-0-the-two-companies">Section 0 — The two companies</h2>
+<h3 id="apple-the-control">Apple — the control</h3>
+<p>Apple has been continuously listed on NASDAQ since its December 1980 IPO. Over a 30-year window it gives you one PERMNO, one GVKEY, one exchange, one CUSIP, and one ticker. It also gives you five stock splits, which is exactly enough to prove that your price-adjustment code works before you point it at anything hard. The corporate name changed from <em>Apple Computer, Inc.</em> to <em>Apple Inc.</em> in January 2007; CRSP records that as a name-record change, not a new security, which is a useful thing to see happen once.</p>
+<h3 id="dell-the-case">Dell — the case</h3>
+<p>Read this table as a set of falsifiable claims. Two of them you will confirm directly out of CRSP later in this walkthrough. The rest come from Dell's SEC filings, and Lab 2 expects you to check at least one yourself and log the check.</p>
+<div class="tablewrap"><table><thead><tr><th>When</th><th>What happened</th><th>How it shows up in the data</th></tr></thead><tbody><tr><td><strong>22 Jun 1988</strong></td><td>Dell Computer Corporation IPO on NASDAQ, ticker <code>DELL</code></td><td><code>msenames.namedt</code> = 1988-06-22 for PERMNO 11081; <code>comp.company.ipodate</code> = 1988-06-22</td></tr><tr><td>1990s</td><td>Several 2-for-1 splits</td><td><code>cfacpr</code> / <code>cfacshr</code> in <code>crsp.msf</code></td></tr><tr><td><strong>22 Jul 2003</strong></td><td>Renamed Dell Inc. — <strong>and the CUSIP changed</strong></td><td>New <code>msenames</code> record: <code>comnam</code> DELL COMPUTER CORP → DELL INC, <code>ncusip</code> <code>24702510</code> → <code>24702R10</code></td></tr><tr><td><strong>29 Oct 2013</strong></td><td>Take-private merger with Denali Holding (Michael Dell + Silver Lake) completes; common stock ceases trading on NASDAQ</td><td><code>msedelist</code>: <code>dlstdt</code> 2013-10-29, <code>dlstcd</code> <strong>233</strong>, <code>dlret</code> <strong>+0.009381</strong>, <code>nwperm</code> <strong>0</strong> — no successor security</td></tr><tr><td>Nov 2013 – Aug 2016</td><td>No listed Dell equity of any kind</td><td>No CRSP rows for any Dell PERMNO</td></tr><tr><td><strong>7 Sep 2016</strong></td><td>EMC acquisition completes; Class V <strong>tracking stock</strong> (<code>DVMT</code>) begins trading on NYSE</td><td>A separate security: PERMNO 16267, <code>shrcls</code> = <code>V</code>, <code>ncusip</code> 24703L10</td></tr><tr><td><strong>27–28 Dec 2018</strong></td><td>Class V exchanged; Class C common begins trading on NYSE as <code>DELL</code></td><td>DVMT delists (<code>dlstcd</code> <strong>341</strong>, <code>nwperm</code> <strong>18267</strong>); Class C is PERMNO 18267, <code>shrcls</code> = <code>C</code>, from 2018-12-28</td></tr><tr><td><strong>Nov 2021</strong></td><td>VMware spun off</td><td><code>cfacpr</code> steps 2.088212 → 1.0 while <code>cfacshr</code> stays 1.0; raw price halves and the monthly return is <strong>positive</strong></td></tr></tbody></table></div>
+<p>The right-hand column above names CRSP and Compustat fields you have not met yet — <code>ncusip</code>, <code>dlstcd</code>, <code>dlret</code>, <code>nwperm</code>, <code>cfacpr</code>, <code>cfacshr</code>. Do not look them up now. Each is explained where it is first used: identifiers in Step 2.1–2.2, adjustment factors in Step 3.3, delisting fields in Step 3.5. The table is here so that you can come back to it once those sections have made it readable.</p>
+<p><strong>The identifiers, as returned by CRSP and Compustat on 2026-09-03.</strong> These are not anchors to check — they are query output. Your own run should reproduce them; if it does not, that is a finding.</p>
+<div class="tablewrap"><table><thead><tr><th>Security</th><th>PERMNO</th><th>PERMCO</th><th>NCUSIP</th><th>Exchange</th><th>Coverage in <code>crsp.msf</code></th></tr></thead><tbody><tr><td>Apple Inc.</td><td>14593</td><td>7</td><td><code>03783310</code></td><td>NASDAQ</td><td>1980-11 → 2024-12</td></tr><tr><td>Dell Computer Corp / Dell Inc.</td><td>11081</td><td>9833</td><td><code>24702510</code> → <code>24702R10</code></td><td>NASDAQ</td><td>1988-05 → <strong>2013-10</strong></td></tr><tr><td>Dell Technologies Class V (<code>DVMT</code>)</td><td>16267</td><td>55676</td><td><code>24703L10</code></td><td>NYSE</td><td>2016-08 → 2018-12</td></tr><tr><td>Dell Technologies Class C (<code>DELL</code>)</td><td>18267</td><td>55676</td><td><code>24703L20</code></td><td>NYSE</td><td><strong>2018-11</strong> → 2024-12</td></tr></tbody></table></div>
+<p>And the Compustat side, which does not agree with any of that:</p>
+<div class="tablewrap"><table><thead><tr><th>Company</th><th>GVKEY</th><th><code>costat</code></th><th><code>ipodate</code></th></tr></thead><tbody><tr><td>Apple Inc.</td><td><code>001690</code></td><td>A</td><td>1980-12-12</td></tr><tr><td><strong>Dell Technologies Inc.</strong></td><td><code>014489</code></td><td><strong>A</strong></td><td><strong>1988-06-22</strong></td></tr></tbody></table></div>
+<p>Five things follow, and they are the whole reason Dell is in this lab.</p>
+<p><strong>Dell did not "relist."</strong> There was no re-IPO and no new public offering of Dell common stock in 2018. The Class C shares became publicly traded because Dell Technologies bought in the Class V tracking stock, paying partly in Class C shares, which then listed.</p>
+<p><strong>CRSP says three securities; Compustat says one company.</strong> Two of them are Dell common stock — old Dell and Class C — with the Class V tracking stock in between. Old Dell and Dell Technologies are different PERMNOs (11081 / 18267), different PERMCOs (9833 / 55676), different CUSIPs, and different exchanges (NASDAQ / NYSE). But Compustat carries <strong>one GVKEY, <code>014489</code></strong>, through the whole history — still <code>costat = 'A'</code>, still carrying the 1988 <code>ipodate</code>. Neither vendor is wrong. They are answering different questions, and the CCM link table is where the two answers meet.</p>
+<p><strong>The ticker string carries over, and that is the trap.</strong> <code>WHERE ticker = 'DELL'</code> returns both securities. Sorted by date they look like one series with a five-year hole. Nothing errors. You will build this trap deliberately in Step 3.8.</p>
+<p><strong><code>DVMT</code> is not Dell for the missing years — but CRSP does record a succession.</strong> The Class V stock tracked the economic performance of Dell's interest in VMware, so using it as "Dell 2016–2018" answers a question about VMware and labels the answer Dell. What CRSP <em>does</em> record is <code>nwperm = 18267</code> on DVMT's delisting row: a Class V holder became a Class C holder. So a defensible DVMT → Class C series exists. What does <strong>not</strong> exist, anywhere in the data, is any link from old Dell to anything: <code>nwperm = 0</code>.</p>
+<p><strong>The delisting return is small and positive.</strong> <code>dlret</code> = +0.94% for a take-private at $13.86 against a September close of $13.75. The interesting number is not its size; it is that it exists at all, and that the SIZ monthly file's October 2013 row is otherwise <strong>empty</strong> — <code>prc</code>, <code>ret</code> and <code>retx</code> are all null and <code>cfacpr</code> is 0.</p>
+
+<figure class="cov">
+  <figcaption class="cov-title">What each database can see &mdash; as returned 3 Sep 2026</figcaption>
+  <div class="cov-scroll"><div class="cov-inner">
+
+    <div class="cov-group">CRSP &mdash; monthly prices and returns (crsp.msf)</div>
+    <div class="cov-row"><div class="cov-lbl">Apple Inc.<span>PERMNO 14593</span></div>
+      <div class="cov-track"><i class="band"></i><b class="bar apple" style="left:0%;width:94.55%"></b></div>
+      <div class="cov-rng">1996-01<br>2024-12</div></div>
+    <div class="cov-row"><div class="cov-lbl">Dell Inc.<span>PERMNO 11081 &middot; NASDAQ</span></div>
+      <div class="cov-track"><i class="band"></i><b class="bar dell" style="left:0%;width:58.14%"></b></div>
+      <div class="cov-rng">1996-01<br><b>2013-10</b></div></div>
+    <div class="cov-row"><div class="cov-lbl">Dell Technologies<span>PERMNO 18267 &middot; NYSE</span></div>
+      <div class="cov-track"><i class="band"></i><b class="bar dell dashed" style="left:74.73%;width:19.82%"></b></div>
+      <div class="cov-rng"><b>2018-11</b><br>2024-12</div></div>
+    <div class="cov-row"><div class="cov-lbl">Class V tracking<span>PERMNO 16267 &middot; DVMT</span></div>
+      <div class="cov-track"><i class="band"></i><b class="bar dvmt" style="left:67.40%;width:7.60%"></b></div>
+      <div class="cov-rng">2016-08<br>2018-12</div></div>
+
+    <div class="cov-group">Compustat &mdash; annual fundamentals (comp.funda)</div>
+    <div class="cov-row"><div class="cov-lbl">Apple Inc.<span>GVKEY 001690</span></div>
+      <div class="cov-track"><i class="band"></i><b class="bar apple" style="left:0%;width:97.00%"></b></div>
+      <div class="cov-rng">1996-09<br>2025-09</div></div>
+    <div class="cov-row"><div class="cov-lbl">Dell<span>GVKEY 014489 &mdash; one key</span></div>
+      <div class="cov-track"><i class="band"></i><b class="bar dell" style="left:0%;width:57.0%"></b><b class="bar private" style="left:57.0%;width:11.7%"></b><b class="bar dell" style="left:68.7%;width:29.38%"></b></div>
+      <div class="cov-rng">1996-01<br>2026-01</div></div>
+
+    <div class="cov-axis">
+      <span style="left:0%">1996</span><span style="left:16.3%">2001</span>
+      <span style="left:32.6%">2006</span><span style="left:48.91%">2011</span>
+      <span style="left:65.21%">2016</span><span style="left:81.51%">2021</span>
+      <span style="left:97.82%">2026</span>
+    </div>
+  </div></div>
+  <p class="cov-note"><span class="swatch band-sw"></span><strong>Oct&nbsp;2013&nbsp;&ndash;&nbsp;Nov&nbsp;2018:
+  no listed Dell common stock.</strong> The hatched Compustat segment is three fiscal years where
+  the <em>rows exist and every value is null</em>; fundamentals resume at datadate 2017-01-31,
+  two full years before Class C lists. The three sources also stop in three different years &mdash;
+  <code>crsp.msf</code> at 2024-12, <code>crsp.msf_v2</code> at 2025-12,
+  <code>comp.funda</code> at 2026-08. <strong>All of it is correct.</strong></p>
+</figure>
+<blockquote class="rule"><strong>The rule this gives you.</strong> A gap in a price series is a fact about the security, not a defect in the data. Filling a gap that reflects a real discontinuity does not repair the panel; it destroys the only evidence that the discontinuity happened.</blockquote>
+<hr>
+<h2 id="section-1-setup-python-on-your-own-machine">Section 1 — Setup: Python on your own machine</h2>
+<p>You are building a local Python environment and keeping it. That is the working assumption from here on: a virtual environment you control, files that survive, and a notebook you can re-run in three weeks. Cloud notebooks are a fallback at the end of this section, not the default.</p>
+<p>Two reasons this is the right default for professional data. WRDS pulls are slow enough that you want a cache that outlives a session, and the licence terms make "where exactly did this file go" a question you need to be able to answer.</p>
+<h3 id="1-1-what-you-need">1.1 What you need</h3>
+<div class="tablewrap"><table><thead><tr><th></th><th></th></tr></thead><tbody><tr><td>Python</td><td><strong>3.11 or 3.12.</strong> Not 3.13+. See 1.2 — this is not a style preference</td></tr><tr><td>Disk</td><td>~500 MB for the environment, plus your cached pulls</td></tr><tr><td>Account</td><td>A WRDS account with a <strong>WRDS-native password</strong> — see 1.3</td></tr><tr><td>Editor</td><td>JupyterLab or VS Code; both run the same notebook</td></tr></tbody></table></div>
+<h3 id="1-2-create-the-environment-and-pin-the-python-version">1.2 Create the environment — and pin the Python version</h3>
+<div class="codewrap"><pre class="lang-bash"><code># from your project directory
+python3.12 -m venv .venv
+
+source .venv/bin/activate          # macOS / Linux
+.venv\Scripts\activate             # Windows PowerShell
+
+pip install -r requirements.txt</code></pre></div>
+<p>with <code>requirements.txt</code>:</p>
+<div class="codewrap"><pre class="lang-out"><code>wrds==3.5.0
+pandas==2.2.3
+psycopg2-binary==2.9.12
+pyarrow
+matplotlib
+jupyterlab</code></pre></div>
+<p>Then run <code>jupyter lab</code> and work in a notebook in that directory.</p>
+<p><strong>Why the version pin is real.</strong> <code>wrds</code> 3.5.0 declares <code>pandas&gt;=2.2,&lt;2.3</code>, and that pandas generation predates Python 3.13/3.14. On Python 3.14 with pandas 2.2.3, the <code>crsp.msenames</code> query in Step 2.3 <strong>segmentation-faults inside pandas' SQL layer</strong> — not an exception you can catch, a hard crash of the interpreter. Worse, run as <code>python script.py | tail</code> and the shell reports the <em>pipe's</em> exit status, so the crash looks like success.</p>
+<p>That is a real failure, hit while writing this document, on the query you are about to run. The queries were correct. The environment was not.</p>
+<blockquote class="rule"><strong>The rule this gives you.</strong> A crash is evidence about your environment, not your query. Before you rewrite code that worked yesterday, ask what moved underneath it — and never trust an exit code that came through a pipe.</blockquote>
+<p>If you cannot install 3.12, there is a clean workaround: bypass pandas' SQL path entirely. Query with <code>psycopg2</code> and build the frame yourself.</p>
+<div class="codewrap"><pre class="lang-python"><code>import pandas as pd, psycopg2, os
+os.environ[&#x27;PGPASSFILE&#x27;] = os.path.expanduser(&#x27;~/.pgpass&#x27;)
+cn = psycopg2.connect(host=&#x27;wrds-pgdata.wharton.upenn.edu&#x27;, port=9737, dbname=&#x27;wrds&#x27;,
+                      user=WRDS_USER, sslmode=&#x27;require&#x27;, connect_timeout=30)
+
+def raw_sql(sql, params=None, date_cols=()):
+    # drop-in substitute for conn.raw_sql where pandas&#x27; SQL path fails
+    with cn.cursor() as cur:
+        cur.execute(sql, params)
+        df = pd.DataFrame(cur.fetchall(), columns=[c[0] for c in cur.description])
+    for col in date_cols:
+        df[col] = pd.to_datetime(df[col])
+    return df</code></pre></div>
+<p>Every SQL statement in this document runs unchanged through that function.</p>
+<h3 id="1-3-credentials">1.3 Credentials</h3>
+<p>The PostgreSQL server does <strong>not</strong> accept institutional single sign-on. It authenticates a WRDS-native password through PAM. If you have only ever reached WRDS through the Purdue login, you probably do not have one, and the failure reads:</p>
+<div class="codewrap"><pre class="lang-out"><code>FATAL:  PAM authentication failed for user &quot;yourname&quot;</code></pre></div>
+<p>That is a rejected password, not a broken config. Set one under <strong>Account → Profile</strong> on the WRDS website and allow a few minutes for it to propagate.</p>
+<p>Then create <code>~/.pgpass</code> — on Windows, <code>%APPDATA%\postgresql\pgpass.conf</code> — containing one line:</p>
+<div class="codewrap"><pre class="lang-out"><code>wrds-pgdata.wharton.upenn.edu:9737:wrds:YOUR_USERNAME:YOUR_PASSWORD</code></pre></div>
+<p>and set the permissions, or the driver ignores the file:</p>
+<div class="codewrap"><pre class="lang-bash"><code>chmod 600 ~/.pgpass</code></pre></div>
+<p>A literal <code>:</code> or <code>\</code> inside the password must be backslash-escaped, or the line parses into the wrong fields and you get the PAM error above with a password that is actually correct.</p>
+<p>With that in place, connecting needs no prompt and puts no secret in your notebook:</p>
+<div class="codewrap"><pre class="lang-python"><code>import wrds
+conn = wrds.Connection(wrds_username=&#x27;YOUR_USERNAME&#x27;)</code></pre></div>
+<p>Never type a password into a cell. Never commit a notebook containing one. Close the connection when you are done — WRDS is a shared server with a finite pool:</p>
+<div class="codewrap"><pre class="lang-python"><code>conn.close()</code></pre></div>
+<h3 id="1-4-project-layout-and-the-one-line-that-keeps-you-out-of-tr">1.4 Project layout, and the one line that keeps you out of trouble</h3>
+<div class="codewrap"><pre class="lang-python"><code>from pathlib import Path
+
+PROJ = Path.cwd()                       # your project directory
+(PROJ / &#x27;raw&#x27;).mkdir(exist_ok=True)     # exactly as pulled, never edited
+(PROJ / &#x27;out&#x27;).mkdir(exist_ok=True)     # everything derived</code></pre></div>
+<p>Everything you pull is written to <code>raw/</code> as <strong>Parquet</strong> immediately, before any cleaning. Parquet preserves dtypes; CSV does not, and a PERMNO that round-trips through CSV as <code>14593.0</code> is a bug you will spend twenty minutes on. (You will meet that float anyway — the CCM link table returns <code>lpermno</code> as a float. Cast it.)</p>
+<p>Then, in <code>.gitignore</code>:</p>
+<div class="codewrap"><pre class="lang-out"><code>.venv/
+raw/
+out/
+*.parquet</code></pre></div>
+<p><strong>WRDS data is licensed, not public.</strong> It must not reach a public repository, a shared drive outside Purdue, or a public AI chat. Committing <code>raw/</code> to GitHub is a licence violation, and it is the easiest mistake to make in this lab, because everything else about the workflow encourages you to commit your work. Submit code, derived results, and small illustrative extracts inside the notebook. Not the pulls.</p>
+<h3 id="if-you-cannot-install-python-locally">If you cannot install Python locally</h3>
+<p>Google Colab runs everything here with three changes: <code>%pip install --quiet wrds</code> in the first cell followed by <strong>Runtime → Restart session</strong>; <code>PROJ</code> pointed at mounted Drive (<code>drive.mount('/content/drive')</code>); and credentials typed at the prompt each session — <strong>answer <code>n</code></strong> when the library offers to create a <code>.pgpass</code>, because that writes your password in cleartext to a machine you do not control. Colab pins an older Python, so the 1.2 version problem does not arise there.</p>
+<p>Use it if you must. The rest of this document assumes local.</p>
+<h3 id="1-5-the-cache-pattern">1.5 The cache pattern</h3>
+<p>Use this for every pull in this document. It is four lines and it is the difference between a notebook you can iterate on and one that costs 90 seconds of shared server time per run.</p>
+<div class="codewrap"><pre class="lang-python"><code>import pandas as pd
+
+def cached(name, fn, refresh=False):
+    &quot;&quot;&quot;Run fn() once, cache to Drive as Parquet, reuse thereafter.&quot;&quot;&quot;
+    path = PROJ / &#x27;raw&#x27; / f&#x27;{name}.parquet&#x27;
+    if path.exists() and not refresh:
+        print(f&#x27;{name}: cache hit -&gt; {path}&#x27;)
+        return pd.read_parquet(path)
+    df = fn()
+    df.to_parquet(path, index=False)
+    print(f&#x27;{name}: pulled {len(df):,} rows -&gt; {path}&#x27;)
+    return df</code></pre></div>
+<p>Your final submitted notebook must still run start to finish on a fresh kernel (<code>rules.md</code>). A cache that is read but never demonstrably regenerable is not reproducible — so keep the <code>refresh=True</code> path working and say in the notebook when you last used it.</p>
+<h3 id="1-6-schema-reconnaissance-do-not-skip-this">1.6 Schema reconnaissance — do not skip this</h3>
+<p>This is the step that separates a working query from an hour of <code>UndefinedTable</code> errors. CRSP has been migrating from its legacy file layout to a newer one. CRSP's own names for the two are <strong>SIZ</strong> (the legacy layout: <code>crsp.msf</code>, <code>crsp.msenames</code>, <code>crsp.msedelist</code>) and <strong>CIZ</strong> (the current one: <code>crsp.msf_v2</code>, <code>crsp.stksecurityinfohist</code>). Treat them as labels — what matters is that they hold the same data under different column names and, in one important case, different conventions. Which you have, and which tables your account actually exposes — and what the columns inside them are called — depends on your institution's subscription and the vintage of the data on the server. The column names in Sections 2 and 3 are the <strong>SIZ</strong> names, because they are what nearly every textbook, replication package, and WRDS example is written in. Confirm what you have:</p>
+<div class="codewrap"><pre class="lang-python"><code># 1. Which libraries can you see?
+libs = conn.list_libraries()
+print([l for l in libs if l.startswith((&#x27;crsp&#x27;, &#x27;comp&#x27;))])
+
+# 2. Which monthly stock tables exist in crsp?
+tabs = conn.list_tables(library=&#x27;crsp&#x27;)
+print([t for t in tabs if t in (&#x27;msf&#x27;, &#x27;msenames&#x27;, &#x27;msedelist&#x27;, &#x27;msf_v2&#x27;,
+                                &#x27;stksecurityinfohist&#x27;, &#x27;ccmxpf_lnkhist&#x27;)])
+
+# 3. What are the actual columns?
+print(conn.describe_table(library=&#x27;crsp&#x27;, table=&#x27;msf&#x27;))
+
+# 4. Look at five real rows before you write a WHERE clause
+conn.get_table(library=&#x27;crsp&#x27;, table=&#x27;msenames&#x27;, obs=5)</code></pre></div>
+<p>Write the output of step 2 into your source log. It is the single most useful line you will record this week, because it is what makes your notebook reproducible by someone else on a different subscription.</p>
+<p><strong>If <code>crsp.msf</code> is absent and only <code>crsp.msf_v2</code> exists</strong>, you are on CIZ. The concepts in this walkthrough transfer unchanged; the names do not. Run <code>describe_table</code> on <code>msf_v2</code> and <code>stksecurityinfohist</code> and map them yourself — the monthly date, return, price, and shares outstanding fields carry a <code>mth</code> prefix, and identifier history lives in the security-info history table rather than in <code>msenames</code>. <strong>Do that mapping from the output, not from memory and not from an AI's suggestion.</strong> Then read Step 3.6, which is about a substantive behavioural difference between the two layouts, not just a renaming.</p>
+<hr>
+<h2 id="section-2-from-cusip-to-permanent-identifiers">Section 2 — From CUSIP to permanent identifiers</h2>
+<h3 id="2-1-what-a-cusip-actually-is">2.1 What a CUSIP actually is</h3>
+<p>Nine characters, in three parts:</p>
+
+<figure class="cusip">
+  <div class="cusip-row">
+    <div class="cusip-seg seg-issuer"><span class="ch">0</span><span class="ch">3</span><span class="ch">7</span><span class="ch">8</span><span class="ch">3</span><span class="ch">3</span></div>
+    <div class="cusip-seg seg-issue"><span class="ch">1</span><span class="ch">0</span></div>
+    <div class="cusip-seg seg-check"><span class="ch">0</span></div>
+  </div>
+  <div class="cusip-row cusip-legend">
+    <div class="cusip-seg"><span class="lbl">issuer</span><span class="sub">6 &middot; the issuer<br>(Apple Inc.)</span></div>
+    <div class="cusip-seg"><span class="lbl">issue</span><span class="sub">2 &middot; this<br>issue</span></div>
+    <div class="cusip-seg"><span class="lbl">check</span><span class="sub">1 &middot; check digit,<br>carries nothing</span></div>
+  </div>
+  <figcaption>CRSP stores the first 8. Compustat stores all 9. That is why <code>cusip8()</code> exists.</figcaption>
+</figure>
+<p>The first six identify the <strong>issuer</strong>. The next two identify the <strong>specific issue</strong> — a class of common stock, a particular bond, a preferred series. The last is a computed check digit carrying no information.</p>
+<p>This matters immediately, because the two databases store different amounts of it:</p>
+<div class="tablewrap"><table><thead><tr><th>Database</th><th>Field</th><th>Length</th><th>Note</th></tr></thead><tbody><tr><td>CRSP</td><td><code>ncusip</code></td><td>8</td><td>Historical — the CUSIP that was correct <em>at the time of that name record</em></td></tr><tr><td>CRSP</td><td><code>cusip</code></td><td>8</td><td>Header — the security's <strong>most recent</strong> CUSIP, stamped on every historical row</td></tr><tr><td>Compustat</td><td><code>cusip</code></td><td>9</td><td>Current, includes check digit</td></tr></tbody></table></div>
+<p>So a 9-character CUSIP from a 10-K cover page needs the check digit dropped before it will match anything in CRSP:</p>
+<div class="codewrap"><pre class="lang-python"><code>def cusip8(c):
+    &quot;&quot;&quot;9-character CUSIP -&gt; the 8-character form CRSP stores.&quot;&quot;&quot;
+    c = c.strip().upper()
+    return c[:8] if len(c) == 9 else c</code></pre></div>
+<h3 id="2-2-the-header-cusip-trap">2.2 The header-CUSIP trap</h3>
+<p><code>crsp.msenames</code> has both <code>ncusip</code> and <code>cusip</code>, and they are not the same thing.</p>
+<ul><li><code>ncusip</code> changes through the security's life, one value per name record.</li><li><code>cusip</code> is the <strong>current</strong> value, copied onto every row including rows from 1994.</li></ul>
+<p>Search on <code>cusip</code> and you will find a security by its <em>present</em> identifier even for periods when it had a different one — which sounds convenient and is exactly the look-ahead the course spent Week 1 on. Search on <code>ncusip</code> and you find it by what it was actually called at the time. Query both, compare, and understand why they differ before you pick one.</p>
+<h3 id="2-3-find-the-permno">2.3 Find the PERMNO</h3>
+<div class="codewrap"><pre class="lang-python"><code>import pandas as pd
+
+SEEDS = {
+    &#x27;AAPL_current&#x27;:      &#x27;037833100&#x27;,   # Apple Inc.
+    &#x27;DELL_TECH_CLASS_C&#x27;: &#x27;24703L202&#x27;,   # Dell Technologies Inc. Class C — VERIFY, see 2.5
+}
+seeds8 = tuple(cusip8(c) for c in SEEDS.values())
+
+names = conn.raw_sql(&quot;&quot;&quot;
+    SELECT permno, permco, namedt, nameendt, ncusip, cusip, ticker, comnam,
+           shrcd, exchcd, siccd
+    FROM   crsp.msenames
+    WHERE  ncusip IN %(c)s OR cusip IN %(c)s
+    ORDER  BY permno, namedt
+&quot;&quot;&quot;, params={&#x27;c&#x27;: seeds8}, date_cols=[&#x27;namedt&#x27;, &#x27;nameendt&#x27;])
+
+print(names[[&#x27;permno&#x27;, &#x27;permco&#x27;, &#x27;namedt&#x27;, &#x27;nameendt&#x27;, &#x27;ncusip&#x27;,
+             &#x27;ticker&#x27;, &#x27;comnam&#x27;, &#x27;exchcd&#x27;, &#x27;shrcd&#x27;]].to_string(index=False))</code></pre></div>
+<blockquote class="gotcha"><strong>Gotcha that will cost you ten minutes.</strong> Two rules, both verified against the library source rather than inferred. <strong>(1)</strong> <code>raw_sql</code> uses <strong>pyformat</strong> placeholders — <code>%(name)s</code>, not <code>:name</code>. It hands your string to <code>pandas.read_sql_query</code>, which calls SQLAlchemy's <code>exec_driver_sql</code>, which passes it straight through to <code>psycopg2</code>; the <code>:name</code> style that SQLAlchemy's own <code>text()</code> would want never applies. The <code>wrds</code> package documents exactly this style in its own <code>raw_sql</code> docstring. <strong>(2)</strong> The parameter for an <code>IN</code> clause must be a <strong>tuple</strong>, not a list. <code>psycopg2</code> renders a tuple as <code>(a, b)</code> and a list as a PostgreSQL array, and an array on the right of <code>IN</code> is a type error. A one-element tuple needs the trailing comma: <code>(14593,)</code>. WRDS's own published examples sidestep both by writing literal values into the SQL string. That is fine for fixed dates and dangerous for anything derived from input. Parameterise.</blockquote>
+<p><strong>Real output, run 2026-09-03</strong> (abridged):</p>
+<div class="codewrap"><pre class="lang-out"><code>permno  permco  namedt      nameendt    ncusip    cusip     ticker  comnam                 shrcd  exchcd
+ 11081    9833  1988-06-22  2003-07-21  24702510  24702R10  DELL    DELL COMPUTER CORP        11       3
+ 11081    9833  2003-07-22  2004-06-09  24702R10  24702R10  DELL    DELL INC                  11       3
+ 14593       7  1980-12-12  1982-10-31  03783310  03783310  AAPL    APPLE COMPUTER INC        11       3
+ 14593       7  2007-01-11  2017-12-27  03783310  03783310  AAPL    APPLE INC                 11       3
+ 16267   55676  2016-09-07  2018-12-27  24703L10  24703L10  DVMT    DELL TECHNOLOGIES INC     11       1
+ 18267   55676  2018-12-28  2020-03-22  24703L20  24703L20  DELL    DELL TECHNOLOGIES INC     11       1</code></pre></div>
+<p>Read what that output is telling you.</p>
+<ul><li>Apple has <strong>one</strong> PERMNO across five name records. The <code>comnam</code> change from <em>Apple Computer Inc</em> to <em>Apple Inc</em> on 2007-01-11 creates a new row, not a new security. That is correct behaviour, and it is why you never key on a name.</li><li><strong>Look at Dell's first row.</strong> <code>ncusip</code> is <code>24702510</code> — the CUSIP that was correct in 1988 — but <code>cusip</code> on that same 1988 row reads <code>24702R10</code>, the value Dell carried from 2003 onward. This is the header-CUSIP trap from Step 2.2, live, on the first row of your output. Search on <code>cusip</code> and a 1988 record answers to a 2003 identifier.</li><li><code>shrcd</code> 11 is US common stock — and note that the <strong>tracking stock is also <code>shrcd</code> 11</strong>. A share-code screen does not separate it. What does is <code>shrcls</code>: <code>V</code> for the Class V tracking stock, <code>C</code> for the Class C common.</li><li><code>exchcd</code> 3 is NASDAQ, 1 is NYSE. Old Dell is 3; both Dell Technologies securities are 1. A single ticker string changed exchanges between two different companies.</li></ul>
+<h3 id="2-4-find-the-old-dell-search-by-name-not-by-identifier">2.4 Find the old Dell — search by name, not by identifier</h3>
+<p>You do not have old Dell's CUSIP, and this is the realistic case: you have a company, not an identifier. Search the name history.</p>
+<div class="codewrap"><pre class="lang-python"><code>dell_names = conn.raw_sql(&quot;&quot;&quot;
+    SELECT permno, permco, namedt, nameendt, ncusip, cusip, ticker, comnam,
+           shrcd, exchcd
+    FROM   crsp.msenames
+    WHERE  comnam LIKE &#x27;DELL%%&#x27;
+    ORDER  BY permno, namedt
+&quot;&quot;&quot;, date_cols=[&#x27;namedt&#x27;, &#x27;nameendt&#x27;])
+
+print(dell_names.to_string(index=False))</code></pre></div>
+<p><code>comnam</code> is stored uppercase. Note the <strong>doubled</strong> <code>%%</code>: the database driver reads a single <code>%</code> as the start of a parameter placeholder, so a literal one in a <code>LIKE</code> pattern must be escaped. Doubling works; passing the pattern as a parameter — <code>LIKE %(pat)s</code> with <code>params={'pat': 'DELL%'}</code> — is cleaner and always safe.</p>
+<p>You should get more than one PERMNO. Sort out which is which by <code>namedt</code>/<code>nameendt</code> and by <code>exchcd</code>, and expect to see at least: the NASDAQ security whose name records end in 2013, the NYSE Class C security starting December 2018, and — if your search is loose enough — the Class V tracking security running from 2016 to 2018. Confirm the tracking stock's identity by its <code>comnam</code> and its share class field rather than by assuming.</p>
+<p>Now pin all four securities explicitly, by PERMNO, and never key on anything else again:</p>
+<div class="codewrap"><pre class="lang-python"><code>PERMNO_AAPL      = 14593    # Apple Inc., NASDAQ, 1980-12 onward
+PERMNO_DELL_OLD  = 11081    # Dell Computer Corp / Dell Inc., NASDAQ, through 2013-10
+PERMNO_DELL_DVMT = 16267    # Class V tracking stock, NYSE, 2016-09 to 2018-12
+PERMNO_DELL_NEW  = 18267    # Dell Technologies Class C, NYSE, from 2018-12
+PERMNOS = (PERMNO_AAPL, PERMNO_DELL_OLD, PERMNO_DELL_NEW)   # note: DVMT deliberately excluded</code></pre></div>
+<p>DVMT is pinned but left out of <code>PERMNOS</code>. Keeping the name and excluding it from the panel is a decision you made on purpose; not knowing it existed is not.</p>
+<h3 id="2-5-what-you-should-get">2.5 What you should get</h3>
+<p>The table in Section 0 lists the PERMNOs, PERMCOs, NCUSIPs and GVKEYs this walkthrough returned on 2026-09-03. Check your output against it.</p>
+<p>If your query disagrees, <strong>your query wins</strong> — data vintages move and subscriptions differ — and the disagreement is an entry for <code>data_quality_issues.md</code>: what you searched, what you got, what you concluded. What is not acceptable is silently adopting whichever value makes your code run.</p>
+<p>Two identifiers are worth noting because they are the ones people get wrong:</p>
+<ul><li>The 9-character CUSIP on Dell Technologies' 10-K cover page is <code>24703L202</code>; CRSP stores <code>24703L20</code>. The Class V tracking stock was <code>24703L103</code> / <code>24703L10</code> — one issue-code digit apart, a different security entirely.</li><li>Old Dell has <strong>two</strong> NCUSIPs, <code>24702510</code> before the 2003 rename and <code>24702R10</code> after. Both are correct; neither is "the" Dell CUSIP.</li></ul>
+<h3 id="2-6-find-the-gvkey-and-expect-one-not-two">2.6 Find the GVKEY — and expect one, not two</h3>
+<p>Compustat is keyed on <strong>GVKEY</strong>, a six-character company identifier stored as text with leading zeros. Read it as a string or you will lose the zeros.</p>
+<div class="codewrap"><pre class="lang-python"><code>comp_hits = conn.raw_sql(&quot;&quot;&quot;
+    SELECT gvkey, conm, cik, sic, naics, gsector, costat, ipodate, dldte, dlrsn, fic, loc
+    FROM   comp.company
+    WHERE  conm LIKE %(p)s OR conm LIKE %(q)s
+    ORDER  BY gvkey
+&quot;&quot;&quot;, params={&#x27;p&#x27;: &#x27;DELL%&#x27;, &#x27;q&#x27;: &#x27;APPLE%&#x27;}, date_cols=[&#x27;ipodate&#x27;, &#x27;dldte&#x27;])
+print(comp_hits.to_string(index=False))</code></pre></div>
+<blockquote class="gotcha"><strong>Gotcha.</strong> <code>comp.company</code> has <strong>no <code>tic</code> and no <code>cusip</code> column</strong> — a natural thing to ask for, and it fails. Tickers and CUSIPs live in <code>comp.funda</code>, <code>comp.names</code>, and <code>comp.security</code> (where the deletion fields are spelled <code>dlrsni</code> and <code>dldtei</code>, not <code>dlrsn</code> and <code>dldte</code>). Run <code>describe_table</code> before you write the SELECT list; Step 1.6 exists for exactly this.</blockquote>
+<p><strong>Real output, abridged:</strong></p>
+<div class="codewrap"><pre class="lang-out"><code>gvkey   conm                    cik         sic   gsector  costat  ipodate     dldte  dlrsn
+001690  APPLE INC               0000320193  3663  45       A       1980-12-12
+014489  DELL TECHNOLOGIES INC   0001571996  3571  45       A       1988-06-22</code></pre></div>
+<p><strong>There is no second Dell GVKEY.</strong> Compustat carries one company record, <code>014489</code>, still <code>costat = 'A'</code>, and its <code>ipodate</code> is <strong>1988-06-22</strong> — the <em>old</em> Dell Computer Corporation's IPO. Compustat's entity convention carries one GVKEY across the buyout, the EMC acquisition, the tracking stock and the relisting. Be careful what you conclude from that: it is a vendor identifier decision about how to file this history, not evidence about legal continuity of the registrant. It tells you how Compustat organises the data, which is what you need in order to query it.</p>
+<p>Hold that next to what CRSP just told you: two Dell <strong>common-stock</strong> PERMNOs, two PERMCOs, two exchanges, five years apart — plus the Class V tracking stock in between, which Compustat's single company record also absorbs. <strong>Both vendors are right.</strong> Compustat is tracking a reporting entity; CRSP is tracking tradeable securities; and a company can persist while its securities do not.</p>
+<p>The fields worth reading:</p>
+<div class="tablewrap"><table><thead><tr><th>Field</th><th>What it tells you</th></tr></thead><tbody><tr><td><code>costat</code></td><td><code>A</code> active in Compustat, <code>I</code> inactive</td></tr><tr><td><code>dldte</code></td><td>Date the company was dropped from the research file</td></tr><tr><td><code>dlrsn</code></td><td><strong>Why</strong> — 01 acquisition/merger, 02 bankruptcy, 09 now private, 10 no longer files, and others. Look up whatever code you get in the Compustat manual</td></tr><tr><td><code>cik</code></td><td>SEC filer ID — your bridge to EDGAR for the Lab 2 Step 5 filing dates</td></tr></tbody></table></div>
+<p>Dell has no <code>dldte</code> or <code>dlrsn</code> because it never left. If you want to see those fields populated, the same query returns a dozen other <code>APPLE%</code> and <code>DELL%</code> companies that did.</p>
+<p>Then pin them:</p>
+<div class="codewrap"><pre class="lang-python"><code>GVKEY_AAPL = &#x27;001690&#x27;
+GVKEY_DELL = &#x27;014489&#x27;          # one key, both eras
+GVKEYS = (GVKEY_AAPL, GVKEY_DELL)</code></pre></div>
+<h3 id="2-7-checkpoint">2.7 Checkpoint</h3>
+<p>Before continuing, you should be able to state, in one line each:</p>
+<ol><li>How many distinct PERMNOs the string <code>DELL</code> maps to inside your requested window, and why.</li><li>Which of the three Dell-related PERMNOs are common stock (11081 and 18267) and which is the tracking stock (16267) — and which of the three you put in your panel, and why.</li><li>Whether the exchange changed, and what that implies about <code>exchcd</code>-based screens.</li><li>Which CUSIP field you searched on, <code>ncusip</code> or <code>cusip</code>, and why that was the right choice.</li></ol>
+<p>Put those four lines in <code>source_log.md</code> now. They are the identifier adjudications Lab 2 asks for, and they are much harder to reconstruct later.</p>
+<hr>
+<h2 id="section-3-thirty-years-of-monthly-prices-from-crsp">Section 3 — Thirty years of monthly prices from CRSP</h2>
+<h3 id="3-1-the-pull">3.1 The pull</h3>
+<p><code>crsp.msf</code> is the monthly stock file: one row per security per month, keyed on <code>permno</code> + <code>date</code>, where <code>date</code> is the last trading day of the month. It carries prices and returns but no names, so you join <code>crsp.msenames</code> <strong>on the date range of each name record</strong> — that is what makes the join point-in-time rather than as-of-today.</p>
+<div class="codewrap"><pre class="lang-python"><code>START, END = &#x27;1996-01-01&#x27;, &#x27;2026-08-31&#x27;
+
+def pull_msf():
+    return conn.raw_sql(&quot;&quot;&quot;
+        SELECT a.permno, a.permco, a.date,
+               a.prc, a.ret, a.retx, a.shrout, a.vol,
+               a.cfacpr, a.cfacshr,
+               b.ticker, b.comnam, b.ncusip, b.exchcd, b.shrcd, b.siccd
+        FROM   crsp.msf AS a
+        LEFT JOIN crsp.msenames AS b
+               ON  a.permno = b.permno
+               AND b.namedt &lt;= a.date
+               AND a.date  &lt;= b.nameendt
+        WHERE  a.permno IN %(p)s
+          AND  a.date BETWEEN %(s)s AND %(e)s
+        ORDER  BY a.permno, a.date
+    &quot;&quot;&quot;, params={&#x27;p&#x27;: PERMNOS, &#x27;s&#x27;: START, &#x27;e&#x27;: END}, date_cols=[&#x27;date&#x27;])
+
+msf = cached(&#x27;crsp_msf&#x27;, pull_msf)
+print(msf.groupby(&#x27;permno&#x27;)[&#x27;date&#x27;].agg([&#x27;min&#x27;, &#x27;max&#x27;, &#x27;count&#x27;]))</code></pre></div>
+<p><strong>Real output, run 2026-09-03:</strong></p>
+<div class="codewrap"><pre class="lang-out"><code>permno   first       last        rows
+11081    1996-01-31  2013-10-31   214
+14593    1996-01-31  2024-12-31   348
+18267    2018-11-30  2024-12-31    74</code></pre></div>
+<p><strong>Your 30-year window does not exist, and you have to find that out yourself.</strong> The maximum date in <code>crsp.msf</code> is <strong>2024-12-31</strong> — not 2026. The legacy SIZ files have stopped being extended; <code>crsp.msf_v2</code> (CIZ) runs to <strong>2025-12-31</strong>, and <code>comp.funda</code> runs to <strong>2026-08-31</strong>. So the three sources end in three different years, and the panel you can actually build is 1996 through 2024 or 2025, not 1996 through 2026.</p>
+<p>Nothing warned you about this. The query succeeded, the frame was dense, and the last row was simply older than you assumed. <strong>Print the actual maximum date and put it in your source log as the coverage end</strong> — this is the concrete form of the Week 2 lesson, and it is a <code>data_quality_issues.md</code> entry with a real number in it.</p>
+<p>Three more things to notice.</p>
+<ul><li>Apple's count is one row per month with no gaps. That is your control working.</li><li>Old Dell <strong>stops</strong> in October 2013. It does not go to zero, it does not go null — the rows end.</li><li>New Dell <strong>starts</strong> at 2018-11-30 — a month <em>before</em> the Class C shares began trading on 2018-12-28. Look at that row: <code>prc</code>, <code>ret</code>, <code>retx</code>, <code>shrout</code> and <code>vol</code> are <strong>all null</strong>. It is a placeholder. So the first Dell Technologies observation with a price is 2018-12-31, and even that one has a null <code>ret</code>, because there is no prior price to compute a return from. A naive <code>.dropna()</code> and a naive <code>len()</code> give different answers about when this series starts, and only one of them is right for your question.</li></ul>
+<p>Also check the maximum date against today. CRSP monthly data is delivered on a lag; the most recent month you can see is typically some weeks or months behind the calendar. <strong>Print the actual maximum date and put it in your source log as the coverage end.</strong> Assuming your data runs to today is a small error that becomes a large one in a backtest.</p>
+<h3 id="3-2-negative-prices-are-not-errors">3.2 Negative prices are not errors</h3>
+<div class="codewrap"><pre class="lang-python"><code>print((msf[&#x27;prc&#x27;] &lt; 0).sum(), &#x27;rows with negative prc&#x27;)</code></pre></div>
+<p>CRSP writes the price as a <strong>negative number</strong> when there was no closing trade and the value recorded is the average of the closing bid and ask. The magnitude is the price; the sign is a quality flag. So:</p>
+<div class="codewrap"><pre class="lang-python"><code>msf[&#x27;prc_abs&#x27;] = msf[&#x27;prc&#x27;].abs()</code></pre></div>
+<p>and keep a count of how many rows were flagged. On two large-cap names over monthly data you will find few or none — which is the point of checking on names where you expect none, so that you recognise it on a name where you do not. This is a <code>data_quality_issues.md</code> entry with a real percentage in it even when the percentage is zero.</p>
+<h3 id="3-3-splits-cfacpr-and-cfacshr">3.3 Splits: <code>cfacpr</code> and <code>cfacshr</code></h3>
+<p><code>prc</code> is the price <strong>as traded on that date</strong>, unadjusted. Apple traded above $600 in 2012 and near $100 in 2014, and nothing happened to the company in between except a 7-for-1 split. Plot raw <code>prc</code> over 30 years and you will produce a chart that is simply false.</p>
+<p>CRSP gives you two cumulative adjustment factors:</p>
+<ul><li><code>cfacpr</code> — cumulative factor to adjust <strong>prices</strong></li><li><code>cfacshr</code> — cumulative factor to adjust <strong>shares outstanding</strong></li></ul>
+<div class="codewrap"><pre class="lang-python"><code>msf[&#x27;prc_adj&#x27;]    = msf[&#x27;prc_abs&#x27;] / msf[&#x27;cfacpr&#x27;]
+msf[&#x27;shrout_adj&#x27;] = msf[&#x27;shrout&#x27;]  * msf[&#x27;cfacshr&#x27;]</code></pre></div>
+<p>The adjusted price is expressed in the units of the <strong>most recent</strong> period in the file — that is what "cumulative" means — so the whole series shifts when CRSP updates. An adjusted price is a <em>relative</em> quantity. Never quote one as a historical fact without saying what it is adjusted to.</p>
+<p><strong>Verify the adjustment on a known event.</strong> Apple's 7-for-1 split took effect in June 2014. Print the four months around it:</p>
+<div class="codewrap"><pre class="lang-python"><code>aapl = msf[msf.permno == PERMNO_AAPL]
+print(aapl[(aapl.date &gt;= &#x27;2014-04-01&#x27;) &amp; (aapl.date &lt;= &#x27;2014-08-31&#x27;)]
+      [[&#x27;date&#x27;, &#x27;prc&#x27;, &#x27;prc_adj&#x27;, &#x27;cfacpr&#x27;, &#x27;ret&#x27;, &#x27;shrout&#x27;]].to_string(index=False))</code></pre></div>
+<p><strong>Real output:</strong></p>
+<div class="codewrap"><pre class="lang-out"><code>date        prc        ret       shrout     cfacpr  cfacshr
+2014-05-30  633.00000  0.078293    861381.0   28.0    28.0
+2014-06-30   92.93000  0.027662   5989171.0    4.0     4.0</code></pre></div>
+<p>Raw price falls from 633 to 92.93 — a factor of about seven — while <code>cfacpr</code> steps from 28 to 4, <code>shrout</code> multiplies by seven, and the return for the split month is <strong>+2.77%</strong>. CRSP's return field is already split-adjusted. If your <code>ret</code> shows the split as an 85% loss, you have the wrong field or the wrong table.</p>
+<p>Check the adjusted series is smooth: 633 / 28 = 22.61, and 92.93 / 4 = 23.23. Check the adjusted share count too: 861,381 × 28 = 24.1bn, and 5,989,171 × 4 = 24.0bn. Both continuous.</p>
+<p>(<code>cfacpr</code> = 28 in 2014 is 7 × 4 — the 2014 seven-for-one <em>and</em> the 2020 four-for-one. The factor is cumulative to the end of the file, which is what Step 3.3's warning about "adjusted to what?" means in practice.)</p>
+<h4 id="when-the-two-factors-disagree-the-case-that-breaks-naive-cod">When the two factors disagree — the case that breaks naive code</h4>
+<p>A split moves <code>cfacpr</code> and <code>cfacshr</code> together. A <strong>distribution</strong> does not. Look at Dell Technologies around the November 2021 VMware spin-off:</p>
+<div class="codewrap"><pre class="lang-out"><code>date        prc        ret       shrout     cfacpr    cfacshr
+2021-10-29  109.99000  0.057190  290849.0   2.088212  1.0
+2021-11-30   56.47000  0.072109  290849.0   1.000000  1.0</code></pre></div>
+<p>The raw price <strong>halves</strong>, the share count does not move, and the monthly return is <strong>+7.2%</strong>. Nothing is wrong. Holders received VMware shares; the Dell share is worth less because it no longer carries the VMware stake, and the total return is positive because the distribution had value. <code>cfacpr</code> ≠ <code>cfacshr</code> is the flag that says <em>distribution, not split</em>.</p>
+<p>Now re-read Step 3.4. If you had "adjusted" market capitalisation by dividing price by <code>cfacpr</code> without multiplying shares by <code>cfacshr</code>, you would have halved Dell's market cap for every month before November 2021 — silently, in a column that still looks like dollars.</p>
+<h3 id="3-4-market-capitalisation">3.4 Market capitalisation</h3>
+<div class="codewrap"><pre class="lang-python"><code># shrout is in THOUSANDS of shares; prc is in dollars.
+msf[&#x27;mktcap_musd&#x27;] = msf[&#x27;prc_abs&#x27;] * msf[&#x27;shrout&#x27;] / 1_000    # $ millions</code></pre></div>
+<p>Use the <strong>unadjusted</strong> price with the <strong>unadjusted</strong> share count. Market cap is a level, and levels are invariant to split adjustment — dividing the price and multiplying the shares by the same factor cancels. Applying only one of the two adjustments is a common and large bug.</p>
+<h3 id="3-5-delisting-returns">3.5 Delisting returns</h3>
+<p>This is the field the Week 2 handout named as the clearest single answer to "why does the university pay for WRDS."</p>
+<p>When old Dell's rows end in October 2013, holders did not get nothing. The take-private merger paid cash. That final outcome is the <strong>delisting return</strong>, and in the legacy SIZ layout it lives in a separate table:</p>
+<div class="codewrap"><pre class="lang-python"><code>def pull_dl():
+    return conn.raw_sql(&quot;&quot;&quot;
+        SELECT permno, dlstdt, dlstcd, dlret, dlretx, dlprc, dlpdt, nwperm, nwcomp
+        FROM   crsp.msedelist
+        WHERE  permno IN %(p)s
+    &quot;&quot;&quot;, params={&#x27;p&#x27;: PERMNOS}, date_cols=[&#x27;dlstdt&#x27;, &#x27;dlpdt&#x27;])
+
+dl = cached(&#x27;crsp_msedelist&#x27;, pull_dl)
+print(dl.to_string(index=False))</code></pre></div>
+<p><strong>Real output:</strong></p>
+<div class="codewrap"><pre class="lang-out"><code>permno  dlstdt      dlstcd  dlret      dlretx     dlprc  dlpdt       nwperm  nwcomp
+ 11081  2013-10-29     233   0.009381   0.009381    0.0  2013-10-30       0       0
+ 14593  2024-12-31     100
+ 16267  2018-12-27     341  -0.013196  -0.013196    0.0  2018-12-28   18267   55676
+ 18267  2024-12-31     100</code></pre></div>
+<p>Read every column of that.</p>
+<ul><li><strong>Old Dell: <code>dlstdt</code> 2013-10-29, <code>dlstcd</code> 233, <code>dlret</code> +0.94%.</strong> A 2xx code is the merger family, which is what a take-private executed as a merger should be — look up 233 specifically in the CRSP manual and write down what it says.</li><li><strong><code>nwperm</code> = 0 for old Dell.</strong> That field names the security a delisted security <em>became</em>. Zero means there was no successor: the position ended in cash. This is the single strongest piece of evidence in the whole lab for why you may not chain old Dell onto anything.</li><li><strong><code>nwperm</code> = 18267 for DVMT.</strong> CRSP <em>does</em> record a succession here — the Class V tracking stock became the Class C common. So the vendor itself supports a DVMT → Class C series, and does not support a Dell Inc. → anything series. That distinction is the difference between an informed choice and a guess.</li><li><strong><code>dlstcd</code> 100 for Apple and Dell Technologies</strong> means still active. Note their <code>dlstdt</code> of 2024-12-31: that is the SIZ file's end date, not an event.</li></ul>
+<p><strong>Read <code>dlstcd</code> and look it up.</strong> The delisting code says <em>why</em> the security disappeared, and the broad families are:</p>
+<div class="tablewrap"><table><thead><tr><th>Range</th><th>Meaning</th></tr></thead><tbody><tr><td>100</td><td>Still active</td></tr><tr><td>200–299</td><td>Merger or acquisition</td></tr><tr><td>300–399</td><td>Exchange (moved to another exchange)</td></tr><tr><td>400–499</td><td>Liquidation</td></tr><tr><td>500–599</td><td>Dropped — insufficient capital, delinquent filings, too few market makers, bankruptcy, and similar</td></tr></tbody></table></div>
+<p>A take-private leveraged buyout executed as a merger is a <strong>2xx</strong> event, not a 5xx one. If your <code>dlstcd</code> for Dell falls outside the 200s, stop and find out why before you write anything about it. Get the exact code's meaning from the CRSP manual on WRDS, cite it, and put the citation in your source log. Do not accept a code definition from an AI without the manual.</p>
+<p><strong>Combining the delisting return with the monthly return:</strong></p>
+<div class="codewrap"><pre class="lang-python"><code>import numpy as np
+
+m = msf.merge(dl[[&#x27;permno&#x27;, &#x27;dlstdt&#x27;, &#x27;dlstcd&#x27;, &#x27;dlret&#x27;]], how=&#x27;left&#x27;, on=&#x27;permno&#x27;)
+
+# Attach the delisting return only in the month it occurred.
+same_month = (m[&#x27;dlstdt&#x27;].dt.to_period(&#x27;M&#x27;) == m[&#x27;date&#x27;].dt.to_period(&#x27;M&#x27;))
+m[&#x27;dlret_m&#x27;] = np.where(same_month, m[&#x27;dlret&#x27;], np.nan)
+
+both_missing = m[&#x27;ret&#x27;].isna() &amp; m[&#x27;dlret_m&#x27;].isna()
+m[&#x27;ret_adj&#x27;]  = (1 + m[&#x27;ret&#x27;].fillna(0)) * (1 + m[&#x27;dlret_m&#x27;].fillna(0)) - 1
+m[&#x27;ret_adj&#x27;]  = m[&#x27;ret_adj&#x27;].mask(both_missing)     # keep genuine missings missing</code></pre></div>
+<p>That <code>mask</code> line is not decoration. Without it, a month where both fields are missing becomes a return of exactly 0.0 — a fabricated observation that no null-count will ever find. That is the Week 2 failure mode reproduced inside your own cleaning code.</p>
+<p><strong>When <code>dlret</code> itself is missing.</strong> CRSP does not always have a final value, and the gap is not random — it is concentrated in performance-related delistings, which is precisely where the missing number is worst. The standard treatments in the literature (Shumway 1997; Shumway and Warther 1999) substitute <strong>−30%</strong> for performance-related delistings on NYSE/NYSE American and <strong>−55%</strong> on NASDAQ. If you apply a substitution, say so on the face of the result, cite it, and report the statistic both ways. If you do not, say that too. What is not acceptable is dropping the row, which deletes the worst outcome in the security's history and biases every subsequent statistic upward.</p>
+<h3 id="3-6-which-layout-are-you-on-and-does-it-already-include-the-">3.6 Which layout are you on, and does it already include the delisting return?</h3>
+<p>The SIZ and CIZ layouts differ in more than column names, and the difference is exactly the thing Step 3.5 just did by hand.</p>
+<p><strong>In the legacy SIZ layout</strong>, <code>crsp.msf.ret</code> is the pre-delisting return. The delisting return lives in <code>crsp.msedelist</code> and you must combine the two yourself, as Step 3.5 does.</p>
+<p><strong>In the CIZ layout, the delisting return is already in the return series.</strong> WRDS states this directly in its own published Fama-French replication for the new format (<code>ff3_crspCIZ.ipynb</code>, the CRSP block):</p>
+<blockquote class="note"><em>No need to add delisting return in the new CIZ CRSP format — last trading return and price prior to delisting are already part of the time series output.</em></blockquote>
+<p>So on CIZ, applying the Step 3.5 combination <strong>double-counts the delisting return</strong>. One security, one month, a merger payoff applied twice — and no shape check, null check, or range check will catch it.</p>
+<p><strong>Confirmed on Dell, on this server, 2026-09-03.</strong> October 2013, PERMNO 11081:</p>
+<div class="codewrap"><pre class="lang-out"><code>SIZ  crsp.msf     date 2013-10-31   prc (null)   ret (null)   cfacpr 0.0
+     crsp.msedelist                              dlret  0.009381
+CIZ  crsp.msf_v2  mthcaldt 2013-10-31   mthprc 13.86   mthret 0.009381   mthdelflg &#x27;A&#x27;</code></pre></div>
+<p>The SIZ monthly row for the delisting month is <strong>empty</strong> — no price, no return — so the delisting return is the <em>only</em> October 2013 observation, and you must merge it in. The CIZ row carries <code>mthret</code> = 0.009381, <strong>exactly equal to <code>dlret</code></strong>. Both layouts, correctly handled, give the same answer. Handled wrongly, CIZ plus the Step 3.5 combination gives 0.009381 applied twice.</p>
+<p>Repeat this on your own connection and record the two numbers. It takes one query each.</p>
+<p>If your account exposes only one layout, say which, cite the CRSP documentation for it, and state in your notebook — in one sentence — which convention your <code>ret_adj</code> column follows. A reader cannot check your work without that sentence, and neither can you in three weeks.</p>
+<h3 id="3-7-the-coverage-table-lab-2-step-2-on-professional-data">3.7 The coverage table — Lab 2 Step 2, on professional data</h3>
+<div class="codewrap"><pre class="lang-python"><code>cov = (m.groupby([&#x27;permno&#x27;])
+         .agg(rows=(&#x27;date&#x27;, &#x27;size&#x27;),
+              first=(&#x27;date&#x27;, &#x27;min&#x27;),
+              last=(&#x27;date&#x27;, &#x27;max&#x27;),
+              name=(&#x27;comnam&#x27;, &#x27;last&#x27;),
+              exch=(&#x27;exchcd&#x27;, &#x27;last&#x27;))
+         .reset_index())
+# NB: &#x27;last&#x27; is bounded by the file, not by today - see Step 3.1
+cov[&#x27;spans_sample&#x27;] = (cov[&#x27;first&#x27;] &lt;= &#x27;1996-12-31&#x27;) &amp; (cov[&#x27;last&#x27;] &gt;= &#x27;2024-12-31&#x27;)
+print(cov.to_string(index=False))</code></pre></div>
+<p>Then answer, in writing, the Lab 2 Step 3 question for each row that fails: <em>what would have had to go wrong for me to notice this by accident?</em> For old Dell the honest answer is uncomfortable — nothing would have. The rows simply stop, and a <code>groupby().mean()</code> over the panel never mentions it.</p>
+<h3 id="3-8-build-the-ticker-trap-then-look-at-it">3.8 Build the ticker trap, then look at it</h3>
+<p>Do this deliberately. It takes one query and it is the most persuasive thing you will produce this week.</p>
+<div class="codewrap"><pre class="lang-python"><code>def pull_by_ticker():
+    return conn.raw_sql(&quot;&quot;&quot;
+        SELECT a.permno, a.date, a.prc, a.ret, b.ticker, b.comnam, b.exchcd
+        FROM   crsp.msf AS a
+        JOIN   crsp.msenames AS b
+               ON a.permno = b.permno
+              AND b.namedt &lt;= a.date AND a.date &lt;= b.nameendt
+        WHERE  b.ticker = &#x27;DELL&#x27;
+          AND  a.date BETWEEN %(s)s AND %(e)s
+        ORDER  BY a.date
+    &quot;&quot;&quot;, params={&#x27;s&#x27;: START, &#x27;e&#x27;: END}, date_cols=[&#x27;date&#x27;])
+
+trap = pull_by_ticker()
+print(trap[&#x27;permno&#x27;].nunique(), &#x27;distinct PERMNOs behind the ticker DELL&#x27;)
+print(trap.groupby(&#x27;permno&#x27;)[&#x27;date&#x27;].agg([&#x27;min&#x27;, &#x27;max&#x27;, &#x27;size&#x27;]))
+print(trap.groupby(&#x27;permno&#x27;)[&#x27;comnam&#x27;].last())</code></pre></div>
+<p>Now the demonstration. Compute a naive cumulative return on <code>trap</code> sorted by date, as if it were one security:</p>
+<div class="codewrap"><pre class="lang-python"><code>naive = trap.sort_values(&#x27;date&#x27;).copy()
+naive[&#x27;idx&#x27;] = (1 + naive[&#x27;ret&#x27;].fillna(0)).cumprod()
+print(&#x27;naive chained growth of $1:&#x27;, round(naive[&#x27;idx&#x27;].iloc[-1], 2))</code></pre></div>
+<div class="codewrap"><pre class="lang-out"><code>naive chained growth of $1: 69.21</code></pre></div>
+<p>It runs. It returns a number, and the number is impressive. The number is meaningless, because it chains the returns of a NASDAQ company that ceased to exist in 2013 onto the returns of a different NYSE company that began trading in 2018, across a five-year period in which the holder of the first security held <strong>no position in either</strong> — they were paid cash in October 2013 and CRSP records no successor. What they did with the proceeds is a separate assumption you would have to state. There is no error, no warning, no null.</p>
+<p>Put that number, and the reason it is wrong, in <code>data_quality_issues.md</code>. It is the strongest evidence entry available to you this week.</p>
+<blockquote class="rule"><strong>The rule this gives you.</strong> A ticker is a string that exchanges reassign. A PERMNO is a promise that the thing on this row is the thing that was on the last one. Key on the promise.</blockquote>
+<h3 id="3-9-the-total-return-index-and-the-gap-you-must-not-close">3.9 The total-return index, and the gap you must not close</h3>
+<p>For Apple, the 30-year index is straightforward:</p>
+<div class="codewrap"><pre class="lang-python"><code>def index_from(df):
+    &quot;&quot;&quot;Compound observed returns only. A month with no return is dropped, loudly.&quot;&quot;&quot;
+    d = df.sort_values(&#x27;date&#x27;).copy()
+    n_missing = int(d[&#x27;ret_adj&#x27;].isna().sum())
+    if n_missing:
+        print(f&#x27;permno {int(d.permno.iloc[0])}: {n_missing} month(s) with no return, dropped&#x27;)
+    d = d[d[&#x27;ret_adj&#x27;].notna()].copy()
+    d[&#x27;tri&#x27;] = (1 + d[&#x27;ret_adj&#x27;]).cumprod()
+    return d
+
+aapl_tri     = index_from(m[m.permno == PERMNO_AAPL])
+dell_old_tri = index_from(m[m.permno == PERMNO_DELL_OLD])
+dell_new_tri = index_from(m[m.permno == PERMNO_DELL_NEW])</code></pre></div>
+<p>Note what that function does <strong>not</strong> do. <code>fillna(0)</code> would have been shorter and would have turned every unobserved month into a month of exactly zero return — the same fabrication Step 3.5 warned about, now compounded into a headline number. Dropping is also a choice: the index then starts at the first <em>observed</em> return, so Dell Technologies' index starts in January 2019 rather than at the November 2018 placeholder. Say which you did.</p>
+<p>For Dell you now have two indices and a decision. There are exactly three defensible things to do with the gap, and one indefensible one.</p>
+<div class="tablewrap"><table><thead><tr><th>Treatment</th><th>What it claims</th><th>Defensible?</th></tr></thead><tbody><tr><td>Two separate series, plotted separately, gap left open</td><td>"There were two Dell common-stock securities."</td><td><strong>Yes</strong> — this is the default</td></tr><tr><td>One series, terminated in Oct 2013 at the delisting return, with the cash proceeds stated</td><td>"The position ended here, for this amount."</td><td><strong>Yes</strong>, and it is the honest holder's view</td></tr><tr><td>One series, terminated in 2013, proceeds reinvested in a <strong>stated</strong> alternative (T-bills, the market) until Dec 2018</td><td>"This is what a holder who reinvested would have had."</td><td><strong>Yes, if you state the alternative</strong> — it is now a strategy, not a security</td></tr><tr><td>Chain old Dell straight onto new Dell</td><td>"This is Dell's 30-year return."</td><td><strong>No.</strong> It is a fabricated holding period</td></tr></tbody></table></div>
+<p>You are not guessing about the fourth row. <code>msedelist.nwperm</code> is <strong>0</strong> for old Dell: CRSP records no successor security. The data says the position ended.</p>
+<p>The fourth row is what <code>groupby('ticker').cumprod()</code> gives you by default. Pick one of the first three, implement it, and write one sentence in the notebook saying which and why. Lab 2 Step 7 is going to ask you to defend it.</p>
+<p>Splicing <code>DVMT</code> into the gap is a fifth option, and it is subtler than it looks. Using it as "Dell 2016–2018" answers a question about VMware and labels the answer Dell — the Class V stock tracked VMware's economics, not Dell's. But CRSP records <code>nwperm = 18267</code> on DVMT's delisting row, so a <strong>DVMT → Class C</strong> series from September 2016 onward is vendor-supported and defensible, provided you label it as what it is: a tracking-stock holder's experience, not Dell common stock. What remains indefensible is bridging October 2013 to September 2016, where there is nothing to bridge with.</p>
+<h3 id="3-10-if-you-are-on-the-ciz-layout">3.10 If you are on the CIZ layout</h3>
+<p>The concepts above transfer unchanged. Four things do not, and all four are visible in WRDS's own <code>ff3_crspCIZ.ipynb</code>, which is the reference to copy from rather than a chatbot.</p>
+<p><strong>Column names.</strong> The monthly file is <code>crsp.msf_v2</code>, and the fields are:</p>
+<div class="codewrap"><pre class="lang-python"><code>crsp_m = conn.raw_sql(&quot;&quot;&quot;
+    select a.permno, a.permco, a.mthcaldt,
+           a.issuertype, a.securitytype, a.securitysubtype, a.sharetype, a.usincflg,
+           a.primaryexch, a.conditionaltype, a.tradingstatusflg,
+           a.mthret, a.mthretx, a.shrout, a.mthprc
+    from crsp.msf_v2 as a
+    where a.mthcaldt between &#x27;01/01/1996&#x27; and &#x27;08/31/2026&#x27;
+&quot;&quot;&quot;, date_cols=[&#x27;mthcaldt&#x27;])</code></pre></div>
+<p><strong>The universe screen is a set of flags, not two share codes.</strong> <code>shrcd in (10, 11)</code> has no CIZ equivalent; it becomes five conditions:</p>
+<div class="codewrap"><pre class="lang-python"><code>crsp_m = crsp_m.loc[(crsp_m.sharetype == &#x27;NS&#x27;) &amp;
+                    (crsp_m.securitytype == &#x27;EQTY&#x27;) &amp;
+                    (crsp_m.securitysubtype == &#x27;COM&#x27;) &amp;
+                    (crsp_m.usincflg == &#x27;Y&#x27;) &amp;
+                    (crsp_m.issuertype.isin([&#x27;ACOR&#x27;, &#x27;CORP&#x27;]))]</code></pre></div>
+<p>and <code>exchcd in (1, 2, 3)</code> becomes:</p>
+<div class="codewrap"><pre class="lang-python"><code>crsp_m = crsp_m.loc[(crsp_m.primaryexch.isin([&#x27;N&#x27;, &#x27;A&#x27;, &#x27;Q&#x27;])) &amp;
+                    (crsp_m.conditionaltype == &#x27;RW&#x27;) &amp;
+                    (crsp_m.tradingstatusflg == &#x27;A&#x27;)]</code></pre></div>
+<p>Read those two blocks carefully before you use them on Dell. The Class V tracking stock is a good test of whether <code>securitysubtype == 'COM'</code> does what you expect, and the last months of a delisting security are a good test of <code>tradingstatusflg == 'A'</code> — a filter that keeps only actively trading rows will silently drop the final observation you spent Step 3.5 protecting. Check it; do not assume it.</p>
+<p><strong>Market equity — and the fields I got wrong before checking.</strong> WRDS computes <code>me = mthprc * shrout</code>, with no absolute value; <code>shrout</code> is in thousands, so <code>me</code> is in thousands of dollars. But CIZ is not missing the adjustment factors, as you might assume from their absence in the WRDS example: <code>crsp.msf_v2</code> carries <strong><code>mthcumfacpr</code></strong> and <strong><code>mthcumfacshr</code></strong> — the CIZ names for <code>cfacpr</code> and <code>cfacshr</code> — and it also carries <strong><code>mthcap</code></strong>, market capitalisation precomputed, so you need not multiply anything. Run <code>describe_table</code> on <code>msf_v2</code> and read all 45 columns before deciding you have to derive something.</p>
+<p><strong>One filter that is safer than it looks.</strong> It is natural to worry that <code>tradingstatusflg == 'A'</code> will drop a security's final pre-delisting month. On Dell's October 2013 row it does not — <code>tradingstatusflg</code> is <code>'A'</code> in the delisting month, and the delisting is marked by a separate field, <code>mthdelflg</code>, which flips to <code>'A'</code> there. Check this on your own data rather than trusting either the worry or the reassurance.</p>
+<p><strong>Delisting returns are already included.</strong> See Step 3.6. Do not apply the Step 3.5 combination on CIZ.</p>
+<hr>
+<h2 id="section-4-financials-from-compustat">Section 4 — Financials from Compustat</h2>
+<h3 id="4-1-the-four-filters-and-what-happens-without-them">4.1 The four filters, and what happens without them</h3>
+<p><code>comp.funda</code> is the annual fundamentals file. It contains the <strong>same fiscal year more than once</strong>, under different presentations, and if you do not filter you will silently double or triple your rows.</p>
+<div class="tablewrap"><table><thead><tr><th>Filter</th><th>Value</th><th>Meaning</th></tr></thead><tbody><tr><td><code>indfmt</code></td><td><code>'INDL'</code></td><td>Industrial format (the other is <code>'FS'</code>, financial services)</td></tr><tr><td><code>datafmt</code></td><td><code>'STD'</code></td><td>Standardised presentation</td></tr><tr><td><code>popsrc</code></td><td><code>'D'</code></td><td>Domestic population source (North America)</td></tr><tr><td><code>consol</code></td><td><code>'C'</code></td><td>Consolidated statements</td></tr></tbody></table></div>
+<p>These four are not optional and they are not stylistic. Omit them and a <code>groupby(['gvkey', 'fyear']).sum()</code> will report Apple's revenue two or three times over. Nothing errors.</p>
+<blockquote class="note">Apple and Dell are both <code>INDL</code>. If your capstone company is a bank, an insurer, or a broker, <code>INDL</code> may return nothing useful and you need <code>FS</code> — and a different set of ratios. Check which format your company reports in before you assume.</blockquote>
+<h3 id="4-2-the-pull">4.2 The pull</h3>
+<div class="codewrap"><pre class="lang-python"><code>def pull_funda():
+    return conn.raw_sql(&quot;&quot;&quot;
+        SELECT gvkey, datadate, fyear, fyr, tic, cusip, conm, cik,
+               at, lt, seq, ceq, pstk, pstkl, pstkrv, txditc,
+               sale, revt, cogs, xsga, ni, ib, epspx,
+               dltt, dlc, che, oancf, capx, dvc, csho, prcc_f
+        FROM   comp.funda
+        WHERE  gvkey IN %(g)s
+          AND  indfmt = &#x27;INDL&#x27; AND datafmt = &#x27;STD&#x27;
+          AND  popsrc = &#x27;D&#x27;    AND consol  = &#x27;C&#x27;
+          AND  datadate BETWEEN %(s)s AND %(e)s
+        ORDER  BY gvkey, datadate
+    &quot;&quot;&quot;, params={&#x27;g&#x27;: GVKEYS, &#x27;s&#x27;: START, &#x27;e&#x27;: END}, date_cols=[&#x27;datadate&#x27;])
+
+funda = cached(&#x27;comp_funda&#x27;, pull_funda)
+
+# Duplicate check — run it every time, not once.
+dups = funda.duplicated(subset=[&#x27;gvkey&#x27;, &#x27;datadate&#x27;]).sum()
+print(&#x27;duplicate gvkey-datadate rows:&#x27;, dups)          # must be 0</code></pre></div>
+<p>Amounts in <code>funda</code> are in <strong>millions of USD</strong> unless the currency field says otherwise. Do not mix them with the <code>mktcap_musd</code> you computed in Step 3.4 without confirming both units — they happen to agree here because Step 3.4 divided by a thousand on purpose.</p>
+<h3 id="4-3-datadate-fyear-and-fyr-the-trap-that-catches-dell-and-no">4.3 <code>datadate</code>, <code>fyear</code>, and <code>fyr</code> — the trap that catches Dell and not Apple</h3>
+<p>Three date-ish fields that mean three different things:</p>
+<ul><li><code>datadate</code> — the <strong>fiscal period end date</strong>. The real date. Use this for everything.</li><li><code>fyr</code> — the month in which the fiscal year ends (1–12).</li><li><code>fyear</code> — Compustat's <strong>fiscal year label</strong>, and it is not always the calendar year of <code>datadate</code>.</li></ul>
+<p>The convention: <strong>if <code>datadate</code> falls in January through May, <code>fyear</code> is the previous calendar year.</strong> June through December, <code>fyear</code> matches.</p>
+<p>Watch it happen:</p>
+<div class="codewrap"><pre class="lang-python"><code>chk = funda[[&#x27;gvkey&#x27;, &#x27;conm&#x27;, &#x27;datadate&#x27;, &#x27;fyear&#x27;, &#x27;fyr&#x27;, &#x27;sale&#x27;]].copy()
+chk[&#x27;datadate_year&#x27;] = chk[&#x27;datadate&#x27;].dt.year
+chk[&#x27;label_offset&#x27;]  = chk[&#x27;datadate_year&#x27;] - chk[&#x27;fyear&#x27;]
+print(chk.sort_values([&#x27;gvkey&#x27;, &#x27;datadate&#x27;]).to_string(index=False))</code></pre></div>
+<p><strong>Real output:</strong></p>
+<div class="codewrap"><pre class="lang-out"><code>gvkey   datadate    fyear  fyr   sale       offset
+001690  2015-09-30   2015    9   233715.0        0     &lt;- Apple
+001690  2016-09-30   2016    9   215091.0        0
+014489  2019-01-31   2018    1    90621.0        1     &lt;- Dell
+014489  2020-01-31   2019    1    92154.0        1</code></pre></div>
+<ul><li><strong>Apple</strong> closes its fiscal year in late September. <code>fyr = 9</code>, offset 0 on every row.</li><li><strong>Dell</strong> closes at the end of January. <code>fyr = 1</code>, offset <strong>1</strong> on every row in its history. The twelve months ending 2019-01-31 are what Dell's own annual report calls <strong>fiscal 2019</strong>; Compustat labels that row <code>fyear = 2018</code>.</li></ul>
+<p>So <em>Dell fiscal 2024</em> and <em>Compustat <code>fyear</code> 2023</em> are the same twelve months. Merge on <code>fyear</code> against anything keyed to Dell's own reporting language and you are off by one year for the entire history. <strong>Always join on <code>datadate</code>.</strong> Use <code>fyear</code> for labelling only, and when you write about a Dell figure, say which convention you are using.</p>
+<p>This single gotcha, on a company where the offset is 1 in every year, is worth its own <code>data_quality_issues.md</code> entry.</p>
+<h3 id="4-4-the-observation-that-makes-the-point-and-it-is-not-the-o">4.4 The observation that makes the point — and it is not the one you expect</h3>
+<p>Put the two coverage windows side by side.</p>
+<div class="codewrap"><pre class="lang-python"><code>dell_f = funda[funda.gvkey == GVKEY_DELL]
+# bracket the private window with one populated year either side, for contrast
+win = dell_f[dell_f.datadate.between(&#x27;2013-01-01&#x27;, &#x27;2019-12-31&#x27;)]
+print(win[[&#x27;datadate&#x27;, &#x27;fyear&#x27;, &#x27;sale&#x27;, &#x27;at&#x27;, &#x27;seq&#x27;]].to_string(index=False))</code></pre></div>
+<p><strong>Real output:</strong></p>
+<div class="codewrap"><pre class="lang-out"><code>datadate    fyear   sale       at          seq
+2013-01-31   2012   56940.0     47540.0    10680.0
+2014-01-31   2013                                     &lt;- rows exist, values do not
+2015-01-31   2014
+2016-01-31   2015
+2017-01-31   2016   61642.0    118206.0    13474.0    &lt;- values resume
+2018-01-31   2017   78660.0    122281.0     9710.0
+2019-01-31   2018   90621.0    111820.0    -4569.0</code></pre></div>
+<p>This is better than the story I expected to tell, and worse for anyone who does not look.</p>
+<p><strong>The rows are there and the numbers are not.</strong> For the three fiscal years ending January 2014, 2015 and 2016 — the years Dell was wholly private, before the EMC deal — Compustat keeps the <code>gvkey</code>/<code>datadate</code> row and leaves <code>sale</code>, <code>at</code>, <code>seq</code>, <code>ceq</code> and <code>ni</code> <strong>null</strong>. A <code>count(*)</code> on <code>funda</code> reports coverage for those years. A <code>groupby('gvkey').size()</code> reports coverage. Only a null check finds the truth.</p>
+<p><strong>Values resume at <code>datadate</code> 2017-01-31</strong>, covering February 2016 through January 2017 — which contains the September 2016 EMC close and the Class V listing. The obvious explanation is that Compustat populates items for companies filing with the SEC, and Dell had public securities again from that point. Treat that as a hypothesis consistent with one episode, not a rule: vendor coverage and item population follow collection and file conventions that this one company cannot establish.</p>
+<p><strong>Now the part that matters for your panel.</strong> For <code>datadate</code> 2017-01-31 and 2018-01-31, Compustat has complete fundamentals — revenue, assets, equity — while the CCM link table (Section 5) supplies <strong>no PERMNO at all</strong> for <code>gvkey</code> 014489, because Class C did not exist and the tracking stock is not linked. Two full firm-years of clean financial data for a company whose common stock you could not have bought at any price.</p>
+<p>Those two rows are what an inner join deletes without comment, and what a fundamentals-only screen ranks as if it were investable. Both failures are silent.</p>
+<blockquote class="rule"><strong>The rule this gives you.</strong> Coverage is a property of a <em>database</em>, not of a company. And "the row exists" is not "the data exists" — the Week 2 lesson that absence is invisible has a mirror image, where presence is misleading. Count nulls, not rows.</blockquote>
+<h3 id="4-5-derived-quantities-and-where-they-break">4.5 Derived quantities, and where they break</h3>
+<div class="codewrap"><pre class="lang-python"><code>import numpy as np
+
+f = funda.copy()
+
+# Preferred stock, in the standard order of preference
+f[&#x27;pref&#x27;] = f[&#x27;pstkrv&#x27;].fillna(f[&#x27;pstkl&#x27;]).fillna(f[&#x27;pstk&#x27;])
+
+# Book equity: SEQ, else CEQ + PSTK, else AT - LT; then + deferred taxes - preferred
+f[&#x27;be&#x27;] = (f[&#x27;seq&#x27;]
+             .fillna(f[&#x27;ceq&#x27;] + f[&#x27;pstk&#x27;].fillna(0))
+             .fillna(f[&#x27;at&#x27;] - f[&#x27;lt&#x27;]))
+f[&#x27;be&#x27;] = f[&#x27;be&#x27;] + f[&#x27;txditc&#x27;].fillna(0) - f[&#x27;pref&#x27;].fillna(0)
+
+f[&#x27;leverage&#x27;] = (f[&#x27;dltt&#x27;].fillna(0) + f[&#x27;dlc&#x27;].fillna(0)) / f[&#x27;at&#x27;]
+f[&#x27;roa&#x27;]      = f[&#x27;ib&#x27;] / f[&#x27;at&#x27;]
+
+print(f[[&#x27;conm&#x27;, &#x27;datadate&#x27;, &#x27;fyear&#x27;, &#x27;at&#x27;, &#x27;seq&#x27;, &#x27;be&#x27;, &#x27;leverage&#x27;, &#x27;roa&#x27;]]
+      .to_string(index=False))</code></pre></div>
+<p>WRDS's own Fama-French code uses the shorter form — <code>be = seq + txditc − ps</code>, with <code>ps</code> taken as <code>pstkrv</code>, else <code>pstkl</code>, else <code>pstk</code>, else 0, and <code>be</code> set missing when non-positive. The version above adds the <code>ceq + pstk</code> and <code>at − lt</code> fallbacks for <code>seq</code>, which matters on older or sparser records. Either is defensible; state which you used.</p>
+<p><strong>Check the sign of <code>be</code> before you use it.</strong> Dell Technologies is the case, and it is not marginal:</p>
+<div class="codewrap"><pre class="lang-out"><code>datadate     seq      txditc  pref    be
+2018-01-31   9710.0   (null)   384.0   9326.0
+2019-01-31  -4569.0   (null)  1196.0  -5765.0
+2020-01-31   -945.0   (null)   629.0  -1574.0
+2022-01-31  -1685.0   (null)     0.0  -1685.0
+2023-01-31  -3122.0   (null)     0.0  -3122.0
+2026-01-31  -2470.0   (null)     0.0  -2470.0</code></pre></div>
+<p>Book equity is negative in <strong>seven of the nine</strong> fiscal years from 2019 onward — the aftermath of funding the EMC acquisition with debt. Note also that <code>txditc</code> is null throughout, which is why the <code>.fillna(0)</code> in the formula is doing real work rather than defending against a hypothetical.</p>
+<p>For any year with negative book equity:</p>
+<ul><li>book-to-market is still arithmetically defined, and negative equity is genuine information about the balance sheet — but the <em>ratio</em> stops ordering firms the way a value signal is supposed to;</li><li>ranking on it puts the company at one extreme of the cross-section for a reason that has nothing to do with being cheap;</li><li>the standard convention in portfolio construction is to exclude non-positive book equity — WRDS's own Fama-French code sets it missing. Adopt that, or don't, and say which.</li></ul>
+<p>Whatever you find, report the count: <em>"book equity is negative in N of M firm-years (X%)"</em>. That is the evidence standard in <code>rules.md</code>.</p>
+<h3 id="4-6-what-funda-is-not-point-in-time">4.6 What <code>funda</code> is not: point in time</h3>
+<p>Week 2's Part 4 demonstration measured a 34-day gap between Apple's period end and its filing date. <code>comp.funda</code> does not close that gap for you, in two distinct ways:</p>
+<ol><li><strong>No filing date.</strong> The annual file gives you <code>datadate</code>, not the date the figures became public. The quarterly file <code>comp.fundq</code> carries <code>rdq</code>, the earnings report date, which is the closest thing Compustat gives you to a knowability date. Otherwise you go to EDGAR through the <code>cik</code> you pulled in Step 2.6.</li><li><strong>Not a point-in-time vintage.</strong> Standard <code>funda</code> may carry values that were updated or restated after the fact, so it cannot tell you what a figure looked like to an investor on a given historical date. Compustat sells separate point-in-time products precisely because the standard annual file is not one.</li></ol>
+<p>So the lag policy Lab 2 Step 5 asks you to choose is not a formality — it is the only thing standing between your panel and look-ahead bias. Pick a number of days after <code>datadate</code> before you treat a fundamental as knowable, defend it against one alternative, and apply it mechanically in Section 5. There is no correct number. There is a defended one.</p>
+<hr>
+<h2 id="section-5-ccm-joining-prices-to-fundamentals">Section 5 — CCM: joining prices to fundamentals</h2>
+<h3 id="5-1-why-a-link-table-exists-at-all">5.1 Why a link table exists at all</h3>
+<p>CRSP is a <strong>security</strong> database keyed on PERMNO. Compustat is a <strong>company</strong> database keyed on GVKEY. The relationship between them is many-to-many and it changes over time: one company can have several listed securities, a security can be transferred between registrants, and both vendors reuse neither key across entities. There is no join key. There is a curated link table, maintained by CRSP, that records which GVKEY corresponds to which PERMNO <strong>over which date range</strong>.</p>
+<p>Joining on CUSIP or ticker instead is the classic shortcut and it fails on exactly the cases this lab is built from.</p>
+<h3 id="5-2-the-link-table-and-its-two-filter-columns">5.2 The link table and its two filter columns</h3>
+<p>Two link tables are in circulation and your subscription may expose either or both: <code>crsp.ccmxpf_lnkhist</code> (the link <strong>history</strong> file) and <code>crsp.ccmxpf_linktable</code> (the flattened view, which is what WRDS's own current Fama-French example queries). Check Step 1.6's table list and use what you actually have; the columns used below exist in both.</p>
+<div class="codewrap"><pre class="lang-python"><code>def pull_link():
+    return conn.raw_sql(&quot;&quot;&quot;
+        SELECT gvkey, lpermno AS permno, lpermco AS permco, liid,
+               linktype, linkprim, linkdt,
+               COALESCE(linkenddt, CURRENT_DATE) AS linkenddt
+        FROM   crsp.ccmxpf_lnkhist
+        WHERE  gvkey IN %(g)s
+        ORDER  BY gvkey, linkdt
+    &quot;&quot;&quot;, params={&#x27;g&#x27;: GVKEYS}, date_cols=[&#x27;linkdt&#x27;, &#x27;linkenddt&#x27;])
+
+link_all = cached(&#x27;ccm_lnkhist&#x27;, pull_link)
+print(link_all.to_string(index=False))</code></pre></div>
+<p>Pull it <strong>unfiltered first and look at it</strong>, then filter. The rows you are about to discard are informative.</p>
+<p><code>linkenddt</code> is null for a link that is still open; <code>COALESCE(..., CURRENT_DATE)</code> closes it at today so date comparisons work without special-casing nulls.</p>
+<p><strong><code>linktype</code></strong> — how the link was established:</p>
+<div class="tablewrap"><table><thead><tr><th>Code</th><th>Meaning</th><th>Usual treatment</th></tr></thead><tbody><tr><td><code>LC</code></td><td>Researched and confirmed by CRSP</td><td>Keep</td></tr><tr><td><code>LU</code></td><td>Unresearched; assigned by identifier match</td><td>Keep — this is the standard pair with <code>LC</code></td></tr><tr><td><code>LS</code></td><td>Valid for this security only</td><td>Situational</td></tr><tr><td><code>LX</code></td><td>Security trades on a foreign exchange</td><td>Usually exclude</td></tr><tr><td><code>LD</code></td><td>Duplicate link</td><td>Exclude</td></tr><tr><td><code>LN</code></td><td>Link exists but Compustat has no price data</td><td>Situational</td></tr><tr><td><code>NR</code>, <code>NU</code></td><td>No link — researched / not researched</td><td>Exclude</td></tr></tbody></table></div>
+<p><strong><code>linkprim</code></strong> — whether this security is the company's primary one:</p>
+<div class="tablewrap"><table><thead><tr><th>Code</th><th>Meaning</th></tr></thead><tbody><tr><td><code>P</code></td><td>Primary, as identified by CRSP</td></tr><tr><td><code>C</code></td><td>Primary, as assigned by Compustat for a company with multiple securities</td></tr><tr><td><code>J</code></td><td>Joiner secondary issue</td></tr><tr><td><code>N</code></td><td>Not primary</td></tr></tbody></table></div>
+<p>The conventional research filter is <code>linktype IN ('LU','LC') AND linkprim IN ('P','C')</code>. WRDS's own Fama-French example uses a <strong>broader</strong> one — <code>substr(linktype,1,1)='L'</code>, which keeps <code>LS</code>, <code>LX</code>, <code>LD</code> and <code>LN</code> as well — with the same <code>linkprim</code> restriction. Neither is wrong; they answer different questions. Pick one, say which, and say what it removed. Then look at what it removed, because for Dell it may well remove something interesting.</p>
+<div class="codewrap"><pre class="lang-python"><code>link = link_all[link_all.linktype.isin([&#x27;LU&#x27;, &#x27;LC&#x27;])
+                &amp; link_all.linkprim.isin([&#x27;P&#x27;, &#x27;C&#x27;])].copy()
+print(&#x27;dropped rows:&#x27;)
+print(link_all.merge(link, how=&#x27;left&#x27;, indicator=True)
+              .query(&#x27;_merge == &quot;left_only&quot;&#x27;).to_string(index=False))</code></pre></div>
+<h3 id="5-3-what-dell-s-link-history-actually-says">5.3 What Dell's link history actually says</h3>
+<p><strong>Real output, unfiltered, 2026-09-03:</strong></p>
+<div class="codewrap"><pre class="lang-out"><code>gvkey   lpermno  lpermco  liid  linktype  linkprim  linkdt      linkenddt
+001690     &lt;NA&gt;     &lt;NA&gt;   00X        NU         C  1979-10-01  1980-12-11
+001690  14593.0      7.0    01        LU         P  1980-12-12  (null)
+014489     &lt;NA&gt;     &lt;NA&gt;   00X        NR         C  1987-02-01  1988-06-21
+014489  11081.0   9833.0    01        LC         P  1988-06-22  2013-10-31
+014489  18267.0  55676.0    08        LC         P  2018-12-28  (null)</code></pre></div>
+<p>Five rows, and every one of them is telling you something.</p>
+<p><strong>Two rows have no PERMNO at all.</strong> <code>linktype</code> <code>NU</code> and <code>NR</code> — not researched, and no link after research — with <code>liid</code> <code>00X</code> and a null <code>lpermno</code>. Look at their date ranges: Apple from October 1979 to 11 December 1980, Dell from February 1987 to 21 June 1988. Both end the day before the company's IPO. Compustat has company records from <strong>before there was a security to link to</strong>, and CCM records that honestly rather than leaving a hole.</p>
+<p>This is exactly why Step 5.2 says to pull the table unfiltered and look. It is also a live trap:</p>
+<div class="codewrap"><pre class="lang-python"><code>link_all[&#x27;permno&#x27;] = link_all[&#x27;permno&#x27;].astype(&#x27;int64&#x27;)
+# ValueError: cannot convert NA to integer</code></pre></div>
+<p><strong>Cast after you filter, never before.</strong> The <code>linktype</code> filter is what removes the null rows; run the cast first and it raises on data that is not wrong.</p>
+<p><strong>One GVKEY, two PERMNOs, and a five-year hole.</strong> <code>014489</code> links to old Dell through 2013-10-31, then to Class C from 2018-12-28. Between those dates the link table supplies nothing. The CCM table is independently confirming the discontinuity that <code>msenames</code> and <code>msedelist</code> already showed you — three vendors' files agreeing, none of which would have stopped a ticker-keyed join.</p>
+<p><strong><code>liid</code> changes from <code>01</code> to <code>08</code>.</strong> The Compustat issue identifier is not the same security across the gap, even though the company key is. If you ever join on <code>gvkey</code> alone, <code>liid</code> is the field that would have told you.</p>
+<p><strong>DVMT has no link at all.</strong> PERMNO 16267 does not appear. The tracking stock is in CRSP and is not linked to the Compustat company — so the <code>linkprim</code> filter is not what excludes it; nothing includes it in the first place. That answers the question of what happens to Dell Technologies' "primary security" in 2016–2018: as far as CCM is concerned, there isn't one.</p>
+<p><strong>Apple's link is <code>LU</code>, Dell's are <code>LC</code>.</strong> Unresearched versus research-complete, on the two most heavily studied companies in the file. This is why the standard filter keeps both; a <code>linktype = 'LC'</code> screen would silently drop Apple.</p>
+<p><strong><code>linkenddt</code> is null for open links</strong> — which is what <code>COALESCE(linkenddt, CURRENT_DATE)</code> handles — and <strong><code>lpermno</code> comes back as a float</strong> (<code>14593.0</code>), because a column with nulls cannot be an integer column. Cast it after filtering, or your join matches nothing and reports zero rows without erroring.</p>
+<h3 id="5-4-attach-permno-to-fundamentals-with-date-validation">5.4 Attach PERMNO to fundamentals — with date validation</h3>
+<p>The link is only valid inside its date range. Merging on <code>gvkey</code> alone and forgetting the range is the single most common CCM error.</p>
+<div class="codewrap"><pre class="lang-python"><code>fl = f.merge(link, on=&#x27;gvkey&#x27;, how=&#x27;inner&#x27;)
+
+# Keep only rows where the fiscal period end falls inside the link&#x27;s validity window.
+fl = fl[(fl[&#x27;datadate&#x27;] &gt;= fl[&#x27;linkdt&#x27;]) &amp; (fl[&#x27;datadate&#x27;] &lt;= fl[&#x27;linkenddt&#x27;])].copy()
+
+# A gvkey-datadate should now map to exactly one permno.
+print(&#x27;unlinked fiscal years dropped:&#x27;, len(f) - len(fl))
+print(&#x27;duplicate gvkey-datadate after link:&#x27;,
+      fl.duplicated(subset=[&#x27;gvkey&#x27;, &#x27;datadate&#x27;]).sum())      # must be 0</code></pre></div>
+<p><strong>Expect <code>unlinked fiscal years dropped</code> to be greater than zero, and expect the dropped rows to be Dell's fiscal years ending January 2014 through January 2018</strong> — five rows, of which three are the all-null private years and <strong>two (2017-01-31 and 2018-01-31) carry complete financial data</strong>. That is not a bug: there was no linked security to attach them to. Print the dropped rows and keep them; they are the evidence for the Step 4.4 finding, and they are what an <code>inner</code> join without diagnostics discards in silence.</p>
+<div class="codewrap"><pre class="lang-python"><code>dropped = f.merge(fl[[&#x27;gvkey&#x27;, &#x27;datadate&#x27;]], on=[&#x27;gvkey&#x27;, &#x27;datadate&#x27;],
+                  how=&#x27;left&#x27;, indicator=True).query(&#x27;_merge == &quot;left_only&quot;&#x27;)
+print(dropped[[&#x27;conm&#x27;, &#x27;datadate&#x27;, &#x27;fyear&#x27;, &#x27;sale&#x27;, &#x27;at&#x27;]].to_string(index=False))</code></pre></div>
+<h3 id="5-5-the-monthly-analytical-panel">5.5 The monthly analytical panel</h3>
+<p>Now merge fundamentals onto the monthly price panel, applying your lag policy. Two rules govern the merge:</p>
+<ul><li>Use the <strong>most recent</strong> fundamental that was knowable as of that month — never the one whose <code>datadate</code> is nearest, which can be in the future.</li><li>Impose a <strong>tolerance</strong>, so a stale fundamental is not carried forward indefinitely when a company stops filing.</li></ul>
+<p>Before you merge, <strong>normalise the identifier dtype on both sides.</strong> <code>wrds</code> returns columns using pandas' nullable extension types, so <code>permno</code> arrives as <code>Int64</code> (capital I) from CRSP, while the link table's <code>permno</code> is a plain <code>int64</code> after your cast. They look identical when printed and <code>merge_asof</code> refuses them:</p>
+<div class="codewrap"><pre class="lang-out"><code>pandas.errors.MergeError: incompatible merge keys [0] Int64Dtype() and dtype(&#x27;int64&#x27;),
+must be the same type</code></pre></div>
+<p>This one at least fails loudly. Fix it once, for every frame:</p>
+<div class="codewrap"><pre class="lang-python"><code>for df in (m, fl):
+    df[&#x27;permno&#x27;] = df[&#x27;permno&#x27;].astype(&#x27;int64&#x27;)</code></pre></div>
+<div class="codewrap"><pre class="lang-python"><code>LAG_MONTHS = 6      # your Lab 2 Step 5 policy. State it. Defend it. Apply it mechanically.
+
+fl[&#x27;avail_date&#x27;] = fl[&#x27;datadate&#x27;] + pd.DateOffset(months=LAG_MONTHS)
+
+left  = m.sort_values(&#x27;date&#x27;)
+right = (fl[[&#x27;permno&#x27;, &#x27;avail_date&#x27;, &#x27;datadate&#x27;, &#x27;fyear&#x27;, &#x27;at&#x27;, &#x27;be&#x27;,
+             &#x27;sale&#x27;, &#x27;ib&#x27;, &#x27;leverage&#x27;, &#x27;roa&#x27;]]
+         .sort_values(&#x27;avail_date&#x27;))
+
+panel = pd.merge_asof(
+    left, right,
+    left_on=&#x27;date&#x27;, right_on=&#x27;avail_date&#x27;,
+    by=&#x27;permno&#x27;,
+    direction=&#x27;backward&#x27;,
+    tolerance=pd.Timedelta(days=550),      # measured from avail_date - see note below
+)
+
+panel[&#x27;bm&#x27;] = panel[&#x27;be&#x27;] / panel[&#x27;mktcap_musd&#x27;]
+panel.loc[panel[&#x27;be&#x27;] &lt;= 0, &#x27;bm&#x27;] = np.nan          # negative book equity -&gt; undefined</code></pre></div>
+<p>Both frames must be sorted by the merge key <strong>globally</strong>, not within groups — <code>merge_asof</code> requires it and the error message when they are not is unhelpful.</p>
+<p>Why the tolerance matters: without it, the last fundamental before a company stops filing is carried forward to every subsequent month. Over a five-year gap that produces a B/M ratio in 2018 built from a 2013 balance sheet, and it looks like a number.</p>
+<p><strong>Read the tolerance carefully.</strong> 550 days is measured from <code>avail_date</code>, which is already <code>datadate</code> + 6 months — so a fundamental can stay attached for roughly <em>two years</em> after the fiscal period it describes, not eighteen months. That is deliberate for annual data, where the next observation is a year away. Know which date your window is anchored to before you quote it.</p>
+<p>Two further conventions you are adopting by running this cell, both worth one line in your notebook. The link is validated at <code>datadate</code> — "was there a linked security at fiscal period end" — which is a defensible period-end rule, not the only one; validating at <code>avail_date</code> answers a slightly different question. And <code>bm</code> divides an annual book equity by <em>that month's</em> market capitalisation, which is not the Fama-French construction (that fixes market equity at a formation date). Both are fine for this lab. Neither is fine unstated.</p>
+<h3 id="5-6-validate-the-panel-before-you-use-it">5.6 Validate the panel before you use it</h3>
+<p>Run all of these. Each one has caught a real error in a student notebook.</p>
+<div class="codewrap"><pre class="lang-python"><code># 1. One row per security-month, no duplicates
+assert not panel.duplicated(subset=[&#x27;permno&#x27;, &#x27;date&#x27;]).any()
+
+# 2. Row count is unchanged by the merge — merge_asof must not add rows
+assert len(panel) == len(m)
+
+# 3. No fundamental is used before it was knowable
+bad = panel.dropna(subset=[&#x27;datadate&#x27;])
+assert (bad[&#x27;date&#x27;] &gt;= bad[&#x27;datadate&#x27;] + pd.DateOffset(months=LAG_MONTHS)).all()
+
+# 4. Coverage of the merge, by security
+print(panel.groupby(&#x27;permno&#x27;)[&#x27;at&#x27;].apply(lambda s: f&#x27;{s.notna().mean():.1%} of months matched&#x27;))
+
+# 5. Ratio sanity
+print(panel[[&#x27;bm&#x27;, &#x27;leverage&#x27;, &#x27;roa&#x27;]].describe())</code></pre></div>
+<p>Then do the check no assertion can do: <strong>take one number out of the panel and find it in a filing.</strong> Pick one company, one fiscal year, and one field — total assets, say. Open that year's 10-K on EDGAR (you have the <code>cik</code>), find the balance sheet, and confirm the number matches to the stated units. If it does not, you have either a units problem, a consolidation-format problem, or a link problem, and all three are worth more to you now than after you have built a model on top of it.</p>
+<p>Record the check in <code>source_log.md</code>: company, fiscal year, field, Compustat value, filing value, and whether they agreed.</p>
+<hr>
+<h2 id="section-6-visualise-it">Section 6 — Visualise it</h2>
+<p>Five rules for every chart in this course. They are not stylistic.</p>
+<ol><li><strong>Log scale for any multi-decade price or index series.</strong> On a linear axis, thirty years of compounding renders the first twenty as a flat line against the axis. A doubling in 1998 and a doubling in 2024 are the same event and must occupy the same vertical distance.</li><li><strong>Never a dual y-axis.</strong> Two measures on two scales in one frame lets you manufacture any apparent relationship by choosing the scales. Use two stacked panels sharing the x-axis.</li><li><strong>Leave the gap open.</strong> Do not interpolate across Dell's private years, and do not let matplotlib connect the last 2013 point to the first 2018 point. Plot the segments separately or insert <code>NaN</code>; a connecting line is a claim you did not make.</li><li><strong>Label the discontinuity on the chart.</strong> A reader who has to be told in the caption that the shaded band is a take-private will not be told.</li><li><strong>Colour carries identity, not rank.</strong> One colour per company, fixed, everywhere, including the fundamentals charts. If a filter changes which series are shown, the survivors keep their colours.</li></ol>
+<p>The two-colour palette below is checked for colour-vision deficiency separation; use it rather than matplotlib's default cycle, and pair it with direct labels so identity never rests on colour alone.</p>
+<div class="codewrap"><pre class="lang-python"><code>import matplotlib.pyplot as plt
+import matplotlib.dates as mdates
+
+C_AAPL, C_DELL = &#x27;#2a78d6&#x27;, &#x27;#eb6834&#x27;      # blue / orange, CVD-separable
+GAP = (&#x27;2013-10-31&#x27;, &#x27;2018-12-27&#x27;)   # after the Oct-2013 cash-out, before Class C lists
+# NB: one row falls inside this band - the empty 2018-11-30 placeholder. No price, no trade.
+
+def style(ax):
+    ax.grid(True, which=&#x27;major&#x27;, axis=&#x27;y&#x27;, lw=.6, alpha=.35)
+    ax.set_axisbelow(True)
+    for s in (&#x27;top&#x27;, &#x27;right&#x27;):
+        ax.spines[s].set_visible(False)
+    ax.xaxis.set_major_locator(mdates.YearLocator(5))
+    ax.xaxis.set_major_formatter(mdates.DateFormatter(&#x27;%Y&#x27;))
+
+def endlabel(ax, x, y, text, color):
+    ax.annotate(text, xy=(x, y), xytext=(6, 0), textcoords=&#x27;offset points&#x27;,
+                color=color, fontsize=9, fontweight=&#x27;600&#x27;, va=&#x27;center&#x27;)</code></pre></div>
+<h3 id="6-1-split-adjusted-price-thirty-years">6.1 Split-adjusted price, thirty years</h3>
+<div class="codewrap"><pre class="lang-python"><code>a  = panel[panel.permno == PERMNO_AAPL].sort_values(&#x27;date&#x27;)
+do = panel[panel.permno == PERMNO_DELL_OLD].sort_values(&#x27;date&#x27;)
+dn = panel[panel.permno == PERMNO_DELL_NEW].sort_values(&#x27;date&#x27;)
+
+fig, ax = plt.subplots(figsize=(11, 5.2))
+ax.axvspan(pd.Timestamp(GAP[0]), pd.Timestamp(GAP[1]), color=&#x27;#000000&#x27;, alpha=.055, lw=0)
+
+ax.plot(a[&#x27;date&#x27;],  a[&#x27;prc_adj&#x27;],  color=C_AAPL, lw=1.8, label=&#x27;Apple (AAPL)&#x27;)
+ax.plot(do[&#x27;date&#x27;], do[&#x27;prc_adj&#x27;], color=C_DELL, lw=1.8, label=&#x27;Dell Inc. (NASDAQ, to 2013)&#x27;)
+ax.plot(dn[&#x27;date&#x27;], dn[&#x27;prc_adj&#x27;], color=C_DELL, lw=1.8, ls=(0, (5, 2)),
+        label=&#x27;Dell Technologies Class C (NYSE, from 2018)&#x27;)
+
+ax.set_yscale(&#x27;log&#x27;)
+ax.set_ylabel(&#x27;Split-adjusted price (USD, log scale)&#x27;)
+ax.set_title(&#x27;Thirty years of monthly prices — and five years in which one of them did not exist&#x27;,
+             loc=&#x27;left&#x27;, fontsize=12, fontweight=&#x27;600&#x27;)
+ax.annotate(&#x27;Dell common stock not listed\nOct 2013 – Dec 2018\n(take-private LBO, then Class C listing)&#x27;,
+            xy=(pd.Timestamp(&#x27;2016-03-01&#x27;), ax.get_ylim()[0] * 1.6),
+            ha=&#x27;center&#x27;, fontsize=8.5, color=&#x27;#5a6572&#x27;)
+endlabel(ax, a[&#x27;date&#x27;].iloc[-1],  a[&#x27;prc_adj&#x27;].iloc[-1],  &#x27;Apple&#x27;, C_AAPL)
+endlabel(ax, dn[&#x27;date&#x27;].iloc[-1], dn[&#x27;prc_adj&#x27;].iloc[-1], &#x27;Dell Tech&#x27;, C_DELL)
+style(ax); ax.legend(frameon=False, fontsize=9, loc=&#x27;upper left&#x27;)
+fig.tight_layout(); fig.savefig(PROJ / &#x27;out&#x27; / &#x27;fig1_price.png&#x27;, dpi=160)</code></pre></div>
+<p>Two deliberate choices to notice. The two Dell securities share a colour because they share a trade name, and they are distinguished by <strong>line style</strong> because they are not the same security — the chart encodes both facts at once. And the gap is drawn as a shaded band with its cause written inside it, so the discontinuity is the most visible thing on the chart rather than something a reader has to infer from absence.</p>
+<p>Now do the comparison that proves the point: plot raw <code>prc</code> instead of <code>prc_adj</code> on the same axes and look at Apple in 2014 and 2020. Keep that chart. It belongs in your notebook next to the corrected one, because "here is the version that was wrong and here is how I could tell" is worth more than a single clean figure.</p>
+<h3 id="6-2-market-capitalisation-a-second-panel-not-a-second-axis">6.2 Market capitalisation — a second panel, not a second axis</h3>
+<div class="codewrap"><pre class="lang-python"><code>fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(11, 7), sharex=True,
+                               gridspec_kw={&#x27;height_ratios&#x27;: [1, 1]})
+for ax in (ax1, ax2):
+    ax.axvspan(pd.Timestamp(GAP[0]), pd.Timestamp(GAP[1]), color=&#x27;#000000&#x27;, alpha=.055, lw=0)
+
+ax1.plot(a[&#x27;date&#x27;], a[&#x27;prc_adj&#x27;], color=C_AAPL, lw=1.8)
+ax1.plot(do[&#x27;date&#x27;], do[&#x27;prc_adj&#x27;], color=C_DELL, lw=1.8)
+ax1.plot(dn[&#x27;date&#x27;], dn[&#x27;prc_adj&#x27;], color=C_DELL, lw=1.8, ls=(0, (5, 2)))
+ax1.set_yscale(&#x27;log&#x27;); ax1.set_ylabel(&#x27;Adj. price (USD, log)&#x27;)
+
+ax2.plot(a[&#x27;date&#x27;], a[&#x27;mktcap_musd&#x27;] / 1e6, color=C_AAPL, lw=1.8, label=&#x27;Apple&#x27;)
+ax2.plot(do[&#x27;date&#x27;], do[&#x27;mktcap_musd&#x27;] / 1e6, color=C_DELL, lw=1.8, label=&#x27;Dell Inc.&#x27;)
+ax2.plot(dn[&#x27;date&#x27;], dn[&#x27;mktcap_musd&#x27;] / 1e6, color=C_DELL, lw=1.8, ls=(0, (5, 2)),
+         label=&#x27;Dell Technologies&#x27;)
+ax2.set_yscale(&#x27;log&#x27;); ax2.set_ylabel(&#x27;Market cap ($ trillions, log)&#x27;)
+ax2.legend(frameon=False, fontsize=9, loc=&#x27;upper left&#x27;)
+
+for ax in (ax1, ax2): style(ax)
+ax1.set_title(&#x27;Price and size, same x-axis, separate scales&#x27;, loc=&#x27;left&#x27;,
+              fontsize=12, fontweight=&#x27;600&#x27;)
+fig.tight_layout(); fig.savefig(PROJ / &#x27;out&#x27; / &#x27;fig2_price_mktcap.png&#x27;, dpi=160)</code></pre></div>
+<p>Note that Dell Technologies' market capitalisation at relisting is not comparable to Dell Inc.'s at delisting, and not only because of the five-year gap: the 2018 company owns EMC and a controlling interest in VMware, which the 2013 company did not. A chart that puts the two levels in one frame invites a comparison the data cannot support, so say so in the caption.</p>
+<h3 id="6-3-total-return-with-the-gap-left-open">6.3 Total return, with the gap left open</h3>
+<div class="codewrap"><pre class="lang-python"><code>fig, ax = plt.subplots(figsize=(11, 5.2))
+ax.axvspan(pd.Timestamp(GAP[0]), pd.Timestamp(GAP[1]), color=&#x27;#000000&#x27;, alpha=.055, lw=0)
+
+for df, ls, lab in [(aapl_tri, &#x27;-&#x27;, &#x27;Apple — $1 held throughout&#x27;),
+                    (dell_old_tri, &#x27;-&#x27;, &#x27;Dell Inc. — $1 held to cash-out, Oct 2013&#x27;),
+                    (dell_new_tri, (0, (5, 2)), &#x27;Dell Technologies — $1 from Dec 2018&#x27;)]:
+    col = C_AAPL if &#x27;Apple&#x27; in lab else C_DELL
+    ax.plot(df[&#x27;date&#x27;], df[&#x27;tri&#x27;], color=col, lw=1.8, ls=ls, label=lab)
+
+ax.set_yscale(&#x27;log&#x27;)
+ax.set_ylabel(&#x27;Growth of $1 (log scale)&#x27;)
+ax.set_title(&#x27;Three separate holding periods — deliberately not chained&#x27;,
+             loc=&#x27;left&#x27;, fontsize=12, fontweight=&#x27;600&#x27;)
+ax.legend(frameon=False, fontsize=9, loc=&#x27;upper left&#x27;)
+style(ax)
+fig.tight_layout(); fig.savefig(PROJ / &#x27;out&#x27; / &#x27;fig3_total_return.png&#x27;, dpi=160)</code></pre></div>
+<p>Each Dell series starts at $1 at its own beginning. They are three separate investments, and the chart says so. If you chose one of the reinvestment treatments from Step 3.9 instead, plot that as a <strong>fourth, explicitly labelled</strong> series — "Dell proceeds reinvested in 3-month T-bills, 2013–2018" — never as a continuation of the third.</p>
+<h3 id="6-4-fundamentals-including-the-years-crsp-cannot-see">6.4 Fundamentals, including the years CRSP cannot see</h3>
+<div class="codewrap"><pre class="lang-python"><code>fig, ax = plt.subplots(figsize=(11, 4.6))
+ax.axvspan(pd.Timestamp(GAP[0]), pd.Timestamp(GAP[1]), color=&#x27;#000000&#x27;, alpha=.055, lw=0)
+
+for gv, col, lab in [(GVKEY_AAPL, C_AAPL, &#x27;Apple&#x27;),
+                     (GVKEY_DELL, C_DELL, &#x27;Dell (one GVKEY, both eras)&#x27;)]:
+    d = f[f.gvkey == gv].sort_values(&#x27;datadate&#x27;)
+    ax.plot(d[&#x27;datadate&#x27;], d[&#x27;sale&#x27;] / 1_000, color=col, lw=1.8, marker=&#x27;o&#x27;, ms=3.5, label=lab)
+
+ax.set_ylabel(&#x27;Revenue ($ billions)&#x27;)
+ax.set_xlabel(&#x27;Fiscal period end (datadate) — not fyear&#x27;)
+ax.set_title(&#x27;Compustat sees the private years. CRSP does not.&#x27;,
+             loc=&#x27;left&#x27;, fontsize=12, fontweight=&#x27;600&#x27;)
+ax.annotate(&#x27;No listed Dell common stock —\nyet fundamentals continue&#x27;,
+            xy=(pd.Timestamp(&#x27;2016-03-01&#x27;), ax.get_ylim()[1] * .55),
+            ha=&#x27;center&#x27;, fontsize=8.5, color=&#x27;#5a6572&#x27;)
+ax.legend(frameon=False, fontsize=9, loc=&#x27;upper left&#x27;)
+style(ax)
+fig.tight_layout(); fig.savefig(PROJ / &#x27;out&#x27; / &#x27;fig4_revenue.png&#x27;, dpi=160)</code></pre></div>
+<p>Dell is <strong>one</strong> line here, not two — there is one GVKEY. You do not have to draw the gap: the three null fiscal years break the line by themselves, because matplotlib does not join across <code>NaN</code>. The hole in the revenue series is the private period, drawn for free.</p>
+<p>Plot against <code>datadate</code>, not <code>fyear</code>. Do it once against <code>fyear</code> as well and watch Dell's entire series shift a year relative to Apple's. That shift is Step 4.3's trap, made visible.</p>
+<p>This chart is the one to put in front of someone who asks why the university pays for WRDS. The shaded band contains data on one axis and nothing on the other, from the same company, in the same years, and both are correct.</p>
+<hr>
+<h2 id="section-7-export-and-how-this-maps-onto-lab-2">Section 7 — Export, and how this maps onto Lab 2</h2>
+<h3 id="7-1-write-the-outputs">7.1 Write the outputs</h3>
+<div class="codewrap"><pre class="lang-python"><code>panel.to_parquet(PROJ / &#x27;out&#x27; / &#x27;panel_monthly.parquet&#x27;, index=False)
+panel.to_csv(PROJ / &#x27;out&#x27; / &#x27;panel_monthly.csv&#x27;, index=False)
+f.to_parquet(PROJ / &#x27;out&#x27; / &#x27;fundamentals_annual.parquet&#x27;, index=False)
+link_all.to_csv(PROJ / &#x27;out&#x27; / &#x27;ccm_links.csv&#x27;, index=False)
+cov.to_csv(PROJ / &#x27;out&#x27; / &#x27;coverage_table.csv&#x27;, index=False)
+conn.close()</code></pre></div>
+<p>Every row of <code>panel_monthly</code> carries <code>permno</code>. That is the Lab 2 submission requirement — "the panel, with the permanent identifier on every row" — and it is why you never dropped the column even when it was inconvenient.</p>
+<p><strong>Before you submit:</strong> confirm that nothing you are uploading to a public location contains raw CRSP or Compustat rows. Brightspace is fine. A public GitHub repository is not.</p>
+<h3 id="7-2-where-each-step-of-this-walkthrough-lands-in-lab-2">7.2 Where each step of this walkthrough lands in Lab 2</h3>
+<div class="tablewrap"><table><thead><tr><th>Lab 2 step</th><th>What this walkthrough produced</th></tr></thead><tbody><tr><td>Step 1 — universe and how you built the list</td><td>Your 8–15 PERMNOs, and the written answer to "start or end of sample?" — for a name like Dell the answer is decisive</td></tr><tr><td>Step 2 — find what is missing</td><td>Step 3.7 coverage table; Step 5.4 dropped-fiscal-years table</td></tr><tr><td>Step 3 — how each problem stayed invisible</td><td>Step 3.8's ticker trap: it returned a number, not an error</td></tr><tr><td>Step 4 — size the survivorship question</td><td>The naive chained Dell return vs. the two honest ones</td></tr><tr><td>Step 5 — knowability date</td><td>Step 4.6: the <code>cik</code> route to EDGAR, and the <code>LAG_MONTHS</code> policy you applied in 5.5</td></tr><tr><td>Step 6 — the catalog</td><td>Section 7.3 below</td></tr><tr><td>Step 7 — defend your panel</td><td>Step 3.9's four treatments — you chose one, now defend it</td></tr><tr><td>Step 8 — what did you notice</td><td><strong>Section 9</strong> shows the kinds of thing that turn up. Yours will be different — that is the point</td></tr></tbody></table></div>
+<h3 id="7-3-catalog-entries-this-walkthrough-should-generate">7.3 Catalog entries this walkthrough should generate</h3>
+<p>Three worked examples in the six-field format from <code>handout.md</code>. <strong>The shape, not your answer</strong> — your evidence will be your own counts.</p>
+<blockquote class="catalog"><strong>Issue:</strong> Ticker <code>DELL</code> resolves to two distinct securities with a five-year gap.<br><strong>Severity:</strong> Blocker for any time-series claim about "Dell"; Low for a 2019+ cross-section.<br><strong>Evidence:</strong> <code>crsp.msenames</code> returns 2 PERMNOs for <code>ticker='DELL'</code>. PERMNO 11081: NASDAQ (<code>exchcd</code> 3), 1996-01 to 2013-10, 214 monthly rows. PERMNO 18267: NYSE (<code>exchcd</code> 1), from 2018-11, 74 rows. <code>msedelist.nwperm</code> = 0 for 11081 — CRSP records no successor security. Counting month-ends 1996-01 to 2024-12 (348 months): 288 carry a Dell common-stock row (214 + 74), so <strong>60 months have no row at all (17.2%)</strong> and <strong>62 have no row carrying a price (17.8%)</strong>. The two extra are old Dell's October 2013 delisting month, where <code>prc</code> is null and the return comes from <code>dlret</code>, and Dell Technologies' empty November 2018 placeholder. State which rule you counted under; the rule matters more than the number.<br><strong>Code reference:</strong> the <code>pull_by_ticker</code> cell.<br><strong>Current state:</strong> The panel is keyed on PERMNO, so the securities are separate. A ticker-keyed join would have chained them.<br><strong>Proposed handling:</strong> PERMNO is the key everywhere. The two Dell securities are reported as two, never chained. Cost: no single 30-year Dell return exists, which is correct.</blockquote>
+<blockquote class="catalog"><strong>Issue:</strong> Compustat covers Dell fiscal years in which CRSP has no price rows.<br><strong>Severity:</strong> Medium — a fundamentals-only screen would surface an uninvestable company.<br><strong>Evidence:</strong> 5 annual <code>funda</code> rows for GVKEY 014489 with <code>datadate</code> from 2014-01-31 to 2018-01-31. Three (2014/2015/2016-01-31) have <code>sale</code>, <code>at</code> and <code>seq</code> all null. Two (2017-01-31, 2018-01-31) carry complete financials. <code>crsp.ccmxpf_lnkhist</code> supplies no PERMNO for 014489 between 2013-10-31 and 2018-12-28, so all five are dropped by the link merge.<br><strong>Code reference:</strong> the <code>win</code> cell in Step 4.4; the <code>dropped</code> cell in Step 5.4.<br><strong>Current state:</strong> Those fiscal years survive the fundamentals pull and are dropped by the CCM date-range filter, correctly and silently.<br><strong>Proposed handling:</strong> The dropped rows are retained in a separate table as evidence. Any screen built on <code>funda</code> requires a listed-security check via CCM before a name is called investable.</blockquote>
+<blockquote class="catalog"><strong>Issue:</strong> Compustat <code>fyear</code> is offset by one from Dell's own fiscal-year labels.<br><strong>Severity:</strong> High — it silently misaligns every merge on a year key.<br><strong>Evidence:</strong> <code>datadate_year - fyear = 1</code> on 39 of 39 Dell rows (100%) and 0 of 46 Apple rows (0%). Dell's <code>fyr</code> is 1; Apple's is 9.<br><strong>Code reference:</strong> the <code>label_offset</code> cell in Step 4.3.<br><strong>Current state:</strong> All merges use <code>datadate</code>. No merge in this notebook uses <code>fyear</code>.<br><strong>Proposed handling:</strong> <code>fyear</code> is used for axis labels only, and every Dell figure quoted in prose states which convention it follows.</blockquote>
+<h3 id="7-4-from-two-companies-to-your-panel-of-8-15">7.4 From two companies to your panel of 8–15</h3>
+<p>Apple and Dell were the worked example. Lab 2 wants <strong>8 to 15 securities</strong>, and the number is deliberately small — this is not a data engineering exercise.</p>
+<p><strong>What does not change: the queries.</strong> <code>PERMNOS</code> is a tuple; make it longer. Every SQL statement takes <code>IN %(p)s</code> unchanged, the CCM link and its date-range validation work the same, and every assertion in Step 5.6 holds at any panel size. You do not need a new pipeline.</p>
+<p>What does change is the judgement, and in two places a little code: resolving identifiers for names you cannot inspect by eye, and deciding what to do if one of your companies has two share classes trading at once.</p>
+<p><strong>What does change is what you can no longer do by eye.</strong></p>
+<p><em>Resolving identifiers.</em> You cannot read fifteen name histories the way you read Dell's. Do it programmatically, then verify: one row per <strong>requested</strong> name, showing how many PERMNOs it resolved to, the coverage window, and the exchange. The names that resolve to more than one PERMNO, or to none, are the interesting ones — and a name that returns nothing will not appear in any null count.</p>
+<p><em>The coverage table becomes the deliverable.</em> At two companies it was a sanity check. At fifteen it is the Lab 2 Step 2 artefact, and the thing you will actually be defending.</p>
+<p><em>PERMCO versus PERMNO.</em> Two companies got you one clean case (DVMT and Class C sharing PERMCO 55676, though never on the same day). In a panel of fifteen you may have a company with two share classes trading <em>simultaneously</em>. Decide explicitly: keep only the primary security, or aggregate market capitalisation across the PERMNOs of that PERMCO — which is what WRDS's own Fama-French code does, and note that it aggregates <strong>per date, across eligible common-stock securities only</strong>, not across every PERMNO ever attached to the PERMCO. Either choice is defensible. Not noticing is not.</p>
+<p><em>Delistings become plural.</em> With fifteen names over thirty years you will likely have several, and some may have a null <code>dlret</code>. <strong>The default for this course: leave it missing and report the rate</strong> — "2 of 3 delistings have no delisting return" is the deliverable. Substituting a value (Step 3.5 names the standard ones) is optional, and if you do it, say so. You are not expected to adjudicate the literature on this.</p>
+<p><em>Caching earns its keep.</em> Fifteen names is still a small pull, but you will re-run the notebook many times. Step 1.5 exists for this.</p>
+<p><em>Charts stop being one chart.</em> Do not plot fifteen lines in one frame — beyond about six series, colours stop being distinguishable and the legend does the work the chart should be doing. Use small multiples, or plot a panel statistic and overlay only the two or three securities you are making a point about. The Section 6 rules are unchanged; the form is not.</p>
+<p><strong>A word on what you will find.</strong> Some of your names will be entirely well-behaved. It is perfectly possible to draw eight companies that all listed once, never renamed, never split off a subsidiary, and still trade. If that is your panel, say so — "I checked for X, Y and Z and found none" is a real result and reads as competence. What does not read as competence is a panel where nobody looked.</p>
+<hr>
+<h2 id="section-8-troubleshooting">Section 8 — Troubleshooting</h2>
+<div class="tablewrap"><table><thead><tr><th>Symptom</th><th>Cause</th><th>Fix</th></tr></thead><tbody><tr><td><code>ProgrammingError: relation "crsp.msf" does not exist</code></td><td>Your subscription exposes the CIZ layout, or a different library name</td><td>Re-run Step 1.6. Map the names from <code>list_tables</code> / <code>describe_table</code> output</td></tr><tr><td><code>SyntaxError</code> or <code>IndexError</code> on a <code>LIKE</code> clause</td><td>A single <code>%</code> inside <code>raw_sql</code> is read as a parameter placeholder</td><td>Double it (<code>'DELL%%'</code>), or pass the pattern as a parameter: <code>LIKE %(pat)s</code> with <code>params={'pat': 'DELL%'}</code></td></tr><tr><td><code>operator does not exist: integer = integer[]</code></td><td>You passed a <strong>list</strong> to an <code>IN</code> clause</td><td>Pass a <strong>tuple</strong>. One element needs the trailing comma</td></tr><tr><td>Query hangs or times out</td><td>Unbounded date range, or no <code>permno</code> filter</td><td>Always filter on both <code>permno</code> and <code>date</code>. Never <code>SELECT *</code> from <code>crsp.msf</code></td></tr><tr><td><code>SQLAlchemy</code> / <code>psycopg2</code> import error after install</td><td>A pandas outside <code>wrds</code>' <code>&gt;=2.2,&lt;2.3</code> pin, or a stale interpreter</td><td>Recreate the venv from the pinned <code>requirements.txt</code> in Step 1.2; restart the kernel</td></tr><tr><td><code>FATAL: PAM authentication failed for user "..."</code></td><td>No WRDS-native password (institutional SSO does not work here), or a typo</td><td>Set a password under Account → Profile on the WRDS site; wait a few minutes; retry</td></tr><tr><td>Auth fails with a password you know is right</td><td>Unescaped <code>:</code> or <code>\</code> in the <code>.pgpass</code> line, so the fields parse wrong</td><td>Escape them with a backslash, or change the password to avoid both</td></tr><tr><td><code>.pgpass</code> appears ignored</td><td>File permissions too open</td><td><code>chmod 600 ~/.pgpass</code></td></tr><tr><td>Python exits 139, or "Segmentation fault"</td><td>Python 3.13+ with the pinned pandas 2.2.x — see Step 1.2</td><td>Use Python 3.11/3.12, or the <code>psycopg2</code> <code>raw_sql</code> substitute in Step 1.2</td></tr><tr><td>A crashing script reports success</td><td>The exit code came from a pipe (`python x.py \</td><td>tail`)</td><td>Redirect instead (<code>python x.py &gt; log 2&gt;&amp;1</code>) and check <code>$?</code></td></tr><tr><td>Connection drops mid-pull</td><td>Network drop, VPN timeout, or a long-running query</td><td>Cache each pull separately (Step 1.5) so a failure costs one query, not all of them</td></tr><tr><td><code>merge_asof</code> raises "left keys must be sorted"</td><td>Frames sorted within groups but not globally</td><td><code>.sort_values('date')</code> on the whole frame before merging</td></tr><tr><td>Row count grows after a merge</td><td>Missing <code>funda</code> filters, or an unvalidated CCM link</td><td>Re-check the four filters in 4.1 and the date range in 5.4</td></tr><tr><td><code>ValueError: cannot convert NA to integer</code></td><td>Casting <code>lpermno</code> before filtering out <code>NR</code>/<code>NU</code> link rows</td><td>Filter <code>linktype</code> first, then cast — Step 5.3</td></tr><tr><td><code>MergeError: incompatible merge keys ... Int64Dtype() and dtype('int64')</code></td><td><code>wrds</code> returns nullable <code>Int64</code>; your other frame is plain <code>int64</code></td><td>Cast <code>permno</code> to <code>int64</code> on <strong>both</strong> frames before <code>merge_asof</code> — Step 5.5</td></tr><tr><td>PERMNO comes back as <code>14593.0</code></td><td>Round-tripped through CSV</td><td>Use Parquet, or cast on read</td></tr></tbody></table></div>
+<hr>
+<h2 id="section-9-irregularities-a-gallery-not-a-to-do-list">Section 9 — Irregularities: a gallery, not a to-do list</h2>
+<p>Everything below turned up while running the queries for this document. Almost none of it is resolved, <strong>and you are not expected to resolve it.</strong> This section is not an assignment bank. It is here so that when something like it happens to your company, you recognise the shape of it instead of assuming you broke something.</p>
+<p>Two points, and they are the whole reason the section exists.</p>
+<p><strong>The data carries the company's history.</strong> Every oddity below is a corporate event, a vendor decision, or a file convention that left a mark. The five-year hole is a leveraged buyout. The CUSIP that changes mid-series is a rename. The adjustment factor that steps while the share factor does not is a spin-off. You are not looking at defects; you are looking at history, written in fields that were never designed to narrate it. Learning to read that is most of what separates someone who can use CRSP from someone who can query it.</p>
+<p><strong>The data is hard to handle, and it is hard case by case.</strong> There is almost no universal rule. Nearly every item below needs a judgement about <em>this</em> security, in <em>this</em> period, for <em>this</em> question — and the same field can be a nuisance in one analysis and disqualifying in another. That is precisely why <code>data_quality_issues.md</code> asks you to rate severity yourself rather than looking it up.</p>
+<p><strong>Your company may have none of these.</strong> It may have three that are not here. Two companies over a few hours produced this list; a different pair would produce a different one. Do not go looking for these specific items in your own data and conclude all is well when you do not find them.</p>
+<p><strong>What is actually expected of you:</strong> notice, write it down, decide whether it matters for what you are doing, and move on. If it blocks you, deal with it then — and "I noticed this, could not resolve it, and here is what it would change if it mattered" is a complete and professional answer.</p>
+<blockquote class="note"><strong>Calibration.</strong> This course is seven weeks and it is exploratory by design. Nobody masters this material in a term. Practitioners work with CRSP and Compustat for years and still meet cases they have not seen before; the honest figure is closer to seven years than seven weeks. The goal here is recognition, not mastery — you should leave able to tell that something is odd, and to say so in writing. That is a genuinely useful professional skill and it is enough.</blockquote>
+<h3 id="a-irregularities-that-are-history">A. Irregularities that are history</h3>
+<p>Each of these is the data recording something that happened to the company.</p>
+<div class="tablewrap"><table><thead><tr><th>What you see</th><th>What it is</th></tr></thead><tbody><tr><td>Dell's <code>ncusip</code> changes <code>24702510</code> → <code>24702R10</code> in July 2003, while the header <code>cusip</code> reads <code>24702R10</code> on rows from 1988</td><td>The rename to Dell Inc. A single identifier field carrying two different eras</td></tr><tr><td>No CRSP rows for any Dell security, Nov 2013 → Aug 2016</td><td>The company was private. Nothing traded, so nothing was recorded</td></tr><tr><td><code>msedelist.nwperm</code> = 0 for old Dell, 18267 for DVMT</td><td>Old Dell's holders were cashed out; DVMT's holders became Class C holders. Two different endings, in one integer field</td></tr><tr><td>Dell Technologies' <code>cfacpr</code> steps 2.088212 → 1.0 in Nov 2021 while <code>cfacshr</code> stays 1.0</td><td>The VMware spin-off. Price falls by half, the return is +7.2%, and the two factors disagreeing is the only signal that it was a distribution rather than a split</td></tr><tr><td>Shares outstanding jump 22,484 → 171,909 thousand, Dec 2018 → Jan 2019</td><td>The Class V exchange completing. Worth a glance at the filings if December 2018 market cap matters to you</td></tr><tr><td>Three Dell fiscal years with rows and no values (<code>datadate</code> 2014/2015/2016-01-31)</td><td>The wholly-private years. Compustat kept the company and had nothing to report</td></tr><tr><td>Values resume at <code>datadate</code> 2017-01-31</td><td>Dell became an SEC filer with public securities again</td></tr><tr><td><code>comp.company.ipodate</code> = 1988-06-22 on the modern Dell Technologies record</td><td>Compustat treats it as one continuous company. The 1988 IPO is, in its view, this company's IPO</td></tr><tr><td>CCM <code>NR</code>/<code>NU</code> rows with null PERMNO, ending the day before each IPO</td><td>Compustat had company records before there was a security to link to</td></tr></tbody></table></div>
+<p>Read down that column and you have the corporate history of Dell from 1988 to 2026, told entirely in identifier fields and adjustment factors. That is the point of Group A.</p>
+<h3 id="b-irregularities-that-are-the-vendor-s-filing-cabinet">B. Irregularities that are the vendor's filing cabinet</h3>
+<p>These are not about the company. They are artefacts of how CRSP and Compustat build and deliver files — and they are the ones most likely to make you think your code is broken.</p>
+<div class="tablewrap"><table><thead><tr><th>What you see</th><th>Probably</th></tr></thead><tbody><tr><td><code>crsp.msf</code> ends 2024-12, <code>crsp.msf_v2</code> ends 2025-12, <code>comp.funda</code> ends 2026-08</td><td>The legacy SIZ files are being retired in favour of CIZ. Check the current position before relying on SIZ for anything recent</td></tr><tr><td>SIZ starts each security exactly one month before CIZ (three for three)</td><td>A convention, not an accident</td></tr><tr><td>That extra SIZ month is entirely null</td><td>A placeholder row. <code>len()</code> and <code>.dropna()</code> will disagree about when the series starts</td></tr><tr><td>SIZ <code>ret</code> 0.004430 vs CIZ <code>mthret</code> 0.004418, Sept 2013</td><td>About 1.2 basis points. Almost certainly immaterial; worth knowing it is non-zero</td></tr><tr><td><code>nameendt</code> and <code>dlstdt</code> = 2024-12-31 on securities that still trade, with <code>dlstcd</code> 100</td><td>File-end artefacts, not events. <code>WHERE dlstdt IS NULL</code> would not do what you expect</td></tr><tr><td>Old Dell's final row has <code>cfacpr</code> = 0.0</td><td>Watch out for <code>prc / cfacpr</code></td></tr><tr><td><code>dlprc</code> = 0.00000 on every delisting row, though <code>dlret</code> is correct</td><td>The field is not populated the way the name suggests</td></tr><tr><td>The first month of a newly listed security has a price and a null <code>ret</code></td><td>There is no prior price. Every new listing does this</td></tr><tr><td>Apple's <code>msenames</code> records break at 2004-06-10 and 2017-12-28 with no change in the obvious columns</td><td>Something in the other 15 columns changed. Diff them if you are curious</td></tr><tr><td>Old Dell <code>liid</code> 01, Class C <code>liid</code> 08</td><td>Compustat issue numbering. 02–07 went somewhere</td></tr><tr><td>Apple's CCM link is <code>LU</code> (unresearched); Dell's are <code>LC</code></td><td>Which is why the standard filter keeps both</td></tr><tr><td>DVMT has no CCM link at all</td><td>Not filtered out — simply absent</td></tr><tr><td>Compustat <code>datadate</code> sits on calendar month ends though fiscal years end on weekdays</td><td>Normalisation</td></tr><tr><td><code>txditc</code> null in every Dell year</td><td><code>fillna(0)</code> is asserting something; know that it is</td></tr></tbody></table></div>
+<h3 id="c-irregularities-that-are-your-own-machine">C. Irregularities that are your own machine</h3>
+<div class="tablewrap"><table><thead><tr><th>What you see</th><th>What it is</th></tr></thead><tbody><tr><td>Segfault / exit 139 on a working query</td><td>Python 3.13+ against the pinned pandas. Step 1.2</td></tr><tr><td>A crashing script reporting success</td><td>The exit code came from a pipe</td></tr><tr><td><code>ValueError: cannot convert NA to integer</code> on <code>lpermno</code></td><td>Cast after filtering, not before. Step 5.3</td></tr><tr><td><code>MergeError: incompatible merge keys ... Int64Dtype()</code></td><td><code>wrds</code> returns nullable dtypes. Step 5.5</td></tr></tbody></table></div>
+<p>These are the only ones with a definite right answer, and all four are already answered above.</p>
+<h3 id="if-you-do-want-to-go-further">If you do want to go further</h3>
+<p>You do not need to, for this course. But if you continue into research — a thesis, a working paper, an analyst job that touches historical data — <strong>CCM is where that work starts.</strong> The linked CRSP–Compustat panel is the standard base for empirical corporate finance and asset pricing, and essentially every published result you will read is built on some version of the merge you performed in Section 5. The identifier archaeology in Sections 2 and 3 is not a detour before the real work; it is the admission price, and the reason a careless panel produces a result that cannot be replicated.</p>
+<p>Everything in Group A and B is a question with a real answer in a manual, a release note, or an SEC filing. Chase one if it interests you. Chase none of them and still do well in this course.</p>
+<hr>
+<h2 id="appendix-a-code-tables">Appendix A — Code tables</h2>
+<p>Abbreviated, for orientation only. <strong>The authoritative lists are the CRSP and Compustat manuals on WRDS.</strong> Cite the manual, not this table, and never a chatbot.</p>
+<p><strong>CRSP <code>dlstcd</code></strong> — 100 active · 200–299 merger/acquisition · 300–399 exchange · 400–499 liquidation · 500–599 dropped (including delinquent filings, insufficient capital, too few market makers, bankruptcy).</p>
+<p><strong>CRSP <code>shrcd</code></strong> — 10, 11 US common stock · 12 foreign incorporated · 18 REIT · 44, 48 ADR · 71–75 closed-end funds. A "US common equity" screen is conventionally <code>shrcd in (10, 11)</code>.</p>
+<p><strong>CRSP <code>exchcd</code></strong> — 1 NYSE · 2 NYSE American (formerly AMEX) · 3 NASDAQ · 4 NYSE Arca · negative values indicate a security that was on that exchange but is not currently trading.</p>
+<p><strong>CCM <code>linktype</code></strong> — <code>LC</code>, <code>LU</code> keep · <code>LS</code>, <code>LN</code> situational · <code>LX</code>, <code>LD</code>, <code>NR</code>, <code>NU</code> exclude.</p>
+<p><strong>CCM <code>linkprim</code></strong> — <code>P</code> primary (CRSP) · <code>C</code> primary (Compustat) · <code>J</code> joiner · <code>N</code> not primary.</p>
+<p><strong>Compustat <code>costat</code></strong> — <code>A</code> active · <code>I</code> inactive. <code>dlrsn</code> gives the reason a company left the file; look up the specific code you get, because more than one is plausible for a going-private transaction.</p>
+<hr>
+<h2 id="appendix-b-what-is-verified-what-is-read-and-what-is-left-to">Appendix B — What is verified, what is read, and what is left to you</h2>
+<p>The course requires distinguishing evidence you generated from evidence you read. Applied to this document:</p>
+<p><strong>Generated — the whole walkthrough was executed against live WRDS on 2026-09-03</strong>, on the pinned environment in Step 1.2 (Python 3.12.14, <code>wrds</code> 3.5.0, pandas 2.2.3, psycopg2 2.9.12): every query, the delisting merge, the CCM link, the <code>merge_asof</code> panel, the validation assertions, the chart, and the Parquet/CSV export. Forty checks, all passing, exit code 0. Specifically verified: Every PERMNO, PERMCO, GVKEY, NCUSIP and coverage window in Section 0; Dell's delisting date, code (233), return (+0.009381) and <code>nwperm</code> of 0; DVMT's delisting to <code>nwperm</code> 18267; the equality of CIZ <code>mthret</code> and SIZ <code>dlret</code> in October 2013; the empty SIZ row for that month; the null 2018-11-30 placeholder row; Apple's split factors and the +2.77% split month; the VMware distribution where <code>cfacpr</code> ≠ <code>cfacshr</code> and the price halves on a positive return; the <code>fyear</code> offset of 1 for Dell and 0 for Apple; the three all-null Dell fiscal years and the two linked-but-unlinkable ones; seven negative book-equity years; the full CCM link table for both companies; that <code>comp.company</code> has no <code>tic</code> or <code>cusip</code> column; that <code>raw_sql</code> takes <code>%(name)s</code> and rejects <code>:name</code>; and that <code>crsp.msf</code> ends 2024-12-31, <code>crsp.msf_v2</code> ends 2025-12-31, and <code>comp.funda</code> ends 2026-08-31.</p>
+<p><strong>Read, not generated — verify before you rely on it.</strong> The corporate history behind those numbers: that the 2013 buyers were Michael Dell and Silver Lake; that the 2016 transaction was the EMC acquisition; that Class V tracked VMware's economics; that the December 2018 listing came from the Class V exchange rather than an offering; the merger consideration per share. CRSP's data confirms the dates and the discontinuities; it does not say <em>why</em>. Sources: Dell's SEC filings via EDGAR, reachable through <code>cik</code> 0001571996.</p>
+<p><strong>Named conventions, with citations to carry into your write-up.</strong> The −30% / −55% missing-delisting-return substitutions are Shumway (1997) and Shumway and Warther (1999). The <code>INDL</code>/<code>STD</code>/<code>D</code>/<code>C</code> Compustat filters and the CCM <code>linktype</code>/<code>linkprim</code> filters are WRDS research-application conventions; the CIZ column names, universe screens and delisting-return behaviour come from WRDS's <code>ff3_crspCIZ.ipynb</code>.</p>
+<p><strong>Left to you on purpose.</strong> The exact wording of delisting code 233 and of whatever <code>dlrsn</code> codes you encounter — both are one lookup away in the manuals, and looking them up is the habit. Also: whether the numbers above still hold on your run. Data vintages move. A figure here that your query contradicts is a finding, not an error to work around.</p>
+<p><strong>One correction worth reading as a lesson.</strong> An earlier draft of this document asserted that old Dell and Dell Technologies would come back as <em>two</em> GVKEYs, and that CIZ lacked cumulative adjustment factors. Both were wrong, and both were plausible. They were caught by running the queries, which is the only thing that ever catches this class of error.</p>
+<h2 id="appendix-c-if-your-wrds-account-has-not-cleared">Appendix C — If your WRDS account has not cleared</h2>
+<p>Lab 2's rule stands: the attempt counts, the outcome never does. Do this instead, and document the attempt — source, route tried, date, barrier, and why WRDS would have been independent.</p>
+<ol><li>Pull Apple and Dell Technologies from the free lane (<code>yfinance</code> or equivalent) over the same 1996–2026 window.</li><li>Establish what you get for <strong>old Dell</strong>. You will most likely get nothing, or a series that begins in December 2018 under the label "Dell". Record which, with the first date.</li><li>Get Dell's pre-2013 fundamentals from <strong>SEC EDGAR</strong>, which does not delete filings when a company goes private. <code>https://data.sec.gov/submissions/CIK##########.json</code> gives you the full filing history including period end and filing date — the same endpoint as the Week 2 Part 4 demonstration.</li><li>Write the limitations section: there is no delisting return available to you, so the final outcome of a Dell holding in 2013 is not in your data at any price. State what that forbids, quantitatively where you can.</li></ol>
+<p>That last paragraph is the professional behaviour, and it is graded as such. A student who documents precisely what they could not see is ahead of a student who quietly reported a number built on a five-year hole.</p>
+<hr>
+<h3 id="reference-code-and-where-it-lives">Reference code, and where it lives</h3>
+<p><strong>Course textbook — <em>Financial Modeling with Python and AI</em>, the DRIVER series</strong>, at <code>https://cinderzhang.github.io/DRIVER-FinancialModeling/</code>. The textbook teaches this material in the free lane; this walkthrough is the professional-lane counterpart, and the two are meant to be read against each other. The sessions that bear directly on Lab 2:</p>
+<div class="tablewrap"><table><thead><tr><th>Session</th><th>What it gives you</th><th>Where it lands in this walkthrough</th></tr></thead><tbody><tr><td><a href="https://cinderzhang.github.io/DRIVER-FinancialModeling/Session2-Data-Collection-APIs.html">Session 2 — Data Collection &amp; APIs</a></td><td>Pulling price and fundamental data through a public API</td><td>The free-lane comparison in Appendix C; the second of your two required sources</td></tr><tr><td><a href="https://cinderzhang.github.io/DRIVER-FinancialModeling/Session3-Data-Cleaning-Validation.html">Session 3 — Data Cleaning &amp; Validation</a></td><td>Validation patterns and what a clean panel has to survive</td><td>Steps 3.2, 3.7 and 5.6 — the checks, and the counts that go in the catalog</td></tr><tr><td><a href="https://cinderzhang.github.io/DRIVER-FinancialModeling/Session1-Total-Return-Analysis.html">Session 1 — Total Return Analysis</a></td><td>Total return construction and compounding</td><td>Step 3.9, where Dell forces you to decide what a holding period even is</td></tr><tr><td><a href="https://cinderzhang.github.io/DRIVER-FinancialModeling/00-DRIVER-Methodology-Preface.html">DRIVER Methodology Preface</a></td><td>Discover, Represent, Implement, Validate, Evolve, Reflect</td><td>The Validate stage is Step 3.6 and Step 5.6; the Evolve stage is what your catalog entries are for</td></tr></tbody></table></div>
+<p>The textbook's examples run on free sources by design, so where it and this document differ on a number, they are not in conflict — they are two lanes on the same question, and the difference between them is frequently the finding.</p>
+<div class="tablewrap"><table><thead><tr><th>Source</th><th>What it is</th><th>Use it for</th></tr></thead><tbody><tr><td>WRDS Research Applications → <strong>Python Replications</strong> (<code>wrds-www.wharton.upenn.edu/pages/wrds-research/applications/python-replications/</code>)</td><td>Maintained WRDS notebooks against the current schema</td><td>Working query patterns; the CIZ conventions in Steps 3.6 and 3.10</td></tr><tr><td><code>conn.describe_table()</code> on your own connection</td><td>The columns your subscription actually has</td><td>Settling any disagreement with this document</td></tr><tr><td>CRSP and Compustat manuals on WRDS</td><td>Code definitions and editorial conventions</td><td><code>dlstcd</code>, <code>dlrsn</code>, <code>linktype</code>, <code>shrcd</code> — cite the manual, never a chatbot</td></tr><tr><td>SEC EDGAR, via the <code>cik</code> in <code>comp.company</code></td><td>Filings, filing dates, cover-page CUSIPs</td><td>Step 4.6 knowability dates; the Step 5.6 tie-out</td></tr></tbody></table></div>
+<hr>
+<p><em>Two sources minimum, per <code>rules.md</code>. Where you have professional access, one of them is the professional source. Everything you pulled here goes in <code>source_log.md</code> with its access route, coverage window, and retrieval date.</em></p>
+</main>
+<footer>Companion to Lab 2. The graded steps are in the Lab 2 brief; the conventions are
+in the Week 2 rules. Verify every table and column name against your own WRDS connection &mdash;
+where this page and your connection disagree, your connection wins, and the disagreement is a
+finding. WRDS data is licensed, not public: nothing pulled here may be redistributed.</footer>
+
+</body></html>
