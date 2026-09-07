@@ -1,102 +1,179 @@
-<!doctype html><html lang='en'><head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width,initial-scale=1'>
-<title>Week 3 — Lab</title><style>
-:root { --bg:#ffffff; --fg:#14181d; --muted:#5a6572; --rule:#dfe3e8;
-        --accent:#0b5fa5; --code-bg:#f4f6f8; }
-@media (prefers-color-scheme: dark) {
-  :root { --bg:#0f1419; --fg:#e9ecf0; --muted:#9aa4b2; --rule:#2a323c;
-          --accent:#6fb3f2; --code-bg:#182029; } }
+<!doctype html><html lang='en'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>Week 3 — Lab</title><style>
+:root { --bg:#ffffff; --fg:#14181d; --muted:#5a6572; --rule:#dfe3e8; --accent:#0b5fa5; --code-bg:#f4f6f8; }
+@media (prefers-color-scheme: dark) { :root { --bg:#0f1419; --fg:#e9ecf0; --muted:#9aa4b2; --rule:#2a323c; --accent:#6fb3f2; --code-bg:#182029; } }
 * { box-sizing: border-box; }
-body { margin:0; background:var(--bg); color:var(--fg);
-       font: 17px/1.6 -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+body { margin:0; background:var(--bg); color:var(--fg); font: 17px/1.6 -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
 main { max-width: 46rem; margin: 0 auto; padding: 2.25rem 1.25rem 4.5rem; }
 h1 { font-size:1.9rem; line-height:1.2; margin:0 0 1rem; letter-spacing:-.01em; }
 h2 { font-size:1.4rem; line-height:1.25; margin:2.2rem 0 .8rem; }
 h3 { font-size:1.1rem; margin:1.8rem 0 .6rem; }
-p, li { margin:.7rem 0; }
-li { margin:.35rem 0; }
-strong { font-weight:650; }
-a { color:var(--accent); }
-blockquote { margin:1.1rem 0; padding:.5rem 0 .5rem 1.1rem;
-             border-left:3px solid var(--accent); color:var(--muted); }
-pre { background:var(--code-bg); border:1px solid var(--rule); border-radius:8px;
-      padding:.9rem 1.1rem; overflow-x:auto; font:13.5px/1.55 ui-monospace, Menlo, Consolas, monospace; }
-code { font:.9em ui-monospace, Menlo, Consolas, monospace; background:var(--code-bg);
-       padding:.08em .3em; border-radius:4px; }
+p, li { margin:.7rem 0; } li { margin:.35rem 0; } strong { font-weight:650; } a { color:var(--accent); }
+blockquote { margin:1.1rem 0; padding:.5rem 0 .5rem 1.1rem; border-left:3px solid var(--accent); color:var(--muted); }
+pre { background:var(--code-bg); border:1px solid var(--rule); border-radius:8px; padding:.9rem 1.1rem; overflow-x:auto; font:13.5px/1.55 ui-monospace, Menlo, Consolas, monospace; }
+code { font:.9em ui-monospace, Menlo, Consolas, monospace; background:var(--code-bg); padding:.08em .3em; border-radius:4px; }
 pre code { background:none; padding:0; }
-table { border-collapse:collapse; margin:1.1rem 0; font-size:.92rem; max-width:100%;
-        display:block; overflow-x:auto; }
-th, td { border:1px solid var(--rule); padding:.45rem .7rem; text-align:left; }
-th { background:var(--code-bg); }
+table { border-collapse:collapse; margin:1.1rem 0; font-size:.92rem; max-width:100%; display:block; overflow-x:auto; }
+th, td { border:1px solid var(--rule); padding:.45rem .7rem; text-align:left; } th { background:var(--code-bg); }
 hr { border:0; border-top:1px solid var(--rule); margin:2rem 0; }
-.math { background:var(--code-bg); border:1px solid var(--rule); border-radius:8px;
-        padding:.7rem 1rem; margin:1rem 0; font-family:ui-monospace, Menlo, Consolas, monospace;
-        font-size:.92rem; }
 @media (max-width:600px) { body { font-size:16px; } h1 { font-size:1.6rem; } }
-
-.nav { margin: 0 0 1.5rem; font-size:.9rem; }
-.nav a { color: var(--accent); text-decoration: none; }
-.nav a:hover { text-decoration: underline; }
-.wk { border:1px solid var(--rule); border-radius:10px; padding:1.1rem 1.4rem; margin:0 0 1rem; }
-.wk h3 { margin:.1rem 0 .5rem; font-size:1.05rem; }
-.wk .num { color:var(--muted); font:600 11px/1 ui-monospace,Menlo,Consolas,monospace;
-           letter-spacing:.1em; text-transform:uppercase; }
-.surfaces a { display:inline-block; margin:.3rem .4rem .3rem 0; padding:.3rem .65rem;
-              border:1px solid var(--accent); border-radius:999px; font-size:.85rem;
-              color:var(--accent); text-decoration:none; }
-.surfaces a:hover { background:var(--code-bg); }
-.surfaces span.held { display:inline-block; margin:.3rem .4rem .3rem 0; padding:.3rem .65rem;
-                      border:1px dashed var(--rule); border-radius:999px; font-size:.85rem;
-                      color:var(--muted); }
-.lede { color:var(--muted); margin:0 0 2rem; }
+.nav { margin: 0 0 1.5rem; font-size:.9rem; } .nav a { color: var(--accent); text-decoration: none; } .nav a:hover { text-decoration: underline; }
 </style></head>
 <body><main>
 <div class='nav'><a href='../index.html'>MSF Financial Modeling</a></div>
-<h1>Week 3 — Lab</h1><h1>Lab 3 — Metrics, Verified, Against a Benchmark You Chose</h1>
-<blockquote><strong>Register: DO.</strong> Teaching is in <code>handout.md</code>; conventions in <code>rules.md</code>.</blockquote>
-<p><strong>You arrive with:</strong> your panel, a permanent identifier on every row, <code>data_quality_issues.md</code> with severities you assigned, and a statement of what your panel cannot be used for. From the session you have the SPY/RSP comparison, the annualization convention gap, and the idea that an index is a membership dataset.</p>
-<p><strong>Where this goes next:</strong> Week 4 builds portfolios from the return and covariance estimates you produce here. Every convention you leave unstated becomes a silent assumption inside an optimizer.</p>
-<hr>
+<h1>Lab 3 — Did Your Panel Earn Its Risk?</h1>
+<blockquote>
+<p><strong>Register: DO.</strong> Teaching is in <code>handout.md</code>; conventions in <code>rules.md</code>.</p>
+</blockquote>
+<p><strong>You arrive with:</strong> your panel, a permanent identifier on every row, <code>data_quality_issues.md</code> with severities you assigned, and a statement of what your panel cannot be used for. From the session you have the French factor file loaded, Apple's Sharpe ratio and regression reproduced, and the idea that one regression produces all three numbers.</p>
+<p><strong>Where this goes next:</strong> Week 4 builds portfolios from the excess-return series and the covariance matrix you save in Step 5. Every convention you leave unstated becomes a silent assumption inside an optimizer.</p>
+<p><strong>Honest completion floor.</strong> Tuesday in the room: Step 0, the environment, for everyone, then Steps 1 and 2. Thursday in the room: Steps 3 to 5. Steps 6 to 9 belong outside the room. A student who leaves Thursday with Steps 0 to 5 in a notebook that runs on their own laptop has done the in-class core.</p>
+<hr />
+<h2>Step 0 — Your environment: VS Code, on your machine, with two agents</h2>
+<p>Done together on Tuesday, from the projector, on the student route. Every path below is the one demonstrated. Colab is the fallback only if your laptop cannot be made to work in the room; say so, and use it.</p>
+<p>Where things live is your decision. Make a folder for this course, put it wherever you keep work, and keep everything from here to Week 7 in it. The only rule about it is in <code>rules.md</code>: it holds nothing you cannot afford to lose, because agents will run inside it without asking.</p>
+<p><strong>0.1 VS Code.</strong></p>
+<ol>
+<li>Run the VS Code installer you downloaded. Accept the defaults.</li>
+<li>Open VS Code. Extensions sidebar: <code>Ctrl+Shift+X</code> (Windows) or <code>Cmd+Shift+X</code> (Mac). Install <strong>Python</strong>, <strong>Pylance</strong>, and <strong>Jupyter</strong>, all published by Microsoft.</li>
+<li><strong>File → Open Folder</strong> → your course folder. Click <strong>Yes, I trust the authors</strong> if asked.</li>
+</ol>
+<p><strong>0.2 The environment, with uv.</strong></p>
+<ol>
+<li>Open the terminal panel: <strong>View → Terminal</strong>, or <code>Ctrl+`</code> (the backtick key, top-left of the keyboard). It opens inside the folder you just opened.</li>
+<li>Install uv with the one line for your OS, then close the terminal panel (the bin icon) and open a new one so the shell sees it:</li>
+</ol>
+<pre><code>curl -LsSf https://astral.sh/uv/install.sh | sh                                        # Mac
+powershell -ExecutionPolicy ByPass -c &quot;irm https://astral.sh/uv/install.ps1 | iex&quot;     # Windows
+</code></pre>
+<ol>
+<li>In the new terminal, create the project and add the packages. uv fetches Python 3.12 itself if you do not have it:</li>
+</ol>
+<pre><code>uv init --python 3.12
+uv add pandas numpy statsmodels yfinance requests jupyter ipykernel
+</code></pre>
+<p>That leaves a <code>pyproject.toml</code>, a <code>uv.lock</code>, and a <code>.venv</code> in your folder. The lock file is what makes your Week 7 deliverable reproducible by a colleague; keep it.</p>
+<ol>
+<li><code>Ctrl+Shift+P</code> → <strong>Python: Select Interpreter</strong> → the entry ending in <code>.venv</code>.</li>
+<li><strong>File → New File → Jupyter Notebook</strong>. Save it in your course folder under whatever name you will recognise in October. Top right, <strong>Select Kernel</strong> → <strong>Python Environments</strong> → that <code>.venv</code>.</li>
+<li>In the first cell, run the check. <strong>The shape, not your answer:</strong></li>
+</ol>
+<pre><code>import pandas, statsmodels, yfinance, sys
+print(sys.version.split()[0], pandas.__version__, statsmodels.__version__, yfinance.__version__)
+3.12.x  2.x.x  0.14.x  0.2.xx
+</code></pre>
+<p>A version line and no red text. If you see red, paste the whole error into an agent and ask what it means before asking it to fix anything.</p>
+<p><strong>0.3 The Antigravity extension.</strong> Start here: https://marketplace.visualstudio.com/items?itemName=Google.google-antigravity</p>
+<ol>
+<li>Extensions sidebar → search <strong>Google Antigravity</strong>, publisher Google → <strong>Install</strong>. Needs VS Code 1.90 or later; a fresh install is.</li>
+<li>Click the <strong>Antigravity icon</strong> that appears in the Activity Bar on the left → <strong>sign in</strong> with your Google account. The free tier is enough. On first launch it installs its own <code>agy</code> backend; let it.</li>
+<li>Ask it one thing about your notebook, for example what the check cell prints. If it answers from the file, it can see your folder.</li>
+</ol>
+<p><strong>0.4 Codex, from the terminal panel.</strong> Start here: https://learn.chatgpt.com/docs/codex/cli</p>
+<ol>
+<li>In the VS Code terminal, run the installer for your OS:</li>
+</ol>
+<pre><code>curl -fsSL https://chatgpt.com/codex/install.sh | sh                                    # Mac
+powershell -ExecutionPolicy ByPass -c &quot;irm https://chatgpt.com/codex/install.ps1 | iex&quot;  # Windows
+</code></pre>
+<ol>
+<li>Close the terminal panel and open a new one, so the shell sees the new command.</li>
+<li>Run <code>codex</code>. Choose <strong>Sign in with ChatGPT</strong>; a browser tab opens; sign in; return to the terminal.</li>
+<li>Now run it the way this course uses it, from inside your course folder and nowhere else:</li>
+</ol>
+<pre><code>codex --yolo
+</code></pre>
+<p><code>--yolo</code> tells Codex to run commands without asking you first and without a sandbox. That is why the folder rule exists. Ask it to list the files in the folder; it should name your notebook.</p>
+<ol>
+<li>Leave both agents open. From Step 1 on, the pattern is fire-then-work: give an agent the task, do the next step yourself while it runs, come back and judge what it produced.</li>
+</ol>
+<p><strong>If your laptop will not cooperate.</strong> Pair with a neighbour whose install worked for Steps 1 and 2, and open a Colab notebook as your own fallback. Bring the laptop to office hours before Thursday. The lab does not depend on which environment produced the notebook.</p>
 <h2>Step 1 — State your conventions before you compute</h2>
-<p>Write down, before running anything:</p>
-<ul><li>Return type: simple or log, and why</li><li>Annualization basis: 252, 365, or something else, and why</li><li>Risk-free rate: what you will use, or that you are using zero and saying so</li><li>Window: exact start and end, and why that window</li></ul>
-<p>Four lines. Two minutes now, and it saves an argument later. Every number you report for the rest of the course inherits these.</p>
-<h2>Step 2 — Compute the metrics</h2>
-<p>For your panel, compute per security and for an equal-weighted portfolio of it:</p>
-<ul><li>total return over the window</li><li>annualized return</li><li>annualized volatility</li><li>Sharpe ratio, with your stated risk-free assumption</li></ul>
-<p>Then compute annualized volatility a <strong>second way</strong>, using a different annualization basis, and report both. State which one you will use for the rest of the course, and why.</p>
-<h2>Step 3 — Verify against something you did not write</h2>
-<p>Pick at least two of your computed numbers and check them against an independent source that did not come from your code — an issuer factsheet, an index provider, a vendor&#x27;s computed metric.</p>
-<p>For each, record: your number, their number, the gap, and your explanation. Work the handout&#x27;s Part 4 list in order — convention, then window, then computation.</p>
-<p><strong>A verification that fails to match, is investigated, and is honestly reported as unresolved is a complete answer.</strong> &quot;Verified&quot; with nothing behind it is not.</p>
-<h2>Step 4 — Choose a benchmark, and say what it is made of</h2>
-<p>Choose a benchmark for your panel. Then answer:</p>
-<ol><li>What is it, and what rules define its membership?</li><li>Why is it the right comparison for <em>your</em> panel specifically?</li><li>What is the obvious alternative, and what would change if you used it instead?</li></ol>
-<p>For question 3, <strong>compute it</strong>. Report your panel&#x27;s excess return against both benchmarks. The SPY/RSP example exists so you know how large that difference can get.</p>
-<p>If you cannot obtain a point-in-time membership file for your benchmark, say so, and say what it prevents you from claiming.</p>
-<h2>Step 5 — Say what your catalog allows you to claim</h2>
-<p>Reread <code>data_quality_issues.md</code>. Then write a short section titled <strong>&quot;What these numbers can and cannot support.&quot;</strong></p>
-<p>Name each open issue and state, concretely, what it forbids. Then choose one of the handout&#x27;s three options for each — fix the input, bound the damage, or restrict the claim — and do it.</p>
-<p>If a Blocker is still open, no headline result is reported this week. Say that plainly and report what you can.</p>
-<h2>Step 6 — Your benchmark, your defence</h2>
-<p>You chose the benchmark in Step 4. Now defend it.</p>
-<blockquote>A colleague says your benchmark flatters your panel and you should have used the other one. What is their strongest argument, and what is your answer?</blockquote>
-<p>Write the strongest version of their case, including any number that supports it. Then answer it or concede it. <strong>Conceding a good objection earns full marks.</strong></p>
-<h2>Step 7 — What did you notice that I did not ask about?</h2>
+<p>Write down, before running anything, seven lines. <strong>The shape, not your answer</strong>, from the worked example:</p>
+<pre><code>Return type:     simple monthly returns from adjusted month-end close (yfinance, auto_adjust=True)
+Frequency:       monthly; annualization ×12 for means and alphas, ×√12 for volatilities
+Risk-free:       RF column, Ken French Data Library, Fama/French 3 Factors monthly
+Window:          2015-07 to 2025-06, 120 months
+Market series:   French Mkt-RF (regression); SPY (investable benchmark)
+Equal-weight:    rebalanced monthly to 1/N
+Std deviation:   sample (ddof = 1)
+</code></pre>
+<p>Every number you report for the rest of the course inherits these.</p>
+<h2>Step 2 — Build the excess-return panel</h2>
+<ol>
+<li>Start here: https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/data_library.html → U.S. Research Returns Data → Fama/French 3 Factors → CSV.</li>
+<li>Parse the monthly block only. Divide by 100. Key the rows on a monthly period.</li>
+<li>Resample your panel to month-end, compute simple returns, key on the same monthly period, and inner-join.</li>
+<li>Keep two frames: the raw monthly returns, which Step 3 needs for CAGR and wealth, and an excess frame with <code>RF</code> subtracted from every security column. Do not subtract it from <code>Mkt-RF</code>.</li>
+<li>Print the joined shape and assert the month count you declared in Step 1.</li>
+</ol>
+<p><strong>The shape, not your answer:</strong></p>
+<pre><code>joined: (120, 14)    2015-07 -&gt; 2025-06
+first row 2015-07:  AAPL -0.0329   SPY 0.0226   Mkt-RF 0.0157   RF 0.0000
+last row  2025-06:  AAPL  0.0215   SPY 0.0514   Mkt-RF 0.0486   RF 0.0034
+</code></pre>
+<p>If the row count is not what you declared, months were dropped in the join. Find them before going on.</p>
+<h2>Step 3 — Sharpe, stated properly</h2>
+<p>For every security and for the equal-weight panel, compute the Sharpe ratio under the Week 3 standard, and beside it the CAGR-over-volatility shortcut, in one table. <strong>The shape, not your answer:</strong></p>
+<pre><code>             CAGR    ann vol   Sharpe (excess, arithmetic)   CAGR/vol, rf=0
+AAPL       22.00%    27.81%              0.788                   0.791
+EW panel   16.66%    13.38%              1.083                   1.245
+</code></pre>
+<p>Then two sentences: which names change rank between the two columns, and which column you will use for the rest of the course.</p>
+<h2>Step 4 — Jensen's regression</h2>
+<p>Regress each security's excess return, and the equal-weight panel's, on <code>Mkt-RF</code>. Report alpha per year, t(α), beta, t(β), R², and annualized residual volatility. <strong>The shape, not your answer:</strong></p>
+<pre><code>             α/yr    t(α)     β     t(β)     R²    resid vol
+AAPL        8.41%   1.23   1.134   9.41   0.429     21.1%
+EW panel    5.89%   2.71   0.721  18.80   0.750      6.7%
+</code></pre>
+<p>Then answer, in writing: which alphas in your panel would you stand behind, by what threshold, and why the equal-weight panel's t-statistic is what it is relative to its members'.</p>
+<h2>Step 5 — Decompose the risk, and hand Week 4 its inputs</h2>
+<p>For every security and the equal-weight panel: total volatility, systematic volatility (|β| × market vol), idiosyncratic volatility (residual), and the systematic share. Check one name by hand: √(systematic² + idiosyncratic²) should come within about 1% of total; handout Part 4 explains the degrees-of-freedom gap. <strong>The shape, not your answer:</strong></p>
+<pre><code>             β     total   systematic   idiosyncratic   share
+AAPL      1.134   27.9%      18.2%         21.1%        43%
+EW panel  0.721   13.4%      11.6%          6.7%        75%
+check AAPL: sqrt(18.2² + 21.1²) = 27.9
+</code></pre>
+<p>Two sentences: your equal-weight panel's idiosyncratic volatility against the median single name, and what that says about how much diversification eight-to-fifteen names bought you.</p>
+<p>Then save what Week 4 needs, in files you name and will load yourself next week:</p>
+<ul>
+<li>your monthly excess returns, dated, one column per security, in decimals;</li>
+<li>the annualized sample covariance matrix of those excess returns, in the same security order.</li>
+</ul>
+<p>Week 4 does not care what you called them. It cares that the matrix loads back in the same order as the returns, so check that now.</p>
+<p>Print the 3×3 corner of the covariance matrix and check that its diagonal is your Step 5 total volatility squared, using the unrounded volatility. <strong>The shape, not your answer:</strong> Apple 0.0776 = 0.2785².</p>
+<h2>Step 6 — Verify one beta against something you did not write</h2>
+<p>Pick one security. Start here: https://finance.yahoo.com/quote/TICKER, statistics panel, <strong>Beta (5Y Monthly)</strong>. Record the figure and the retrieval date.</p>
+<p>Compare it with your Step 4 beta. If they differ, work the six checks in order: identity, frequency, window, return type, regressor, formula. Re-run yours on the matched window and conventions, using only complete months, and report both figures with their windows. Where the vendor does not state a convention, say which one you assumed and call the match provisional. <strong>The shape, not your answer:</strong> the Exxon entry in handout Part 7, which fails by 0.687, traces it to the window, and closes to 0.003 on sixty months ending 2026-07.</p>
+<p>A gap that survives all six checks is a computation error, in one of you. Say which, or say unresolved.</p>
+<h2>Step 7 — Your benchmark, your defence</h2>
+<p>Compute alpha for your equal-weight panel three ways: on <code>Mkt-RF</code>, on the investable benchmark you chose in Step 1, and on the obvious alternative. <strong>The shape, not your answer:</strong> 5.89%, 5.23% on SPY, 8.04% on RSP.</p>
+<p>Then defend. A colleague says your benchmark flatters your panel and you should have used the alternative. Write the strongest version of their case, including the number that supports it. Then answer it or concede it. Conceding a good objection earns full marks. Pretending the choice was not a choice earns nothing.</p>
+<h2>Step 8 — What your catalog allows you to claim</h2>
+<p>Reread <code>data_quality_issues.md</code>. Write a short section titled <strong>What these numbers can and cannot support.</strong> For each open issue, state what it does to an alpha, then choose one of the three responses: fix the input, bound the damage, or restrict the claim. Do it.</p>
+<p>If a Blocker is still open, no headline alpha is reported this week. Say that plainly and report what you can.</p>
+<h2>Step 9 — What did you notice that I did not ask about?</h2>
 <p>The standing question.</p>
-<p>Something in this week&#x27;s computation behaved in a way the steps did not anticipate. A metric that moved more than you expected when a convention changed. A security whose numbers look wrong next to its peers. A relationship you did not expect in your panel.</p>
-<p>Write it down with evidence.</p>
-<p><strong>Graded on genuineness and evidence, never on whether it was the right thing to notice.</strong> If you think one of this week&#x27;s claims is overstated and can support that, this is where it goes.</p>
+<p>Something in this week's computation behaved in a way the steps did not anticipate. A beta that halved between two windows. A name whose residual volatility dwarfs its peers. A covariance entry where the two matrices disagree by a lot. A Sharpe ratio that changed sign when the risk-free rate went in.</p>
+<p>Write it down with evidence. Graded on genuineness and evidence, never on whether it was the right thing to notice. If you think one of this week's claims is overstated and can support that, this is where it goes.</p>
+<hr />
 <h2>If you want to do this differently</h2>
-<p>You may depart from the method above — a different metric set, a different verification strategy, a benchmark nobody would expect. <strong>A defended departure earns full marks.</strong> State what you did instead, why, and what you gave up.</p>
-<p><strong>Two sources, minimum — and where you have professional access, one of them is the professional source.</strong> This week that is <strong>WRDS / CRSP</strong>, for point-in-time index membership, so your benchmark carries no look-ahead.</p>
-<p>Pending access is neither an excuse nor a penalty. Document the attempt — source, route tried, date, barrier, and why that source would have been independent — and use a second free source instead. <strong>The attempt counts; the outcome never does.</strong></p>
+<p>You may depart from the method above. A defended departure earns full marks. State what you did instead, why, and what you gave up.</p>
+<p>Two departures are worked in the handout's script and are welcome here: add <code>SMB</code> and <code>HML</code> to the regression, the Fama-French three-factor model, and report how the alphas move; or run the same regression on daily data and compare the betas with the monthly ones. Either is a good Step 9 finding.</p>
+<p>Two sources, minimum, and where you have professional access, one of them is the professional source. This week that is CRSP monthly returns on WRDS, so your alphas are not alphas on survivors; the French factors are on WRDS too, in <code>ff.factors_monthly</code>.</p>
+<p>Pending access is neither an excuse nor a penalty. Document the attempt, source, route tried, date, barrier, and why that source would have been independent, and use a second free source instead. The attempt counts; the outcome never does.</p>
 <h2>Submit</h2>
-<ul><li>Your notebook, runnable start to finish</li><li>Your conventions statement from Step 1</li><li>The metrics table, both annualization bases shown</li><li>Your verification entries from Step 3</li><li>&quot;What these numbers can and cannot support&quot; from Step 5</li><li>Your Step 6 defence and Step 7 finding</li></ul>
+<ul>
+<li>Your notebook, runnable start to finish</li>
+<li>One markdown file holding: your Step 1 conventions; the three tables from Steps 3, 4 and 5; your Step 6 verification entry; your Step 7 defence; your Step 8 section; your Step 9 finding</li>
+<li>The returns and the covariance matrix from Step 5</li>
+<li>Your updated <code>source_log.md</code>, now with the French library, the Yahoo quote page, and any WRDS table</li>
+</ul>
 <h2>Before Week 4 — do these</h2>
-<ol><li>Save your return series and covariance estimate to disk. Week 4 consumes them directly.</li><li>Make sure your conventions statement is in the notebook, not just in your head — Week 4&#x27;s</li></ol>
-<p>optimizer inherits every one of them.</p>
-<ol><li>Confirm your benchmark series covers exactly your panel&#x27;s window. A benchmark spanning a</li></ol>
-<p>different period produces excess returns that mean nothing.</p>
-<p><strong>Lab 4 preview:</strong> feed these estimates to a mean-variance optimizer, then find out what the optimizer does when the estimates are wrong by the amount they are actually wrong by.</p>
+<ol>
+<li>Your Step 0 environment works on your own laptop, not a neighbour's. Office hours before Thursday if it does not.</li>
+<li>Confirm your Step 5 returns and covariance matrix load from disk in the same security order.</li>
+<li>Make sure your conventions statement is in the notebook, not just in your head. Week 4's optimizer inherits every line of it.</li>
+<li>Confirm your benchmark series covers exactly your panel's window.</li>
+</ol>
+<p>Lab 4 preview: feed your means and covariance matrix to a mean-variance optimizer, then find out what the optimizer does when the estimates are wrong by the amount they are actually wrong by.</p>
 </main></body></html>

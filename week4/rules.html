@@ -1,79 +1,50 @@
-<!doctype html><html lang='en'><head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width,initial-scale=1'>
-<title>Week 4 — Rules</title><style>
-:root { --bg:#ffffff; --fg:#14181d; --muted:#5a6572; --rule:#dfe3e8;
-        --accent:#0b5fa5; --code-bg:#f4f6f8; }
-@media (prefers-color-scheme: dark) {
-  :root { --bg:#0f1419; --fg:#e9ecf0; --muted:#9aa4b2; --rule:#2a323c;
-          --accent:#6fb3f2; --code-bg:#182029; } }
+<!doctype html><html lang='en'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>Week 4 — Rules</title><style>
+:root { --bg:#ffffff; --fg:#14181d; --muted:#5a6572; --rule:#dfe3e8; --accent:#0b5fa5; --code-bg:#f4f6f8; }
+@media (prefers-color-scheme: dark) { :root { --bg:#0f1419; --fg:#e9ecf0; --muted:#9aa4b2; --rule:#2a323c; --accent:#6fb3f2; --code-bg:#182029; } }
 * { box-sizing: border-box; }
-body { margin:0; background:var(--bg); color:var(--fg);
-       font: 17px/1.6 -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+body { margin:0; background:var(--bg); color:var(--fg); font: 17px/1.6 -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
 main { max-width: 46rem; margin: 0 auto; padding: 2.25rem 1.25rem 4.5rem; }
 h1 { font-size:1.9rem; line-height:1.2; margin:0 0 1rem; letter-spacing:-.01em; }
 h2 { font-size:1.4rem; line-height:1.25; margin:2.2rem 0 .8rem; }
 h3 { font-size:1.1rem; margin:1.8rem 0 .6rem; }
-p, li { margin:.7rem 0; }
-li { margin:.35rem 0; }
-strong { font-weight:650; }
-a { color:var(--accent); }
-blockquote { margin:1.1rem 0; padding:.5rem 0 .5rem 1.1rem;
-             border-left:3px solid var(--accent); color:var(--muted); }
-pre { background:var(--code-bg); border:1px solid var(--rule); border-radius:8px;
-      padding:.9rem 1.1rem; overflow-x:auto; font:13.5px/1.55 ui-monospace, Menlo, Consolas, monospace; }
-code { font:.9em ui-monospace, Menlo, Consolas, monospace; background:var(--code-bg);
-       padding:.08em .3em; border-radius:4px; }
+p, li { margin:.7rem 0; } li { margin:.35rem 0; } strong { font-weight:650; } a { color:var(--accent); }
+blockquote { margin:1.1rem 0; padding:.5rem 0 .5rem 1.1rem; border-left:3px solid var(--accent); color:var(--muted); }
+pre { background:var(--code-bg); border:1px solid var(--rule); border-radius:8px; padding:.9rem 1.1rem; overflow-x:auto; font:13.5px/1.55 ui-monospace, Menlo, Consolas, monospace; }
+code { font:.9em ui-monospace, Menlo, Consolas, monospace; background:var(--code-bg); padding:.08em .3em; border-radius:4px; }
 pre code { background:none; padding:0; }
-table { border-collapse:collapse; margin:1.1rem 0; font-size:.92rem; max-width:100%;
-        display:block; overflow-x:auto; }
-th, td { border:1px solid var(--rule); padding:.45rem .7rem; text-align:left; }
-th { background:var(--code-bg); }
+table { border-collapse:collapse; margin:1.1rem 0; font-size:.92rem; max-width:100%; display:block; overflow-x:auto; }
+th, td { border:1px solid var(--rule); padding:.45rem .7rem; text-align:left; } th { background:var(--code-bg); }
 hr { border:0; border-top:1px solid var(--rule); margin:2rem 0; }
-.math { background:var(--code-bg); border:1px solid var(--rule); border-radius:8px;
-        padding:.7rem 1rem; margin:1rem 0; font-family:ui-monospace, Menlo, Consolas, monospace;
-        font-size:.92rem; }
 @media (max-width:600px) { body { font-size:16px; } h1 { font-size:1.6rem; } }
-
-.nav { margin: 0 0 1.5rem; font-size:.9rem; }
-.nav a { color: var(--accent); text-decoration: none; }
-.nav a:hover { text-decoration: underline; }
-.wk { border:1px solid var(--rule); border-radius:10px; padding:1.1rem 1.4rem; margin:0 0 1rem; }
-.wk h3 { margin:.1rem 0 .5rem; font-size:1.05rem; }
-.wk .num { color:var(--muted); font:600 11px/1 ui-monospace,Menlo,Consolas,monospace;
-           letter-spacing:.1em; text-transform:uppercase; }
-.surfaces a { display:inline-block; margin:.3rem .4rem .3rem 0; padding:.3rem .65rem;
-              border:1px solid var(--accent); border-radius:999px; font-size:.85rem;
-              color:var(--accent); text-decoration:none; }
-.surfaces a:hover { background:var(--code-bg); }
-.surfaces span.held { display:inline-block; margin:.3rem .4rem .3rem 0; padding:.3rem .65rem;
-                      border:1px dashed var(--rule); border-radius:999px; font-size:.85rem;
-                      color:var(--muted); }
-.lede { color:var(--muted); margin:0 0 2rem; }
+.nav { margin: 0 0 1.5rem; font-size:.9rem; } .nav a { color: var(--accent); text-decoration: none; } .nav a:hover { text-decoration: underline; }
 </style></head>
 <body><main>
 <div class='nav'><a href='../index.html'>MSF Financial Modeling</a></div>
-<h1>Week 4 — Rules</h1><h1>Week 4 — Rules and Conventions</h1>
-<blockquote><strong>Register: RULES.</strong> No teaching here — see <code>handout.md</code>.</blockquote>
-<h2>Constraints are declared before results are seen</h2>
-<p>Your constraints go in writing during prework, before you optimize. In Lab 4 Step 6 you will be asked whether you chose them before or after seeing the weights, and the honest answer is required.</p>
-<p>Choosing constraints after seeing an ugly result is legitimate practice — but it must be disclosed as what it is. Presenting a post-hoc constraint as a prior principle is not.</p>
-<h2>Every remedy names its cost</h2>
-<p>Constraints, shrinkage, minimum variance, risk parity — each gives something up. A remedy reported without its cost is incomplete.</p>
+<h1>Week 4 — Rules and Conventions</h1>
+<blockquote>
+<p><strong>Register: RULES.</strong> No teaching here — see <code>handout.md</code>.</p>
+</blockquote>
+<h2>The cap is declared before results are seen</h2>
+<p>Your cap goes in writing during prework, before you optimize, and it satisfies N × cap ≥ 1. In Lab 4 Step 5 you will be asked whether you chose it before or after seeing the weights, and the honest answer is required.</p>
+<p>Choosing a cap after seeing an ugly result is legitimate practice. It must be disclosed as what it is. Presenting a post-hoc constraint as a prior principle is not.</p>
+<h2>Inputs are excess returns</h2>
+<p>The tangency portfolio is computed on mean excess returns and the covariance of excess returns, both inherited from Week 3. A portfolio computed on raw means is a different portfolio and is not reported as the tangency portfolio.</p>
 <h2>In-sample results are labelled as such</h2>
-<p>Any Sharpe ratio, return, or volatility computed on the same data used to estimate the inputs is labelled <strong>in-sample</strong>, every time it appears.</p>
+<p>Any Sharpe ratio, return, or volatility computed on the same data used to estimate the inputs is labelled in-sample, every time it appears.</p>
 <p>An unlabelled performance number is read as out-of-sample. If it is not, that is a misrepresentation, and it is the most common one in this field.</p>
-<h2>Out-of-sample means untouched</h2>
-<p>A portfolio tested out of sample is estimated on one period and held, unchanged, through another. No re-estimation, no rebalancing, no parameter tweaks informed by the test period.</p>
-<p>If you rebalance during the test, say so and say on what rule — that is a different and legitimate experiment, but it is not the one described here.</p>
+<h2>Out of sample means fixed weights, reset monthly, no re-estimation</h2>
+<p>A portfolio tested out of sample is estimated on one window and held through the next with its weights fixed at the estimated values, reset to them at the start of each month. No re-estimation, no parameter changes informed by the test window. The 1/N comparison gets the same treatment.</p>
+<p>Buy-and-hold, where the weights drift with prices, is a different and legitimate experiment. If you run it, say so, and report the lowest point of the wealth path beside the result.</p>
+<h2>Every remedy names its cost</h2>
+<p>The remedy this week is long-only with a cap. It costs in-sample Sharpe and it costs the ability to express a negative view. Both are stated whenever the constrained portfolio is reported. A remedy reported without its cost is incomplete.</p>
 <h2>Leverage is reported, always</h2>
-<p>Every portfolio you report carries its gross leverage — the sum of absolute weights. A weight vector without it hides the most important thing about it.</p>
+<p>Every portfolio you report carries its gross leverage, the sum of absolute weights. A weight vector without it hides the most important thing about it.</p>
 <h2>Inherited conventions</h2>
-<p>Your Week 3 conventions bind here: return type, annualization basis, risk-free assumption, window. The optimizer inherits every one of them silently.</p>
-<p>If a convention changes, every downstream number changes with it. Say so.</p>
+<p>Your Week 3 conventions bind here: return type, frequency, annualization, risk-free source, window. The optimizer inherits every one of them silently. If a convention changes, every downstream number changes with it. Say so.</p>
 <h2>AI use</h2>
-<p>AI writes optimizers readily and writes them correctly. It will not tell you that the output is unstable, will not check the second window, and will not label anything in-sample.</p>
-<p>Ask for the code. Then do the diagnostic work yourself — that is what this week is.</p>
-<p>What must be yours: the constraint choices, the diagnosis, the remedy selection and its stated cost, and the judgment about whether the result is a statement about the world or about your sample.</p>
+<p>AI writes optimizers readily and mostly correctly. Three things it will do without comment: use raw means instead of excess; scale the weights by their sum without checking that the sum is positive or that Σ is invertible; report the in-sample Sharpe as if it were a result. It will not move the window, and it will not label anything.</p>
+<p>Ask for the code. Then do the diagnostic work yourself. That is what this week is.</p>
+<p>What must be yours: the cap and its reason, the diagnosis, the stated cost, the defence, and the judgment about whether a result is a statement about the world or about your sample.</p>
 <p>You must be able to explain every line of code you submit.</p>
 <h2>Reproducibility and citation</h2>
 <p>Unchanged: fresh-kernel runs, every number traceable to code, every source in <code>source_log.md</code>.</p>

@@ -1,145 +1,546 @@
-<!doctype html><html lang='en'><head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width,initial-scale=1'>
-<title>Week 3 — Handout</title><style>
-:root { --bg:#ffffff; --fg:#14181d; --muted:#5a6572; --rule:#dfe3e8;
-        --accent:#0b5fa5; --code-bg:#f4f6f8; }
-@media (prefers-color-scheme: dark) {
-  :root { --bg:#0f1419; --fg:#e9ecf0; --muted:#9aa4b2; --rule:#2a323c;
-          --accent:#6fb3f2; --code-bg:#182029; } }
+<!doctype html><html lang='en'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>Week 3 — Handout</title><style>
+:root { --bg:#ffffff; --fg:#14181d; --muted:#5a6572; --rule:#dfe3e8; --accent:#0b5fa5; --code-bg:#f4f6f8; }
+@media (prefers-color-scheme: dark) { :root { --bg:#0f1419; --fg:#e9ecf0; --muted:#9aa4b2; --rule:#2a323c; --accent:#6fb3f2; --code-bg:#182029; } }
 * { box-sizing: border-box; }
-body { margin:0; background:var(--bg); color:var(--fg);
-       font: 17px/1.6 -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+body { margin:0; background:var(--bg); color:var(--fg); font: 17px/1.6 -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
 main { max-width: 46rem; margin: 0 auto; padding: 2.25rem 1.25rem 4.5rem; }
 h1 { font-size:1.9rem; line-height:1.2; margin:0 0 1rem; letter-spacing:-.01em; }
 h2 { font-size:1.4rem; line-height:1.25; margin:2.2rem 0 .8rem; }
 h3 { font-size:1.1rem; margin:1.8rem 0 .6rem; }
-p, li { margin:.7rem 0; }
-li { margin:.35rem 0; }
-strong { font-weight:650; }
-a { color:var(--accent); }
-blockquote { margin:1.1rem 0; padding:.5rem 0 .5rem 1.1rem;
-             border-left:3px solid var(--accent); color:var(--muted); }
-pre { background:var(--code-bg); border:1px solid var(--rule); border-radius:8px;
-      padding:.9rem 1.1rem; overflow-x:auto; font:13.5px/1.55 ui-monospace, Menlo, Consolas, monospace; }
-code { font:.9em ui-monospace, Menlo, Consolas, monospace; background:var(--code-bg);
-       padding:.08em .3em; border-radius:4px; }
+p, li { margin:.7rem 0; } li { margin:.35rem 0; } strong { font-weight:650; } a { color:var(--accent); }
+blockquote { margin:1.1rem 0; padding:.5rem 0 .5rem 1.1rem; border-left:3px solid var(--accent); color:var(--muted); }
+pre { background:var(--code-bg); border:1px solid var(--rule); border-radius:8px; padding:.9rem 1.1rem; overflow-x:auto; font:13.5px/1.55 ui-monospace, Menlo, Consolas, monospace; }
+code { font:.9em ui-monospace, Menlo, Consolas, monospace; background:var(--code-bg); padding:.08em .3em; border-radius:4px; }
 pre code { background:none; padding:0; }
-table { border-collapse:collapse; margin:1.1rem 0; font-size:.92rem; max-width:100%;
-        display:block; overflow-x:auto; }
-th, td { border:1px solid var(--rule); padding:.45rem .7rem; text-align:left; }
-th { background:var(--code-bg); }
+table { border-collapse:collapse; margin:1.1rem 0; font-size:.92rem; max-width:100%; display:block; overflow-x:auto; }
+th, td { border:1px solid var(--rule); padding:.45rem .7rem; text-align:left; } th { background:var(--code-bg); }
 hr { border:0; border-top:1px solid var(--rule); margin:2rem 0; }
-.math { background:var(--code-bg); border:1px solid var(--rule); border-radius:8px;
-        padding:.7rem 1rem; margin:1rem 0; font-family:ui-monospace, Menlo, Consolas, monospace;
-        font-size:.92rem; }
 @media (max-width:600px) { body { font-size:16px; } h1 { font-size:1.6rem; } }
-
-.nav { margin: 0 0 1.5rem; font-size:.9rem; }
-.nav a { color: var(--accent); text-decoration: none; }
-.nav a:hover { text-decoration: underline; }
-.wk { border:1px solid var(--rule); border-radius:10px; padding:1.1rem 1.4rem; margin:0 0 1rem; }
-.wk h3 { margin:.1rem 0 .5rem; font-size:1.05rem; }
-.wk .num { color:var(--muted); font:600 11px/1 ui-monospace,Menlo,Consolas,monospace;
-           letter-spacing:.1em; text-transform:uppercase; }
-.surfaces a { display:inline-block; margin:.3rem .4rem .3rem 0; padding:.3rem .65rem;
-              border:1px solid var(--accent); border-radius:999px; font-size:.85rem;
-              color:var(--accent); text-decoration:none; }
-.surfaces a:hover { background:var(--code-bg); }
-.surfaces span.held { display:inline-block; margin:.3rem .4rem .3rem 0; padding:.3rem .65rem;
-                      border:1px dashed var(--rule); border-radius:999px; font-size:.85rem;
-                      color:var(--muted); }
-.lede { color:var(--muted); margin:0 0 2rem; }
+.nav { margin: 0 0 1.5rem; font-size:.9rem; } .nav a { color: var(--accent); text-decoration: none; } .nav a:hover { text-decoration: underline; }
 </style></head>
 <body><main>
 <div class='nav'><a href='../index.html'>MSF Financial Modeling</a></div>
-<h1>Week 3 — Handout</h1><h1>Week 3 — Handout</h1>
-<blockquote><strong>Register: TEACH.</strong> Narrative and worked examples. Graded steps are in <code>lab.md</code>; conventions are in <code>rules.md</code>.</blockquote>
-<p><strong>You arrive with:</strong> a panel, a permanent identifier on every row, a data-quality catalog with severities you assigned, and a written statement of what your panel cannot be used for.</p>
-<p>Now you compute something. This is where the previous two weeks start collecting.</p>
-<hr>
+<h1>Week 3 — Handout</h1>
+<blockquote>
+<p><strong>Register: TEACH.</strong> Narrative and worked examples. Graded steps are in <code>lab.md</code>; conventions are in <code>rules.md</code>.</p>
+</blockquote>
+<p><strong>You arrive with:</strong> a panel of 8 to 15 securities, a permanent identifier on every row, <code>data_quality_issues.md</code> with severities you assigned, and a written statement of what your panel cannot be used for.</p>
+<p><strong>Where this goes next:</strong> Week 4 builds portfolios from the return series and the covariance matrix you produce this week. Every convention you leave unstated here becomes a silent assumption inside an optimizer.</p>
+<hr />
 <h2>Why this matters</h2>
-<p>You will be asked, more than once in your career, what something returned. It sounds like a question with an answer.</p>
-<p>It is a question with several answers, all defensible, differing by amounts large enough to change a decision. The professional skill is not producing a number. It is producing a number <strong>and being able to say exactly which question it answers</strong> — which convention, which window, which benchmark, which assumption about the risk-free rate.</p>
-<p>An analyst who reports 13.53% and an analyst who reports 10.42% can both be right about the same index over the same decade. Here is how.</p>
-<hr>
-<h2>Part 1 — What did the S&amp;P 500 return?</h2>
-<p>Two funds. Both track the S&amp;P 500. Both hold the same five hundred companies. Ten years, same window.</p>
-<pre><code>import yfinance as yf, numpy as np
-
-px = yf.download([&quot;SPY&quot;,&quot;RSP&quot;], start=&quot;2015-06-30&quot;, end=&quot;2025-06-30&quot;,
-                 auto_adjust=True, progress=False)[&quot;Close&quot;].dropna()
-r = px.pct_change().dropna()
-
-for c in [&quot;SPY&quot;,&quot;RSP&quot;]:
-    tot = px[c].iloc[-1]/px[c].iloc[0] - 1
-    ann = (1+tot)**(252/len(r)) - 1
-    vol = r[c].std()*np.sqrt(252)
-    print(f&quot;{c}: total {tot*100:7.2f}%  annualized {ann*100:5.2f}%  &quot;
-          f&quot;vol {vol*100:5.2f}%  sharpe {ann/vol:.3f}&quot;)</code></pre>
-<pre><code>window 2015-06-30 -&gt; 2025-06-27  (2514 trading days)
-
-SPY: total  254.36%  annualized 13.53%  vol 18.31%  sharpe 0.739
-RSP: total  168.78%  annualized 10.42%  vol 18.78%  sharpe 0.555</code></pre>
-<p><strong>Same index. Same companies. Same decade.</strong> A gap of 3.11 percentage points per year, which compounds to 85.6 percentage points of cumulative return — on a dollar invested, an eighty-six cent difference.</p>
-<p>The Sharpe ratios differ by 33%.</p>
-<h3>The only difference is weighting</h3>
-<p><code>SPY</code> weights each company by market capitalisation. <code>RSP</code> weights each company equally. Nothing else about the two is different.</p>
-<p>Over this particular decade, the largest companies outperformed, so the cap-weighted version won. Over a different decade it goes the other way. Neither is the <em>correct</em> S&amp;P 500 return. They answer different questions:</p>
-<ul><li><em>&quot;What did the market&#x27;s capital actually earn?&quot;</em> → cap-weighted</li><li><em>&quot;What did the average member company return?&quot;</em> → equal-weighted</li></ul>
-<p>If you report one without saying which, you have not reported a number. You have reported a number and hidden the question.</p>
-<blockquote><strong>The rule this gives you.</strong> Every performance number is downstream of a construction choice. Name the choice when you report the number, every time.</blockquote>
-<hr>
-<h2>Part 2 — The same series, two volatilities</h2>
-<p>Now something more uncomfortable. Take one series — <code>SPY</code> — and compute its annualized volatility. Nothing about the data changes. Only the convention:</p>
-<pre><code>daily vol × sqrt(252)  = 18.31%     [252 trading days per year]
-daily vol × sqrt(365)  = 22.03%     [365 calendar days per year]</code></pre>
-<p><strong>A 3.72 percentage point difference from a choice about what a year is.</strong></p>
-<p>Both conventions exist in real use. Equities typically annualize on 252 trading days, because that is how many days the market is actually open. Some fixed income and derivatives conventions use 360 or 365. If you take a daily equity volatility and scale it by √365, you have implicitly claimed the market moves on weekends.</p>
-<p>Every metric with a time dimension has this property. Annualized return, volatility, Sharpe ratio, tracking error, information ratio — all of them carry a convention, and the convention is usually invisible in the output.</p>
-<blockquote><strong>The rule this gives you.</strong> When your number disagrees with someone else&#x27;s, check the convention <strong>before</strong> you check the data. It is the more common explanation and the faster one to test.</blockquote>
-<hr>
-<h2>Part 3 — An index is a membership dataset, not a price series</h2>
-<p>Here is the thing that makes this a professional-data week.</p>
-<p>You just downloaded <code>SPY</code> and <code>RSP</code> and got price series. That is what a free source gives you: the <em>level</em> of a thing, over time. It is enough to answer &quot;what did it return.&quot;</p>
-<p>It is not enough to answer almost anything else.</p>
-<p>An index is defined by <strong>rules and a membership list</strong>:</p>
-<ul><li>Which securities are in it, on each date</li><li>What weight each one carries</li><li>When and why members are added and removed</li><li>How the weights change when a member has a corporate action</li></ul>
-<p>A professional index dataset gives you the <strong>membership file</strong> — the constituents as of each date, with weights. That is a different and much larger object than a price series, and it is what makes the following possible:</p>
-<table><thead><tr><th>Question</th><th>Needs</th></tr></thead><tbody><tr><td>What did the index return?</td><td>the price series</td></tr><tr><td>What was in the index in March 2023?</td><td>the point-in-time membership file</td></tr><tr><td>Did this manager beat their benchmark because of stock picking or sector tilt?</td><td>membership + weights</td></tr><tr><td>Would my strategy have been investable at the time?</td><td>membership, as it stood then</td></tr><tr><td>Is my panel survivorship-biased?</td><td>membership as of the <em>start</em> of the sample</td></tr></tbody></table>
-<p>That last row should look familiar. <strong>This is your Week 2 problem, and the membership file is the fix.</strong> When you asked where your list of names came from, the professional answer is: from a point-in-time membership file, constructed as of the start of the sample, not from today&#x27;s constituent list.</p>
-<p>If you have WRDS, this is available. If you do not, the honest move is the same one as last week: state the limitation, and say what you would have used.</p>
-<hr>
-<h2>Part 4 — Verify against something you did not compute</h2>
-<p>You have a number. Before it goes anywhere, check it against a source that did not come from your code.</p>
-<p>For a fund, the fact sheet or the issuer&#x27;s own site publishes returns and often volatility. For an index, the index provider publishes factsheets. For a security, several vendors publish computed metrics.</p>
-<p>Your number will not match exactly. That is expected, and the discipline is what you do next:</p>
-<table><thead><tr><th>Gap size</th><th>Almost always</th></tr></thead><tbody><tr><td>a few basis points</td><td>rounding, or a slightly different window</td></tr><tr><td>tenths of a percent</td><td>different day-count, or dividend treatment</td></tr><tr><td>a percentage point or more</td><td>different window, different share class, or a real error</td></tr><tr><td>the sign is different</td><td>a real error, in one of you</td></tr></tbody></table>
-<p>Work down that list before concluding anything. <strong>The most common cause of a disagreement is a convention difference, and the second most common is a window difference.</strong> Actual computation errors are third, and they are the only one people check first.</p>
-<p><strong>The shape, not your answer</strong> — a filled verification entry:</p>
-<blockquote><strong>Metric:</strong> SPY annualized volatility, 10 years to 2025-06-27 <strong>Mine:</strong> 18.31% (daily log-free simple returns, ×√252) <strong>Independent source:</strong> issuer factsheet, 3-year standard deviation — <strong>not comparable</strong>, different window. <strong>Resolution:</strong> could not verify directly; the published figure uses a 3-year window and I used 10. Recomputed mine on a matched 3-year window to compare, and report the 10-year figure with its window stated on the face of the result. <strong>Status:</strong> verified on a matched window; the headline figure&#x27;s window is stated.</blockquote>
-<p>Notice what that entry does: it fails to verify directly, says so, and does something about it. That is a complete and professional answer. &quot;Verified ✓&quot; with nothing behind it is not.</p>
-<hr>
-<h2>Part 5 — What your Week 2 catalog now forbids</h2>
-<p>Your data-quality catalog said what your panel cannot be used for. This is the week that starts to bite.</p>
-<p>If your panel is survivor-only, then any cross-sectional statistic you compute from it — average return, dispersion, the fraction of names that beat something — is conditioned on survival, and you may not report it as though it were not.</p>
-<p>You have three honest options, and they are all acceptable:</p>
-<ol><li><strong>Fix the input.</strong> Rebuild the name list from a point-in-time membership source.</li><li><strong>Bound the damage.</strong> Estimate how much the contamination moves the number and report the</li></ol>
-<p>bound alongside it.</p>
-<ol><li><strong>Restrict the claim.</strong> Report only what the contaminated panel <em>can</em> support — often that</li></ol>
-<p>is a statement about survivors, which is a real thing to say as long as you say it.</p>
-<p>What is not an option is computing the number, knowing what is wrong with it, and reporting it plainly. The catalog exists precisely so that this moment has a written record.</p>
-<blockquote><strong>The rule this gives you.</strong> The limitations you wrote down last week are not a disclaimer. They are a constraint on what you are allowed to say this week.</blockquote>
-<hr>
-<h2>This week&#x27;s sources</h2>
-<p>Register: [the source register](../sources.html).</p>
-<table><thead><tr><th>Working with</th><th>For</th></tr></thead><tbody><tr><td><code>yfinance</code> (guaranteed lane)</td><td>the SPY/RSP comparison, and your own metrics</td></tr><tr><td>Index provider methodology documents</td><td>the membership rules behind your benchmark</td></tr><tr><td>WRDS / CRSP (Gen 1)</td><td>point-in-time index membership, if entitled</td></tr></tbody></table>
-<p><strong>Read the methodology, do not infer it.</strong> An index&#x27;s construction rules are published, and they change. What a fund was in 2015 is not necessarily what it is now, and no summary of it — yours, a textbook&#x27;s, or anyone else&#x27;s — substitutes for the current document.</p>
-<p>The same applies to the conventions inside your own code. A function that annualizes has made a choice about what a year is. If you did not make that choice deliberately, something else did.</p>
-<hr>
-<p><strong>Two sources, minimum — and where you have professional access, one of them is the professional source.</strong> This week that is <strong>WRDS / CRSP</strong>, for point-in-time index membership, so your benchmark carries no look-ahead.</p>
-<p>Pending access is neither an excuse nor a penalty. Document the attempt — source, route tried, date, barrier, and why that source would have been independent — and use a second free source instead. <strong>The attempt counts; the outcome never does.</strong></p>
+<p>A portfolio manager looks at a position that returned 22% a year for a decade and asks one question: <strong>did it earn its risk?</strong> Three numbers answer it, and every desk that reports performance produces all three.</p>
+<p>The Sharpe ratio says what the position paid per unit of risk taken. Jensen's alpha says what it paid after the market's share is removed. The risk decomposition says how much of the risk was the market's and how much was the position's own. A junior analyst who reports 22% has reported a number. One who reports the three, with the conventions behind them, has reported a result.</p>
+<p>The three come from one regression and one convention. This week you learn both, on eight companies whose numbers are printed below so you can check your own.</p>
+<hr />
+<h2>The paper</h2>
+<p>This week is anchored on <strong>Sharpe (1964), "Capital Asset Prices: A Theory of Market Equilibrium under Conditions of Risk," Journal of Finance 19(3), 425–442.</strong> It is the paper the Capital Asset Pricing Model comes from, and its one equation is the reason the three numbers above exist:</p>
+<pre><code>E[r_i] − r_f  =  β_i · ( E[r_m] − r_f )
+</code></pre>
+<p>In words: the expected excess return on any asset is its beta times the expected excess return on the market. Nothing else is rewarded. The part of an asset's risk that is not the market's, Sharpe argued, can be diversified away, so the market does not pay for it.</p>
+<p><strong>Jensen (1968), "The Performance of Mutual Funds in the Period 1945–1964," Journal of Finance 23(2), 389–416,</strong> turned that equation into a regression you can run on data and named the intercept. The digits below are Jensen's procedure on a modern panel.</p>
+<p><strong>Read:</strong> Sharpe's introduction and the section on equilibrium in the capital market, through the figure with the capital market line, about eight pages. Jensen's introduction and the section that defines the regression, about six pages. Both are on JSTOR through Purdue Libraries. Start here: https://www.lib.purdue.edu → Databases → JSTOR. Sharpe's DOI is 10.1111/j.1540-6261.1964.tb02865.x; Jensen's is 10.1111/j.1540-6261.1968.tb00815.x.</p>
+<p><strong>What the paper does not say.</strong> It does not say that a positive intercept is skill. It says that, if the model is right, the intercept should be zero. Everything you do with alpha this week sits on that "if."</p>
+<p><strong>Textbook.</strong> The free-lane counterpart, with code, is in the DRIVER textbook: <a href="https://cinderzhang.github.io/DRIVER-FinancialModeling/Session5-Portfolio-Metrics.html">Session 5 — Portfolio Metrics</a> for the Sharpe ratio, beta, and alpha, and <a href="https://cinderzhang.github.io/DRIVER-FinancialModeling/Session1-Total-Return-Analysis.html">Session 1 — Total Return Analysis</a> for why an adjusted close is a total-return proxy. Read the paper for the idea and the textbook for the code.</p>
+<hr />
+<h2>Part 1 — Excess returns first, and the risk-free rate is data</h2>
+<p>Every number this week is computed on <strong>excess returns</strong>: the security's return minus the one-month Treasury bill rate in the same month. Not the raw return. The raw return includes what you would have earned for doing nothing.</p>
+<p>The risk-free series is not a constant you type in. It is a column in the <strong>Ken French Data Library</strong>, the free reference source for factor data, and it comes bundled with the market factor you will need in Part 3.</p>
+<p>Get it:</p>
+<ol>
+<li>Go to https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/data_library.html</li>
+<li>Under <strong>U.S. Research Returns Data</strong>, find <strong>Fama/French 3 Factors</strong> and click <strong>CSV</strong>. The file is <code>F-F_Research_Data_Factors_CSV.zip</code>.</li>
+<li>Unzip. The CSV has a four-line preamble, then a header <code>,Mkt-RF,SMB,HML,RF</code>, then one row per month from 192607. Values are in <strong>percent</strong>. The monthly block ends where a blank line and the word "Annual" begin.</li>
+</ol>
+<p>The last three monthly rows on the day this was written:</p>
+<pre><code>202605,   4.91,  -1.59,  -2.31,   0.31
+202606,  -1.07,   3.39,   3.58,   0.29
+202607,  -0.60,  -1.96,   2.11,   0.33
+</code></pre>
+<p><code>Mkt-RF</code> is the return on the whole US equity market <strong>already in excess of</strong> the bill rate. <code>RF</code> is the bill rate itself. If you subtract <code>RF</code> from <code>Mkt-RF</code>, you have subtracted it twice. That is the single most common error in student factor regressions.</p>
+<p>Over the worked window, July 2015 to June 2025, the mean monthly bill rate was 0.1571%, about 1.88% a year. In 2015 it was zero. In 2025 it was 0.34% a month. A Sharpe ratio that ignores it is wrong by an amount that changes over time.</p>
+<hr />
+<h2>Part 2 — The Sharpe ratio, stated properly</h2>
+<p>The Sharpe ratio is the mean excess return divided by the standard deviation of excess return, scaled to a year:</p>
+<pre><code>Sharpe  =  mean( r − r_f ) / sd( r − r_f )  ×  √12         [monthly data]
+</code></pre>
+<p>For Apple, July 2015 to June 2025, 120 months:</p>
+<pre><code>mean monthly excess  =  1.8291%
+sd monthly excess    =  8.0395%   (sample sd, ddof = 1)
+Sharpe               =  1.8291 / 8.0395 × √12  =  0.788
+</code></pre>
+<p>That is the whole computation. What makes it a professional number is stating the three choices inside it, because each one moves the answer.</p>
+<p><strong>The three choices.</strong></p>
+<ol>
+<li><strong>Excess or raw.</strong> Above, excess. Using raw returns with the risk-free rate silently set to zero gives Apple 0.857 instead of 0.788. For Coca-Cola it is 0.653 instead of 0.533. The gap is the bill rate, and the bill rate was zero in 2015 and 4% in 2024, so the error is not constant across windows.</li>
+<li><strong>Arithmetic or geometric mean.</strong> Above, the arithmetic mean of monthly returns, annualized by ×12. The alternative is the <strong>compound annual growth rate, CAGR</strong>: the single yearly rate that, compounded, turns the starting dollar into the ending dollar. One dollar in Apple in July 2015 was $7.30 in June 2025, so</li>
+</ol>
+<pre><code>CAGR  =  ( 7.3035 ) ^ (12 / 120)  −  1   =   22.00% per year
+</code></pre>
+<p>The arithmetic mean of the same 120 months, ×12, is 23.83%. The two are different questions. CAGR answers "what did I actually earn per year," compounding included. The arithmetic mean answers "what did a typical month pay," which is what a Sharpe ratio is built on, because volatility is measured around that mean. Over one horizon the arithmetic mean is never below the geometric one, and volatility drives them apart: two annual returns of +50% and −50% average to zero and compound to −13.4% a year, because $1 became $0.75. Across horizons the order can flip, because ×12 ignores compounding inside the year: Microsoft's arithmetic 28.04% sits below its 29.23% CAGR. Dividing a CAGR by a volatility mixes the two and is a common shortcut; it is not a Sharpe ratio. Microsoft's Sharpe is 1.248; its CAGR over volatility is 1.396.
+3. <strong>Sample or population standard deviation.</strong> <code>pandas</code> uses the sample version by default (<code>ddof=1</code>); <code>numpy</code> uses the population version (<code>ddof=0</code>). On 120 months the difference is 0.4% of the answer, invisible here and a real discrepancy source on short windows.</p>
+<p>The eight names and two benchmarks, both ways:</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>CAGR</th>
+<th>Ann. vol</th>
+<th>Sharpe (excess, arithmetic)</th>
+<th>CAGR ÷ vol, rf = 0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>AAPL</td>
+<td>22.00%</td>
+<td>27.81%</td>
+<td>0.788</td>
+<td>0.791</td>
+</tr>
+<tr>
+<td>MSFT</td>
+<td>29.23%</td>
+<td>20.94%</td>
+<td>1.248</td>
+<td>1.396</td>
+</tr>
+<tr>
+<td>JNJ</td>
+<td>7.55%</td>
+<td>16.04%</td>
+<td>0.415</td>
+<td>0.471</td>
+</tr>
+<tr>
+<td>KO</td>
+<td>9.48%</td>
+<td>15.88%</td>
+<td>0.533</td>
+<td>0.597</td>
+</tr>
+<tr>
+<td>XOM</td>
+<td>7.22%</td>
+<td>27.47%</td>
+<td>0.320</td>
+<td>0.263</td>
+</tr>
+<tr>
+<td>JPM</td>
+<td>18.86%</td>
+<td>24.56%</td>
+<td>0.755</td>
+<td>0.768</td>
+</tr>
+<tr>
+<td>PG</td>
+<td>10.40%</td>
+<td>16.23%</td>
+<td>0.576</td>
+<td>0.641</td>
+</tr>
+<tr>
+<td>WMT</td>
+<td>17.50%</td>
+<td>19.04%</td>
+<td>0.852</td>
+<td>0.919</td>
+</tr>
+<tr>
+<td>SPY</td>
+<td>13.54%</td>
+<td>15.48%</td>
+<td>0.780</td>
+<td>0.875</td>
+</tr>
+<tr>
+<td>RSP</td>
+<td>10.44%</td>
+<td>16.91%</td>
+<td>0.562</td>
+<td>0.618</td>
+</tr>
+</tbody>
+</table>
+<p>Monthly total-return proxies from <code>yfinance</code> with <code>auto_adjust=True</code>, month-end close, July 2015 to June 2025. Every number is produced by <a href="week3_worked.py"><code>week3_worked.py</code></a>.</p>
+<p>The last column is the shortcut. It is not a Sharpe ratio. The two columns rank the names differently: SPY looks better than Apple on the shortcut and worse on the ratio.</p>
+<p><strong>The rule this gives you.</strong> A Sharpe ratio is reported with its three choices. "Sharpe 0.79" is not a result. "Sharpe 0.79, monthly excess returns over one-month bills, arithmetic mean, sample sd, ×√12, 2015-07 to 2025-06" is.</p>
+<hr />
+<h2>Part 3 — Jensen's alpha: one regression</h2>
+<p>Jensen's procedure is an ordinary least squares regression of the security's excess return on the market's excess return:</p>
+<pre><code>r_i − r_f  =  α_i  +  β_i · ( r_m − r_f )  +  ε_i
+</code></pre>
+<p>The slope β is the security's sensitivity to the market. The intercept α is the average excess return the security earned <strong>that the market does not account for</strong>. The residual ε is what is left each month.</p>
+<p>For Apple on the French market factor, 120 months:</p>
+<pre><code>α  =  0.0070 per month   →  8.41% per year     t = 1.23
+β  =  1.1335                                   t = 9.41
+R² =  0.429
+residual sd  =  6.10% per month   →  21.1% per year
+</code></pre>
+<p>Read that. Apple earned 0.70% a month more than a 1.13-beta position in the market would have. The t-statistic says the estimate is 1.23 standard errors from zero. A 95% interval on the monthly alpha runs from −0.43% to +1.83%. It includes zero. You may not call Apple's alpha "positive" with that interval; you may call it "8.4% a year, not distinguishable from zero on 120 months."</p>
+<p>Microsoft is the one name in the eight you could stand behind:</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>α per year</th>
+<th>t(α)</th>
+<th>β</th>
+<th>t(β)</th>
+<th>R²</th>
+<th>residual vol, ann.</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>AAPL</td>
+<td>8.41%</td>
+<td>1.23</td>
+<td>1.134</td>
+<td>9.41</td>
+<td>0.429</td>
+<td>21.1%</td>
+</tr>
+<tr>
+<td>MSFT</td>
+<td>15.22%</td>
+<td>3.14</td>
+<td>0.916</td>
+<td>10.74</td>
+<td>0.494</td>
+<td>15.0%</td>
+</tr>
+<tr>
+<td>JNJ</td>
+<td>0.87%</td>
+<td>0.19</td>
+<td>0.487</td>
+<td>6.04</td>
+<td>0.236</td>
+<td>14.2%</td>
+</tr>
+<tr>
+<td>KO</td>
+<td>3.31%</td>
+<td>0.71</td>
+<td>0.432</td>
+<td>5.29</td>
+<td>0.192</td>
+<td>14.4%</td>
+</tr>
+<tr>
+<td>XOM</td>
+<td>−1.49%</td>
+<td>−0.19</td>
+<td>0.862</td>
+<td>6.33</td>
+<td>0.254</td>
+<td>23.9%</td>
+</tr>
+<tr>
+<td>JPM</td>
+<td>5.04%</td>
+<td>0.94</td>
+<td>1.126</td>
+<td>11.94</td>
+<td>0.547</td>
+<td>16.6%</td>
+</tr>
+<tr>
+<td>PG</td>
+<td>5.19%</td>
+<td>1.05</td>
+<td>0.348</td>
+<td>3.99</td>
+<td>0.119</td>
+<td>15.3%</td>
+</tr>
+<tr>
+<td>WMT</td>
+<td>10.62%</td>
+<td>1.87</td>
+<td>0.464</td>
+<td>4.65</td>
+<td>0.155</td>
+<td>17.5%</td>
+</tr>
+<tr>
+<td>Equal-weight panel</td>
+<td>5.89%</td>
+<td>2.71</td>
+<td>0.721</td>
+<td>18.80</td>
+<td>0.750</td>
+<td>6.7%</td>
+</tr>
+</tbody>
+</table>
+<p>Regressor: French <code>Mkt-RF</code>, monthly, 2015-07 to 2025-06. Alpha per year is the monthly intercept ×12.</p>
+<p>Three things to notice.</p>
+<p>Every beta has a t-statistic near or above 4. Betas are estimated precisely on ten years of monthly data. Alphas are not: one of eight clears 2. That asymmetry is permanent. Expected returns are hard to estimate; sensitivities are not.</p>
+<p>The R² column is not fit quality in the usual sense. It is the fraction of the security's variance that the market explains. Procter &amp; Gamble's 0.119 means 88% of its month-to-month movement had nothing to do with the market. That number is Part 4.</p>
+<p>The equal-weight panel has a t(α) of 2.71 while seven of its eight members do not clear 2. Nothing was added. Idiosyncratic noise was averaged out, and the standard error fell with it. This is diversification seen from the alpha side.</p>
+<p><strong>The code</strong>, in full, because Week 4 inherits it:</p>
+<pre><code class="language-python">import statsmodels.api as sm
+X = sm.add_constant(df[&quot;Mkt-RF&quot;])          # column of ones + market excess return
+m = sm.OLS(df[&quot;AAPL&quot;] - df[&quot;RF&quot;], X).fit()  # excess return on the left
+alpha_m, beta = m.params[&quot;const&quot;], m.params[&quot;Mkt-RF&quot;]
+print(alpha_m*12, m.tvalues[&quot;const&quot;], beta, m.rsquared, (m.mse_resid**0.5)*12**0.5)
+</code></pre>
+<p><code>df</code> holds monthly simple returns in decimals with the French columns already divided by 100 and aligned on year-month. The alignment is the part AI-written code gets wrong: French rows are keyed <code>202506</code>, <code>yfinance</code> rows are keyed by the last trading day. Convert both to a monthly period before joining, and assert the row count you expect. Here it is 120.</p>
+<hr />
+<h2>Part 4 — Risk decomposition, and why diversification works</h2>
+<p>The regression splits each month's excess return into a market part and a residual. Because the residual is uncorrelated with the market by construction, the variances add:</p>
+<pre><code>total variance  =  β² · var(r_m − r_f)  +  var(ε)
+                   systematic            idiosyncratic
+</code></pre>
+<p>For Apple, in monthly variance units:</p>
+<pre><code>β² · var_m  =  1.1335² × 0.002157  =  0.002771
+var(ε)      =                          0.003723
+sum         =                          0.006494     total variance, measured directly: 0.006463
+</code></pre>
+<p>The 0.5% gap is a degrees-of-freedom difference: the regression's residual variance is divided by n − 2 and the total by n − 1. Divide the residual sum of squares by n − 1 instead and the identity is exact; the tables keep the regression's n − 2 figure because that is what the software reports, so expect the check to close within about 1%, not to the last digit. Annualized and in standard-deviation units, the same split reads: total 27.9%, systematic 18.2%, idiosyncratic 21.1%, and √(18.2² + 21.1²) = 27.9. Systematic volatility is |β| times market volatility; the absolute value matters only for a negative-beta security, and none of these eight is one.</p>
+<p>All nine:</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>β</th>
+<th>total vol</th>
+<th>systematic vol</th>
+<th>idiosyncratic vol</th>
+<th>systematic share (R²)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>AAPL</td>
+<td>1.134</td>
+<td>27.9%</td>
+<td>18.2%</td>
+<td>21.1%</td>
+<td>43%</td>
+</tr>
+<tr>
+<td>MSFT</td>
+<td>0.916</td>
+<td>21.0%</td>
+<td>14.7%</td>
+<td>15.0%</td>
+<td>49%</td>
+</tr>
+<tr>
+<td>JNJ</td>
+<td>0.487</td>
+<td>16.1%</td>
+<td>7.8%</td>
+<td>14.2%</td>
+<td>24%</td>
+</tr>
+<tr>
+<td>KO</td>
+<td>0.432</td>
+<td>15.9%</td>
+<td>7.0%</td>
+<td>14.4%</td>
+<td>19%</td>
+</tr>
+<tr>
+<td>XOM</td>
+<td>0.862</td>
+<td>27.5%</td>
+<td>13.9%</td>
+<td>23.9%</td>
+<td>25%</td>
+</tr>
+<tr>
+<td>JPM</td>
+<td>1.126</td>
+<td>24.5%</td>
+<td>18.1%</td>
+<td>16.6%</td>
+<td>55%</td>
+</tr>
+<tr>
+<td>PG</td>
+<td>0.348</td>
+<td>16.2%</td>
+<td>5.6%</td>
+<td>15.3%</td>
+<td>12%</td>
+</tr>
+<tr>
+<td>WMT</td>
+<td>0.464</td>
+<td>19.0%</td>
+<td>7.5%</td>
+<td>17.5%</td>
+<td>15%</td>
+</tr>
+<tr>
+<td>Equal-weight panel</td>
+<td>0.721</td>
+<td>13.4%</td>
+<td>11.6%</td>
+<td>6.7%</td>
+<td>75%</td>
+</tr>
+</tbody>
+</table>
+<p>Annualized, market factor volatility 16.1% a year.</p>
+<p>Read the last row against the eight above it. Every single name carries idiosyncratic volatility between 14% and 24% a year. The equal-weight portfolio of the same eight carries 6.7%. The systematic part did not shrink; it is the weighted average of the betas, 0.721, times the market's 16.1%. The idiosyncratic part collapsed, because eight residuals that are mostly unrelated to each other average toward zero.</p>
+<p>That is Sharpe's argument in a table. The market does not pay for idiosyncratic risk because an investor can remove most of it by holding eight names instead of one. Whatever is left, 6.7% here, is the part your panel's construction chose to keep.</p>
+<p><strong>The covariance matrix Week 4 needs.</strong> Week 4 feeds an optimizer with two inputs: the mean of each security's excess return and the covariance matrix of those excess returns. The second is the sample covariance, annualized, and for eight names it holds 36 distinct numbers, each estimated from the same 120 months. The 3×3 corner:</p>
+<pre><code>            AAPL    MSFT     JNJ
+AAPL      0.0776  0.0346  0.0148
+MSFT      0.0346  0.0439  0.0103
+JNJ       0.0148  0.0103  0.0260
+</code></pre>
+<p>The diagonal is the variance you already have: 0.0776 is 27.9% squared. The off-diagonal is what the optimizer acts on, and 0.0346 says Apple and Microsoft move together at a correlation of 0.59. Save the matrix with the return series. Week 4 begins by asking how much you should trust those 36 numbers.</p>
+<hr />
+<h2>Part 5 — Which market? Alpha depends on the regressor</h2>
+<p>Jensen regressed on "the market." There is no such series. There is French's <code>Mkt-RF</code>, the value-weighted return on every listed US stock. There is SPY, the investable cap-weighted S&amp;P 500. There is RSP, the same 500 companies weighted equally. Each is a defensible market, and each gives a different alpha:</p>
+<table>
+<thead>
+<tr>
+<th>Alpha per year</th>
+<th>vs French Mkt-RF</th>
+<th>vs SPY</th>
+<th>vs RSP</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>AAPL</td>
+<td>8.41%</td>
+<td>7.58%</td>
+<td>13.47%</td>
+</tr>
+<tr>
+<td>MSFT</td>
+<td>15.22%</td>
+<td>14.35%</td>
+<td>19.68%</td>
+</tr>
+<tr>
+<td>KO</td>
+<td>3.31%</td>
+<td>2.47%</td>
+<td>3.83%</td>
+</tr>
+<tr>
+<td>XOM</td>
+<td>−1.49%</td>
+<td>−2.00%</td>
+<td>−0.66%</td>
+</tr>
+<tr>
+<td>Equal-weight panel</td>
+<td>5.89%</td>
+<td>5.23%</td>
+<td>8.04%</td>
+</tr>
+</tbody>
+</table>
+<p>Same panel. Same 120 months. The equal-weight panel's alpha is 5.2% against SPY and 8.0% against RSP. Alpha is the panel's mean excess return minus beta times the benchmark's mean excess return, so a benchmark with a lower mean, RSP returned 3.1 percentage points a year less than SPY over this decade, leaves more for the intercept, and every name looks better against it.</p>
+<p>Why RSP returned less is worth one paragraph. SPY weights each company by market capitalization; RSP holds the same companies at equal weight and rebalances back to equal weight every quarter. Over this decade the largest companies outperformed, so the cap-weighted fund won. RSP also charges 0.20% a year against SPY's 0.09%, and its quarterly rebalancing has a cost. The two funds differ in construction, in fees, and in implementation, and the 3.1-point gap is all three together. "Same companies, different weights" is the headline; it is not the whole story.</p>
+<p><strong>The rule this gives you.</strong> A benchmark is a choice, and the choice moves alpha by more than most alphas are worth. Name it, say what it is made of, and compute the obvious alternative so you know how large the gap is before a colleague computes it for you.</p>
+<hr />
+<h2>Part 6 — The equal-weight portfolio is also a convention</h2>
+<p>"Equal-weighted portfolio of my panel" hides a choice. Do you rebalance back to equal weight every month, or buy equal amounts once and let the weights drift?</p>
+<p>Same eight names, same window:</p>
+<pre><code>Monthly-rebalanced 1/8      CAGR 16.66%   vol 13.38%   Sharpe 1.083   $1 → $4.67
+Buy-and-hold 1/8 at start   CAGR 17.52%   vol 14.14%   Sharpe 1.086   $1 → $5.02
+</code></pre>
+<p>Buy-and-hold won by 0.9 points a year here because it let the winners run and the winners kept winning. Over a mean-reverting decade it goes the other way. Neither is the correct equal-weight return. State which one you computed. The regression tables above use the monthly-rebalanced version, because that is what <code>df[NAMES].mean(axis=1)</code> computes, and that is what most students will write without noticing they chose.</p>
+<hr />
+<h2>Part 7 — Verify against something you did not write</h2>
+<p>Beta is the one number this week that every vendor publishes. The Yahoo Finance quote page for any ticker shows <strong>Beta (5Y Monthly)</strong> in its statistics panel. Start here: https://finance.yahoo.com/quote/AAPL. That label is a convention statement: sixty months, monthly returns, against the S&amp;P 500.</p>
+<p>On the day this was written it showed Apple 1.085, Coca-Cola 0.342, Exxon 0.175. My ten-year betas from Part 3 are 1.134, 0.432, 0.862. Exxon's disagrees by a factor of five.</p>
+<p>Work the discrepancy in the order that finds it fastest:</p>
+<ol>
+<li><strong>Identity.</strong> Same security? Yes.</li>
+<li><strong>Frequency.</strong> Monthly both. Matches.</li>
+<li><strong>Window.</strong> Mine: 2015-07 to 2025-06, 120 months. Yahoo: the sixty months ending in the most recent full month. Does not match.</li>
+<li><strong>Return type.</strong> Mine: excess returns. Yahoo: almost certainly raw. On monthly data this moves beta by about 0.01.</li>
+<li><strong>Regressor.</strong> Mine: French Mkt-RF. Yahoo: S&amp;P 500 index. SPY and the index give the same beta to two decimals; French's broader market differs slightly.</li>
+<li><strong>Formula.</strong> OLS slope both.</li>
+</ol>
+<p>Step 3 is the gap. Yahoo does not print its end month, so I tried the sixty months ending in each recent full month. Sixty months ending July 2026, raw returns, against SPY, matched:</p>
+<pre><code>              mine, matched window    Yahoo Beta (5Y Monthly)    gap
+AAPL                 1.087                    1.085             0.002
+KO                   0.334                    0.342             0.008
+XOM                  0.172                    0.175             0.003
+</code></pre>
+<p>Closed, provisionally: the agreement identifies the window, and the vendor has not confirmed it. The filled verification entry, <strong>the shape, not your answer</strong>:</p>
+<pre><code>Metric:       Exxon beta
+Mine:         0.862 — monthly excess returns on French Mkt-RF, 2015-07 to 2025-06, 120 months
+Source:       Yahoo Finance quote page, &quot;Beta (5Y Monthly)&quot;, retrieved 2026-09-07: 0.175
+Gap:          0.687 — not a rounding gap
+Worked:       identity same; frequency same; window differs (60 months ending 2026-07 vs 120 ending 2025-06)
+Matched:      re-ran on 2021-08 to 2026-07, raw returns vs SPY: 0.172 vs 0.175, gap 0.003
+Status:       verified on a matched window, provisional on the vendor's unstated end month. The ten-year figure stands with its window stated.
+Finding:      Exxon's beta fell from about 0.86 to about 0.17 across the two windows. That is a
+              window finding, not an error, and it goes in Step 9 of the lab.
+</code></pre>
+<p>Notice what the entry does. It fails to match, says so, finds the cause by working a list, closes the gap on matched conventions, and reports both numbers with their windows. "Verified ✓" with nothing behind it is not an entry.</p>
+<p>A gap that survives all six checks is a computation error, in one of you. Only then look at the code.</p>
+<hr />
+<h2>Part 8 — What your catalog now forbids</h2>
+<p>Your Week 2 catalog stated what your panel cannot be used for. Alpha is where it bites.</p>
+<p>If your name list was built from today's constituents, every name in it survived to today. Names that were delisted, acquired at a discount, or went bankrupt are absent, and those names had, on average, negative alphas. The alphas you compute on survivors are biased upward by an amount you cannot see in your data.</p>
+<p>The three honest responses, unchanged from Week 2:</p>
+<ol>
+<li><strong>Fix the input.</strong> Rebuild the panel from a point-in-time membership list. On the professional lane this is CRSP, whose monthly file carries the delisted names and their delisting returns.</li>
+<li><strong>Bound the damage.</strong> Estimate how many names would have been in a point-in-time list and were not, and report the alpha with that attrition rate beside it.</li>
+<li><strong>Restrict the claim.</strong> Report the alpha as an alpha on survivors, which is a real statement as long as it says so.</li>
+</ol>
+<p>What is not a response is computing the number, knowing what is wrong with it, and reporting it plainly. A Blocker open in your catalog means no headline alpha this week.</p>
+<hr />
+<h2>This week's sources</h2>
+<p>Register: <a href="../sources.html">the source register</a>.</p>
+<table>
+<thead>
+<tr>
+<th>Working with</th>
+<th>For</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ken French Data Library, Fama/French 3 Factors monthly (guaranteed lane)</td>
+<td><code>Mkt-RF</code> and <code>RF</code>, the two columns every number this week needs</td>
+</tr>
+<tr>
+<td>yfinance (guaranteed lane)</td>
+<td>monthly total-return proxies for your panel and your investable benchmark</td>
+</tr>
+<tr>
+<td>Yahoo Finance quote page, Beta (5Y Monthly) (guaranteed lane)</td>
+<td>the independent beta for Part 7</td>
+</tr>
+<tr>
+<td>WRDS: CRSP monthly stock file (professional lane)</td>
+<td>monthly returns with delisting returns for a universe built point-in-time, so your alphas are not alphas on survivors</td>
+</tr>
+<tr>
+<td>WRDS: <code>ff.factors_monthly</code> (professional lane)</td>
+<td>the same French factors, queryable next to CRSP</td>
+</tr>
+</tbody>
+</table>
+<p>Two sources, minimum, and where you have professional access, one of them is the professional source. This week that is CRSP monthly returns, because the free lane cannot see the names that left. CRSP removes the bias only if the universe is built as of the start of the sample and the delisting returns are kept; a list of today's survivors pulled from CRSP is still a list of survivors.</p>
+<p>Pending access is neither an excuse nor a penalty. Document the attempt and use a second free source instead. The attempt counts; the outcome never does.</p>
+<hr />
+<h2>Working environment, from this week</h2>
+<p>The course moves from Colab to <strong>VS Code on your own machine</strong> this week, and the move happens in the room on Tuesday, for everyone, before any finance. The install path is Lab 3 Step 0 and the Tuesday deck; the prework tells you what to download before you arrive. Colab stays as the fallback if a laptop cannot be made to work in the room, and nothing in the lab depends on which one you used.</p>
 <h2>Before the lab — do these</h2>
-<ol><li>Reproduce the SPY/RSP comparison. Confirm you get the same shape of answer.</li><li>Have your panel and <code>data_quality_issues.md</code> open.</li><li>Decide what benchmark your panel should be measured against, and write one sentence on why</li></ol>
-<p>before you compute anything with it.</p>
-<p><strong>Next: Lab 3</strong> computes metrics on your panel, verifies them against something you did not write, chooses a benchmark you will have to defend, and reports what your Week 2 limitations allow you to claim.</p>
+<ol>
+<li>Download the installers in prework Part 0. Do not install yet; Tuesday does that together.</li>
+<li>Download the French factor file and load it. Assert that the last monthly row is the CRSP month named in the file's first line.</li>
+<li>Reproduce Apple's row of the Part 2 table and Apple's regression in Part 3. If your Sharpe is 0.79 and your beta is 1.13, your alignment is right.</li>
+<li>Open <code>data_quality_issues.md</code> and, for each open issue, write one sentence on what it does to an alpha.</li>
+<li>Decide which investable benchmark your panel should be measured against and write one sentence on why, before you compute anything with it.</li>
+</ol>
+<p>Next: Lab 3 computes the three numbers on your panel, verifies one beta against a source you did not write, defends your benchmark against the obvious alternative, and hands Week 4 its covariance matrix.</p>
 </main></body></html>

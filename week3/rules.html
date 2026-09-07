@@ -1,81 +1,65 @@
-<!doctype html><html lang='en'><head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width,initial-scale=1'>
-<title>Week 3 — Rules</title><style>
-:root { --bg:#ffffff; --fg:#14181d; --muted:#5a6572; --rule:#dfe3e8;
-        --accent:#0b5fa5; --code-bg:#f4f6f8; }
-@media (prefers-color-scheme: dark) {
-  :root { --bg:#0f1419; --fg:#e9ecf0; --muted:#9aa4b2; --rule:#2a323c;
-          --accent:#6fb3f2; --code-bg:#182029; } }
+<!doctype html><html lang='en'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>Week 3 — Rules</title><style>
+:root { --bg:#ffffff; --fg:#14181d; --muted:#5a6572; --rule:#dfe3e8; --accent:#0b5fa5; --code-bg:#f4f6f8; }
+@media (prefers-color-scheme: dark) { :root { --bg:#0f1419; --fg:#e9ecf0; --muted:#9aa4b2; --rule:#2a323c; --accent:#6fb3f2; --code-bg:#182029; } }
 * { box-sizing: border-box; }
-body { margin:0; background:var(--bg); color:var(--fg);
-       font: 17px/1.6 -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+body { margin:0; background:var(--bg); color:var(--fg); font: 17px/1.6 -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
 main { max-width: 46rem; margin: 0 auto; padding: 2.25rem 1.25rem 4.5rem; }
 h1 { font-size:1.9rem; line-height:1.2; margin:0 0 1rem; letter-spacing:-.01em; }
 h2 { font-size:1.4rem; line-height:1.25; margin:2.2rem 0 .8rem; }
 h3 { font-size:1.1rem; margin:1.8rem 0 .6rem; }
-p, li { margin:.7rem 0; }
-li { margin:.35rem 0; }
-strong { font-weight:650; }
-a { color:var(--accent); }
-blockquote { margin:1.1rem 0; padding:.5rem 0 .5rem 1.1rem;
-             border-left:3px solid var(--accent); color:var(--muted); }
-pre { background:var(--code-bg); border:1px solid var(--rule); border-radius:8px;
-      padding:.9rem 1.1rem; overflow-x:auto; font:13.5px/1.55 ui-monospace, Menlo, Consolas, monospace; }
-code { font:.9em ui-monospace, Menlo, Consolas, monospace; background:var(--code-bg);
-       padding:.08em .3em; border-radius:4px; }
+p, li { margin:.7rem 0; } li { margin:.35rem 0; } strong { font-weight:650; } a { color:var(--accent); }
+blockquote { margin:1.1rem 0; padding:.5rem 0 .5rem 1.1rem; border-left:3px solid var(--accent); color:var(--muted); }
+pre { background:var(--code-bg); border:1px solid var(--rule); border-radius:8px; padding:.9rem 1.1rem; overflow-x:auto; font:13.5px/1.55 ui-monospace, Menlo, Consolas, monospace; }
+code { font:.9em ui-monospace, Menlo, Consolas, monospace; background:var(--code-bg); padding:.08em .3em; border-radius:4px; }
 pre code { background:none; padding:0; }
-table { border-collapse:collapse; margin:1.1rem 0; font-size:.92rem; max-width:100%;
-        display:block; overflow-x:auto; }
-th, td { border:1px solid var(--rule); padding:.45rem .7rem; text-align:left; }
-th { background:var(--code-bg); }
+table { border-collapse:collapse; margin:1.1rem 0; font-size:.92rem; max-width:100%; display:block; overflow-x:auto; }
+th, td { border:1px solid var(--rule); padding:.45rem .7rem; text-align:left; } th { background:var(--code-bg); }
 hr { border:0; border-top:1px solid var(--rule); margin:2rem 0; }
-.math { background:var(--code-bg); border:1px solid var(--rule); border-radius:8px;
-        padding:.7rem 1rem; margin:1rem 0; font-family:ui-monospace, Menlo, Consolas, monospace;
-        font-size:.92rem; }
 @media (max-width:600px) { body { font-size:16px; } h1 { font-size:1.6rem; } }
-
-.nav { margin: 0 0 1.5rem; font-size:.9rem; }
-.nav a { color: var(--accent); text-decoration: none; }
-.nav a:hover { text-decoration: underline; }
-.wk { border:1px solid var(--rule); border-radius:10px; padding:1.1rem 1.4rem; margin:0 0 1rem; }
-.wk h3 { margin:.1rem 0 .5rem; font-size:1.05rem; }
-.wk .num { color:var(--muted); font:600 11px/1 ui-monospace,Menlo,Consolas,monospace;
-           letter-spacing:.1em; text-transform:uppercase; }
-.surfaces a { display:inline-block; margin:.3rem .4rem .3rem 0; padding:.3rem .65rem;
-              border:1px solid var(--accent); border-radius:999px; font-size:.85rem;
-              color:var(--accent); text-decoration:none; }
-.surfaces a:hover { background:var(--code-bg); }
-.surfaces span.held { display:inline-block; margin:.3rem .4rem .3rem 0; padding:.3rem .65rem;
-                      border:1px dashed var(--rule); border-radius:999px; font-size:.85rem;
-                      color:var(--muted); }
-.lede { color:var(--muted); margin:0 0 2rem; }
+.nav { margin: 0 0 1.5rem; font-size:.9rem; } .nav a { color: var(--accent); text-decoration: none; } .nav a:hover { text-decoration: underline; }
 </style></head>
 <body><main>
 <div class='nav'><a href='../index.html'>MSF Financial Modeling</a></div>
-<h1>Week 3 — Rules</h1><h1>Week 3 — Rules and Conventions</h1>
-<blockquote><strong>Register: RULES.</strong> No teaching here — see <code>handout.md</code>.</blockquote>
+<h1>Week 3 — Rules and Conventions</h1>
+<blockquote>
+<p><strong>Register: RULES.</strong> No teaching here — see <code>handout.md</code>.</p>
+</blockquote>
 <h2>Conventions are declared, not assumed</h2>
-<p>Every reported metric carries its conventions: return type, annualization basis, risk-free assumption, and window. A number without them is not a result.</p>
+<p>Every reported metric carries its conventions: return type, frequency, annualization basis, risk-free source, window, and the market series it was regressed on. A number without them is not a result.</p>
 <p>Once declared in Lab 3 Step 1, these bind for the rest of the course. If you change one later, say so and say why.</p>
+<h2>The Sharpe standard</h2>
+<p>A Sharpe ratio is computed on excess returns over the one-month bill rate from the French library, with the arithmetic mean, the sample standard deviation, and ×√12 on monthly data. Any other construction is reported under a different name, with its construction stated. CAGR divided by volatility is not a Sharpe ratio.</p>
+<h2>Alpha is conditional</h2>
+<p>Alpha is the intercept of a stated regression on a stated market series over a stated window. It is never reported without its t-statistic or confidence interval. "Positive alpha" requires an interval that excludes zero; otherwise the honest phrase is "not distinguishable from zero on N months."</p>
+<p>Alpha is not skill. Alpha is what one model did not explain.</p>
 <h2>The verification standard</h2>
-<p>A metric is verified when it has been checked against a source <strong>you did not compute</strong>.</p>
-<p>Acceptable outcomes, all of them:</p>
-<ul><li>Matches within a stated tolerance — verified</li><li>Differs, and the difference is explained by a convention or window — verified, explanation</li></ul>
-<p>recorded</p>
-<ul><li>Differs, was investigated, remains unexplained — <strong>reported as unresolved</strong></li></ul>
-<p>Not acceptable: claiming verification without naming a source, or quietly adjusting your number to match theirs. If you change a number after seeing someone else&#x27;s, say that is what happened and why it was right to.</p>
-<h2>The catalog constrains the claim</h2>
-<p>Open issues in <code>data_quality_issues.md</code> limit what you may report. <strong>A Blocker means no headline result.</strong></p>
-<p>Three honest responses per issue: fix the input, bound the damage, or restrict the claim. Choose one and record which.</p>
+<p>A metric is verified when it has been checked against a source you did not compute, on matched conventions. Acceptable outcomes, all of them:</p>
+<ul>
+<li>Matches within a stated tolerance — verified.</li>
+<li>Differs; the difference is traced to a named convention or window; re-run on matched conventions closes it — verified on a matched window, both figures reported with their windows.</li>
+<li>Differs; investigated through the six checks (identity, frequency, window, return type, regressor, formula); remains unexplained — reported as unresolved.</li>
+</ul>
+<p>Not acceptable: claiming verification without naming a source and a retrieval date, or adjusting your number to match theirs without saying so.</p>
 <h2>Benchmarks are stated, never implied</h2>
-<p>Every comparison names its benchmark and the rules defining its membership. &quot;Against the market&quot; is not a benchmark.</p>
-<p>Where a point-in-time membership file is unavailable, say so and state what it prevents you from claiming.</p>
+<p>Every alpha names the series it was regressed on and what that series is made of. "Against the market" is not a benchmark. Your investable benchmark and the obvious alternative are both computed; the gap between them is reported.</p>
+<p>The equal-weight portfolio of your panel is a convention. State whether it is rebalanced monthly or held from the start.</p>
+<h2>The catalog constrains the claim</h2>
+<p>Open issues in <code>data_quality_issues.md</code> limit what you may report. A Blocker means no headline alpha. A survivor-only panel produces alphas on survivors, and they are labelled as such or bounded or the input is fixed. Choose one and record which.</p>
+<h2>The two agents, and the folder rule</h2>
+<p>From this week two coding agents are installed on your machine in class: <strong>Codex</strong> (OpenAI, in the VS Code terminal) and <strong>Antigravity</strong> (Google, as a VS Code extension). Use either or both. Nothing graded depends on which.</p>
+<p>Codex is run as <code>codex --yolo</code>. That flag removes the approval prompts and the sandbox: the agent runs whatever command it decides to run, on your real disk, without asking. So:</p>
+<ul>
+<li>Run it <strong>only</strong> from inside the folder you made for this course. Never from your home directory or any folder holding something you cannot lose. Where that folder is and what it is called are yours to decide; that it holds nothing irreplaceable is not.</li>
+<li>Keep nothing in that folder that must not leave your machine. WRDS pulls stay in a folder your <code>.gitignore</code> excludes, and an agent is never asked to push, upload, or share.</li>
+<li>If an agent proposes deleting, moving, or pushing anything, stop it and read what it wanted to do. Those are your decisions.</li>
+</ul>
+<p>The same rule applies to Antigravity when it is allowed to run commands.</p>
 <h2>AI use</h2>
-<p>AI will compute any metric you ask for and will silently choose conventions for you. It annualizes on 252 or 365 depending on nothing in particular and does not mention which.</p>
-<p><strong>Check the conventions in generated code before you trust the output.</strong> This is the single highest-value review you can perform on AI-written analytics code this week.</p>
-<p>What must be yours: the convention choices, the benchmark choice, the verification judgment, and the decision about what your catalog allows you to claim.</p>
+<p>AI will write this week's regression in ten seconds and will make one of four errors in it without comment: subtract RF from Mkt-RF a second time; regress raw returns instead of excess; join French rows to yfinance rows on mismatched dates and silently drop months; annualize an intercept by compounding instead of ×12. Check all four before you trust the output. Print the row count after the join and assert it.</p>
+<p>What must be yours: the convention choices, the benchmark choice, the judgment about which alphas you would stand behind, the verification judgment, and the decision about what your catalog allows you to claim.</p>
 <p>You must be able to explain every line of code you submit.</p>
+<h2>Live-data drift</h2>
+<p>The French library is revised when CRSP is; a re-download months later can change the last few rows. Yahoo's published beta changes every month as its window rolls. Record the retrieval date on every number you did not compute, and report a drifted reproduction as a finding, never as a failure.</p>
 <h2>Reproducibility and citation</h2>
-<p>Unchanged: fresh-kernel runs, every number traceable to code, every source in <code>source_log.md</code> with access route, coverage window, and retrieval date.</p>
-<p>Independent verification sources go in the source log too — including the ones that failed to resolve a gap.</p>
+<p>Unchanged: fresh-kernel runs, every number traceable to code, every source in <code>source_log.md</code> with access route, coverage window, and retrieval date. The French library, the Yahoo quote page, and any WRDS table you touched each get an entry.</p>
 </main></body></html>

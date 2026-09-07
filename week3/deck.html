@@ -1,115 +1,305 @@
-<!doctype html><html lang='en'><head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width,initial-scale=1'>
-<title>Week 3</title><style>
-:root { --bg:#ffffff; --fg:#14181d; --muted:#5a6572; --rule:#dfe3e8;
-        --accent:#0b5fa5; --code-bg:#f4f6f8; }
-@media (prefers-color-scheme: dark) {
-  :root { --bg:#0f1419; --fg:#e9ecf0; --muted:#9aa4b2; --rule:#2a323c;
-          --accent:#6fb3f2; --code-bg:#182029; } }
-* { box-sizing: border-box; }
-html, body { height:100%; }
-body { margin:0; background:var(--bg); color:var(--fg);
-       font: 22px/1.5 -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
-
-.slide { display:none; min-height:100vh; padding:5vh 7vw 9vh;
-         flex-direction:column; justify-content:center; }
-.slide.current { display:flex; }
-.slide > *:first-child { margin-top:0; }
-
+<!doctype html><html lang='en'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>Week 3</title><style>
+:root { --bg:#ffffff; --fg:#14181d; --muted:#5a6572; --rule:#dfe3e8; --accent:#0b5fa5; --code-bg:#f4f6f8; }
+@media (prefers-color-scheme: dark) { :root { --bg:#0f1419; --fg:#e9ecf0; --muted:#9aa4b2; --rule:#2a323c; --accent:#6fb3f2; --code-bg:#182029; } }
+* { box-sizing: border-box; } html, body { height:100%; }
+body { margin:0; background:var(--bg); color:var(--fg); font: 22px/1.5 -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+.slide { display:none; min-height:100vh; padding:5vh 7vw 9vh; flex-direction:column; justify-content:center; }
+.slide.current { display:flex; } .slide > *:first-child { margin-top:0; }
 h1 { font-size:2.8rem; line-height:1.15; margin:0 0 1rem; letter-spacing:-.01em; }
 h2 { font-size:2.1rem; line-height:1.2; margin:0 0 1.4rem; letter-spacing:-.01em; }
 h3 { font-size:1.4rem; margin:1.2rem 0 .6rem; color:var(--muted); }
-p, li { max-width:52ch; }
-li { margin:.45rem 0; }
-strong { font-weight:650; }
-blockquote { margin:1.3rem 0; padding:.7rem 0 .7rem 1.2rem;
-             border-left:4px solid var(--accent); color:var(--muted); }
-pre { background:var(--code-bg); border:1px solid var(--rule); border-radius:8px;
-      padding:1rem 1.2rem; overflow-x:auto; max-width:100%;
-      font:.72em/1.5 ui-monospace, Menlo, Consolas, monospace; }
+p, li { max-width:52ch; } li { margin:.45rem 0; } strong { font-weight:650; }
+blockquote { margin:1.3rem 0; padding:.7rem 0 .7rem 1.2rem; border-left:4px solid var(--accent); color:var(--muted); }
+pre { background:var(--code-bg); border:1px solid var(--rule); border-radius:8px; padding:1rem 1.2rem; overflow-x:auto; max-width:100%; font:.72em/1.5 ui-monospace, Menlo, Consolas, monospace; }
 code { font:.88em ui-monospace, Menlo, Consolas, monospace; }
-table { border-collapse:collapse; margin:1.1rem 0; font-size:.78em; max-width:100%;
-        display:block; overflow-x:auto; }
-th, td { border:1px solid var(--rule); padding:.5rem .8rem; text-align:left; }
-th { background:var(--code-bg); }
-.math { background:var(--code-bg); border:1px solid var(--rule); border-radius:8px;
-        padding:.8rem 1.1rem; margin:1.1rem 0; font-size:.8em;
-        font-family:ui-monospace, Menlo, Consolas, monospace; }
-
-.title-slide h1 { font-size:3.4rem; }
-.title-slide .sub { color:var(--muted); font-size:1.3rem; margin-top:.6rem; }
-
-#bar { position:fixed; top:0; left:0; height:3px; background:var(--accent);
-       width:0; transition:width .15s ease; z-index:10; }
-#num { position:fixed; bottom:1.4vh; right:2vw; color:var(--muted);
-       font:600 .7rem ui-monospace, Menlo, Consolas, monospace; z-index:10; }
-#hint { position:fixed; bottom:1.4vh; left:2vw; color:var(--muted);
-        font:.68rem -apple-system, "Segoe UI", sans-serif; z-index:10; opacity:.75; }
-
-@media print {
-  #bar, #num, #hint { display:none; }
-  .slide { display:flex !important; min-height:auto; page-break-after:always;
-           padding:6% 8%; border-bottom:none; }
-  body { font-size:15px; }
-  h1 { font-size:2rem; } h2 { font-size:1.6rem; }
-}
+table { border-collapse:collapse; margin:1.1rem 0; font-size:.78em; max-width:100%; display:block; overflow-x:auto; }
+th, td { border:1px solid var(--rule); padding:.5rem .8rem; text-align:left; } th { background:var(--code-bg); }
+.title-slide h1 { font-size:3.4rem; } .title-slide .sub { color:var(--muted); font-size:1.3rem; margin-top:.6rem; }
+#bar { position:fixed; top:0; left:0; height:3px; background:var(--accent); width:0; transition:width .15s ease; z-index:10; }
+#num { position:fixed; bottom:1.4vh; right:2vw; color:var(--muted); font:600 .7rem ui-monospace, Menlo, Consolas, monospace; z-index:10; }
+#hint { position:fixed; bottom:1.4vh; left:2vw; color:var(--muted); font:.68rem -apple-system, "Segoe UI", sans-serif; z-index:10; opacity:.75; }
+@media print { #bar, #num, #hint { display:none; } .slide { display:flex !important; min-height:auto; page-break-after:always; padding:6% 8%; border-bottom:none; } body { font-size:15px; } h1 { font-size:2rem; } h2 { font-size:1.6rem; } }
 @media (max-width:820px) { body { font-size:17px; } h2 { font-size:1.6rem; } }
 </style></head><body>
 <div id='bar'></div>
 <section class='slide title-slide'><h1>Week 3</h1><div class='sub'>FIN 69000-003 · Financial Analytics with Python (with AI)</div></section>
-<section class='slide'><h2>What your panel forbids</h2>
-<p>You arrive with:</p>
-<ul><li>A panel, permanent identifier on every row</li><li><code>data_quality_issues.md</code>, severities you assigned</li><li>A written statement of what your panel <strong>cannot</strong> be used for</li></ul>
-<p>That last one stops being paperwork today.</p></section>
-<section class='slide'><h2>What did the S&amp;P 500 return?</h2>
-<p>Straight question.</p>
-<p>Give me a number.</p>
-<p>Now: <strong>what exactly does that number measure?</strong></p></section>
-<section class='slide'><h2>Two answers, same index</h2>
-<pre><code>window 2015-06-30 -&gt; 2025-06-27   (2514 trading days)
-
-SPY: total 254.36%   annualized 13.53%   vol 18.31%   sharpe 0.739
-RSP: total 168.78%   annualized 10.42%   vol 18.78%   sharpe 0.555</code></pre>
-<p>Same five hundred companies. Same decade.</p>
-<ul><li><strong>3.11 percentage points</strong> per year</li><li><strong>85.6 percentage points</strong> cumulative — 86 cents on the dollar</li><li><strong>33%</strong> difference in Sharpe</li></ul>
-<p><em>What is different about these two funds?</em></p></section>
-<section class='slide'><h2>An index is a membership dataset</h2>
-<p>You downloaded a price series. That is the thin part.</p>
-<table><thead><tr><th>Question</th><th>Needs</th></tr></thead><tbody><tr><td>What did the index return?</td><td>the price series</td></tr><tr><td>What was in it in March 2023?</td><td>point-in-time <strong>membership</strong></td></tr><tr><td>Picking or sector tilt?</td><td>membership + weights</td></tr><tr><td>Was my strategy investable then?</td><td>membership, as it stood</td></tr><tr><td><strong>Is my panel survivorship-biased?</strong></td><td><strong>membership at the start of the sample</strong></td></tr></tbody></table>
-<p>That last row is your Week 2 problem. The membership file is the fix.</p></section>
-<section class='slide'><h2>The same series, two volatilities</h2>
-<pre><code>daily vol x sqrt(252)  = 18.31%     [trading days]
-daily vol x sqrt(365)  = 22.03%     [calendar days]</code></pre>
-<p><strong>3.72 percentage points</strong> from a choice about what a year is.</p>
-<p>Scaling daily equity data by sqrt(365) claims the market moves on weekends.</p>
-<blockquote>When your number disagrees with someone else&#x27;s, check the <strong>convention</strong> before the data.</blockquote></section>
+<section class='slide'><h2>Before we start — do these</h2>
+<ol>
+<li><strong>Tools alive.</strong> Print the last row of your French factor file. Nothing typed into AI.</li>
+<li><strong>Defend to a partner.</strong> Two minutes each: the worst open issue in your catalog, and what it does to an alpha.</li>
+<li><strong>Gap check.</strong> Write down which of these you cannot yet define in one sentence: excess return, Sharpe ratio, beta, alpha, R², residual. That list is yours for the week.</li>
+</ol></section>
+<section class='slide'><h2>Tech prep — everyone, now (35 min)</h2>
+<p>From today the course runs in <strong>VS Code on your laptop</strong>. We install together, from the projector, on your route. Lab 3 Step 0 has every path written down.</p>
+<p><strong>1.</strong> Run the VS Code installer you downloaded. Python itself arrives in step 5; nothing else to install first.</p>
+<p><strong>2.</strong> VS Code → <code>Ctrl+Shift+X</code> → install <strong>Python</strong> and <strong>Jupyter</strong> (both Microsoft) and Pylance.</p>
+<p><strong>3.</strong> Open Course/work folder → <strong>File → Open Folder</strong>.</p>
+<p>Laptop will not cooperate? Pair with a neighbour today, Colab as your own fallback, office hours before Thursday.</p></section>
+<section class='slide'><h2>Tech prep — the environment</h2>
+<p><strong>4.</strong> <strong>View → Terminal</strong> (or <code>Ctrl+`</code>). The panel opens inside the folder you opened.</p>
+<p><strong>5.</strong> Install <strong>uv</strong>; it makes the environment and fetches Python 3.12:</p>
+<pre><code>curl -LsSf https://astral.sh/uv/install.sh | sh                                        # Mac
+powershell -ExecutionPolicy ByPass -c &quot;irm https://astral.sh/uv/install.ps1 | iex&quot;     # Windows
+uv init --python 3.12
+uv add pandas numpy statsmodels yfinance requests jupyter ipykernel
+</code></pre>
+<p><strong>6.</strong> <code>Ctrl+Shift+P</code> → <strong>Python: Select Interpreter</strong> → the new <code>.venv</code></p>
+<p><strong>7.</strong> <strong>File → New File → Jupyter Notebook</strong> → save it in your course folder, any name → <strong>Select Kernel</strong> → that <code>.venv</code></p>
+<p><strong>8.</strong> First cell: print the four versions. No red text.</p></section>
+<section class='slide'><h2>Tech prep — Antigravity</h2>
+<p><strong>9.</strong> <code>Ctrl+Shift+X</code> → search <strong>Google Antigravity</strong> (publisher: Google) → <strong>Install</strong>.</p>
+<p><strong>10.</strong> Click the <strong>Antigravity icon</strong> in the left Activity Bar → <strong>Sign in</strong> with your Google account. Free tier is enough. Let it install its <code>agy</code> backend.</p>
+<p><strong>11.</strong> Ask it: <em>"what does the first cell print?"</em> If it answers from your notebook, it can see the folder.</p></section>
+<section class='slide'><h2>Tech prep — Codex in the terminal</h2>
+<p><strong>12.</strong> In the terminal panel, the installer for your OS:</p>
+<pre><code>curl -fsSL https://chatgpt.com/codex/install.sh | sh                                     # Mac
+powershell -ExecutionPolicy ByPass -c &quot;irm https://chatgpt.com/codex/install.ps1 | iex&quot;   # Windows
+</code></pre>
+<p><strong>13.</strong> Close the terminal (bin icon), open a new one. Run <code>codex</code> → <strong>Sign in with ChatGPT</strong>.</p>
+<p><strong>14.</strong> Then, <strong>inside your course folder and nowhere else:</strong></p>
+<pre><code>codex --yolo
+</code></pre>
+<p><code>--yolo</code> = no approval prompts, no sandbox. The folder rule in <code>rules.md</code> is the price of that. Ask it to <em>list the files in this folder</em>.</p></section>
+<section class='slide'><h2>What your panel arrives with</h2>
+<ul>
+<li>8 to 15 securities, permanent identifier on every row</li>
+<li><code>data_quality_issues.md</code>, severities you assigned</li>
+<li>A statement of what the panel cannot be used for</li>
+</ul>
+<p>Where it goes: Week 4 builds portfolios from the return series and the <strong>covariance matrix</strong> you save on Thursday.</p></section>
+<section class='slide'><h2>Did it earn its risk?</h2>
+<p>A position returned 22% a year for ten years.</p>
+<p>The portfolio manager asks one question.</p>
+<p>Three numbers answer it. They come from <strong>one regression</strong> and <strong>one convention</strong>.</p></section>
+<section class='slide'><h2>The paper</h2>
+<p>Sharpe (1964), <em>Capital Asset Prices</em>, Journal of Finance.</p>
+<pre><code>E[r_i] − r_f  =  β_i · ( E[r_m] − r_f )
+</code></pre>
+<p>Only market risk is rewarded. The rest can be diversified away, so the market does not pay for it.</p>
+<p>Jensen (1968) turned it into a regression and named the intercept.</p>
+<p><strong>What it does not say:</strong> that a positive intercept is skill. It says the intercept should be zero, <em>if the model is right</em>.</p>
+<p>Textbook, with the code: DRIVER <strong>Session 5 — Portfolio Metrics</strong>.</p></section>
+<section class='slide'><h2>References — this week</h2>
+<p><strong>Papers</strong></p>
+<ul>
+<li>Sharpe, W. F. (1964). Capital Asset Prices. <em>J. Finance</em> 19(3), 425–442. doi:10.1111/j.1540-6261.1964.tb02865.x</li>
+<li>Jensen, M. C. (1968). The Performance of Mutual Funds in the Period 1945–1964. <em>J. Finance</em> 23(2), 389–416. doi:10.1111/j.1540-6261.1968.tb00815.x</li>
+</ul>
+<p><strong>Textbook</strong> — Zhang, <em>DRIVER Financial Modeling</em>, cinderzhang.github.io/DRIVER-FinancialModeling</p>
+<ul>
+<li>Session 5 — Portfolio Metrics · Session 1 — Total Return Analysis</li>
+<li>Book chapter excerpt (PDF) follows on publisher approval; until then, the online sessions.</li>
+</ul></section>
+<section class='slide'><h2>Excess returns first</h2>
+<p>Every number this week is <strong>return minus the one-month bill rate</strong>, same month.</p>
+<p>The bill rate is data: Ken French Data Library → Fama/French 3 Factors → <code>RF</code>.</p>
+<pre><code>202605,   4.91,  -1.59,  -2.31,   0.31
+202606,  -1.07,   3.39,   3.58,   0.29
+202607,  -0.60,  -1.96,   2.11,   0.33
+</code></pre>
+<p><code>Mkt-RF</code> is <strong>already</strong> in excess of the bill rate. Subtract <code>RF</code> from it and you have subtracted it twice.</p>
+<p>Mean bill rate over the window: 0.1571% a month. Zero in 2015. 0.34% in 2025.</p></section>
+<section class='slide'><h2>The Sharpe ratio, stated properly</h2>
+<pre><code>Sharpe = mean(r − r_f) / sd(r − r_f) × √12
+</code></pre>
+<p>Apple, 2015-07 to 2025-06, 120 months:</p>
+<pre><code>1.8291% / 8.0395% × √12  =  0.788
+</code></pre>
+<p>Three choices inside it: <strong>excess or raw</strong> · <strong>arithmetic or geometric</strong> · <strong>sample or population sd</strong>.</p>
+<p>Geometric = CAGR: $1 → $7.30 in 120 months, so (7.3035)^(12/120) − 1 = 22.00%. Arithmetic ×12 = 23.83%. Sharpe is built on the arithmetic one.</p>
+<p>Raw instead of excess: Apple 0.857. Coca-Cola 0.653 instead of 0.533.</p></section>
+<section class='slide'><h2>The shortcut is not a Sharpe ratio</h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Sharpe (excess, arithmetic)</th>
+<th>CAGR ÷ vol, rf = 0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>AAPL</td>
+<td>0.788</td>
+<td>0.791</td>
+</tr>
+<tr>
+<td>MSFT</td>
+<td>1.248</td>
+<td>1.396</td>
+</tr>
+<tr>
+<td>XOM</td>
+<td>0.320</td>
+<td>0.263</td>
+</tr>
+<tr>
+<td>SPY</td>
+<td>0.780</td>
+<td>0.875</td>
+</tr>
+</tbody>
+</table>
+<p>Same data. Different ranking. The right-hand column is what this page used to print.</p>
+<p>State the three choices, every time.</p></section>
+<section class='slide'><h2>One regression</h2>
+<pre><code>r_i − r_f  =  α  +  β · ( r_m − r_f )  +  ε
+</code></pre>
+<p>Apple on French <code>Mkt-RF</code>:</p>
+<pre><code>α  =  0.0070 / month  →  8.41% / year     t = 1.23
+β  =  1.134                                t = 9.41
+R² =  0.429       residual sd  21.1% / year
+</code></pre>
+<p>95% interval on α: −0.43% to +1.83% a month. <strong>It includes zero.</strong></p></section>
+<section class='slide'><h2>Reading alpha</h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>α / yr</th>
+<th>t(α)</th>
+<th>β</th>
+<th>t(β)</th>
+<th>R²</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>AAPL</td>
+<td>8.41%</td>
+<td>1.23</td>
+<td>1.134</td>
+<td>9.41</td>
+<td>0.429</td>
+</tr>
+<tr>
+<td>MSFT</td>
+<td>15.22%</td>
+<td>3.14</td>
+<td>0.916</td>
+<td>10.74</td>
+<td>0.494</td>
+</tr>
+<tr>
+<td>XOM</td>
+<td>−1.49%</td>
+<td>−0.19</td>
+<td>0.862</td>
+<td>6.33</td>
+<td>0.254</td>
+</tr>
+<tr>
+<td>PG</td>
+<td>5.19%</td>
+<td>1.05</td>
+<td>0.348</td>
+<td>3.99</td>
+<td>0.119</td>
+</tr>
+<tr>
+<td>EW panel</td>
+<td>5.89%</td>
+<td>2.71</td>
+<td>0.721</td>
+<td>18.80</td>
+<td>0.750</td>
+</tr>
+</tbody>
+</table>
+<p>Every t(β) near or above 4. One t(α) in eight above 2. <strong>Betas are precise; alphas are not.</strong> That never changes.</p>
+<p>The equal-weight panel clears 2 when seven of its eight members do not. Nothing was added. Noise was averaged out.</p></section>
+<section class='slide'><h2>Risk decomposition</h2>
+<pre><code>total variance  =  β² · var(r_m − r_f)  +  var(ε)
+                   systematic            idiosyncratic
+</code></pre>
+<p>Apple, annualized:</p>
+<pre><code>√( 18.2%²  +  21.1%² )  =  27.9%   ✓
+</code></pre>
+<p>R² is the systematic share. Procter &amp; Gamble: 12%. Eighty-eight percent of its movement had nothing to do with the market.</p></section>
+<section class='slide'><h2>Why diversification works</h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>idiosyncratic vol</th>
+<th>systematic share</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Single names, range</td>
+<td>14% to 24%</td>
+<td>12% to 55%</td>
+</tr>
+<tr>
+<td>Equal-weight panel of eight</td>
+<td><strong>6.7%</strong></td>
+<td>75%</td>
+</tr>
+</tbody>
+</table>
+<p>The systematic part did not shrink: 0.721 × 16.1%.</p>
+<p>The idiosyncratic part collapsed. Eight unrelated residuals average toward zero.</p>
+<p>That is Sharpe's argument in a table.</p></section>
+<section class='slide'><h2>The covariance Week 4 needs</h2>
+<p>The annualized sample covariance of your excess returns. Eight names: <strong>36 numbers</strong>, every one estimated from the same 120 months.</p>
+<pre><code>            AAPL    MSFT     JNJ
+AAPL      0.0776  0.0346  0.0148
+MSFT      0.0346  0.0439  0.0103
+JNJ       0.0148  0.0103  0.0260
+</code></pre>
+<p>Diagonal = your volatilities squared. Off-diagonal = what the optimizer acts on. Apple–Microsoft correlation 0.59.</p>
+<p>Save it with the returns. Week 4 asks how much to trust those 36 numbers.</p></section>
+<section class='slide'><h2>Which market?</h2>
+<table>
+<thead>
+<tr>
+<th>Equal-weight panel alpha / yr</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>vs French Mkt-RF</td>
+<td>5.89%</td>
+</tr>
+<tr>
+<td>vs SPY</td>
+<td>5.23%</td>
+</tr>
+<tr>
+<td>vs RSP</td>
+<td>8.04%</td>
+</tr>
+</tbody>
+</table>
+<p>Same panel, same 120 months. RSP returned 3.1 points a year less than SPY, so everything looks better against it.</p>
+<p>Cap-weighted vs equal-weighted, rebalanced quarterly, 0.09% vs 0.20% fees. Construction, fees, and implementation, together.</p>
+<p><strong>Name the benchmark. Compute the alternative.</strong></p></section>
 <section class='slide'><h2>Verify against something you did not write</h2>
-<blockquote><strong>Metric:</strong> SPY annualized volatility, 10 years <strong>Mine:</strong> 18.31% <strong>Source:</strong> issuer factsheet, 3-year standard deviation — <strong>not comparable</strong> <strong>Resolution:</strong> recomputed on a matched 3-year window; report the 10-year figure with its window stated on the face of the result <strong>Status:</strong> verified on a matched window</blockquote>
-<p>It <strong>failed</strong> to verify directly. It says so. It does something about it.</p>
-<p><strong>That is a complete professional answer.</strong></p></section>
-<section class='slide'><h2>Work the gap in this order</h2>
-<table><thead><tr><th>Gap</th><th>Almost always</th></tr></thead><tbody><tr><td>a few bp</td><td>rounding, or a slightly different window</td></tr><tr><td>tenths of a percent</td><td>day-count, or dividend treatment</td></tr><tr><td>a point or more</td><td>different window, share class, or a real error</td></tr><tr><td>sign is different</td><td>a real error, in one of you</td></tr></tbody></table>
-<p><strong>Convention → window → computation.</strong></p>
-<p>Most people check computation first. It is the least likely and the most expensive.</p></section>
+<p>Yahoo quote page, <strong>Beta (5Y Monthly)</strong>: Exxon 0.175. Mine: 0.862.</p>
+<p>Work the six: identity · frequency · <strong>window</strong> · return type · regressor · formula.</p>
+<p>Re-run on 60 months to 2026-07, the window that matched: <strong>0.172 vs 0.175.</strong></p>
+<p>Closed, provisionally: Yahoo does not print its end month. Both figures reported, both windows stated. And Exxon's beta <em>did</em> fall from 0.86 to 0.17. That is a Step 9 finding, not an error.</p></section>
 <section class='slide'><h2>What your catalog now forbids</h2>
-<p>Survivor-only panel. So you may <strong>not</strong> write:</p>
-<blockquote><em>&quot;The average name in my panel returned X%.&quot;</em></blockquote>
-<p>Not &quot;with a caveat.&quot; Not at all.</p>
-<p>The limitations you wrote last week are a <strong>constraint on what you may say</strong> this week.</p></section>
-<section class='slide'><h2>Three honest responses</h2>
-<ol><li><strong>Fix the input</strong> — rebuild from point-in-time membership</li><li><strong>Bound the damage</strong> — estimate the contamination and report the bound</li><li><strong>Restrict the claim</strong> — say only what the panel supports</li></ol>
-<p>All three are professional.</p>
-<p>There is no fourth option where you compute it, know what is wrong, and report it plainly.</p>
-<blockquote>The catalog exists so there is a written record at the moment a deadline tempts you.</blockquote></section>
-<section class='slide'><h2>Your benchmark, your defence</h2>
-<p>You choose it. You defend it.</p>
-<blockquote><em>&quot;That benchmark flatters your panel. You should have used the other one.&quot;</em></blockquote>
-<p>Strongest version of their case — <strong>with the number that supports it</strong>.</p>
-<p>Then answer it, or concede it. <strong>Conceding earns full marks.</strong></p>
-<p>And the standing question:</p>
-<blockquote><strong>What did you notice that I did not ask about?</strong></blockquote></section>
+<p>Survivor-only panel → the names that left had negative alphas → yours are biased <strong>up</strong>.</p>
+<p>Three honest responses: fix the input (CRSP, delisting returns) · bound the damage · restrict the claim.</p>
+<p>There is no fourth option. A Blocker open means no headline alpha.</p></section>
+<section class='slide'><h2>Before Thursday — do these</h2>
+<ol>
+<li>Step 0 works on <strong>your</strong> laptop: your notebook runs on the uv environment, Antigravity signed in, <code>codex --yolo</code> answers from your course folder. Office hours if not.</li>
+<li>Lab 3 Steps 1 and 2: conventions written, excess panel joined with the row count asserted. Reproduce Apple: Sharpe 0.788, beta 1.134.</li>
+<li>Open the Yahoo quote page for one of your names and write down <strong>Beta (5Y Monthly)</strong> and today's date.</li>
+<li>Write one sentence per open catalog issue: what it does to alpha.</li>
+</ol>
+<p>Thursday: the Sharpe table both ways, the regression, the decomposition, and the files Week 4 reads.</p></section>
 <section class='slide'><h2>Before next week — do these</h2>
-<blockquote><strong>Two sources minimum — and one of them professional where you have access.</strong> Pending access is documented, never penalised. The attempt counts; the outcome does not.</blockquote>
-<ol><li>State your <strong>conventions</strong> — return type, annualization, risk-free, window.</li><li>Compute the metrics, <strong>both</strong> annualization bases shown.</li><li>Verify two numbers against a source you did not write.</li><li>Choose a benchmark; compute the alternative too.</li><li>Write <strong>&quot;What these numbers can and cannot support.&quot;</strong></li><li>Save your return series and covariance estimate to disk.</li></ol>
-<p><strong>Lab 4 preview:</strong> feed these estimates to a mean-variance optimizer, then find out what it does when the estimates are wrong by the amount they are actually wrong by.</p></section>
+<ol>
+<li>Lab 3 Steps 3 to 5 in the room Thursday; Steps 6 to 9 outside it.</li>
+<li>Save your dated excess returns and the covariance matrix, and confirm they load back in the same security order. You name them; Week 4 loads what you saved.</li>
+<li>Verify one beta on a matched window and record the retrieval date.</li>
+<li>Compute your panel's alpha three ways and write the defence.</li>
+<li>Two sources minimum, one professional where you have access. The attempt counts; the outcome does not.</li>
+</ol>
+<p>Lab 4 preview: feed your means and covariance matrix to a mean-variance optimizer, then find out what it does when the estimates are wrong by the amount they are actually wrong by.</p></section>
 <div id='num'></div><div id='hint'>← → or space to navigate</div><script>var s=[].slice.call(document.querySelectorAll('.slide')),i=0;function go(n){i=Math.max(0,Math.min(s.length-1,n));s.forEach(function(e,k){e.classList.toggle('current',k===i);});document.getElementById('num').textContent=(i+1)+' / '+s.length;document.getElementById('bar').style.width=((i)/(s.length-1)*100)+'%';if(location.hash!=='#'+(i+1)){history.replaceState(null,'','#'+(i+1));}}document.addEventListener('keydown',function(e){if(e.key==='ArrowRight'||e.key===' '||e.key==='PageDown'){e.preventDefault();go(i+1);}else if(e.key==='ArrowLeft'||e.key==='PageUp'){e.preventDefault();go(i-1);}else if(e.key==='Home'){go(0);}else if(e.key==='End'){go(s.length-1);}});document.addEventListener('click',function(e){if(e.target.closest('a,pre,table'))return;go(i+1);});go(parseInt((location.hash||'#1').slice(1),10)-1||0);</script></body></html>

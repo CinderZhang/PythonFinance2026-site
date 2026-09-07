@@ -1,82 +1,106 @@
-<!doctype html><html lang='en'><head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width,initial-scale=1'>
-<title>Week 3 — Prework</title><style>
-:root { --bg:#ffffff; --fg:#14181d; --muted:#5a6572; --rule:#dfe3e8;
-        --accent:#0b5fa5; --code-bg:#f4f6f8; }
-@media (prefers-color-scheme: dark) {
-  :root { --bg:#0f1419; --fg:#e9ecf0; --muted:#9aa4b2; --rule:#2a323c;
-          --accent:#6fb3f2; --code-bg:#182029; } }
+<!doctype html><html lang='en'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>Week 3 — Prework</title><style>
+:root { --bg:#ffffff; --fg:#14181d; --muted:#5a6572; --rule:#dfe3e8; --accent:#0b5fa5; --code-bg:#f4f6f8; }
+@media (prefers-color-scheme: dark) { :root { --bg:#0f1419; --fg:#e9ecf0; --muted:#9aa4b2; --rule:#2a323c; --accent:#6fb3f2; --code-bg:#182029; } }
 * { box-sizing: border-box; }
-body { margin:0; background:var(--bg); color:var(--fg);
-       font: 17px/1.6 -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+body { margin:0; background:var(--bg); color:var(--fg); font: 17px/1.6 -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
 main { max-width: 46rem; margin: 0 auto; padding: 2.25rem 1.25rem 4.5rem; }
 h1 { font-size:1.9rem; line-height:1.2; margin:0 0 1rem; letter-spacing:-.01em; }
 h2 { font-size:1.4rem; line-height:1.25; margin:2.2rem 0 .8rem; }
 h3 { font-size:1.1rem; margin:1.8rem 0 .6rem; }
-p, li { margin:.7rem 0; }
-li { margin:.35rem 0; }
-strong { font-weight:650; }
-a { color:var(--accent); }
-blockquote { margin:1.1rem 0; padding:.5rem 0 .5rem 1.1rem;
-             border-left:3px solid var(--accent); color:var(--muted); }
-pre { background:var(--code-bg); border:1px solid var(--rule); border-radius:8px;
-      padding:.9rem 1.1rem; overflow-x:auto; font:13.5px/1.55 ui-monospace, Menlo, Consolas, monospace; }
-code { font:.9em ui-monospace, Menlo, Consolas, monospace; background:var(--code-bg);
-       padding:.08em .3em; border-radius:4px; }
+p, li { margin:.7rem 0; } li { margin:.35rem 0; } strong { font-weight:650; } a { color:var(--accent); }
+blockquote { margin:1.1rem 0; padding:.5rem 0 .5rem 1.1rem; border-left:3px solid var(--accent); color:var(--muted); }
+pre { background:var(--code-bg); border:1px solid var(--rule); border-radius:8px; padding:.9rem 1.1rem; overflow-x:auto; font:13.5px/1.55 ui-monospace, Menlo, Consolas, monospace; }
+code { font:.9em ui-monospace, Menlo, Consolas, monospace; background:var(--code-bg); padding:.08em .3em; border-radius:4px; }
 pre code { background:none; padding:0; }
-table { border-collapse:collapse; margin:1.1rem 0; font-size:.92rem; max-width:100%;
-        display:block; overflow-x:auto; }
-th, td { border:1px solid var(--rule); padding:.45rem .7rem; text-align:left; }
-th { background:var(--code-bg); }
+table { border-collapse:collapse; margin:1.1rem 0; font-size:.92rem; max-width:100%; display:block; overflow-x:auto; }
+th, td { border:1px solid var(--rule); padding:.45rem .7rem; text-align:left; } th { background:var(--code-bg); }
 hr { border:0; border-top:1px solid var(--rule); margin:2rem 0; }
-.math { background:var(--code-bg); border:1px solid var(--rule); border-radius:8px;
-        padding:.7rem 1rem; margin:1rem 0; font-family:ui-monospace, Menlo, Consolas, monospace;
-        font-size:.92rem; }
 @media (max-width:600px) { body { font-size:16px; } h1 { font-size:1.6rem; } }
-
-.nav { margin: 0 0 1.5rem; font-size:.9rem; }
-.nav a { color: var(--accent); text-decoration: none; }
-.nav a:hover { text-decoration: underline; }
-.wk { border:1px solid var(--rule); border-radius:10px; padding:1.1rem 1.4rem; margin:0 0 1rem; }
-.wk h3 { margin:.1rem 0 .5rem; font-size:1.05rem; }
-.wk .num { color:var(--muted); font:600 11px/1 ui-monospace,Menlo,Consolas,monospace;
-           letter-spacing:.1em; text-transform:uppercase; }
-.surfaces a { display:inline-block; margin:.3rem .4rem .3rem 0; padding:.3rem .65rem;
-              border:1px solid var(--accent); border-radius:999px; font-size:.85rem;
-              color:var(--accent); text-decoration:none; }
-.surfaces a:hover { background:var(--code-bg); }
-.surfaces span.held { display:inline-block; margin:.3rem .4rem .3rem 0; padding:.3rem .65rem;
-                      border:1px dashed var(--rule); border-radius:999px; font-size:.85rem;
-                      color:var(--muted); }
-.lede { color:var(--muted); margin:0 0 2rem; }
+.nav { margin: 0 0 1.5rem; font-size:.9rem; } .nav a { color: var(--accent); text-decoration: none; } .nav a:hover { text-decoration: underline; }
 </style></head>
 <body><main>
 <div class='nav'><a href='../index.html'>MSF Financial Modeling</a></div>
-<h1>Week 3 — Prework</h1><h1>Week 3 — Prework</h1>
-<blockquote><strong>Register: TEACH.</strong> The bridge from Lab 2 to what Lab 3 assumes.</blockquote>
+<h1>Week 3 — Prework</h1>
+<blockquote>
+<p><strong>Register: TEACH.</strong> The bridge from Lab 2 to what Lab 3 assumes.</p>
+</blockquote>
 <p><strong>You arrive with:</strong> a panel, a catalog, and a limitations statement.</p>
-<p><strong>Honest time budget: about 1 hour 20 minutes.</strong></p>
-<table><thead><tr><th>Part</th><th>What</th><th>Time</th></tr></thead><tbody><tr><td>A</td><td>Reproduce the two-index comparison</td><td>25 min</td></tr><tr><td>B</td><td>Find your benchmark&#x27;s rules</td><td>25 min</td></tr><tr><td>C</td><td>Reread your own catalog</td><td>15 min</td></tr><tr><td>D</td><td>One paragraph, before class</td><td>15 min</td></tr></tbody></table>
-<hr>
-<h2>Part A — Reproduce the comparison</h2>
-<p>Run the SPY/RSP block from <code>handout.md</code> Part 1 yourself.</p>
-<p>Then answer, on paper, before class:</p>
-<ol><li>Which of the two is &quot;the S&amp;P 500 return&quot;?</li><li>If a client asked you what the market did over this decade, which number would you give,</li></ol>
-<p>and what would you say alongside it?</p>
-<p>There is no right answer to 1. There is a right <em>behaviour</em> for 2.</p>
-<h2>Part B — Find your benchmark&#x27;s rules</h2>
-<p>Choose a candidate benchmark for your panel. Then find and write down its <strong>construction rules</strong> — not its price history.</p>
-<p>Look for the index methodology document. Most major index providers publish one. Find:</p>
-<ul><li>What makes a security eligible for inclusion</li><li>How constituents are weighted</li><li>How often membership is reviewed, and what triggers a change outside the schedule</li><li>What happens to the index when a member is acquired or delisted</li></ul>
-<p>That last one should now interest you more than it would have two weeks ago.</p>
-<p>If you cannot find a methodology document, that is a finding — write down where you looked. <strong>A benchmark whose rules you cannot state is a benchmark you cannot defend.</strong></p>
-<h2>Part C — Reread your own catalog</h2>
-<p>Open <code>data_quality_issues.md</code> and read it as though someone else wrote it.</p>
-<p>For each open issue, write one sentence: <strong>what claim would this stop me from making?</strong></p>
-<p>Be specific. Not &quot;limits my analysis&quot; — an actual sentence you would otherwise want to write, and now cannot.</p>
-<p>Bring this list. Lab 3 Step 5 builds directly on it.</p>
-<h2>Part D — Write one paragraph</h2>
-<blockquote>Two analysts compute the annualized volatility of the same security over the same window and get different answers. Neither has made an arithmetic error. Give three explanations, ranked by how likely you think each is.</blockquote>
-<p>Keep it. You will find out in the session whether your ranking matches the one professionals use — most people rank these in exactly the wrong order.</p>
-<p><strong>Bring to the session:</strong> the reproduced comparison with your two answers, your benchmark&#x27;s construction rules, your list of forbidden claims, and this paragraph.</p>
+<p>Honest time budget: about 1 hour 45 minutes.</p>
+<table>
+<thead>
+<tr>
+<th>Part</th>
+<th>What</th>
+<th>Time</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>Tech prep — one download, two accounts</td>
+<td>10 min</td>
+</tr>
+<tr>
+<td>A</td>
+<td>Load the French factor file</td>
+<td>20 min</td>
+</tr>
+<tr>
+<td>B</td>
+<td>Reproduce Apple's Sharpe ratio and regression</td>
+<td>30 min</td>
+</tr>
+<tr>
+<td>C</td>
+<td>Read the two papers, about fourteen pages</td>
+<td>25 min</td>
+</tr>
+<tr>
+<td>D</td>
+<td>Reread your own catalog</td>
+<td>15 min</td>
+</tr>
+</tbody>
+</table>
+<h2>Part 0 — Tech prep: download before Tuesday, install on Tuesday</h2>
+<p>From this week the course runs in VS Code on your own laptop instead of Colab. Tuesday's first thirty-five minutes install everything, together, from the projector. Your job before Tuesday is to have the one installer on disk and two accounts ready, so the room is not waiting on a download.</p>
+<ol>
+<li><strong>VS Code.</strong> https://code.visualstudio.com/download → the installer for your operating system. Save it; do not run it yet. Python is not a separate download: <strong>uv</strong>, installed in the room with one line, fetches Python 3.12 itself.</li>
+<li><strong>A ChatGPT account you can sign in to</strong>, at https://chatgpt.com. Codex, the OpenAI coding agent we install Tuesday, signs in with it. Confirm that your plan includes Codex: open https://chatgpt.com/codex and see whether it lets you in. If it asks you to upgrade, note that and bring it; you will pair with a neighbour on Tuesday and the course does not require a paid plan.</li>
+<li><strong>A Google account you can sign in to.</strong> The Antigravity extension we install Tuesday uses it; its free tier is enough.</li>
+<li>Bring the laptop charged, with a power adapter. Installs on battery-saver laptops fail in strange ways.</li>
+</ol>
+<p>If you already have VS Code and uv, you are ahead; Tuesday's block will still check yours.</p>
+<h2>Part A — Load the French factor file</h2>
+<ol>
+<li>Go to https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/data_library.html</li>
+<li>Under <strong>U.S. Research Returns Data</strong>, find <strong>Fama/French 3 Factors</strong>, click <strong>CSV</strong>, unzip.</li>
+<li>Open the CSV in a text editor first. Find the four-line preamble, the header line <code>,Mkt-RF,SMB,HML,RF</code>, the monthly block keyed <code>192607</code> onward, and the point where it stops and an annual block begins.</li>
+<li>Load only the monthly block in Python. Divide by 100. Print the last three rows.</li>
+</ol>
+<p>What you should see, allowing for the file being updated since this was written:</p>
+<pre><code>         Mkt-RF     SMB     HML      RF
+2026-05  0.0491 -0.0159 -0.0231  0.0031
+2026-06 -0.0107  0.0339  0.0358  0.0029
+2026-07 -0.0060 -0.0196  0.0211  0.0033
+</code></pre>
+<p>Write down, in one line, what <code>Mkt-RF</code> is and why you must not subtract <code>RF</code> from it.</p>
+<h2>Part B — Reproduce Apple</h2>
+<p>Pull Apple and SPY from yfinance with <code>auto_adjust=True</code>, resample to month-end, compute simple returns, and join to the French rows on year-month for 2015-07 to 2025-06. Assert 120 rows.</p>
+<p>Then compute Apple's Sharpe ratio under the handout Part 2 standard and run the handout Part 3 regression. Targets:</p>
+<pre><code>Sharpe  0.788      alpha/yr 8.41%   t(α) 1.23    beta 1.134   R² 0.429
+</code></pre>
+<p>If your Sharpe is 0.79 and your beta is 1.13, your alignment is right and the rest of the week is the same code on more columns. If your beta is right and your Sharpe is not, look at the risk-free subtraction. If the row count is not 120, look at the join.</p>
+<p>The full script is <a href="week3_worked.py"><code>week3_worked.py</code></a>; read it after you have tried, not before.</p>
+<h2>Part C — Read the papers</h2>
+<p>Both are on JSTOR through Purdue Libraries. Start here: https://www.lib.purdue.edu → Databases → JSTOR.</p>
+<ul>
+<li><strong>Sharpe (1964), Journal of Finance 19(3).</strong> Read the introduction and the section on equilibrium in the capital market, through the figure with the capital market line. About eight pages. Answer in one sentence: according to Sharpe, why does the market not reward idiosyncratic risk?</li>
+<li><strong>Jensen (1968), Journal of Finance 23(2).</strong> Read the introduction and the section that defines the regression. About six pages. Answer in one sentence: what would a fund manager's alpha be if the model were exactly right and the manager had no information?</li>
+</ul>
+<p>Bring both sentences. They are the first thing Tuesday asks.</p>
+<h2>Part D — Reread your own catalog</h2>
+<p>Open <code>data_quality_issues.md</code> and read it as though someone else wrote it. For each open issue, write one sentence: what does this do to an alpha computed on this panel? Be specific. Not "biases the results"; the direction and, if you can, a bound.</p>
+<p>Bring the list. Lab 3 Step 8 builds directly on it.</p>
+<p><strong>Bring to the session:</strong> the VS Code installer downloaded, the two accounts ready, the French file loaded, Apple reproduced, your two paper sentences, and your list of what each catalog issue does to alpha.</p>
 </main></body></html>

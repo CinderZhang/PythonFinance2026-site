@@ -1,143 +1,315 @@
-<!doctype html><html lang='en'><head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width,initial-scale=1'>
-<title>Week 4 — Handout</title><style>
-:root { --bg:#ffffff; --fg:#14181d; --muted:#5a6572; --rule:#dfe3e8;
-        --accent:#0b5fa5; --code-bg:#f4f6f8; }
-@media (prefers-color-scheme: dark) {
-  :root { --bg:#0f1419; --fg:#e9ecf0; --muted:#9aa4b2; --rule:#2a323c;
-          --accent:#6fb3f2; --code-bg:#182029; } }
+<!doctype html><html lang='en'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>Week 4 — Handout</title><style>
+:root { --bg:#ffffff; --fg:#14181d; --muted:#5a6572; --rule:#dfe3e8; --accent:#0b5fa5; --code-bg:#f4f6f8; }
+@media (prefers-color-scheme: dark) { :root { --bg:#0f1419; --fg:#e9ecf0; --muted:#9aa4b2; --rule:#2a323c; --accent:#6fb3f2; --code-bg:#182029; } }
 * { box-sizing: border-box; }
-body { margin:0; background:var(--bg); color:var(--fg);
-       font: 17px/1.6 -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+body { margin:0; background:var(--bg); color:var(--fg); font: 17px/1.6 -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
 main { max-width: 46rem; margin: 0 auto; padding: 2.25rem 1.25rem 4.5rem; }
 h1 { font-size:1.9rem; line-height:1.2; margin:0 0 1rem; letter-spacing:-.01em; }
 h2 { font-size:1.4rem; line-height:1.25; margin:2.2rem 0 .8rem; }
 h3 { font-size:1.1rem; margin:1.8rem 0 .6rem; }
-p, li { margin:.7rem 0; }
-li { margin:.35rem 0; }
-strong { font-weight:650; }
-a { color:var(--accent); }
-blockquote { margin:1.1rem 0; padding:.5rem 0 .5rem 1.1rem;
-             border-left:3px solid var(--accent); color:var(--muted); }
-pre { background:var(--code-bg); border:1px solid var(--rule); border-radius:8px;
-      padding:.9rem 1.1rem; overflow-x:auto; font:13.5px/1.55 ui-monospace, Menlo, Consolas, monospace; }
-code { font:.9em ui-monospace, Menlo, Consolas, monospace; background:var(--code-bg);
-       padding:.08em .3em; border-radius:4px; }
+p, li { margin:.7rem 0; } li { margin:.35rem 0; } strong { font-weight:650; } a { color:var(--accent); }
+blockquote { margin:1.1rem 0; padding:.5rem 0 .5rem 1.1rem; border-left:3px solid var(--accent); color:var(--muted); }
+pre { background:var(--code-bg); border:1px solid var(--rule); border-radius:8px; padding:.9rem 1.1rem; overflow-x:auto; font:13.5px/1.55 ui-monospace, Menlo, Consolas, monospace; }
+code { font:.9em ui-monospace, Menlo, Consolas, monospace; background:var(--code-bg); padding:.08em .3em; border-radius:4px; }
 pre code { background:none; padding:0; }
-table { border-collapse:collapse; margin:1.1rem 0; font-size:.92rem; max-width:100%;
-        display:block; overflow-x:auto; }
-th, td { border:1px solid var(--rule); padding:.45rem .7rem; text-align:left; }
-th { background:var(--code-bg); }
+table { border-collapse:collapse; margin:1.1rem 0; font-size:.92rem; max-width:100%; display:block; overflow-x:auto; }
+th, td { border:1px solid var(--rule); padding:.45rem .7rem; text-align:left; } th { background:var(--code-bg); }
 hr { border:0; border-top:1px solid var(--rule); margin:2rem 0; }
-.math { background:var(--code-bg); border:1px solid var(--rule); border-radius:8px;
-        padding:.7rem 1rem; margin:1rem 0; font-family:ui-monospace, Menlo, Consolas, monospace;
-        font-size:.92rem; }
 @media (max-width:600px) { body { font-size:16px; } h1 { font-size:1.6rem; } }
-
-.nav { margin: 0 0 1.5rem; font-size:.9rem; }
-.nav a { color: var(--accent); text-decoration: none; }
-.nav a:hover { text-decoration: underline; }
-.wk { border:1px solid var(--rule); border-radius:10px; padding:1.1rem 1.4rem; margin:0 0 1rem; }
-.wk h3 { margin:.1rem 0 .5rem; font-size:1.05rem; }
-.wk .num { color:var(--muted); font:600 11px/1 ui-monospace,Menlo,Consolas,monospace;
-           letter-spacing:.1em; text-transform:uppercase; }
-.surfaces a { display:inline-block; margin:.3rem .4rem .3rem 0; padding:.3rem .65rem;
-              border:1px solid var(--accent); border-radius:999px; font-size:.85rem;
-              color:var(--accent); text-decoration:none; }
-.surfaces a:hover { background:var(--code-bg); }
-.surfaces span.held { display:inline-block; margin:.3rem .4rem .3rem 0; padding:.3rem .65rem;
-                      border:1px dashed var(--rule); border-radius:999px; font-size:.85rem;
-                      color:var(--muted); }
-.lede { color:var(--muted); margin:0 0 2rem; }
+.nav { margin: 0 0 1.5rem; font-size:.9rem; } .nav a { color: var(--accent); text-decoration: none; } .nav a:hover { text-decoration: underline; }
 </style></head>
 <body><main>
 <div class='nav'><a href='../index.html'>MSF Financial Modeling</a></div>
-<h1>Week 4 — Handout</h1><h1>Week 4 — Handout</h1>
-<blockquote><strong>Register: TEACH.</strong> Narrative and worked examples. Graded steps in <code>lab.md</code>; conventions in <code>rules.md</code>.</blockquote>
-<p><strong>You arrive with:</strong> a panel, stated conventions, verified metrics, a chosen benchmark, and a written statement of what your numbers can and cannot support.</p>
-<p>Now you build a portfolio from them. This week is about what happens when you feed real estimates into a theory that assumes you know the truth.</p>
-<hr>
+<h1>Week 4 — Handout</h1>
+<blockquote>
+<p><strong>Register: TEACH.</strong> Narrative and worked examples. Graded steps are in <code>lab.md</code>; conventions are in <code>rules.md</code>.</p>
+</blockquote>
+<p><strong>You arrive with:</strong> a panel, stated conventions, a Sharpe ratio and a Jensen regression for every name, a verified beta, a defended benchmark, your excess-return series, and the covariance matrix of those excess returns.</p>
+<p><strong>Where this goes next:</strong> Week 5 builds a risk report on the exact portfolio you finish this week, with its constraints, its gross leverage, and the rebalancing frequency you commit to.</p>
+<hr />
 <h2>Why this matters</h2>
 <p>Mean-variance optimization is the most taught idea in finance and one of the least used in the form it is taught. Every MSF graduate can derive the efficient frontier. Very few can say why the desk they join does not run the optimizer they were taught.</p>
-<p>You are about to find out. Not by being told — by building it, running it correctly, and watching it fail on real data.</p>
+<p>You are about to find out. Not by being told. By building it, running it correctly, and watching it fail on the eight names whose numbers you already have. Then by applying the one remedy that desks actually use, and seeing what it costs.</p>
 <p>The failure is not a bug. Your code will be right. That is the lesson.</p>
-<hr>
+<hr />
+<h2>The paper</h2>
+<p>This week is anchored on <strong>DeMiguel, Garlappi and Uppal (2009), "Optimal Versus Naive Diversification: How Inefficient Is the 1/N Portfolio Strategy?", Review of Financial Studies 22(5), 1915–1953.</strong></p>
+<p>They took fourteen versions of the optimal portfolio, from the plain sample-based tangency portfolio through Bayesian and shrinkage and constrained variants, ran each on seven datasets, and compared every one out of sample against the least sophisticated thing available: equal weight in every asset, 1/N, no estimation at all. None of the fourteen beat 1/N consistently. Their explanation is the one you will reproduce: the gain from optimizing is smaller than the loss from estimating the inputs. Their headline number, from their simulations under the paper's assumptions, is that a sample-based optimizer on 25 assets needs about 3,000 months of history, 250 years, before it is expected to beat 1/N, and about 6,000 months for 50 assets.</p>
+<p><strong>Read:</strong> the abstract and the introduction, then find the table that compares Sharpe ratios across strategies and datasets and read the 1/N row against the others. The paper is on JSTOR and Oxford Academic through Purdue Libraries. Start here: https://www.lib.purdue.edu → Databases → JSTOR. DOI 10.1093/rfs/hhm075.</p>
+<p><strong>What the paper does not say.</strong> It does not say optimization is useless. It says that with the inputs you can actually estimate, the naive portfolio is a hard benchmark, and that the remedies which work all work by using less of the estimate.</p>
+<p><strong>Textbook.</strong> The free-lane counterpart, with code, is in the DRIVER textbook: <a href="https://cinderzhang.github.io/DRIVER-FinancialModeling/Session6-Modern-Portfolio-Theory.html">Session 6 — Modern Portfolio Theory</a> for the optimizer and the frontier, and <a href="https://cinderzhang.github.io/DRIVER-FinancialModeling/Session7-Asset-Allocation-Rebalancing.html">Session 7 — Asset Allocation and Rebalancing</a> for constraints and rebalancing. Read the paper for the idea and the textbook for the code.</p>
+<hr />
 <h2>Part 1 — The theory, briefly, because you already have it</h2>
-<p>Given expected returns $\mu$ and a covariance matrix $\Sigma$, the tangency portfolio — maximum Sharpe ratio — has weights proportional to:</p>
-<div class="math">w \propto \Sigma^{-1}\mu</div>
-<p>normalised so the weights sum to one. That is the whole calculation. Three lines of code:</p>
-<pre><code>mu = returns.mean().values * 252
-S  = returns.cov().values * 252
+<p>Given expected excess returns μ and a covariance matrix Σ, the maximum-Sharpe portfolio, the tangency portfolio, has weights proportional to Σ⁻¹μ, scaled so they sum to one:</p>
+<pre><code>w  ∝  Σ⁻¹ μ            μ = mean monthly EXCESS return × 12 ;  Σ = covariance of excess returns × 12
+</code></pre>
+<p>Excess, because the Sharpe ratio is defined on excess returns and the tangency portfolio is the one that maximizes it. Using raw means gives a different portfolio, and it is the most common error in student optimizers. Four lines of code, on the excess-return frame you saved in Week 3:</p>
+<pre><code class="language-python">import numpy as np
+mu = ex.mean().values * 12                 # ex: monthly excess returns, one column per name
+S  = ex.cov(ddof=1).values * 12
 w  = np.linalg.solve(S, mu)
-w  = w / w.sum()</code></pre>
-<p>Nothing about this is wrong. The mathematics is correct, the implementation is correct, and it will produce a portfolio with a higher in-sample Sharpe ratio than anything else you can construct from the same assets.</p>
-<p><strong>In-sample.</strong> Hold on to that word.</p>
-<hr>
+w  = w / w.sum()                           # scale to sum to one
+</code></pre>
+<p>Nothing about this is wrong. The mathematics is correct, the implementation is correct, and on the window it was estimated on it produces a higher Sharpe ratio than any other combination of the same assets. That guarantee has two conditions the code does not check: Σ must be invertible, and the raw weights must sum to a positive number. If the sum is zero or negative, the scaling flips the portfolio or blows it up and the result is not the tangency portfolio. Print the sum before you divide by it, and if it is not clearly positive, stop and report that instead of a weight vector.</p>
+<p>In-sample. Hold on to that word.</p>
+<hr />
 <h2>Part 2 — Run it twice</h2>
-<p>Eight large, liquid, familiar US companies. Ten years of daily data, split into two adjacent five-year windows. Same code, same universe, same conventions. Only the estimation window moves.</p>
-<pre><code>            2015-2020    2020-2025        swing
-AAPL            22.0%        -5.5%      -27.6pp
-MSFT           152.6%        19.9%     -132.7pp
-JNJ              3.0%       -15.0%      -18.0pp
-KO             -19.7%        18.7%      +38.4pp
-XOM           -124.6%        19.4%     +143.9pp
-JPM             10.5%        24.8%      +14.3pp
-PG              29.4%         2.3%      -27.1pp
-WMT             26.7%        35.4%       +8.7pp
-
-gross leverage (sum of |w|):  3.89   -&gt;   1.41</code></pre>
-<p>Read the XOM row again.</p>
-<p>The optimizer wants to <strong>short Exxon with 125% of the portfolio</strong> using one window, and <strong>hold 19% long</strong> using the next. Not a different size. The opposite direction, by a margin of 144 percentage points.</p>
-<p>MSFT swings from a 153% long — leveraged, more than the entire portfolio in one name — to 20%.</p>
-<p>Nothing about the world changed discontinuously between those two windows. The companies are the same. What changed is which five years you measured.</p>
-<h3>This is not a coding error</h3>
-<p>Every number above comes from correct code running on clean data. If you built this yourself you would get the same thing.</p>
-<p>The optimizer is doing precisely what it was asked: given these inputs, these weights maximise the Sharpe ratio. The problem is that it believes the inputs.</p>
-<hr>
+<p>Eight large, familiar US companies. Ten years of monthly excess returns, split into two adjacent five-year windows. Same code, same universe, same conventions. Only the estimation window moves.</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>window A, 2015-07 to 2020-06</th>
+<th>window B, 2020-07 to 2025-06</th>
+<th>swing</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>AAPL</td>
+<td>−10.2%</td>
+<td>0.3%</td>
+<td>+10.6 pp</td>
+</tr>
+<tr>
+<td>MSFT</td>
+<td>100.6%</td>
+<td>25.4%</td>
+<td>−75.2 pp</td>
+</tr>
+<tr>
+<td>JNJ</td>
+<td>6.4%</td>
+<td>−55.9%</td>
+<td>−62.3 pp</td>
+</tr>
+<tr>
+<td>KO</td>
+<td>−17.8%</td>
+<td>48.5%</td>
+<td>+66.3 pp</td>
+</tr>
+<tr>
+<td>XOM</td>
+<td>−52.9%</td>
+<td>28.5%</td>
+<td>+81.4 pp</td>
+</tr>
+<tr>
+<td>JPM</td>
+<td>13.2%</td>
+<td>25.9%</td>
+<td>+12.7 pp</td>
+</tr>
+<tr>
+<td>PG</td>
+<td>35.8%</td>
+<td>−23.5%</td>
+<td>−59.2 pp</td>
+</tr>
+<tr>
+<td>WMT</td>
+<td>25.0%</td>
+<td>50.8%</td>
+<td>+25.8 pp</td>
+</tr>
+<tr>
+<td>gross leverage</td>
+<td>2.62</td>
+<td>2.59</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>Every number is produced by <a href="week4_worked.py"><code>week4_worked.py</code></a> from the Week 3 files.</p>
+<p>Read the Exxon row. The optimizer wants to short Exxon with 53% of the portfolio on one window and hold 29% long on the next. Not a different size. The opposite direction, by 81 percentage points. Microsoft goes from a 101% position, more than the whole portfolio in one name, to 25%. Johnson &amp; Johnson goes from a small long to a 56% short.</p>
+<p>Nothing about these companies changed by that much between the two windows. What changed is which five years you measured.</p>
+<p><strong>Count what you asked the data for.</strong> Eight assets means 36 distinct covariance entries plus 8 expected returns: 44 parameters. Each window has 60 months, 60 rows of eight numbers. Dividing, 1.36 months per parameter. That ratio is not a degrees-of-freedom count, because every month informs all 44 estimates at once, but it is the right thing to be uneasy about: you are asking sixty rows to pin down forty-four quantities, and the optimizer will treat every one of them as known.</p>
+<hr />
 <h2>Part 3 — The part that should end the argument</h2>
-<p>Weight instability is uncomfortable but arguable — perhaps the optimizer is right and the world really did change.</p>
-<p>So test it the only way that matters. Estimate on the first window. Hold the resulting portfolio through the second, untouched. Compare against the least sophisticated thing available: equal weights, 1/N, no estimation at all.</p>
-<pre><code>estimated on 2015-2020, held over 2020-2025
-
-tangency (MVO)      return  14.43%    vol  58.16%    sharpe  0.248
-1/N equal weight    return  18.68%    vol  13.91%    sharpe  1.343</code></pre>
-<p>The optimizer earned <strong>less return with four times the volatility</strong>. Its out-of-sample Sharpe ratio is 0.248 against 1.343 for putting an eighth in each name and going home.</p>
-<p><strong>1/N beat the optimizer by a factor of 5.4.</strong></p>
-<p>This is not a quirk of these eight stocks or this window. It is a well-documented result, and it is the reason the naive mean-variance optimizer is not what sits behind institutional portfolios.</p>
-<hr>
+<p>Weight instability is uncomfortable but arguable. Perhaps the optimizer is right and the world really did change.</p>
+<p>So test it the only way that matters. Estimate on window A. Hold the weights through window B. Compare against 1/N, an eighth in each name.</p>
+<p>One convention first, because it changes the number. "Hold the weights" means the weights are fixed at their window-A values and the portfolio is reset to them at the start of every month, with no re-estimation. The alternative, buying once and never touching it, lets the weights drift, and with a 53% short in it the drifting version touched 25 cents on the dollar at one point in window B. Fixed weights, reset monthly, is the experiment this course runs; both portfolios get the same treatment.</p>
+<table>
+<thead>
+<tr>
+<th>out of sample, window B</th>
+<th>annualized excess return</th>
+<th>annual vol</th>
+<th>Sharpe</th>
+<th>gross leverage</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>tangency, estimated on A</td>
+<td>13.25%</td>
+<td>30.51%</td>
+<td>0.434</td>
+<td>2.62</td>
+</tr>
+<tr>
+<td>1/N</td>
+<td>15.76%</td>
+<td>13.55%</td>
+<td>1.163</td>
+<td>1.00</td>
+</tr>
+</tbody>
+</table>
+<p>The optimizer earned less with more than twice the volatility. Its out-of-sample Sharpe ratio is 0.434 against 1.163 for putting an eighth in each name and going home. <strong>1/N beat it by a factor of 2.7.</strong></p>
+<p>For contrast, the same two portfolios on window A, the data the optimizer was fitted to: tangency 2.234, 1/N 0.993. In sample the optimizer wins by a factor of 2.2. Out of sample it loses by 2.7. The gap between those two sentences is estimation error, and it is the whole week.</p>
+<p>This is not a quirk of these eight stocks or this window. It is the paper's result on seven datasets, and it is the reason the naive mean-variance optimizer is not what sits behind institutional portfolios.</p>
+<hr />
 <h2>Part 4 — Why: what your covariance matrix actually contains</h2>
-<p>The formula uses $\Sigma^{-1}$. Everything turns on that inverse.</p>
-<p>You did not measure $\Sigma$. You <strong>estimated</strong> it, from a finite sample, and every entry carries estimation error. For $N$ assets there are $N(N+1)/2$ distinct entries — for our eight assets, 36 numbers, each one noisy. Expected returns are worse: they are notoriously hard to estimate, and the sample mean of five years of daily returns is a very weak signal.</p>
-<p>Inverting a noisy matrix does not average the noise out. It <strong>amplifies</strong> it. The optimizer finds the directions in which assets look most reliably different from each other — and those are exactly the directions where the estimate is least trustworthy, because a small correlation error creates a large apparent arbitrage. It then bets on them, heavily.</p>
-<p>The gross leverage figures tell the story: 3.89 in the first window. To hold that portfolio you must short 1.4 dollars for every dollar of capital, on the strength of a correlation estimate.</p>
-<p><strong>The optimizer is an error-maximiser.</strong> Given noisy inputs, it systematically selects the positions where the noise is most favourable, which is the same as selecting where the estimate is most wrong.</p>
-<p>That is why 1/N wins. It has no estimation error, because it does not estimate anything.</p>
-<hr>
-<h2>Part 5 — What practitioners actually do</h2>
-<p>None of this means the frontier is useless. It means the naive implementation is, and there are known responses. You are not expected to implement all of these; you are expected to know they exist and what problem each solves.</p>
-<table><thead><tr><th>Response</th><th>What it addresses</th></tr></thead><tbody><tr><td><strong>Constraints</strong> — long-only, position caps</td><td>Bounds the damage directly; long-only alone removes most of the pathology</td></tr><tr><td><strong>Shrinkage</strong> of the covariance matrix</td><td>Pulls noisy estimates toward a structured target, reducing inversion instability</td></tr><tr><td><strong>Minimum variance</strong> instead of tangency</td><td>Drops $\mu$ entirely — expected returns are the noisiest input</td></tr><tr><td><strong>Risk parity</strong></td><td>Uses only the risk structure; no expected returns</td></tr><tr><td><strong>Black–Litterman</strong></td><td>Starts from market weights and tilts only where you have a stated view</td></tr><tr><td><strong>Resampling</strong></td><td>Averages over many simulated estimation draws</td></tr></tbody></table>
-<p>Notice the pattern: almost every one works by <strong>using less of the estimate</strong>. Dropping expected returns. Shrinking the covariance. Adding constraints that stop the optimizer acting on what it thinks it knows.</p>
-<p>That is the professional instinct worth taking from this week. When a model&#x27;s output is unstable, the fix is usually to give the model less freedom, not more data.</p>
-<blockquote><strong>The rule this gives you.</strong> Before you trust an optimizer, move the estimation window and look at what the weights do. If they move a lot, the output is a statement about your sample, not about the world.</blockquote>
-<hr>
+<p>The formula uses Σ⁻¹. Everything turns on that inverse.</p>
+<p>You did not measure Σ. You estimated it from 60 months, and every one of the 36 entries carries error. Expected returns are worse: the sample mean of five years of monthly returns is a very weak signal about the next five.</p>
+<p>Inverting a noisy matrix does not average the noise out. It amplifies it, and it amplifies it most in the directions where the matrix says two assets are almost interchangeable, because a small error there looks like a large, reliable difference. The optimizer then bets on exactly those directions, heavily. Window A's 101% Microsoft against a 53% Exxon short is that bet.</p>
+<p>The optimizer is an error maximizer. Given noisy inputs, it selects the positions where the noise happens to be most favourable, which is the same as selecting where the estimate is most wrong.</p>
+<p>That is why 1/N wins. It has no estimation error, because it does not estimate anything. Its performance still has sampling uncertainty, like every number this week, but none of it came from an inverse.</p>
+<hr />
+<h2>Part 5 — What a desk does: long-only, with a cap</h2>
+<p>Every practical remedy works the same way: it gives the optimizer less freedom to act on the estimate. The one you will apply, because it is the one most desks apply, is two constraints. No short positions, and no single name above a cap.</p>
+<p>The unconstrained optimizer solves a linear system. The constrained one is a small numerical optimization, maximizing the Sharpe ratio subject to weights between zero and the cap that sum to one. <code>scipy.optimize.minimize</code> with bounds does it in a few lines; the worked script shows them.</p>
+<p>Estimated on window A, tested on window B, four caps:</p>
+<table>
+<thead>
+<tr>
+<th>cap</th>
+<th>names held</th>
+<th>largest position</th>
+<th>in-sample Sharpe, A</th>
+<th>out-of-sample excess return, B</th>
+<th>out-of-sample vol, B</th>
+<th>out-of-sample Sharpe, B</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>none, long-only</td>
+<td>3</td>
+<td>71.6%</td>
+<td>1.828</td>
+<td>17.7%</td>
+<td>18.6%</td>
+<td>0.948</td>
+</tr>
+<tr>
+<td>25%</td>
+<td>7</td>
+<td>25.0%</td>
+<td>1.514</td>
+<td>14.8%</td>
+<td>15.1%</td>
+<td>0.981</td>
+</tr>
+<tr>
+<td>20%</td>
+<td>7</td>
+<td>20.0%</td>
+<td>1.420</td>
+<td>14.0%</td>
+<td>14.8%</td>
+<td>0.948</td>
+</tr>
+<tr>
+<td>15%</td>
+<td>7</td>
+<td>15.0%</td>
+<td>1.287</td>
+<td>14.1%</td>
+<td>14.0%</td>
+<td>1.007</td>
+</tr>
+<tr>
+<td>1/N, for reference</td>
+<td>8</td>
+<td>12.5%</td>
+<td>0.993</td>
+<td>15.8%</td>
+<td>13.6%</td>
+<td>1.163</td>
+</tr>
+</tbody>
+</table>
+<p>Read it in two directions.</p>
+<p>Down the in-sample column, every constraint costs something: the fitted Sharpe falls from 2.23 unconstrained to 1.83 long-only to 1.29 at a 15% cap. That is the price, and it is paid in full, in sample.</p>
+<p>Down the out-of-sample column, the picture reverses. Long-only alone lifts the out-of-sample Sharpe from 0.434 to 0.948, more than doubling it, by removing the shorts. The cap adds a little more and, just as important, makes the portfolio stable: with a 20% cap the largest swing between windows is 20 points, the cap itself, against 81 points unconstrained.</p>
+<p>And 1/N still wins. On eight names and 60 months, the best constrained portfolio reaches 1.007 against 1.163 for equal weight. That is the honest result and it is the paper's result. The remedy did not beat the naive portfolio. It got you a portfolio you can defend, hold, and explain to a committee, within 15% of the naive one, instead of a portfolio nobody would hold. Read that as a bar to clear before reading it as a disappointment.</p>
+<p>The 20% cap, on window A, holds: Microsoft, Procter &amp; Gamble, and Walmart at the cap, Apple at 19%, Johnson &amp; Johnson at 11%, Coca-Cola at 8%, JPMorgan at 2%, Exxon at zero. Gross leverage 1.00, by construction. Every one of those is a number you could say out loud.</p>
+<p>One arithmetic condition before you choose a cap: with N names, fully invested and long-only, N × cap must be at least 1, or no portfolio exists. At exactly 1/N the only feasible portfolio is equal weight. Choose a cap above that floor and say why.</p>
+<p><strong>What the remedy costs, stated.</strong> Two things. In-sample Sharpe, which you have just seen. And the ability to express a negative view: a long-only portfolio cannot say "Exxon will underperform," only "I will not hold Exxon." If your panel has a name you genuinely believe is overpriced, the constraint silences that belief. Name that when you report the portfolio.</p>
+<p><strong>What else exists.</strong> You are not asked to implement any of these. You are expected to know the names and what each gives up.</p>
+<table>
+<thead>
+<tr>
+<th>Remedy</th>
+<th>What it does</th>
+<th>What it gives up</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Minimum variance</td>
+<td>Drops μ entirely, the noisiest input</td>
+<td>Any view on returns</td>
+</tr>
+<tr>
+<td>Shrinkage of Σ</td>
+<td>Pulls the sample covariance toward a simpler target</td>
+<td>Some real structure in the data</td>
+</tr>
+<tr>
+<td>Risk parity</td>
+<td>Uses only the risk structure, equalizes risk contributions</td>
+<td>Expected returns, and it needs leverage to hit a return target</td>
+</tr>
+<tr>
+<td>Black–Litterman</td>
+<td>Starts from market weights and tilts only where you state a view</td>
+<td>Simplicity; the view calibration is a craft</td>
+</tr>
+<tr>
+<td>Resampling</td>
+<td>Averages weights over many simulated estimation draws</td>
+<td>Transparency</td>
+</tr>
+</tbody>
+</table>
+<p>Notice the pattern. Every one works by using less of the estimate.</p>
+<hr />
 <h2>Part 6 — What a professional dataset changes here</h2>
-<p>Two things, and one of them is uncomfortable.</p>
-<p><strong>It helps.</strong> Longer, cleaner history means more observations per estimated parameter, which is the direct remedy for estimation error. CRSP&#x27;s history goes back decades and includes the delisted names — so a covariance matrix estimated from it is not conditioned on survival the way one built from today&#x27;s names is. Your Week 2 problem propagates directly into $\Sigma$.</p>
-<p><strong>It does not save you.</strong> More data reduces estimation error; it does not eliminate it, and it does nothing about the deeper problem that the covariance structure itself changes over time. A twenty-year estimate is not twenty years of the same thing. The 2015–2020 window and the 2020–2025 window are not two samples from one distribution — they are two different regimes, and averaging them gives you a portfolio optimal for neither.</p>
-<p>This is worth saying plainly because it cuts against the instinct this course has been building. Better data is necessary and it is not sufficient. A professional dataset makes your estimate honest. It does not make it certain.</p>
-<hr>
-<h2>This week&#x27;s sources</h2>
-<p>Register: [the source register](../sources.html).</p>
-<table><thead><tr><th>Working with</th><th>For</th></tr></thead><tbody><tr><td>Your Week 3 panel and covariance estimate</td><td>everything this week</td></tr><tr><td>WRDS / CRSP (Gen 1)</td><td>a covariance matrix that is not conditioned on survival</td></tr></tbody></table>
-<p><strong>Correct code and a meaningless result are entirely compatible.</strong> Nothing this week will error. The optimizer runs, returns weights, and reports a Sharpe ratio, and every number in it is arithmetically right.</p>
-<p>Whether that result is a statement about the world or about your five-year sample is not visible anywhere in the output. It is only visible if you move the window and look, which is why that is the assignment.</p>
-<hr>
-<p><strong>Two sources, minimum — and where you have professional access, one of them is the professional source.</strong> This week that is <strong>WRDS / CRSP</strong>, for deep history — estimation error is a function of how much of it you have.</p>
-<p>Pending access is neither an excuse nor a penalty. Document the attempt — source, route tried, date, barrier, and why that source would have been independent — and use a second free source instead. <strong>The attempt counts; the outcome never does.</strong></p>
+<p>Longer history helps. CRSP's monthly file goes back decades and includes the names that were delisted, so a covariance estimated from a universe built point-in-time, with delisting returns kept, is not conditioned on survival the way one built from today's names is. Pulling today's survivors from CRSP does not change that. Your Week 2 problem propagates straight into Σ. More observations per parameter is the direct remedy for estimation error.</p>
+<p>It does not save you. The paper's 3,000 months, on its assumptions, is the point: even a century of data is not enough for the unconstrained optimizer on 25 assets, and the covariance structure changes over that century anyway. Better data makes your estimate honest. It does not make it certain.</p>
+<hr />
+<h2>This week's sources</h2>
+<p>Register: <a href="../sources.html">the source register</a>.</p>
+<table>
+<thead>
+<tr>
+<th>Working with</th>
+<th>For</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Your Week 3 excess returns and covariance matrix (guaranteed lane)</td>
+<td>everything this week</td>
+</tr>
+<tr>
+<td>WRDS: CRSP monthly stock file (professional lane)</td>
+<td>longer history and the delisted names, so the estimate is not conditioned on survival</td>
+</tr>
+</tbody>
+</table>
+<p>Two sources, minimum, and where you have professional access, one of them is the professional source. This week that is CRSP, for history: estimation error is a function of how much of it you have.</p>
+<p>Pending access is neither an excuse nor a penalty. Document the attempt and use a second free source instead. The attempt counts; the outcome never does.</p>
+<hr />
 <h2>Before the lab — do these</h2>
-<ol><li>Reproduce the two-window weight comparison on your own panel. You will get different</li></ol>
-<p>numbers; look at whether you get the same <em>character</em> of result.</p>
-<ol><li>Have your covariance estimate and conventions from Week 3 loaded.</li><li>Decide, before you compute anything, what constraints you think a portfolio built from your</li></ol>
-<p>panel should carry — and write down why.</p>
-<p><strong>Next: Lab 4</strong> builds the optimizer, breaks it deliberately, applies one remedy you choose, and asks you to defend the constrained portfolio against the unconstrained one.</p>
+<ol>
+<li>Reproduce the two-window weight table on your own panel. You will get different numbers; look at whether you get the same character of result.</li>
+<li>Have your Week 3 excess returns and covariance matrix loaded, in the same security order.</li>
+<li>Decide your cap, before you compute anything with it, and write one sentence on why that number. Prework Part C is where it goes.</li>
+</ol>
+<p>Next: Lab 4 builds the optimizer, breaks it deliberately, tests it against 1/N, applies long-only with your cap, and asks you to defend the cap against a colleague who says it is arbitrary.</p>
 </main></body></html>
