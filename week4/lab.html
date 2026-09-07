@@ -17,13 +17,17 @@ th, td { border:1px solid var(--rule); padding:.45rem .7rem; text-align:left; } 
 hr { border:0; border-top:1px solid var(--rule); margin:2rem 0; }
 @media (max-width:600px) { body { font-size:16px; } h1 { font-size:1.6rem; } }
 .nav { margin: 0 0 1.5rem; font-size:.9rem; } .nav a { color: var(--accent); text-decoration: none; } .nav a:hover { text-decoration: underline; }
+.wk { border:1px solid var(--rule); border-radius:10px; padding:1.1rem 1.4rem; margin:0 0 1rem; }
+.wk h3 { margin:.1rem 0 .5rem; font-size:1.05rem; }
+.wk .num { color:var(--muted); font:600 11px/1 ui-monospace,Menlo,Consolas,monospace; letter-spacing:.1em; text-transform:uppercase; }
+.surfaces a { display:inline-block; margin:.3rem .4rem .3rem 0; padding:.3rem .65rem; border:1px solid var(--accent); border-radius:999px; font-size:.85rem; color:var(--accent); text-decoration:none; }
+.surfaces a:hover { background:var(--code-bg); }
+.lede { color:var(--muted); margin:0 0 2rem; }
 </style></head>
 <body><main>
 <div class='nav'><a href='../index.html'>MSF Financial Modeling</a></div>
 <h1>Lab 4 — Build the Optimizer, Break It, Then Constrain It</h1>
-<blockquote>
-<p><strong>Register: DO.</strong> Teaching is in <code>handout.md</code>; conventions in <code>rules.md</code>.</p>
-</blockquote>
+<blockquote><strong>Register: DO.</strong> Teaching is in <code>handout.md</code>; conventions in <code>rules.md</code>.</blockquote>
 <p><strong>You arrive with:</strong> your panel, stated conventions, your excess-return series and covariance matrix from Week 3, the cap you chose in prework, and your prediction. From the session you have the two-window weight swing, the out-of-sample comparison against 1/N, and the long-only-with-cap table.</p>
 <p><strong>Where this goes next:</strong> Week 5 builds a risk report on the exact portfolio you save in Step 5, with its constraints, its gross leverage, and the rebalancing frequency you commit to.</p>
 <p><strong>Honest completion floor.</strong> Tuesday in the room: Steps 0 to 2. Thursday in the room: Steps 3 to 5. Step 6 is written work outside the room. A student who leaves Thursday with Steps 0 to 5 in a notebook that runs has done the in-class core.</p>

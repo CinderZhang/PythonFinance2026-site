@@ -1,90 +1,78 @@
-<!doctype html><html lang='en'><head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width,initial-scale=1'>
-<title>Week 5 — Lab</title><style>
-:root { --bg:#ffffff; --fg:#14181d; --muted:#5a6572; --rule:#dfe3e8;
-        --accent:#0b5fa5; --code-bg:#f4f6f8; }
-@media (prefers-color-scheme: dark) {
-  :root { --bg:#0f1419; --fg:#e9ecf0; --muted:#9aa4b2; --rule:#2a323c;
-          --accent:#6fb3f2; --code-bg:#182029; } }
+<!doctype html><html lang='en'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>Week 5 — Lab</title><style>
+:root { --bg:#ffffff; --fg:#14181d; --muted:#5a6572; --rule:#dfe3e8; --accent:#0b5fa5; --code-bg:#f4f6f8; }
+@media (prefers-color-scheme: dark) { :root { --bg:#0f1419; --fg:#e9ecf0; --muted:#9aa4b2; --rule:#2a323c; --accent:#6fb3f2; --code-bg:#182029; } }
 * { box-sizing: border-box; }
-body { margin:0; background:var(--bg); color:var(--fg);
-       font: 17px/1.6 -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+body { margin:0; background:var(--bg); color:var(--fg); font: 17px/1.6 -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
 main { max-width: 46rem; margin: 0 auto; padding: 2.25rem 1.25rem 4.5rem; }
 h1 { font-size:1.9rem; line-height:1.2; margin:0 0 1rem; letter-spacing:-.01em; }
 h2 { font-size:1.4rem; line-height:1.25; margin:2.2rem 0 .8rem; }
 h3 { font-size:1.1rem; margin:1.8rem 0 .6rem; }
-p, li { margin:.7rem 0; }
-li { margin:.35rem 0; }
-strong { font-weight:650; }
-a { color:var(--accent); }
-blockquote { margin:1.1rem 0; padding:.5rem 0 .5rem 1.1rem;
-             border-left:3px solid var(--accent); color:var(--muted); }
-pre { background:var(--code-bg); border:1px solid var(--rule); border-radius:8px;
-      padding:.9rem 1.1rem; overflow-x:auto; font:13.5px/1.55 ui-monospace, Menlo, Consolas, monospace; }
-code { font:.9em ui-monospace, Menlo, Consolas, monospace; background:var(--code-bg);
-       padding:.08em .3em; border-radius:4px; }
+p, li { margin:.7rem 0; } li { margin:.35rem 0; } strong { font-weight:650; } a { color:var(--accent); }
+blockquote { margin:1.1rem 0; padding:.5rem 0 .5rem 1.1rem; border-left:3px solid var(--accent); color:var(--muted); }
+pre { background:var(--code-bg); border:1px solid var(--rule); border-radius:8px; padding:.9rem 1.1rem; overflow-x:auto; font:13.5px/1.55 ui-monospace, Menlo, Consolas, monospace; }
+code { font:.9em ui-monospace, Menlo, Consolas, monospace; background:var(--code-bg); padding:.08em .3em; border-radius:4px; }
 pre code { background:none; padding:0; }
-table { border-collapse:collapse; margin:1.1rem 0; font-size:.92rem; max-width:100%;
-        display:block; overflow-x:auto; }
-th, td { border:1px solid var(--rule); padding:.45rem .7rem; text-align:left; }
-th { background:var(--code-bg); }
+table { border-collapse:collapse; margin:1.1rem 0; font-size:.92rem; max-width:100%; display:block; overflow-x:auto; }
+th, td { border:1px solid var(--rule); padding:.45rem .7rem; text-align:left; } th { background:var(--code-bg); }
 hr { border:0; border-top:1px solid var(--rule); margin:2rem 0; }
-.math { background:var(--code-bg); border:1px solid var(--rule); border-radius:8px;
-        padding:.7rem 1rem; margin:1rem 0; font-family:ui-monospace, Menlo, Consolas, monospace;
-        font-size:.92rem; }
 @media (max-width:600px) { body { font-size:16px; } h1 { font-size:1.6rem; } }
-
-.nav { margin: 0 0 1.5rem; font-size:.9rem; }
-.nav a { color: var(--accent); text-decoration: none; }
-.nav a:hover { text-decoration: underline; }
+.nav { margin: 0 0 1.5rem; font-size:.9rem; } .nav a { color: var(--accent); text-decoration: none; } .nav a:hover { text-decoration: underline; }
 .wk { border:1px solid var(--rule); border-radius:10px; padding:1.1rem 1.4rem; margin:0 0 1rem; }
 .wk h3 { margin:.1rem 0 .5rem; font-size:1.05rem; }
-.wk .num { color:var(--muted); font:600 11px/1 ui-monospace,Menlo,Consolas,monospace;
-           letter-spacing:.1em; text-transform:uppercase; }
-.surfaces a { display:inline-block; margin:.3rem .4rem .3rem 0; padding:.3rem .65rem;
-              border:1px solid var(--accent); border-radius:999px; font-size:.85rem;
-              color:var(--accent); text-decoration:none; }
+.wk .num { color:var(--muted); font:600 11px/1 ui-monospace,Menlo,Consolas,monospace; letter-spacing:.1em; text-transform:uppercase; }
+.surfaces a { display:inline-block; margin:.3rem .4rem .3rem 0; padding:.3rem .65rem; border:1px solid var(--accent); border-radius:999px; font-size:.85rem; color:var(--accent); text-decoration:none; }
 .surfaces a:hover { background:var(--code-bg); }
-.surfaces span.held { display:inline-block; margin:.3rem .4rem .3rem 0; padding:.3rem .65rem;
-                      border:1px dashed var(--rule); border-radius:999px; font-size:.85rem;
-                      color:var(--muted); }
 .lede { color:var(--muted); margin:0 0 2rem; }
 </style></head>
 <body><main>
 <div class='nav'><a href='../index.html'>MSF Financial Modeling</a></div>
-<h1>Week 5 — Lab</h1><h1>Lab 5 — The Risk Report</h1>
+<h1>Lab 5 — The Risk Report</h1>
 <blockquote><strong>Register: DO.</strong> Teaching is in <code>handout.md</code>; conventions in <code>rules.md</code>.</blockquote>
 <p><strong>You arrive with:</strong> a portfolio, its constraints, its gross leverage, and your diagnosis of why the unconstrained version could not be trusted. From the session you have the VaR backtest showing 1.77x the advertised breach rate, the clustering, the unbounded tail, and the seven items a committee needs.</p>
 <p><strong>Where this goes next:</strong> Week 6 values a company and Week 7 assembles everything into one deliverable. The limitations section you write here is reused there almost verbatim — so write it as though someone will read it, because someone will.</p>
-<hr>
+<hr />
 <h2>Step 1 — Compute VaR three ways</h2>
 <p>For your portfolio, compute 1-day 99% VaR by all three methods: historical, parametric, and one simulation-based approach.</p>
 <p>Report all three side by side. They will disagree. State which you will carry forward and why.</p>
 <p>Then state, in one sentence each, the assumption each method makes and where you expect it to fail.</p>
 <h2>Step 2 — Backtest your own VaR</h2>
 <p>Run the rolling backtest on your portfolio. Report:</p>
-<ul><li>number of observations tested</li><li>expected breaches at your confidence level</li><li>actual breaches</li><li>the ratio</li><li>breaches by year</li></ul>
+<ul>
+<li>number of observations tested</li>
+<li>expected breaches at your confidence level</li>
+<li>actual breaches</li>
+<li>the ratio</li>
+<li>breaches by year</li>
+</ul>
 <p><strong>Check your shift.</strong> If your breach rate comes in at or below the advertised level, that is the first thing to suspect — a VaR computed with same-day data will look excellent and be worthless.</p>
 <h2>Step 3 — Characterise the tail</h2>
 <p>Two things the breach count hides.</p>
-<ol><li><strong>Clustering.</strong> Report breaches by year. Is your worst year consistent with independent</li></ol>
+<ol>
+<li><strong>Clustering.</strong> Report breaches by year. Is your worst year consistent with independent</li>
+</ol>
 <p>breaches at your stated rate, or not? Say which, and show the numbers.</p>
-<ol><li><strong>Magnitude.</strong> Table your five worst breaches: actual loss, VaR limit, excess in percentage</li></ol>
+<ol>
+<li><strong>Magnitude.</strong> Table your five worst breaches: actual loss, VaR limit, excess in percentage</li>
+</ol>
 <p>points. Then compute CVaR — the average loss conditional on breaching — and compare it to your VaR.</p>
 <p>State the sentence a committee would need to hear about your worst case.</p>
 <h2>Step 4 — Price your rebalancing policy</h2>
 <p>State your policy — calendar, threshold, or never — chosen in prework before you priced it.</p>
 <p>Then estimate:</p>
-<ul><li>the annual turnover it implies</li><li>a round-trip cost assumption, and where you got it</li><li>the resulting annual drag in basis points</li></ul>
+<ul>
+<li>the annual turnover it implies</li>
+<li>a round-trip cost assumption, and where you got it</li>
+<li>the resulting annual drag in basis points</li>
+</ul>
 <p>Compare against at least one alternative policy. Report the drag for both and say what the more expensive one buys you.</p>
-<p>If you conclude the cheaper policy is better, say so. <strong>A well-argued &quot;do less&quot; is a real finding</strong>, and it is right more often than students expect.</p>
+<p>If you conclude the cheaper policy is better, say so. <strong>A well-argued "do less" is a real finding</strong>, and it is right more often than students expect.</p>
 <h2>Step 5 — Name what your risk report cannot see</h2>
-<p>Using the handout&#x27;s blind-spot table and your own <code>data_quality_issues.md</code>, write the limitations section.</p>
+<p>Using the handout's blind-spot table and your own <code>data_quality_issues.md</code>, write the limitations section.</p>
 <p>For each limitation: what it is, why this report cannot see it, and what someone relying on this report should therefore not conclude.</p>
 <p><strong>Include model risk explicitly</strong>, and use your own Step 2 backtest ratio as the evidence. You measured it. Report it.</p>
 <h2>Step 6 — Decide the action in advance</h2>
 <p>State what you would do if the risk limit is breached — before it is breached.</p>
-<p>Be specific and realistic. &quot;Reduce exposure&quot; is not an action. Which positions, by how much, on what trigger, and who decides?</p>
+<p>Be specific and realistic. "Reduce exposure" is not an action. Which positions, by how much, on what trigger, and who decides?</p>
 <p>Then answer: <strong>what would have to be true for this plan to be the wrong response?</strong> Every pre-committed action has a scenario in which following it makes things worse. Name yours.</p>
 <h2>Step 7 — Your policy, your defence</h2>
 <p>You chose the rebalancing policy and the risk limits.</p>
@@ -101,9 +89,22 @@ hr { border:0; border-top:1px solid var(--rule); margin:2rem 0; }
 <p><strong>Two sources, minimum — and where you have professional access, one of them is the professional source.</strong> This week that is <strong>WRDS / CRSP, and TRACE if your portfolio carries credit</strong>, for long history for tail estimates, and transaction-level bond data a free feed does not hold.</p>
 <p>Pending access is neither an excuse nor a penalty. Document the attempt — source, route tried, date, barrier, and why that source would have been independent — and use a second free source instead. <strong>The attempt counts; the outcome never does.</strong></p>
 <h2>Submit</h2>
-<ul><li>Your notebook, runnable start to finish</li><li>The three VaR estimates and your choice among them</li><li>Your backtest: expected, actual, ratio, by year</li><li>The tail table and your CVaR</li><li>Your rebalancing policy, priced, against one alternative</li><li>The limitations section, including measured model risk</li><li>Your pre-committed action and its failure scenario</li><li>Your Step 7 defence and Step 8 finding</li></ul>
+<ul>
+<li>Your notebook, runnable start to finish</li>
+<li>The three VaR estimates and your choice among them</li>
+<li>Your backtest: expected, actual, ratio, by year</li>
+<li>The tail table and your CVaR</li>
+<li>Your rebalancing policy, priced, against one alternative</li>
+<li>The limitations section, including measured model risk</li>
+<li>Your pre-committed action and its failure scenario</li>
+<li>Your Step 7 defence and Step 8 finding</li>
+</ul>
 <h2>Before Week 6 — do these</h2>
-<ol><li>Keep your limitations section in a file of its own. Week 7 reuses it.</li><li>Pick the company you will value in Week 6 and check it has filings you can reach.</li><li>Bring one sentence on what you would need to know about a company before putting a number</li></ol>
+<ol>
+<li>Keep your limitations section in a file of its own. Week 7 reuses it.</li>
+<li>Pick the company you will value in Week 6 and check it has filings you can reach.</li>
+<li>Bring one sentence on what you would need to know about a company before putting a number</li>
+</ol>
 <p>on it.</p>
 <p><strong>Lab 6 preview:</strong> value a company where every input traces to a sourced, dated figure — and discover that the same company reported two different numbers for the same year, both correct.</p>
 </main></body></html>

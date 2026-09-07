@@ -17,13 +17,17 @@ th, td { border:1px solid var(--rule); padding:.45rem .7rem; text-align:left; } 
 hr { border:0; border-top:1px solid var(--rule); margin:2rem 0; }
 @media (max-width:600px) { body { font-size:16px; } h1 { font-size:1.6rem; } }
 .nav { margin: 0 0 1.5rem; font-size:.9rem; } .nav a { color: var(--accent); text-decoration: none; } .nav a:hover { text-decoration: underline; }
+.wk { border:1px solid var(--rule); border-radius:10px; padding:1.1rem 1.4rem; margin:0 0 1rem; }
+.wk h3 { margin:.1rem 0 .5rem; font-size:1.05rem; }
+.wk .num { color:var(--muted); font:600 11px/1 ui-monospace,Menlo,Consolas,monospace; letter-spacing:.1em; text-transform:uppercase; }
+.surfaces a { display:inline-block; margin:.3rem .4rem .3rem 0; padding:.3rem .65rem; border:1px solid var(--accent); border-radius:999px; font-size:.85rem; color:var(--accent); text-decoration:none; }
+.surfaces a:hover { background:var(--code-bg); }
+.lede { color:var(--muted); margin:0 0 2rem; }
 </style></head>
 <body><main>
 <div class='nav'><a href='../index.html'>MSF Financial Modeling</a></div>
 <h1>Lab 3 — Did Your Panel Earn Its Risk?</h1>
-<blockquote>
-<p><strong>Register: DO.</strong> Teaching is in <code>handout.md</code>; conventions in <code>rules.md</code>.</p>
-</blockquote>
+<blockquote><strong>Register: DO.</strong> Teaching is in <code>handout.md</code>; conventions in <code>rules.md</code>.</blockquote>
 <p><strong>You arrive with:</strong> your panel, a permanent identifier on every row, <code>data_quality_issues.md</code> with severities you assigned, and a statement of what your panel cannot be used for. From the session you have the French factor file loaded, Apple's Sharpe ratio and regression reproduced, and the idea that one regression produces all three numbers.</p>
 <p><strong>Where this goes next:</strong> Week 4 builds portfolios from the excess-return series and the covariance matrix you save in Step 5. Every convention you leave unstated becomes a silent assumption inside an optimizer.</p>
 <p><strong>Honest completion floor.</strong> Tuesday in the room: Step 0, the environment, for everyone, then Steps 1 and 2. Thursday in the room: Steps 3 to 5. Steps 6 to 9 belong outside the room. A student who leaves Thursday with Steps 0 to 5 in a notebook that runs on their own laptop has done the in-class core.</p>

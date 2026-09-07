@@ -1,77 +1,99 @@
-<!doctype html><html lang='en'><head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width,initial-scale=1'>
-<title>Week 7 — Prework</title><style>
-:root { --bg:#ffffff; --fg:#14181d; --muted:#5a6572; --rule:#dfe3e8;
-        --accent:#0b5fa5; --code-bg:#f4f6f8; }
-@media (prefers-color-scheme: dark) {
-  :root { --bg:#0f1419; --fg:#e9ecf0; --muted:#9aa4b2; --rule:#2a323c;
-          --accent:#6fb3f2; --code-bg:#182029; } }
+<!doctype html><html lang='en'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>Week 7 — Prework</title><style>
+:root { --bg:#ffffff; --fg:#14181d; --muted:#5a6572; --rule:#dfe3e8; --accent:#0b5fa5; --code-bg:#f4f6f8; }
+@media (prefers-color-scheme: dark) { :root { --bg:#0f1419; --fg:#e9ecf0; --muted:#9aa4b2; --rule:#2a323c; --accent:#6fb3f2; --code-bg:#182029; } }
 * { box-sizing: border-box; }
-body { margin:0; background:var(--bg); color:var(--fg);
-       font: 17px/1.6 -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+body { margin:0; background:var(--bg); color:var(--fg); font: 17px/1.6 -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
 main { max-width: 46rem; margin: 0 auto; padding: 2.25rem 1.25rem 4.5rem; }
 h1 { font-size:1.9rem; line-height:1.2; margin:0 0 1rem; letter-spacing:-.01em; }
 h2 { font-size:1.4rem; line-height:1.25; margin:2.2rem 0 .8rem; }
 h3 { font-size:1.1rem; margin:1.8rem 0 .6rem; }
-p, li { margin:.7rem 0; }
-li { margin:.35rem 0; }
-strong { font-weight:650; }
-a { color:var(--accent); }
-blockquote { margin:1.1rem 0; padding:.5rem 0 .5rem 1.1rem;
-             border-left:3px solid var(--accent); color:var(--muted); }
-pre { background:var(--code-bg); border:1px solid var(--rule); border-radius:8px;
-      padding:.9rem 1.1rem; overflow-x:auto; font:13.5px/1.55 ui-monospace, Menlo, Consolas, monospace; }
-code { font:.9em ui-monospace, Menlo, Consolas, monospace; background:var(--code-bg);
-       padding:.08em .3em; border-radius:4px; }
+p, li { margin:.7rem 0; } li { margin:.35rem 0; } strong { font-weight:650; } a { color:var(--accent); }
+blockquote { margin:1.1rem 0; padding:.5rem 0 .5rem 1.1rem; border-left:3px solid var(--accent); color:var(--muted); }
+pre { background:var(--code-bg); border:1px solid var(--rule); border-radius:8px; padding:.9rem 1.1rem; overflow-x:auto; font:13.5px/1.55 ui-monospace, Menlo, Consolas, monospace; }
+code { font:.9em ui-monospace, Menlo, Consolas, monospace; background:var(--code-bg); padding:.08em .3em; border-radius:4px; }
 pre code { background:none; padding:0; }
-table { border-collapse:collapse; margin:1.1rem 0; font-size:.92rem; max-width:100%;
-        display:block; overflow-x:auto; }
-th, td { border:1px solid var(--rule); padding:.45rem .7rem; text-align:left; }
-th { background:var(--code-bg); }
+table { border-collapse:collapse; margin:1.1rem 0; font-size:.92rem; max-width:100%; display:block; overflow-x:auto; }
+th, td { border:1px solid var(--rule); padding:.45rem .7rem; text-align:left; } th { background:var(--code-bg); }
 hr { border:0; border-top:1px solid var(--rule); margin:2rem 0; }
-.math { background:var(--code-bg); border:1px solid var(--rule); border-radius:8px;
-        padding:.7rem 1rem; margin:1rem 0; font-family:ui-monospace, Menlo, Consolas, monospace;
-        font-size:.92rem; }
 @media (max-width:600px) { body { font-size:16px; } h1 { font-size:1.6rem; } }
-
-.nav { margin: 0 0 1.5rem; font-size:.9rem; }
-.nav a { color: var(--accent); text-decoration: none; }
-.nav a:hover { text-decoration: underline; }
+.nav { margin: 0 0 1.5rem; font-size:.9rem; } .nav a { color: var(--accent); text-decoration: none; } .nav a:hover { text-decoration: underline; }
 .wk { border:1px solid var(--rule); border-radius:10px; padding:1.1rem 1.4rem; margin:0 0 1rem; }
 .wk h3 { margin:.1rem 0 .5rem; font-size:1.05rem; }
-.wk .num { color:var(--muted); font:600 11px/1 ui-monospace,Menlo,Consolas,monospace;
-           letter-spacing:.1em; text-transform:uppercase; }
-.surfaces a { display:inline-block; margin:.3rem .4rem .3rem 0; padding:.3rem .65rem;
-              border:1px solid var(--accent); border-radius:999px; font-size:.85rem;
-              color:var(--accent); text-decoration:none; }
+.wk .num { color:var(--muted); font:600 11px/1 ui-monospace,Menlo,Consolas,monospace; letter-spacing:.1em; text-transform:uppercase; }
+.surfaces a { display:inline-block; margin:.3rem .4rem .3rem 0; padding:.3rem .65rem; border:1px solid var(--accent); border-radius:999px; font-size:.85rem; color:var(--accent); text-decoration:none; }
 .surfaces a:hover { background:var(--code-bg); }
-.surfaces span.held { display:inline-block; margin:.3rem .4rem .3rem 0; padding:.3rem .65rem;
-                      border:1px dashed var(--rule); border-radius:999px; font-size:.85rem;
-                      color:var(--muted); }
 .lede { color:var(--muted); margin:0 0 2rem; }
 </style></head>
 <body><main>
 <div class='nav'><a href='../index.html'>MSF Financial Modeling</a></div>
-<h1>Week 7 — Prework</h1><h1>Week 7 — Prework</h1>
+<h1>Week 7 — Prework</h1>
 <blockquote><strong>Register: TEACH.</strong> The bridge from six weeks of artefacts to one deliverable.</blockquote>
 <p><strong>You arrive with:</strong> everything you built. This week assembles it.</p>
 <p><strong>Honest time budget: about 2 hours.</strong> More than usual, deliberately — the assembly is the work, and doing it before the session makes the session useful.</p>
-<table><thead><tr><th>Part</th><th>What</th><th>Time</th></tr></thead><tbody><tr><td>A</td><td>Gather every artefact into one place</td><td>30 min</td></tr><tr><td>B</td><td>Run everything on a fresh kernel</td><td>45 min</td></tr><tr><td>C</td><td>Identify your load-bearing assumption</td><td>20 min</td></tr><tr><td>D</td><td>Draft the finding paragraph</td><td>25 min</td></tr></tbody></table>
-<hr>
+<table>
+<thead>
+<tr>
+<th>Part</th>
+<th>What</th>
+<th>Time</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A</td>
+<td>Gather every artefact into one place</td>
+<td>30 min</td>
+</tr>
+<tr>
+<td>B</td>
+<td>Run everything on a fresh kernel</td>
+<td>45 min</td>
+</tr>
+<tr>
+<td>C</td>
+<td>Identify your load-bearing assumption</td>
+<td>20 min</td>
+</tr>
+<tr>
+<td>D</td>
+<td>Draft the finding paragraph</td>
+<td>25 min</td>
+</tr>
+</tbody>
+</table>
+<hr />
 <h2>Part A — Gather</h2>
 <p>One directory. Everything from Weeks 1 through 6:</p>
-<ul><li><code>security_master.csv</code> and <code>source_log.md</code></li><li>your panel and <code>data_quality_issues.md</code></li><li>your conventions statement and metrics</li><li>your portfolio weights and constraints</li><li>your risk report and limitations section</li><li>your valuation and source ledger</li><li>every notebook</li></ul>
+<ul>
+<li><code>security_master.csv</code> and <code>source_log.md</code></li>
+<li>your panel and <code>data_quality_issues.md</code></li>
+<li>your conventions statement and metrics</li>
+<li>your portfolio weights and constraints</li>
+<li>your risk report and limitations section</li>
+<li>your valuation and source ledger</li>
+<li>every notebook</li>
+</ul>
 <p><strong>If something is missing, find out now.</strong> Week 7 assembles; it does not rebuild. A missing artefact is a missing section of your deliverable.</p>
 <h2>Part B — Run everything, fresh kernel, in order</h2>
 <p>This will take longer than you expect and things will break. That is the point of doing it now rather than the night before the deadline.</p>
 <p>Record for each failure: what broke, why, and whether you can fix it.</p>
 <p>Common causes, in rough order of frequency:</p>
-<ul><li>a file path that only existed on the day you wrote it</li><li>a variable defined in a cell you later deleted</li><li>a data pull that returns something different now than it did then</li><li>a library behaviour that changed</li></ul>
+<ul>
+<li>a file path that only existed on the day you wrote it</li>
+<li>a variable defined in a cell you later deleted</li>
+<li>a data pull that returns something different now than it did then</li>
+<li>a library behaviour that changed</li>
+</ul>
 <p>The third one is worth pausing on. If a data source returns different values now than it did in Week 2, <strong>that is a finding</strong>, and it belongs in your deliverable — you have direct evidence of the vintage problem you were taught, in your own work.</p>
 <h2>Part C — Identify your load-bearing assumption</h2>
 <p>Across your whole analysis, which single assumption, if wrong, most changes your conclusion?</p>
 <p>Write it down along with:</p>
-<ul><li>why you made it</li><li>what evidence supports it</li><li>how strong that evidence actually is</li><li>what would have to be true for it to be wrong</li></ul>
+<ul>
+<li>why you made it</li>
+<li>what evidence supports it</li>
+<li>how strong that evidence actually is</li>
+<li>what would have to be true for it to be wrong</li>
+</ul>
 <p>You will defend this one on video with a data point you have not seen. Choosing it carefully now is worth more than rehearsing later.</p>
 <p><strong>Choose the real one.</strong> There is a temptation to nominate an assumption you feel comfortable defending. The grader will be able to tell whether it is actually load-bearing, and defending a minor assumption well scores worse than defending the real one imperfectly.</p>
 <h2>Part D — Draft the finding paragraph</h2>

@@ -17,13 +17,17 @@ th, td { border:1px solid var(--rule); padding:.45rem .7rem; text-align:left; } 
 hr { border:0; border-top:1px solid var(--rule); margin:2rem 0; }
 @media (max-width:600px) { body { font-size:16px; } h1 { font-size:1.6rem; } }
 .nav { margin: 0 0 1.5rem; font-size:.9rem; } .nav a { color: var(--accent); text-decoration: none; } .nav a:hover { text-decoration: underline; }
+.wk { border:1px solid var(--rule); border-radius:10px; padding:1.1rem 1.4rem; margin:0 0 1rem; }
+.wk h3 { margin:.1rem 0 .5rem; font-size:1.05rem; }
+.wk .num { color:var(--muted); font:600 11px/1 ui-monospace,Menlo,Consolas,monospace; letter-spacing:.1em; text-transform:uppercase; }
+.surfaces a { display:inline-block; margin:.3rem .4rem .3rem 0; padding:.3rem .65rem; border:1px solid var(--accent); border-radius:999px; font-size:.85rem; color:var(--accent); text-decoration:none; }
+.surfaces a:hover { background:var(--code-bg); }
+.lede { color:var(--muted); margin:0 0 2rem; }
 </style></head>
 <body><main>
 <div class='nav'><a href='../index.html'>MSF Financial Modeling</a></div>
 <h1>Week 3 — Rules and Conventions</h1>
-<blockquote>
-<p><strong>Register: RULES.</strong> No teaching here — see <code>handout.md</code>.</p>
-</blockquote>
+<blockquote><strong>Register: RULES.</strong> No teaching here — see <code>handout.md</code>.</blockquote>
 <h2>Conventions are declared, not assumed</h2>
 <p>Every reported metric carries its conventions: return type, frequency, annualization basis, risk-free source, window, and the market series it was regressed on. A number without them is not a result.</p>
 <p>Once declared in Lab 3 Step 1, these bind for the rest of the course. If you change one later, say so and say why.</p>

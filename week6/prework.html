@@ -1,67 +1,76 @@
-<!doctype html><html lang='en'><head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width,initial-scale=1'>
-<title>Week 6 — Prework</title><style>
-:root { --bg:#ffffff; --fg:#14181d; --muted:#5a6572; --rule:#dfe3e8;
-        --accent:#0b5fa5; --code-bg:#f4f6f8; }
-@media (prefers-color-scheme: dark) {
-  :root { --bg:#0f1419; --fg:#e9ecf0; --muted:#9aa4b2; --rule:#2a323c;
-          --accent:#6fb3f2; --code-bg:#182029; } }
+<!doctype html><html lang='en'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>Week 6 — Prework</title><style>
+:root { --bg:#ffffff; --fg:#14181d; --muted:#5a6572; --rule:#dfe3e8; --accent:#0b5fa5; --code-bg:#f4f6f8; }
+@media (prefers-color-scheme: dark) { :root { --bg:#0f1419; --fg:#e9ecf0; --muted:#9aa4b2; --rule:#2a323c; --accent:#6fb3f2; --code-bg:#182029; } }
 * { box-sizing: border-box; }
-body { margin:0; background:var(--bg); color:var(--fg);
-       font: 17px/1.6 -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+body { margin:0; background:var(--bg); color:var(--fg); font: 17px/1.6 -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
 main { max-width: 46rem; margin: 0 auto; padding: 2.25rem 1.25rem 4.5rem; }
 h1 { font-size:1.9rem; line-height:1.2; margin:0 0 1rem; letter-spacing:-.01em; }
 h2 { font-size:1.4rem; line-height:1.25; margin:2.2rem 0 .8rem; }
 h3 { font-size:1.1rem; margin:1.8rem 0 .6rem; }
-p, li { margin:.7rem 0; }
-li { margin:.35rem 0; }
-strong { font-weight:650; }
-a { color:var(--accent); }
-blockquote { margin:1.1rem 0; padding:.5rem 0 .5rem 1.1rem;
-             border-left:3px solid var(--accent); color:var(--muted); }
-pre { background:var(--code-bg); border:1px solid var(--rule); border-radius:8px;
-      padding:.9rem 1.1rem; overflow-x:auto; font:13.5px/1.55 ui-monospace, Menlo, Consolas, monospace; }
-code { font:.9em ui-monospace, Menlo, Consolas, monospace; background:var(--code-bg);
-       padding:.08em .3em; border-radius:4px; }
+p, li { margin:.7rem 0; } li { margin:.35rem 0; } strong { font-weight:650; } a { color:var(--accent); }
+blockquote { margin:1.1rem 0; padding:.5rem 0 .5rem 1.1rem; border-left:3px solid var(--accent); color:var(--muted); }
+pre { background:var(--code-bg); border:1px solid var(--rule); border-radius:8px; padding:.9rem 1.1rem; overflow-x:auto; font:13.5px/1.55 ui-monospace, Menlo, Consolas, monospace; }
+code { font:.9em ui-monospace, Menlo, Consolas, monospace; background:var(--code-bg); padding:.08em .3em; border-radius:4px; }
 pre code { background:none; padding:0; }
-table { border-collapse:collapse; margin:1.1rem 0; font-size:.92rem; max-width:100%;
-        display:block; overflow-x:auto; }
-th, td { border:1px solid var(--rule); padding:.45rem .7rem; text-align:left; }
-th { background:var(--code-bg); }
+table { border-collapse:collapse; margin:1.1rem 0; font-size:.92rem; max-width:100%; display:block; overflow-x:auto; }
+th, td { border:1px solid var(--rule); padding:.45rem .7rem; text-align:left; } th { background:var(--code-bg); }
 hr { border:0; border-top:1px solid var(--rule); margin:2rem 0; }
-.math { background:var(--code-bg); border:1px solid var(--rule); border-radius:8px;
-        padding:.7rem 1rem; margin:1rem 0; font-family:ui-monospace, Menlo, Consolas, monospace;
-        font-size:.92rem; }
 @media (max-width:600px) { body { font-size:16px; } h1 { font-size:1.6rem; } }
-
-.nav { margin: 0 0 1.5rem; font-size:.9rem; }
-.nav a { color: var(--accent); text-decoration: none; }
-.nav a:hover { text-decoration: underline; }
+.nav { margin: 0 0 1.5rem; font-size:.9rem; } .nav a { color: var(--accent); text-decoration: none; } .nav a:hover { text-decoration: underline; }
 .wk { border:1px solid var(--rule); border-radius:10px; padding:1.1rem 1.4rem; margin:0 0 1rem; }
 .wk h3 { margin:.1rem 0 .5rem; font-size:1.05rem; }
-.wk .num { color:var(--muted); font:600 11px/1 ui-monospace,Menlo,Consolas,monospace;
-           letter-spacing:.1em; text-transform:uppercase; }
-.surfaces a { display:inline-block; margin:.3rem .4rem .3rem 0; padding:.3rem .65rem;
-              border:1px solid var(--accent); border-radius:999px; font-size:.85rem;
-              color:var(--accent); text-decoration:none; }
+.wk .num { color:var(--muted); font:600 11px/1 ui-monospace,Menlo,Consolas,monospace; letter-spacing:.1em; text-transform:uppercase; }
+.surfaces a { display:inline-block; margin:.3rem .4rem .3rem 0; padding:.3rem .65rem; border:1px solid var(--accent); border-radius:999px; font-size:.85rem; color:var(--accent); text-decoration:none; }
 .surfaces a:hover { background:var(--code-bg); }
-.surfaces span.held { display:inline-block; margin:.3rem .4rem .3rem 0; padding:.3rem .65rem;
-                      border:1px dashed var(--rule); border-radius:999px; font-size:.85rem;
-                      color:var(--muted); }
 .lede { color:var(--muted); margin:0 0 2rem; }
 </style></head>
 <body><main>
 <div class='nav'><a href='../index.html'>MSF Financial Modeling</a></div>
-<h1>Week 6 — Prework</h1><h1>Week 6 — Prework</h1>
+<h1>Week 6 — Prework</h1>
 <blockquote><strong>Register: TEACH.</strong> The bridge from Lab 5 to what Lab 6 assumes.</blockquote>
 <p><strong>You arrive with:</strong> a portfolio, a backtested risk report, a limitations section — and a company you chose last week.</p>
 <p><strong>Honest time budget: about 1 hour 30 minutes.</strong></p>
-<table><thead><tr><th>Part</th><th>What</th><th>Time</th></tr></thead><tbody><tr><td>A</td><td>Confirm you can reach your company&#x27;s filings</td><td>20 min</td></tr><tr><td>B</td><td>Run the revision query</td><td>25 min</td></tr><tr><td>C</td><td>Establish the fiscal calendar</td><td>20 min</td></tr><tr><td>D</td><td>One paragraph, before class</td><td>25 min</td></tr><tr><td>E</td><td>Watch Video 2 — Brief Valuation for ABG</td><td>runtime on YouTube</td></tr></tbody></table>
-<hr>
+<table>
+<thead>
+<tr>
+<th>Part</th>
+<th>What</th>
+<th>Time</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A</td>
+<td>Confirm you can reach your company's filings</td>
+<td>20 min</td>
+</tr>
+<tr>
+<td>B</td>
+<td>Run the revision query</td>
+<td>25 min</td>
+</tr>
+<tr>
+<td>C</td>
+<td>Establish the fiscal calendar</td>
+<td>20 min</td>
+</tr>
+<tr>
+<td>D</td>
+<td>One paragraph, before class</td>
+<td>25 min</td>
+</tr>
+<tr>
+<td>E</td>
+<td>Watch Video 2 — Brief Valuation for ABG</td>
+<td>runtime on YouTube</td>
+</tr>
+</tbody>
+</table>
+<hr />
 <h2>Part A — Confirm you can reach the filings</h2>
-<p>Find your company&#x27;s CIK and confirm you can pull its filing history from EDGAR.</p>
-<p>If your company does not file with the SEC — a foreign issuer, a private company — you have a problem worth discovering now rather than during the lab. Either switch companies or find the equivalent regulator&#x27;s filings and confirm you can reach them.</p>
-<p><strong>A company you cannot source is a company you cannot value to this course&#x27;s standard.</strong></p>
+<p>Find your company's CIK and confirm you can pull its filing history from EDGAR.</p>
+<p>If your company does not file with the SEC — a foreign issuer, a private company — you have a problem worth discovering now rather than during the lab. Either switch companies or find the equivalent regulator's filings and confirm you can reach them.</p>
+<p><strong>A company you cannot source is a company you cannot value to this course's standard.</strong></p>
 <h2>Part B — Run the revision query</h2>
 <p>Run the XBRL company-concept query on your company for at least two line items. Operating cash flow and revenue are good starting points.</p>
 <p>Look for any period that appears with more than one value across filings.</p>
@@ -69,14 +78,19 @@ hr { border:0; border-top:1px solid var(--rule); margin:2rem 0; }
 <p>If you do find a revision, note the size in dollars and as a percentage. Bring it; there will be time to compare across the room.</p>
 <h2>Part C — Establish the fiscal calendar</h2>
 <p>For your company, work out:</p>
-<ul><li>When does the fiscal year end? Is it a calendar year?</li><li>Are the recent annual periods all the same length?</li><li>Is there a 53-week year in your window?</li><li>Has the fiscal year end ever changed?</li></ul>
+<ul>
+<li>When does the fiscal year end? Is it a calendar year?</li>
+<li>Are the recent annual periods all the same length?</li>
+<li>Is there a 53-week year in your window?</li>
+<li>Has the fiscal year end ever changed?</li>
+</ul>
 <p>The last one is rarer and nastier than a 53-week year. A company that changes its year end produces a stub period, and any growth series spanning it is meaningless unless adjusted.</p>
 <h2>Part D — Write one paragraph</h2>
 <p>Before the session, and before you build anything:</p>
-<blockquote>Name the single assumption that will drive most of your company&#x27;s valuation. Estimate, in your head, how much the valuation changes if that assumption moves by a modest amount.  Then: what evidence would actually help you narrow it?</blockquote>
-<p>Most students discover their answer to the first question is &quot;the terminal growth rate&quot; and their answer to the third is &quot;I do not know.&quot; Both are honest, and both are the right starting point.</p>
+<blockquote>Name the single assumption that will drive most of your company's valuation. Estimate, in your head, how much the valuation changes if that assumption moves by a modest amount. Then: what evidence would actually help you narrow it?</blockquote>
+<p>Most students discover their answer to the first question is "the terminal growth rate" and their answer to the third is "I do not know." Both are honest, and both are the right starting point.</p>
 <h2>Part E — Watch Video 2: Brief Valuation for ABG</h2>
-<p>Watch before the session. <strong>Brief Valuation for ABG</strong> — <a href='https://youtu.be/2zKb79nwUQY'>https://youtu.be/2zKb79nwUQY</a></p>
+<p>Watch before the session. <strong>Brief Valuation for ABG</strong> — <a href="https://youtu.be/2zKb79nwUQY">https://youtu.be/2zKb79nwUQY</a></p>
 <p>The instructor values the training case, Asbury Automotive Group, the way this week asks you to value your own company: from professional fundamentals to an honest range, not a point. Watch for where the range comes from and which single assumption moves it most.</p>
 <p>Checkpoint 8 in Brightspace is a short quiz on this video; it sits in the capstone review window with Checkpoint 3, the quiz on Video 1 from Week 1. Dates are on the quiz pages.</p>
 <p>ABG is the training case for this course and may not be one of your capstone companies. Watch it as a method, not as a stock view.</p>
