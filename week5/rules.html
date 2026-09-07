@@ -28,29 +28,28 @@ hr { border:0; border-top:1px solid var(--rule); margin:2rem 0; }
 <div class='nav'><a href='../index.html'>MSF Financial Modeling</a></div>
 <h1>Week 5 — Rules and Conventions</h1>
 <blockquote><strong>Register: RULES.</strong> No teaching here — see <code>handout.md</code>.</blockquote>
-<h2>No risk number without its backtest</h2>
-<p>Every VaR or CVaR figure you report carries: horizon, confidence level, method, and <strong>the historical breach rate of that method on comparable data.</strong></p>
-<p>A risk number without its failure rate is not a risk number. It is a decoration, and a dangerous one, because it displaces caution that would otherwise be there.</p>
-<h2>The shift rule</h2>
-<p>Any rolling risk estimate uses only data available strictly before the period it governs. In practice that means shifting the estimate forward by one period, and its absence is the most common defect in student risk code.</p>
-<p>A VaR that looks well calibrated is more likely to be look-ahead contaminated than correct. Suspect it first.</p>
+<h2>The policy is chosen before it is priced</h2>
+<p>Your rebalancing frequency goes in writing during prework, before you compute its cost. In Lab 5 Step 3 you will be asked whether you chose before or after seeing the table, and the honest answer is required.</p>
+<p>Choosing after is legitimate practice. It must be disclosed as what it is. Presenting a post-hoc policy as a prior principle is not.</p>
+<h2>An alpha is reported with what produced the weights</h2>
+<p>Every alpha you report carries its t-statistic and one sentence on how the weights it was measured on were chosen. If the weights were fitted on the same window, the alpha is labelled in-sample, every time it appears.</p>
+<p>An unlabelled alpha is read as a claim of skill. If that is not what you mean, label it.</p>
+<h2>A drawdown is reported with its dates and its convention</h2>
+<p>Every maximum drawdown you report carries the peak date, the trough date, the months to recover or "not recovered by window end", the return series it was computed on, and the observation frequency. A drawdown on monthly data is labelled as such: intramonth lows are not in it.</p>
+<p>A past drawdown is a record of what happened. It is never reported as a limit on what can happen.</p>
+<h2>The cap is a cap on targets unless you say otherwise</h2>
+<p>The cap you defended in Week 4 binds your target weights. Holdings drift between resets. When you report a policy, report how far holdings drifted past the cap under it.</p>
+<h2>Costs are sourced, and tax is named</h2>
+<p>A round-trip cost you found is cited with its source. A round-trip cost you assumed is stated as an assumption, in those words. Tax is named as a cost that is not in the number.</p>
 <h2>Leverage is reported, always</h2>
-<p>Gross and net, on every portfolio, in every report. Inherited from Week 4; it does not lapse.</p>
-<h2>Policies are chosen before they are priced</h2>
-<p>Your rebalancing policy goes in writing during prework, before you compute its cost. You will be asked whether you chose before or after, and the honest answer is required.</p>
-<p>Choosing after is legitimate if disclosed. Presenting a post-hoc policy as a prior principle is not.</p>
-<h2>Actions are pre-committed, and their failure scenario is named</h2>
-<p>A risk report that identifies a risk without proposing an action is incomplete.</p>
-<p>An action without a named scenario in which following it is wrong has not been thought through. Every pre-committed response has one.</p>
-<h2>Limitations are specific</h2>
-<p>"This analysis has limitations" is not a limitations section. Each entry names what the report cannot see, why, and what the reader should therefore not conclude.</p>
-<p>Model risk is included explicitly, evidenced by your own backtest ratio.</p>
+<p>Every portfolio you report carries its gross leverage. Inherited from Week 4; it does not lapse.</p>
+<h2>Inherited conventions</h2>
+<p>Your Week 3 and Week 4 conventions bind here: return type, frequency, annualization, risk-free source, window, and fixed weights reset monthly for the return series. The regression inherits every one of them. If a convention changes, every coefficient changes with it. Say so.</p>
 <h2>AI use</h2>
-<p>AI writes VaR code fluently and will omit the shift unless asked. It will not backtest unless told, will not report clustering, and will not name a single limitation.</p>
-<p>It is also unusually confident in tone about risk numbers, which is exactly wrong for this artefact.</p>
-<p>What must be yours: the method choice, the backtest and its interpretation, the rebalancing policy, the limitations, and the pre-committed action. Those are the report.</p>
+<p>AI writes factor regressions and drawdown code fluently. Four things it will do without comment: report the alpha as evidence of skill; report a drawdown without its dates or its recovery; leave tax out of a trading-cost estimate and not say so; and describe a factor tilt as if the premium were guaranteed. It will not label anything in-sample.</p>
+<p>Ask for the code. Then do the reading yourself. That is what this week is.</p>
+<p>What must be yours: the three committee sentences, the before-or-after statement, the reading of the drawdown, the sheet, and the alpha defence.</p>
 <p>You must be able to explain every line of code you submit.</p>
 <h2>Reproducibility and citation</h2>
 <p>Unchanged: fresh-kernel runs, every number traceable to code, every source in <code>source_log.md</code>.</p>
-<p>Cost assumptions are sourced. A round-trip cost you assumed without a source is stated as an assumption, not presented as a fact.</p>
 </main></body></html>

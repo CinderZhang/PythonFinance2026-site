@@ -28,8 +28,8 @@ hr { border:0; border-top:1px solid var(--rule); margin:2rem 0; }
 <div class='nav'><a href='../index.html'>MSF Financial Modeling</a></div>
 <h1>Week 5 — Prework</h1>
 <blockquote><strong>Register: TEACH.</strong> The bridge from Lab 4 to what Lab 5 assumes.</blockquote>
-<p><strong>You arrive with:</strong> a portfolio, its constraints, and its gross leverage.</p>
-<p><strong>Honest time budget: about 1 hour 20 minutes.</strong></p>
+<p><strong>You arrive with:</strong> a long-only portfolio with your cap, saved with its constraints and gross leverage, and one sentence on how often you intend to rebalance it.</p>
+<p>Honest time budget: about 55 minutes.</p>
 <table>
 <thead>
 <tr>
@@ -41,42 +41,57 @@ hr { border:0; border-top:1px solid var(--rule); margin:2rem 0; }
 <tbody>
 <tr>
 <td>A</td>
-<td>Reproduce the VaR backtest</td>
-<td>30 min</td>
+<td>Build your portfolio's return series and check it</td>
+<td>15 min</td>
 </tr>
 <tr>
 <td>B</td>
-<td>Choose your rebalancing policy — before pricing it</td>
-<td>20 min</td>
+<td>Choose your rebalancing frequency before you price it</td>
+<td>10 min</td>
 </tr>
 <tr>
 <td>C</td>
-<td>Find a real transaction cost number</td>
-<td>20 min</td>
+<td>Find a real transaction-cost number</td>
+<td>15 min</td>
 </tr>
 <tr>
 <td>D</td>
-<td>One paragraph, before class</td>
+<td>Read the paper's argument</td>
 <td>10 min</td>
+</tr>
+<tr>
+<td>E</td>
+<td>One prediction, written before class</td>
+<td>5 min</td>
 </tr>
 </tbody>
 </table>
-<hr />
-<h2>Part A — Reproduce the backtest</h2>
-<p>Run the rolling VaR backtest from <code>handout.md</code> Part 2 on any liquid series.</p>
-<p>Then check one thing deliberately: <strong>remove the shift and run it again.</strong></p>
-<p>Record both breach rates. The version without the shift will look much better calibrated. Write one sentence explaining why that improvement is worthless.</p>
-<p>This is the most important five minutes of prework in the course. A risk model that looks well calibrated because it can see the future is the exact failure this week exists to prevent.</p>
-<h2>Part B — Choose your rebalancing policy</h2>
-<p>Decide now, <strong>before</strong> you price anything: calendar, threshold, or never.</p>
-<p>Write one sentence on why. If you choose threshold, state the band and why that band.</p>
-<p>You will be asked in Lab 5 Step 4 whether you chose before or after seeing the cost. Choosing after is allowed and must be disclosed — but deciding now gives you a cleaner answer and a better defence.</p>
-<h2>Part C — Find a real transaction cost number</h2>
-<p>Find an actual estimate of round-trip trading cost for the kind of security in your portfolio. Not a number you assumed — one you can cite.</p>
-<p>Places to look: broker commission schedules, published bid-ask spread statistics, academic estimates of market impact, fund annual reports that disclose trading costs.</p>
-<p>Write down the number and where it came from. If you cannot find one, write down where you looked and what you will assume instead — <strong>an assumption you have labelled as an assumption is fine; an assumption presented as a fact is not.</strong></p>
-<h2>Part D — Write one paragraph</h2>
-<blockquote>Your portfolio breaches its risk limit tomorrow. Before you know anything about why, what would you do? Now: what would have to be true for that response to make things worse?</blockquote>
-<p>Write both halves. The second is the harder one and it is the one Lab 5 Step 6 grades.</p>
-<p><strong>Bring to the session:</strong> both backtest results with your explanation, your rebalancing policy, your cited cost number, and this paragraph.</p>
+<h2>Part A — Build the series and check it</h2>
+<p>Load two things you already have: the weights you saved in Lab 4 Step 5, and the Week 3 panel with the French columns joined to it. Multiply each month's returns by the weights and sum across names. That is your portfolio's monthly return with the weights fixed and reset each month, the convention Week 4 used.</p>
+<p>Check three things and print the evidence:</p>
+<ol>
+<li>The weights sum to one and none is negative or above your cap. If not, you have loaded the wrong file.</li>
+<li>The series has one row per month of your window and no gaps.</li>
+<li>Its annual mean and volatility match what Lab 4 reported for the full-window portfolio, once you compare like with like: Week 4 reported excess returns, so subtract the risk-free column before comparing. The volatility barely changes; the mean differs by the average risk-free rate.</li>
+</ol>
+<p>Any surprise here is a Week 4 problem surfacing late. Fix it now, not in the lab.</p>
+<h2>Part B — Choose your rebalancing frequency</h2>
+<p>Decide now, before you price anything: monthly, quarterly, or annual. Write one sentence on why that frequency for your panel.</p>
+<p>The order matters for the same reason it did with the cap. In Lab 5 Step 3 you will be asked whether you chose before or after seeing the cost, and the honest answer is required. Choosing after is allowed and must be disclosed. Choosing now gives you a cleaner defence.</p>
+<h2>Part C — Find a real transaction-cost number</h2>
+<p>Find an estimate of the round-trip cost of trading the kind of security in your portfolio, in basis points. Not a number you assumed. One you can cite.</p>
+<p>Places to look: your broker's published commission and spread disclosures; a fund's annual report, which discloses trading costs; academic estimates of spreads and market impact for US equities. Start here: https://www.lib.purdue.edu → Databases → JSTOR, and search for effective spread estimates for US stocks.</p>
+<p>Write the number and where it came from. If you cannot find one, write where you looked and what you will assume instead. An assumption labelled as an assumption is fine. An assumption presented as a fact is not.</p>
+<h2>Part D — Read the paper's argument</h2>
+<p>Fama and French (1993), Journal of Financial Economics 33(1). Start here: https://www.lib.purdue.edu → Databases → ScienceDirect. DOI 10.1016/0304-405X(93)90023-5.</p>
+<p>Read the abstract and the introduction. Nothing else is required. Answer in one sentence each:</p>
+<ol>
+<li>What are the two factors they add to the market, and what does each one measure?</li>
+<li>In their own words, what happens to the intercepts, the alphas, once all three factors are in the regression?</li>
+</ol>
+<p>Bring both sentences. They are the first thing Tuesday asks.</p>
+<h2>Part E — Write one prediction</h2>
+<p>Before you run anything on your own portfolio, write down two numbers: its market beta, and the share of its monthly variance you think the market explains. Then one word for each of size and value: positive, negative, or none.</p>
+<p>Commit. A specific wrong prediction is worth far more to you here than a vague safe one, because the gap between your guess and the regression is exactly what a committee will ask you to explain.</p>
+<p><strong>Bring to the session:</strong> your portfolio series with its three checks, your rebalancing frequency with its reason, your cited cost number, your two paper sentences, and your prediction.</p>
 </main></body></html>

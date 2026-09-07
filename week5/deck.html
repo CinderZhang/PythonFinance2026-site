@@ -23,172 +23,221 @@ th, td { border:1px solid var(--rule); padding:.5rem .8rem; text-align:left; } t
 </style></head><body>
 <div id='bar'></div>
 <section class='slide title-slide'><h1>Week 5</h1><div class='sub'>FIN 69000-003 · Financial Analytics with Python (with AI)</div></section>
-<section class='slide'><h2>A portfolio you have to hand over</h2>
+<section class='slide'><h2>Before we start — do these</h2>
+<ol>
+<li><strong>Tools alive.</strong> Load your Week 4 weights and the Week 3 panel; print the weights' sum and the series length. Both agents answering from your course folder. Nothing typed into AI.</li>
+<li><strong>Defend to a partner.</strong> Two minutes each: the cap you chose last week, and whether you chose it before or after seeing the weights.</li>
+<li><strong>Gap check.</strong> Write down which of these you cannot yet define in one sentence: factor loading, R², turnover, drawdown, in-sample. That list is yours for the week.</li>
+</ol></section>
+<section class='slide'><h2>What you arrive with</h2>
 <ul>
-<li>Weights, and the constraints you chose</li>
-<li>A gross leverage number</li>
-<li>A diagnosis of why the unconstrained version could not be trusted</li>
+<li>A long-only, capped portfolio, saved with its constraints and gross leverage</li>
+<li>Its monthly return series, built and checked</li>
+<li>A rebalancing frequency, chosen in prework, with a reason</li>
+<li>A prediction: market beta, variance share, size and value signs</li>
 </ul>
-<p>Today you hand it to someone.</p>
-<p><strong>The document that goes with it is the artefact.</strong></p></section>
-<section class='slide'><h2>What a committee actually asks</h2>
-<p>Not your Sharpe ratio.</p>
+<p>Where it goes: one page you could hand over with the portfolio. Then Week 6 leaves portfolios for a single company.</p></section>
+<section class='slide'><h2>The question</h2>
+<p>You hand the portfolio to someone who has to hold it. In the first five minutes they ask:</p>
+<p><strong>What is this a bet on?</strong></p>
+<p><strong>What does it cost to keep it the way you built it?</strong></p>
+<p><strong>How bad did it get, and how do you know?</strong></p>
+<p>Three small computations: a regression you already know, a turnover table, a wealth path. No new mathematics. The judgment is in the reading.</p></section>
+<section class='slide'><h2>The paper</h2>
+<p>Fama &amp; French (1993), <em>Common risk factors in the returns on stocks and bonds</em>, Journal of Financial Economics.</p>
+<p>Week 3's regression, with two more columns: <strong>SMB</strong> (small minus big) and <strong>HML</strong> (value minus growth).</p>
+<p>Three series explain most of a diversified portfolio's return. After them, the alpha is usually near zero.</p>
+<p><strong>The framing</strong> — Ang (2014): factors are to assets what nutrients are to food. You read the label. You do not cook.</p>
+<p>Textbook, with the code: DRIVER <strong>Session 5 — Portfolio Metrics</strong> · <strong>Session 7 — Asset Allocation and Rebalancing</strong>.</p></section>
+<section class='slide'><h2>References — this week</h2>
+<p><strong>Papers</strong></p>
 <ul>
-<li>What can go wrong?</li>
-<li>How badly?</li>
-<li>How often?</li>
-<li><strong>What will you do about it?</strong></li>
+<li>Fama, E. F., &amp; French, K. R. (1993). Common risk factors in the returns on stocks and bonds. <em>J. Financial Economics</em> 33(1), 3–56. doi:10.1016/0304-405X(93)90023-5</li>
+<li>McLean, R. D., &amp; Pontiff, J. (2016). Does academic research destroy stock return predictability? <em>J. Finance</em> 71(1), 5–32 — what happens to a premium after it is published.</li>
 </ul>
-<blockquote>A risk report that overstates confidence is worse than none — it displaces the caution that would otherwise be there.</blockquote></section>
-<section class='slide'><h2>VaR, three ways</h2>
-<p>A 1-day 99% VaR of −3% says:</p>
-<ul>
-<li>on <strong>99%</strong> of days, the loss should be no worse than 3%</li>
-<li>on <strong>1%</strong> of days it will be worse — and VaR says <strong>nothing</strong> about how much</li>
-</ul>
+<p><strong>Book</strong> — Ang, A. (2014). <em>Asset Management: A Systematic Approach to Factor Investing</em>. Oxford.</p>
+<p><strong>Textbook</strong> — Zhang, <em>DRIVER Financial Modeling</em>, cinderzhang.github.io/DRIVER-FinancialModeling — Sessions 5 and 7. Book chapter excerpt (PDF) follows on publisher approval.</p></section>
+<section class='slide'><h2>The label: Week 3's regression, two more columns</h2>
+<pre><code>R_p − RF  =  α  +  β_M (Mkt−RF)  +  β_S SMB  +  β_H HML  +  ε
+</code></pre>
+<p>The Week 4 training portfolio: AAPL 14 · MSFT 20 · KO 8 · JPM 20 · PG 19 · WMT 20. Gross 1.00.</p>
 <table>
 <thead>
 <tr>
-<th>Method</th>
-<th>Assumes</th>
+<th>120 months</th>
+<th>α / yr</th>
+<th>β mkt</th>
+<th>β size</th>
+<th>β value</th>
+<th>R²</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>Historical</td>
-<td>the future resembles the sampled past</td>
+<td>market only</td>
+<td>8.6% (t 3.8)</td>
+<td>0.76</td>
+<td></td>
+<td></td>
+<td>0.75</td>
 </tr>
 <tr>
-<td>Parametric</td>
-<td>returns are normally distributed</td>
+<td>three factors</td>
+<td>6.5% (t 3.3)</td>
+<td>0.83</td>
+<td><strong>−0.39</strong> (t −6.5)</td>
+<td>−0.00</td>
+<td>0.82</td>
 </tr>
 <tr>
-<td>Monte Carlo</td>
-<td>your assumed process is right</td>
+<td>SPY</td>
+<td>−0.1%</td>
+<td>0.98</td>
+<td>−0.14</td>
+<td>0.01</td>
+<td>0.996</td>
 </tr>
 </tbody>
 </table>
-<p>All three assume something false. Which failure can you live with — and did you measure it?</p></section>
-<section class='slide'><h2>Backtest it</h2>
-<pre><code>var99  = returns.rolling(250).quantile(0.01).shift(1)
-breach = returns &lt; var99
+<p>Market 0.83: slightly defensive. Size −0.39: big companies, and now a sentence. Value 0.00: consistent with the growth names and the staples offsetting.</p>
+<p>Loadings are average associations in this sample, not forecasts.</p></section>
+<section class='slide'><h2>What diversification did</h2>
+<p>Week 3: the market explained <strong>30%</strong> of a single name's variance on average (12% to 55%).</p>
+<p>This portfolio: <strong>75%</strong>.</p>
+<pre><code>variance 0.0197  =  market 0.0147  +  idiosyncratic 0.0049
+vol      14.0%      12.1%             7.0%
 </code></pre>
-<p>That <code>.shift(1)</code> is Week 2 returning. Without it: look-ahead bias in a risk-management hat.</p>
-<pre><code>window 2005-12-30 -&gt; 2025-06-27, 4903 days
-
-expected breaches at 1% :  49
-actual breaches         :  87      (1.77%)
-ratio                   :  1.77x
-</code></pre>
-<p><strong>Breached nearly twice as often as advertised.</strong></p></section>
-<section class='slide'><h2>The breaches cluster</h2>
-<pre><code>2006:3   2007:11  2008:12  2010:3   2011:6   2012:1  2013:2  2014:3
-2015:5   2016:1   2017:3   2018:7   2019:1   2020:8  2021:1  2022:10
-2024:6   2025:4
-</code></pre>
-<p>Expectation: about <strong>2.5 per year</strong>.</p>
-<p>Does that look like independent events?</p>
-<blockquote>You do not experience the average. You experience the cluster.</blockquote></section>
-<section class='slide'><h2>The tail past the limit</h2>
-<pre><code>worst 5 breaches       actual      VaR      excess
-2020-03-16            -10.94%   -4.69%    -6.26pp
-2020-03-12             -9.57%   -3.92%    -5.65pp
-2008-10-15             -9.84%   -4.93%    -4.92pp
-2008-09-29             -7.84%   -3.10%    -4.73pp
-2020-03-09             -7.81%   -3.18%    -4.63pp
-</code></pre>
-<p>Model said 4.69%. Actual was 10.94% — <strong>more than double</strong>.</p>
-<p>4.7% is not near the worst case. <strong>It is where the worst case starts.</strong></p>
-<p>CVaR asks the better question — from the same history. Better number, not a safe one.</p></section>
-<section class='slide'><h2>Rebalancing has a price</h2>
+<p>Company-specific risk did not vanish. It went from most of each stock to a quarter of the portfolio. That is diversification, in digits.</p></section>
+<section class='slide'><h2>The number that should make you pause</h2>
+<p>α = 6.5% a year, t = 3.3.</p>
+<p>Who chose these weights? <strong>Week 4's optimizer, on this exact window, to make this exact window look good.</strong></p>
+<p>In-sample, in the precise sense Week 4 taught. 1/N, which chose nothing, shows 4.2%.</p>
+<p>Label it. Say what produced it. That sentence is worth more than the number.</p></section>
+<section class='slide'><h2>Factor investing, in one slide</h2>
+<p>Hold the factors on purpose instead of by accident: size, value, momentum, profitability, low volatility. Many of the largest managers run such funds.</p>
+<p>Three things a careful reader knows:</p>
+<ol>
+<li>The premiums are <strong>historical averages</strong>, with decade-long droughts. Value lost to growth for most of the 2010s.</li>
+<li><strong>Published premiums shrink</strong> — McLean &amp; Pontiff: by more than half, on average, after the paper appears.</li>
+<li>A factor fund is <strong>still an estimation problem</strong>. Week 4, twice over.</li>
+</ol>
+<p>This course: read the label on your own portfolio. Not on the lab: building a factor strategy.</p></section>
+<section class='slide'><h2>What keeping it costs</h2>
+<p>Same weights, ten years, four policies. Drag = one-way turnover × round-trip cost.</p>
 <table>
 <thead>
 <tr>
-<th>Cost</th>
+<th>policy</th>
+<th>turnover / yr</th>
+<th>drag at 10 bp</th>
+<th>Sharpe</th>
+<th>largest drift</th>
+<th>end</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>monthly</td>
+<td>20.8%</td>
+<td>2.1 bp</td>
+<td>1.255</td>
+<td>3.4 pp</td>
+<td>JPM 21%</td>
+</tr>
+<tr>
+<td>quarterly</td>
+<td>12.5%</td>
+<td>1.2 bp</td>
+<td>1.259</td>
+<td>5.0 pp</td>
+<td>MSFT 24%</td>
+</tr>
+<tr>
+<td>annual</td>
+<td>5.8%</td>
+<td>0.6 bp</td>
+<td>1.245</td>
+<td>7.0 pp</td>
+<td>JPM 24%</td>
+</tr>
+<tr>
+<td>never</td>
+<td>0</td>
+<td>0</td>
+<td>1.194</td>
+<td><strong>23.3 pp</strong></td>
+<td><strong>MSFT 40%</strong></td>
+</tr>
+</tbody>
+</table>
+<p>Down the cost column: for eight mega-caps, it is cheap. The return barely moves.</p>
+<p>Down the drift column: <strong>"never" carried MSFT to twice your cap.</strong> The portfolio you defended was gone within a few years. The cap binds targets; holdings drift between resets (quarterly: MSFT touched 24%).</p>
+<p>Rebalancing is about staying the portfolio you said you would hold. Not priced here: <strong>tax.</strong></p></section>
+<section class='slide'><h2>How bad did it get</h2>
+<table>
+<thead>
+<tr>
 <th></th>
+<th>worst month</th>
+<th>max drawdown</th>
+<th>peak → trough</th>
+<th>recover</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>Commission</td>
-<td>explicit, small</td>
+<td>portfolio</td>
+<td>2020-02 −8.5%</td>
+<td><strong>−21.3%</strong></td>
+<td>2021-12 → 2022-09</td>
+<td>7 months</td>
 </tr>
 <tr>
-<td>Spread and market impact</td>
-<td>implicit, larger, grows with size</td>
+<td>1/N</td>
+<td>2020-02 −9.6%</td>
+<td>−18.0%</td>
+<td>2020-01 → 2020-03</td>
+<td>5</td>
 </tr>
 <tr>
-<td><strong>Tax</strong></td>
-<td>often the biggest, and the one juniors forget</td>
+<td>SPY</td>
+<td>2020-03 −12.5%</td>
+<td>−23.9%</td>
+<td>2021-12 → 2022-09</td>
+<td>15</td>
 </tr>
 </tbody>
 </table>
-<pre><code> 40% turnover x 10bp round trip =  4bp/yr
-400% turnover x 10bp round trip = 40bp/yr
+<p>Drawdown is what a client lived through. "Vol 14%" is not.</p>
+<pre><code>wealth = (1+r).cumprod()  →  peak = wealth.cummax()  →  dd = wealth/peak − 1
+3.061 / 3.887 − 1 = −21.3%        55 of 120 months below a prior high
 </code></pre>
-<p>At 400%, you must beat the benchmark by 0.4% before you have done anything for anyone.</p>
-<p><strong>Calendar · Threshold · Never.</strong> "Never" is a real policy.</p></section>
-<section class='slide'><h2>What a risk system cannot see</h2>
-<p>Position and exposure data is <strong>not public</strong>. It comes from your own books. Its quality is your own problem.</p>
-<table>
-<thead>
-<tr>
-<th>Blind spot</th>
-<th>Why</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Liquidity</td>
-<td>size relative to volume is not in price history</td>
-</tr>
-<tr>
-<td>Crowding</td>
-<td>you cannot see who else holds what you hold</td>
-</tr>
-<tr>
-<td>Counterparty, collateral</td>
-<td>usually a different system</td>
-</tr>
-<tr>
-<td>Off-balance-sheet</td>
-<td>not a position until it is</td>
-</tr>
-<tr>
-<td><strong>Model risk</strong></td>
-<td>the risk system cannot report that it is wrong</td>
-</tr>
-</tbody>
-</table>
-<p>You measured model risk this morning: <strong>1.77x</strong>.</p>
-<blockquote>Its silences are not reassurance.</blockquote></section>
-<section class='slide'><h2>The report a committee would accept</h2>
+<p>Monthly data: intramonth lows unseen. A past drawdown is a record, not a limit.</p></section>
+<section class='slide'><h2>The hand-over sheet</h2>
+<pre><code>PORTFOLIO      AAPL 14  MSFT 20  KO 8  JPM 20  PG 19  WMT 20 (rounded) | gross 1.00 | long-only, cap 20% on targets
+WHAT IT IS     β mkt 0.83 · size −0.39 · value 0.00 · R² 0.82 · α +6.5%/yr t 3.3 — IN-SAMPLE
+               large-cap, slightly defensive, no value tilt; lagged when small caps ran, in this sample
+WHAT IT COSTS  quarterly · turnover 12.5%/yr · 1.2 bp/yr at an ASSUMED 10 bp · never → MSFT 40% · tax not priced
+HOW BAD        worst 2020-02 −8.5% · drawdown −21.3% (2021-12 → 2022-09, 7 months back) · 55 of 120 months below a high
+CONVENTION     every statistic on the monthly-reset series, whatever the policy line says
+WHAT IT        ten years, mostly rising, eight survivors · positions and liquidity not modelled ·
+CANNOT SEE     every number is on the window the weights were chosen on · a past drawdown is a record, not a limit
+</code></pre>
+<p>Every line: a number and the sentence it supports. The warnings are on the page, not in a footnote.</p></section>
+<section class='slide'><h2>Before Thursday — do these</h2>
 <ol>
-<li>The number — VaR and CVaR, with horizon, confidence, method</li>
-<li><strong>The backtest</strong> — how often this method was wrong</li>
-<li>The concentration — where risk actually sits</li>
-<li>The leverage — gross and net</li>
-<li>What would have to happen to lose a stated amount</li>
-<li><strong>The limitations</strong> — named specifically</li>
-<li><strong>The action</strong> — decided in advance</li>
+<li>Lab 5 Steps 0 to 2 on your own portfolio: the series and its checks, both regressions, the three committee sentences and the alpha with what produced it.</li>
+<li>Your rebalancing frequency is written down with its reason, and you can say whether you chose it before seeing the cost.</li>
+<li>Your cost number is cited, or labelled as an assumption.</li>
 </ol>
-<p>6 is your Week 2 catalog. 7 is the one juniors omit and committees care most about.</p>
-<blockquote>A risk report is judged by what it admits, not what it claims.</blockquote></section>
-<section class='slide'><h2>Your policy, your defence</h2>
-<blockquote><em>"Your limit is where it is because it is comfortable, not because it is right. A tighter limit would have caught the drawdown you just showed us."</em></blockquote>
-<p>Strongest version — <strong>with the number behind it</strong>.</p>
-<p>Then answer it, or concede it. <strong>Conceding earns full marks.</strong></p>
-<blockquote><strong>What did you notice that I did not ask about?</strong></blockquote></section>
+<p>Thursday: price the policy, write the risk line, build the sheet, defend the alpha. Thursday's checkpoint is that notebook as it stands when you leave.</p></section>
 <section class='slide'><h2>Before next week — do these</h2>
-<blockquote><strong>Two sources minimum — and one of them professional where you have access.</strong> Pending access is documented, never penalised. The attempt counts; the outcome does not.</blockquote>
 <ol>
-<li>Compute VaR three ways. State which you carry forward, and why.</li>
-<li><strong>Backtest it.</strong> Expected, actual, ratio, by year. Check your shift.</li>
-<li>Table your five worst breaches. Compute CVaR.</li>
-<li>Price your rebalancing policy against one alternative.</li>
-<li>Write the limitations section — <strong>including measured model risk</strong>.</li>
-<li>Decide the action in advance, and name when following it would be wrong.</li>
-<li><strong>Pick your Week 6 company</strong> and confirm you can reach its filings.</li>
+<li>Lab 5 Steps 3 to 5 in the room Thursday; Step 6 outside it.</li>
+<li>Keep the "what it cannot see" block. Week 6 asks the same question of a valuation.</li>
+<li>Confirm your two capstone companies file with the SEC and you can reach their filings.</li>
+<li>Watch Video 2, Brief Valuation for ABG, from the Week 6 prework. Bring the first input you would want to verify.</li>
+<li>Two sources minimum, one professional where you have access. The attempt counts; the outcome does not.</li>
 </ol>
-<p><strong>Lab 6 preview:</strong> value a company where every input traces to a sourced, dated figure — and discover the same company reported two different numbers for the same year, both correct.</p></section>
+<p>Lab 6 preview: value a company where every input traces to a sourced, dated figure, and discover that the same company reported two different numbers for the same year, both correct.</p></section>
 <div id='num'></div><div id='hint'>← → or space to navigate</div><script>var s=[].slice.call(document.querySelectorAll('.slide')),i=0;function go(n){i=Math.max(0,Math.min(s.length-1,n));s.forEach(function(e,k){e.classList.toggle('current',k===i);});document.getElementById('num').textContent=(i+1)+' / '+s.length;document.getElementById('bar').style.width=((i)/(s.length-1)*100)+'%';if(location.hash!=='#'+(i+1)){history.replaceState(null,'','#'+(i+1));}}document.addEventListener('keydown',function(e){if(e.key==='ArrowRight'||e.key===' '||e.key==='PageDown'){e.preventDefault();go(i+1);}else if(e.key==='ArrowLeft'||e.key==='PageUp'){e.preventDefault();go(i-1);}else if(e.key==='Home'){go(0);}else if(e.key==='End'){go(s.length-1);}});document.addEventListener('click',function(e){if(e.target.closest('a,pre,table'))return;go(i+1);});go(parseInt((location.hash||'#1').slice(1),10)-1||0);</script></body></html>

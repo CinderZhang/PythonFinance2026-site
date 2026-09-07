@@ -27,185 +27,303 @@ hr { border:0; border-top:1px solid var(--rule); margin:2rem 0; }
 <body><main>
 <div class='nav'><a href='../index.html'>MSF Financial Modeling</a></div>
 <h1>Week 5 — Handout</h1>
-<blockquote><strong>Register: TEACH.</strong> Narrative and worked examples. Graded steps in <code>lab.md</code>; conventions in <code>rules.md</code>.</blockquote>
-<p><strong>You arrive with:</strong> a portfolio, the constraints that produced it, its gross leverage, and a diagnosis of why the unconstrained version could not be trusted.</p>
-<p>Now you have to hand it to someone. This week is about the document that goes with it.</p>
+<blockquote><strong>Register: TEACH.</strong> Narrative and worked examples. Graded steps are in <code>lab.md</code>; conventions are in <code>rules.md</code>.</blockquote>
+<p><strong>You arrive with:</strong> a long-only portfolio with your cap, saved with its constraints and its gross leverage, a defence of the cap, and one sentence on how often you intend to rebalance it.</p>
+<p><strong>Where this goes next:</strong> Week 6 leaves portfolios and values a single company. This week closes the portfolio arc with the one page you would hand over with the portfolio.</p>
 <hr />
 <h2>Why this matters</h2>
-<p>An investment committee does not want your Sharpe ratio. They want to know what can go wrong, how badly, how often, and what you will do about it.</p>
-<p>The document that answers those questions is the risk report, and it is the most consequential thing a junior analyst produces — because it is the artefact people rely on when they are deciding how much to lose. A risk report that overstates confidence is worse than no risk report, because it displaces the caution that would otherwise be there.</p>
-<p>You are going to build one, then find out how often the standard number in it would have been wrong.</p>
+<p>You have built a portfolio you can defend. Now imagine handing it to someone who has to hold it: a portfolio manager, a client, a committee. They do not ask for your Sharpe ratio. In the first five minutes they ask three things.</p>
+<p><em>What is this actually a bet on?</em> <em>What does it cost to keep it the way you built it?</em> <em>How bad did it get, and how do you know?</em></p>
+<p>A junior analyst who can answer those three questions on one page, with numbers, is trusted with the next portfolio. One who cannot is asked to go and find out. This week you find out, on the portfolio you already have, with the regression you already know how to run.</p>
+<p>Everything this week is three small computations: a regression you already know how to run, a turnover table that is arithmetic, and a wealth path. None of them is new mathematics. The judgment is in reading the results.</p>
 <hr />
-<h2>Part 1 — Value at Risk, stated properly</h2>
-<p><strong>Value at Risk</strong> answers: over a given horizon, at a given confidence level, what loss will not be exceeded?</p>
-<p>A 1-day 99% VaR of −3% says: <em>on 99% of days, the loss should be no worse than 3%.</em></p>
-<p>Which means it also says: <strong>on 1% of days, it should be worse — and VaR says nothing at all about how much worse.</strong> Both halves of that sentence are load-bearing.</p>
-<p>Three standard ways to compute it:</p>
+<h2>The paper</h2>
+<p>This week is anchored on <strong>Fama and French (1993), "Common risk factors in the returns on stocks and bonds", Journal of Financial Economics 33(1), 3–56.</strong></p>
+<p>Week 3 regressed one stock's excess return on the market's excess return and got a beta, an alpha, and a split of risk into the part the market explains and the part it does not. Fama and French added two more columns to that regression: <strong>SMB</strong>, the return of small companies minus big ones, and <strong>HML</strong>, the return of high book-to-market companies, value, minus low, growth. Their finding was that those three series together explain most of the variation in the returns of diversified stock portfolios, far more than the market alone, and that after those three are accounted for the remaining unexplained return, the alpha, is usually close to zero.</p>
+<p><strong>Read:</strong> the abstract and the introduction. Nothing else is required; the tables are there if you want to see the R² column move when the two factors are added. The paper is on ScienceDirect through Purdue Libraries. Start here: https://www.lib.purdue.edu → Databases → ScienceDirect. DOI 10.1016/0304-405X(93)90023-5.</p>
+<p><strong>The framing.</strong> Andrew Ang's <em>Asset Management: A Systematic Approach to Factor Investing</em> (Oxford, 2014) puts it in one sentence: factors are to assets what nutrients are to food. You do not eat protein; you eat things that contain it. You do not hold "the value factor"; you hold companies whose returns move with it. A portfolio's exposures are its nutritional label. That is what you write this week.</p>
+<p><strong>What the paper does not say.</strong> It does not say that the factors are guaranteed to pay, or that you should build a factor portfolio. This week you read the label. You do not cook.</p>
+<p><strong>Textbook.</strong> The free-lane counterpart, with code, is in the DRIVER textbook: <a href="https://cinderzhang.github.io/DRIVER-FinancialModeling/Session5-Portfolio-Metrics.html">Session 5 — Portfolio Metrics</a> for the regression and for drawdown, and <a href="https://cinderzhang.github.io/DRIVER-FinancialModeling/Session7-Asset-Allocation-Rebalancing.html">Session 7 — Asset Allocation and Rebalancing</a> for rebalancing and drift.</p>
+<hr />
+<h2>Part 1 — What the portfolio is a bet on</h2>
+<p>The portfolio is the Week 4 training case: the eight names, long-only, cap 20%, estimated on the full ten-year window. Six names are held: Apple 14%, Microsoft 20%, Coca-Cola 8%, JPMorgan 20%, Procter &amp; Gamble 19%, Walmart 20%. Johnson &amp; Johnson and Exxon are at zero. Gross leverage 1.00.</p>
+<p>Its monthly return is the weighted sum of the eight monthly returns, weights fixed and reset each month, the same convention Week 4 used. Subtract the risk-free rate and regress on the French factors. The equation is Week 3's with two more terms:</p>
+<pre><code>R_p − RF  =  α  +  β_M (Mkt−RF)  +  β_S SMB  +  β_H HML  +  ε
+</code></pre>
+<p>Every number below comes from <a href="week5_worked.py"><code>week5_worked.py</code></a>, which reads the Week 3 panel file and the Week 4 weights.</p>
 <table>
 <thead>
 <tr>
-<th>Method</th>
-<th>How</th>
-<th>Assumes</th>
+<th>120 months, 2015-07 to 2025-06</th>
+<th>α per year</th>
+<th>β market</th>
+<th>β size (SMB)</th>
+<th>β value (HML)</th>
+<th>R²</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><strong>Historical</strong></td>
-<td>the 1st percentile of actual past returns</td>
-<td>the future resembles the sampled past</td>
+<td>portfolio, market only</td>
+<td>8.6% (t 3.8)</td>
+<td>0.76</td>
+<td></td>
+<td></td>
+<td>0.75</td>
 </tr>
 <tr>
-<td><strong>Parametric</strong></td>
-<td>mean − <em>z</em> × σ, with <em>z</em> from the normal distribution</td>
-<td>returns are normally distributed</td>
+<td>portfolio, three factors</td>
+<td>6.5% (t 3.3)</td>
+<td>0.83</td>
+<td>−0.39 (t −6.5)</td>
+<td>−0.00 (t 0.0)</td>
+<td>0.82</td>
 </tr>
 <tr>
-<td><strong>Monte Carlo</strong></td>
-<td>simulate from an assumed process, take the percentile</td>
-<td>your assumed process is right</td>
+<td>1/N, three factors</td>
+<td>4.2% (t 2.3)</td>
+<td>0.79</td>
+<td>−0.37 (t −6.6)</td>
+<td>+0.16 (t 4.1)</td>
+<td>0.83</td>
+</tr>
+<tr>
+<td>SPY, three factors</td>
+<td>−0.1% (t −0.2)</td>
+<td>0.98</td>
+<td>−0.14</td>
+<td>+0.01</td>
+<td>0.996</td>
 </tr>
 </tbody>
 </table>
-<p>Every one of them assumes something that is not true. The professional question is not which is correct — it is which failure you can live with, and whether you have measured it.</p>
-<hr />
-<h2>Part 2 — Backtest it, because otherwise it is decoration</h2>
-<p>A VaR number that has never been checked against history is a decoration. Checking it is mechanical: compute the VaR each day using only data available before that day, then count how often the next day's actual loss exceeded it.</p>
-<p>If the model is well calibrated, a 99% VaR should be breached about 1% of the time.</p>
-<pre><code>W = 250
-var99 = returns.rolling(W).quantile(0.01).shift(1)   # shift: only past data
-breach = returns &lt; var99
+<p>Read the portfolio's row as its label.</p>
+<p><strong>Market beta 0.83.</strong> Over these ten years, when the market moved one percent, this portfolio moved on average about 0.83 percent in the same direction. It is a slightly defensive equity portfolio, because Coca-Cola, Procter &amp; Gamble and Walmart pull the beta down.</p>
+<p><strong>Size −0.39, and the t-statistic says it is not noise.</strong> A negative loading on small-minus-big means the portfolio behaves like big companies. Of course it does: it is eight of the largest companies in the country, and a committee already knows that. What the number adds is a sentence they can use: <em>on average in this sample, other things equal, a year in which small caps beat large caps by ten points went with this portfolio lagging the market by about four.</em> A loading is an average association over the window, not a forecast for any particular year.</p>
+<p><strong>Value −0.00.</strong> No tilt either way, consistent with the growth names, Apple and Microsoft, offsetting the value names, JPMorgan and the consumer staples. That is worth saying because it is not what most people would guess from the tickers.</p>
+<p><strong>R² 0.82.</strong> The three factors explain 82% of the month-to-month variation in this sample. The market alone explained 75%. Look at the SPY row for scale: an index fund is 99.6% explained, because it <em>is</em> the market. Your portfolio is not an index fund, and the label says by how much.</p>
+<h3>The number that should make you pause</h3>
+<p>The alpha. 6.5% a year, with a t-statistic of 3.3, which by the usual rule is "significant." A junior analyst puts that on the page as evidence the portfolio adds value.</p>
+<p>Do not. Remember what produced these weights. Week 4's optimizer chose them on this exact window to maximize the Sharpe ratio on this exact window. The alpha is measured on the same 120 months the optimizer was fitted to, and the optimizer's whole job was to make those 120 months look good. It is in-sample, in the precise sense Week 4 taught. The 1/N row, which estimated nothing, still shows 4.2%, which tells you how much of the "alpha" is the decade these particular eight companies had rather than anything anyone chose. Label it in-sample and say what produced it. That sentence is worth more to a committee than the number.</p>
+<h3>What diversification did, in one line</h3>
+<p>Week 3 split each stock's risk into the part the market explains and the rest. For these eight names the market explained on average 30% of the variance, with a range from 12% to 55%. For the portfolio built from them, the market explains 75%.</p>
+<pre><code>portfolio annual variance 0.0197  =  market part 0.0147  +  idiosyncratic part 0.0049
+in volatility terms:   14.0%  total ;  12.1% from the market ;  7.0% idiosyncratic
 </code></pre>
-<p>The <code>.shift(1)</code> is the whole discipline of Week 2 reappearing. Without it you are using today's return to set today's limit, which is look-ahead bias wearing a risk-management hat.</p>
-<p>Run over twenty years of daily S&amp;P 500 returns:</p>
-<pre><code>window 2005-12-30 -&gt; 2025-06-27, 4903 days, 250-day lookback
+<p>The company-specific risk did not go away. It went from being most of each stock's risk to being a quarter of the portfolio's, because eight companies' surprises partly cancel. That is what diversification is, in numbers rather than as a slogan, and it is why the committee's first question is about the market exposure: after diversification, the market is most of what is left.</p>
+<hr />
+<h2>Part 2 — What factor investing is, in one page</h2>
+<p>You will hear "factor investing" constantly in the industry, so here is what it means and what to be careful about, without building anything.</p>
+<p>The idea follows from the regression. If most of a diversified portfolio's return comes from a handful of factors, you can hold the factors deliberately rather than by accident. A factor fund does exactly that: it buys the stocks that load on a factor, small companies, cheap companies, companies whose price has been rising, profitable companies, low-volatility companies, and holds them systematically. Many of the largest asset managers run such funds, and a "multi-factor" fund combines several.</p>
+<table>
+<thead>
+<tr>
+<th>Factor</th>
+<th>The long side</th>
+<th>The short side, or the underweight</th>
+<th>Published where</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Market</td>
+<td>equities</td>
+<td>cash</td>
+<td>Sharpe (1964), Week 3</td>
+</tr>
+<tr>
+<td>Size</td>
+<td>small companies</td>
+<td>big companies</td>
+<td>Fama and French (1993)</td>
+</tr>
+<tr>
+<td>Value</td>
+<td>high book-to-market</td>
+<td>low book-to-market</td>
+<td>Fama and French (1993)</td>
+</tr>
+<tr>
+<td>Momentum</td>
+<td>past twelve-month winners</td>
+<td>past losers</td>
+<td>Carhart (1997)</td>
+</tr>
+<tr>
+<td>Profitability, investment</td>
+<td>profitable, conservative firms</td>
+<td>unprofitable, aggressive firms</td>
+<td>Fama and French (2015)</td>
+</tr>
+<tr>
+<td>Low volatility</td>
+<td>low-beta stocks</td>
+<td>high-beta stocks</td>
+<td>Frazzini and Pedersen (2014)</td>
+</tr>
+</tbody>
+</table>
+<p>Three things a careful reader knows.</p>
+<p><strong>The premiums are historical averages, not promises.</strong> Every factor above has had decade-long stretches of underperformance. Value lost to growth for most of the 2010s, which is part of why your portfolio's value loading is zero without anyone deciding it should be.</p>
+<p><strong>Published premiums shrink.</strong> McLean and Pontiff (2016, <em>Journal of Finance</em>) measured what happens to a return pattern after the academic paper that documents it appears: on average it fell by more than half. What is left is smaller, noisier, and shared with everyone who read the same paper.</p>
+<p><strong>A factor fund is still an estimation problem.</strong> Week 4's lesson applies twice: the factor loadings are estimated with error, and the factor premiums are estimated with worse error. A multi-factor fund is a portfolio of estimates.</p>
+<p>What you do with this in the course: read exposures, on your own portfolio, and say what they mean. What you do not do: build a factor strategy. If you want to, the Week 3 French file has everything you need and Lab 5's departure section is where it goes.</p>
+<hr />
+<h2>Part 3 — What keeping it costs</h2>
+<p>Your Week 4 portfolio has target weights. Prices move every month, so the actual weights drift away from the targets. Rebalancing trades them back. Every trade costs something, and you promised in Week 4 to say how often you would do it.</p>
+<p>The cost of a trade has three parts. Commissions, which for US large-cap equities at a retail broker are now close to zero. The bid-ask spread and market impact, which are paid on every trade, are invisible on a statement, and grow with the size of the order. Tax on realised gains, in a taxable account, which is often the largest of the three and is not in any of the numbers below.</p>
+<p>The arithmetic is short. <strong>Turnover</strong> is how much of the portfolio you trade: at each rebalance, sum the absolute changes in weight and halve it, so that selling 5% of Microsoft to buy 5% of Coca-Cola is 5% turnover, not 10%. Add it up per year. <strong>Drag</strong> is annual turnover times the round-trip cost of a trade, in basis points, bp, hundredths of a percent.</p>
+<p>Four policies on the same weights over the same ten years, starting at the targets and letting prices do what they did:</p>
+<table>
+<thead>
+<tr>
+<th>policy</th>
+<th>resets</th>
+<th>one-way turnover per year</th>
+<th>drag at 10 bp round trip</th>
+<th>drag at 50 bp</th>
+<th>annual return</th>
+<th>vol</th>
+<th>Sharpe</th>
+<th>largest drift from target</th>
+<th>biggest position at the end</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>monthly</td>
+<td>119</td>
+<td>20.8%</td>
+<td>2.1 bp</td>
+<td>10.4 bp</td>
+<td>19.5%</td>
+<td>14.0%</td>
+<td>1.255</td>
+<td>3.4 pp</td>
+<td>JPM 21.4%</td>
+</tr>
+<tr>
+<td>quarterly</td>
+<td>39</td>
+<td>12.5%</td>
+<td>1.2 bp</td>
+<td>6.2 bp</td>
+<td>19.5%</td>
+<td>14.0%</td>
+<td>1.259</td>
+<td>5.0 pp</td>
+<td>MSFT 24.0%</td>
+</tr>
+<tr>
+<td>annual</td>
+<td>9</td>
+<td>5.8%</td>
+<td>0.6 bp</td>
+<td>2.9 bp</td>
+<td>19.4%</td>
+<td>14.1%</td>
+<td>1.245</td>
+<td>7.0 pp</td>
+<td>JPM 24.1%</td>
+</tr>
+<tr>
+<td>never</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>19.9%</td>
+<td>15.1%</td>
+<td>1.194</td>
+<td>23.3 pp</td>
+<td><strong>MSFT 40.5%</strong></td>
+</tr>
+</tbody>
+</table>
+<p>Returns and Sharpe ratios are before costs and, as always for this window, in-sample.</p>
+<p>Read it in two directions.</p>
+<p><strong>Down the cost column, the answer is: it is cheap.</strong> For eight of the most liquid stocks in the world, monthly rebalancing at a plausible 10 basis points round trip costs about two basis points a year. Even at 50 basis points, a number you would use for a less liquid name, it is ten. The return columns barely move between monthly, quarterly and annual. If you expected rebalancing frequency to be a big decision for this portfolio, the table says it is not.</p>
+<p><strong>Down the drift column is the reason to rebalance at all.</strong> Never touching the portfolio cost nothing and, over ten years, let Microsoft grow from 20% to 40.5% of it. Twice the cap. The cap you chose in Week 4 prework and defended in Lab 4 was silently gone within a few years, and the portfolio at the end of the decade was not the portfolio you defended. It was a Microsoft position with seven passengers.</p>
+<p>So the rebalancing decision for a portfolio like this is not about return or cost. It is about staying the portfolio you said you would hold. Quarterly keeps every name within 5 points of target for about one basis point a year. That is the sentence to write.</p>
+<p>One precision. The cap binds the target weights. Between resets the holdings drift, by up to the drift column: under quarterly resets Microsoft touched 24% before being trimmed back. If a committee wants the cap to hold on the holdings every day, a calendar is the wrong tool and the threshold policy below is the right one.</p>
+<p>Where the cost is <em>not</em> small: portfolios of small or thinly traded names, where round trips run to hundreds of basis points; strategies with high turnover by design, where 400% turnover at 10 basis points is 40 basis points a year before the strategy has done anything; and taxable accounts, where every rebalance realises gains. Your panel decides which world you are in, and the cost number you cite in prework is your evidence.</p>
+<p><strong>A policy that is not on the table.</strong> Threshold rebalancing trades only when a weight drifts past a band, say 5 points from target. It trades only when needed and keeps every holding within the band, which is what a cap on holdings, rather than on targets, requires. The band is a parameter you choose and defend, exactly like the cap was. It is welcome as a departure in Lab 5.</p>
+<hr />
+<h2>Part 4 — How bad did it get</h2>
+<p>The third question. Two numbers answer it, each with its dates, and both are already in your return series.</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>worst month</th>
+<th>maximum drawdown</th>
+<th>peak to trough</th>
+<th>months to recover</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>portfolio</td>
+<td>2020-02, −8.5%</td>
+<td>−21.3%</td>
+<td>2021-12 to 2022-09</td>
+<td>7</td>
+</tr>
+<tr>
+<td>1/N</td>
+<td>2020-02, −9.6%</td>
+<td>−18.0%</td>
+<td>2020-01 to 2020-03</td>
+<td>5</td>
+</tr>
+<tr>
+<td>SPY</td>
+<td>2020-03, −12.5%</td>
+<td>−23.9%</td>
+<td>2021-12 to 2022-09</td>
+<td>15</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Worst month</strong> is what it says. <strong>Maximum drawdown</strong> is the largest fall from a previous high to a later low, measured on the wealth path, and it is the number a client actually experienced: someone who bought this portfolio at the end of 2021 was down 21% nine months later and waited another seven to get back to even. That is a different fact from "annual volatility 14%," and committees ask for it because they have lived through it.</p>
+<p>The recipe is four lines, on the monthly <strong>total</strong> returns, not the excess returns, because a client's wealth compounds the whole return:</p>
+<pre><code>1. wealth = (1 + r).cumprod()      one dollar compounded through the months
+2. peak   = wealth.cummax()        the highest value reached so far
+3. dd     = wealth / peak − 1      how far below that high, every month
+4. max drawdown = dd.min()         its month is the trough; the peak is the last high before it;
+                                   recovery = months from the trough until wealth first regains the peak,
+                                   or &quot;not recovered by window end&quot;
+</code></pre>
+<p>With digits, for the portfolio. Wealth reached 3.887 at the end of 2021 and fell to 3.061 by September 2022: 3.061 / 3.887 − 1 = −21.3%. It regained 3.887 seven months later. The COVID episode was the second deepest, 2.479 to 2.120 over two months, −14.5%, which is why "worst month" and "maximum drawdown" name different episodes here: the worst single month was February 2020, but the deepest hole was dug slowly in 2022. Over the ten years the portfolio spent 55 of 120 months below a previous high. That last number surprises most people, and it belongs on the page.</p>
+<p>Three conventions, stated so the number means the same thing to everyone. It is computed on monthly observations, so the low inside a month is not seen; the true March 2020 bottom was deeper than any month-end. It is computed on the monthly-reset series, the Week 4 convention, whatever rebalancing policy the sheet recommends; if you want the drawdown of the quarterly path, compute it on that path and say so. And it is a record of what happened, never a limit on what can happen: the next drawdown can be deeper than the worst one so far, and a sheet that reads "maximum drawdown −21%" as a floor has misread it.</p>
+<p><strong>What else exists, names only.</strong> Value at Risk and expected shortfall, which turn the tail of the distribution into one number; stress tests, which ask what a named scenario would do. On ten years of monthly data they rest on a handful of observations. The textbook covers them for anyone who wants them. Not on the lab.</p>
+<hr />
+<h2>Part 5 — The hand-over sheet</h2>
+<p>Put the three answers on one page. Here is the training case's, and it is the shape, not your answer:</p>
+<pre><code>PORTFOLIO        AAPL 14%  MSFT 20%  KO 8%  JPM 20%  PG 19%  WMT 20%  (rounded; 100.0% before rounding)
+                 gross 1.00  |  long-only, cap 20% on target weights, full window
 
-expected breaches at 1% : 49
-actual breaches         : 87        (1.77% of days)
-ratio actual/expected   : 1.77x
+WHAT IT IS       market beta 0.83 ; size −0.39 ; value 0.00 ; R² 0.82   (three-factor regression, 120 months)
+                 alpha +6.5%/yr, t 3.3 — IN-SAMPLE: the weights were fitted on this window
+                 in plain words: a large-cap, slightly defensive equity portfolio with no value tilt.
+                 On average in this sample it lagged when small caps ran, and moved about 0.83 as far as the market.
+
+WHAT IT COSTS    quarterly reset ; one-way turnover 12.5%/yr ; drag 1.2 bp/yr at an ASSUMED 10 bp round trip
+                 why quarterly: &quot;never&quot; carried MSFT to 40%, twice the cap ; monthly bought nothing extra on this window
+                 holdings drift between resets, MSFT touched 24% ; not priced: tax
+
+HOW BAD          worst month 2020-02 −8.5% ; max drawdown −21.3% (2021-12 → 2022-09, recovered in 7 months)
+                 55 of 120 months below a previous high ; monthly data, intramonth lows not seen
+
+CONVENTION       every statistic above is on the monthly-reset series, the Week 4 convention, whatever the policy line says
+
+WHAT IT CANNOT   ten years, one regime mostly rising, eight survivors ; positions and liquidity not modelled ;
+SEE              every number above is on the window the weights were chosen on ; a past drawdown is a record, not a limit
 </code></pre>
-<p><strong>The 99% VaR was breached nearly twice as often as advertised.</strong></p>
-<p>Not because the arithmetic is wrong — the percentile is computed correctly. Because the assumption underneath it, that the recent past describes the near future, fails precisely when it matters.</p>
+<p>Every line is a number and the sentence it supports. Nothing on the page is a claim without its evidence next to it, and the in-sample warnings are on the page, not in a footnote.</p>
 <hr />
-<h2>Part 3 — The two things the breach count hides</h2>
-<p>The headline "1.77x too often" is bad. The detail is worse, in two specific ways that a committee will ask about.</p>
-<h3>Breaches cluster</h3>
-<p>If breaches were independent events at a 1% rate, they would be scattered thinly across twenty years. They are not:</p>
-<pre><code>breaches by year
-2006:3   2007:11  2008:12  2010:3   2011:6   2012:1  2013:2  2014:3
-2015:5   2016:1   2017:3   2018:7   2019:1   2020:8  2021:1  2022:10
-2024:6   2025:4
-</code></pre>
-<p>Twelve breaches in 2008. Eleven in 2007. Ten in 2022. Eight in 2020. Against an expectation of roughly two and a half per year.</p>
-<p>Bad days arrive together. A risk model that assumes independence will tell you an event is a once-a-century occurrence on the same week it happens three times. <strong>Clustering is why a number that looks acceptable on average is dangerous in practice</strong> — you do not experience the average, you experience the cluster.</p>
-<h3>The size beyond VaR is unbounded</h3>
-<p>VaR tells you a threshold. It says nothing about what happens past it:</p>
-<pre><code>worst 5 breaches       actual      VaR      excess
-2020-03-16            -10.94%   -4.69%    -6.26pp
-2020-03-12             -9.57%   -3.92%    -5.65pp
-2008-10-15             -9.84%   -4.93%    -4.92pp
-2008-09-29             -7.84%   -3.10%    -4.73pp
-2020-03-09             -7.81%   -3.18%    -4.63pp
-</code></pre>
-<p>On 2020-03-16 the model said the loss should not exceed 4.69%. The actual loss was 10.94% — <strong>more than double</strong>, and 6.26 percentage points past the limit.</p>
-<p>A committee told "our 99% VaR is 4.7%" and not told this will size positions as though 4.7% is close to the worst case. It is not close to the worst case. It is the <em>start</em> of the worst case.</p>
-<h3>The fix that is not a fix</h3>
-<p><strong>Conditional VaR</strong> — also called expected shortfall — answers the question VaR ducks: given that you breach, what is the average loss? It is strictly more informative, and it is what modern regulation moved toward.</p>
-<p>It is still estimated from the same history, and it still fails when the future does not resemble the past. It is a better number, not a safe one.</p>
-<blockquote><strong>The rule this gives you.</strong> Never report a risk number without its backtest. "Our 99% VaR is X" is incomplete. "Our 99% VaR is X, and over the last twenty years this method was breached 1.77 times more often than advertised, with breaches clustered in stress periods, and the worst breach exceeded the limit by 6.3 percentage points" is a risk report.</blockquote>
-<hr />
-<h2>Part 4 — Rebalancing has a price, and it is not zero</h2>
-<p>Your Week 4 portfolio has weights. Markets move, so the weights drift. Rebalancing pulls them back — and every rebalance is a set of trades, and every trade costs.</p>
-<p>The cost has three parts, and the one people forget is the largest:</p>
-<table>
-<thead>
-<tr>
-<th>Cost</th>
-<th>What it is</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Commission</td>
-<td>explicit, small, easy to find</td>
-</tr>
-<tr>
-<td><strong>Spread and market impact</strong></td>
-<td>implicit, larger, and it grows with your size</td>
-</tr>
-<tr>
-<td>Tax</td>
-<td>on realised gains, in taxable accounts, and often the biggest of all</td>
-</tr>
-</tbody>
-</table>
-<p>The arithmetic is simple enough to do in your head, which is why there is no excuse for ignoring it. A strategy with 40% annual turnover and a 10 basis point round-trip cost gives up 4 basis points a year. Modest. The same strategy at 400% turnover gives up 40 basis points, and now it needs to beat its benchmark by 0.4% before it has done anything for anyone.</p>
-<p><strong>Rebalancing policy is a real decision with a real price:</strong></p>
-<ul>
-<li><strong>Calendar</strong> — rebalance every quarter, say. Simple, predictable, ignores whether it is</li>
-</ul>
-<p>needed.</p>
-<ul>
-<li><strong>Threshold</strong> — rebalance when a weight drifts more than some band. Trades only when it</li>
-</ul>
-<p>matters; the band is a free parameter you must choose and defend.</p>
-<ul>
-<li><strong>Never</strong> — let it drift. Zero cost, and your portfolio slowly becomes a different portfolio.</li>
-</ul>
-<p>There is no correct answer. There is a stated policy with its cost estimated, and there is an unstated one.</p>
-<hr />
-<h2>Part 5 — What a risk system sees, and what it cannot</h2>
-<p>The professional-data question this week.</p>
-<p>A risk system runs on <strong>position and exposure data</strong> — what you hold, in what size, valued how, with what sensitivities. That is a different kind of dataset from anything you have used so far. Prices are public; positions are not. They come from your own books, and their quality is your own problem.</p>
-<p>What position data makes possible: exposure by sector, geography, currency, factor; netting across accounts; look-through into funds you hold; sensitivities to rate and spread moves.</p>
-<p><strong>What it structurally cannot see</strong> — and every one of these has caused a real loss:</p>
-<table>
-<thead>
-<tr>
-<th>Blind spot</th>
-<th>Why</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Liquidity</td>
-<td>a position's <em>size</em> relative to daily volume is not in its price history</td>
-</tr>
-<tr>
-<td>Crowding</td>
-<td>you cannot see who else holds what you hold, and they will sell when you do</td>
-</tr>
-<tr>
-<td>Counterparty and collateral</td>
-<td>often in a different system from the risk system</td>
-</tr>
-<tr>
-<td>Off-balance-sheet and contingent exposure</td>
-<td>not a position until it is</td>
-</tr>
-<tr>
-<td>Model risk</td>
-<td>the risk system cannot report the risk that the risk system is wrong</td>
-</tr>
-</tbody>
-</table>
-<p>That last row deserves the emphasis. Your VaR backtest measured model risk directly — it found the model wrong by a factor of 1.77 — and no risk system reports that number unless someone computes it deliberately.</p>
-<p><strong>This is the week's professional-data point.</strong> A risk report built only from market data answers only the questions market data can answer. Its silences are not reassurance.</p>
-<hr />
-<h2>Part 6 — What a committee actually needs</h2>
-<p>A report they would accept states, on its face:</p>
-<ol>
-<li><strong>The number</strong> — VaR and CVaR, with horizon, confidence, and method</li>
-<li><strong>The backtest</strong> — how often this method was wrong, historically, on this kind of data</li>
-<li><strong>The concentration</strong> — where the risk actually sits, not the average</li>
-<li><strong>The leverage</strong> — gross and net, always</li>
-<li><strong>What would have to happen</strong> for the portfolio to lose a specified amount</li>
-<li><strong>The limitations</strong> — what this report cannot see, named specifically</li>
-<li><strong>The action</strong> — what you will do if a limit is breached, decided in advance</li>
-</ol>
-<p>Item 7 is the one juniors leave out and the one committees care most about. A risk report that identifies a risk and proposes nothing has told the committee something they can do nothing with.</p>
-<p>Item 6 is where your Week 2 catalog reappears. The limitations of the data are limitations of the report, and by now you have them written down.</p>
-<blockquote><strong>The rule this gives you.</strong> A risk report is judged by what it admits, not by what it claims. The strongest one on the table is usually the one that states its own failure rate.</blockquote>
+<h2>Part 6 — What a professional dataset changes here</h2>
+<p>The factor series you regressed on are free, from Ken French's library, and they are the reference implementation. The professional version of this week is about history and breadth. A factor exposure estimated on 120 months has wide error bands; the same regression on the CRSP monthly file adds decades of observations, provided the names existed then and their exposures did not change, which is the question to ask before trusting the narrower band. And a size loading of −0.39 means something different if the universe it is measured in is eight survivors than if it is the whole market with delistings kept. Week 2's problem, once more, propagates into every coefficient.</p>
 <hr />
 <h2>This week's sources</h2>
 <p>Register: <a href="../sources.html">the source register</a>.</p>
@@ -218,37 +336,30 @@ ratio actual/expected   : 1.77x
 </thead>
 <tbody>
 <tr>
-<td>Your Week 4 portfolio</td>
-<td>the risk report</td>
+<td>Your Week 4 portfolio and the Week 3 panel file (guaranteed lane)</td>
+<td>everything this week</td>
 </tr>
 <tr>
-<td>Market data (guaranteed lane)</td>
-<td>the VaR backtest</td>
+<td>Ken French Data Library, Fama/French 3 Factors monthly (guaranteed lane)</td>
+<td><code>SMB</code> and <code>HML</code>, the two columns you have not used yet</td>
 </tr>
 <tr>
-<td>Position and exposure data</td>
-<td>conceptually — <strong>this one is not public.</strong> It comes from your own books, and its quality is your own problem</td>
+<td>WRDS: CRSP monthly stock file and <code>ff.factors_monthly</code> (professional lane)</td>
+<td>longer history for the exposures and the drawdown record</td>
 </tr>
 <tr>
-<td>Cited transaction-cost estimates</td>
-<td>pricing your rebalancing policy</td>
+<td>A cited transaction-cost figure</td>
+<td>pricing your policy</td>
 </tr>
 </tbody>
 </table>
-<p><strong>One line of code decides whether your risk model can see tomorrow.</strong> A VaR computed without shifting the estimate looks beautifully calibrated and is worthless. It is the single most consequential line you will write this week, and it is one character of difference from the version that lies to you.</p>
-<p>A risk model that looks well calibrated is more likely to be look-ahead contaminated than correct. Suspect it first.</p>
+<p>Two sources, minimum, and where you have professional access, one of them is the professional source. Pending access is neither an excuse nor a penalty. Document the attempt and use a second free source instead. The attempt counts; the outcome never does.</p>
 <hr />
-<p><strong>Two sources, minimum — and where you have professional access, one of them is the professional source.</strong> This week that is <strong>WRDS / CRSP, and TRACE if your portfolio carries credit</strong>, for long history for tail estimates, and transaction-level bond data a free feed does not hold.</p>
-<p>Pending access is neither an excuse nor a penalty. Document the attempt — source, route tried, date, barrier, and why that source would have been independent — and use a second free source instead. <strong>The attempt counts; the outcome never does.</strong></p>
 <h2>Before the lab — do these</h2>
 <ol>
-<li>Reproduce the VaR backtest on a series of your choice. Confirm you get a breach rate above</li>
+<li>Build your portfolio's monthly return series from the weights you saved in Week 4, weights fixed and reset each month, and check its annual mean and volatility look like what Week 4 reported.</li>
+<li>Run the three-factor regression on it. Write the market beta, the size and value loadings, and the R² on one line, and one sentence saying what the portfolio is a bet on.</li>
+<li>Decide your rebalancing frequency before you price it. Prework Part B is where it goes.</li>
 </ol>
-<p>1%; if you get one below, look at your <code>.shift(1)</code>.</p>
-<ol>
-<li>Have your Week 4 portfolio weights and gross leverage loaded.</li>
-<li>Decide your rebalancing policy — calendar, threshold, or never — and write one sentence on</li>
-</ol>
-<p>why, before you price it.</p>
-<p><strong>Next: Lab 5</strong> builds the risk report for <em>your</em> portfolio, backtests your own VaR, prices your rebalancing policy, and asks you to state in advance what you would do when a limit breaks.</p>
+<p>Next: Lab 5 reads your portfolio's label, prices the policy you chose, writes its worst month and drawdown with their dates, and puts all three on one page you could hand to a committee.</p>
 </main></body></html>

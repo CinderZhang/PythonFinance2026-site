@@ -26,85 +26,68 @@ hr { border:0; border-top:1px solid var(--rule); margin:2rem 0; }
 </style></head>
 <body><main>
 <div class='nav'><a href='../index.html'>MSF Financial Modeling</a></div>
-<h1>Lab 5 — The Risk Report</h1>
+<h1>Lab 5 — The Hand-Over Sheet</h1>
 <blockquote><strong>Register: DO.</strong> Teaching is in <code>handout.md</code>; conventions in <code>rules.md</code>.</blockquote>
-<p><strong>You arrive with:</strong> a portfolio, its constraints, its gross leverage, and your diagnosis of why the unconstrained version could not be trusted. From the session you have the VaR backtest showing 1.77x the advertised breach rate, the clustering, the unbounded tail, and the seven items a committee needs.</p>
-<p><strong>Where this goes next:</strong> Week 6 values a company and Week 7 assembles everything into one deliverable. The limitations section you write here is reused there almost verbatim — so write it as though someone will read it, because someone will.</p>
+<p><strong>You arrive with:</strong> your portfolio's monthly return series built from the Week 4 weights and checked, the rebalancing frequency you chose in prework, a cited cost number, and your prediction. From the session you have the training case's label, its rebalancing table, and its worst month and drawdown with the recipe that produced them.</p>
+<p><strong>Where this goes next:</strong> Week 6 leaves portfolios and values a single company. This lab closes the portfolio arc with the one page you would hand over with the portfolio, and the habit of putting the in-sample warning on the page rather than in a footnote.</p>
+<p><strong>Honest completion floor.</strong> Tuesday in the room: Steps 0 to 2. Thursday in the room: Steps 3 to 5. Step 6 is written work outside the room. A student who leaves Thursday with Steps 0 to 5 in a notebook that runs has done the in-class core.</p>
+<p><strong>Checkpoint, one this week, Thursday.</strong> It is the state of your notebook after Steps 3 to 5 as they stand when you leave the room, submitted to Brightspace before you walk out and due that night, with one line on where you stopped and your AI disclosure. Tuesday's work is not collected; it is the floor you need to stand on Thursday.</p>
+<p><strong>Where the finished work goes.</strong> This week has no exercise of its own. The checkpoint is the only collected work, and nothing is graded that is not collected. Finish Step 5 and write Step 6 outside the room for your own record: the hand-over sheet is the page that shows what four weeks of portfolio work produced, and it is the right answer to an interviewer who asks.</p>
 <hr />
-<h2>Step 1 — Compute VaR three ways</h2>
-<p>For your portfolio, compute 1-day 99% VaR by all three methods: historical, parametric, and one simulation-based approach.</p>
-<p>Report all three side by side. They will disagree. State which you will carry forward and why.</p>
-<p>Then state, in one sentence each, the assumption each method makes and where you expect it to fail.</p>
-<h2>Step 2 — Backtest your own VaR</h2>
-<p>Run the rolling backtest on your portfolio. Report:</p>
-<ul>
-<li>number of observations tested</li>
-<li>expected breaches at your confidence level</li>
-<li>actual breaches</li>
-<li>the ratio</li>
-<li>breaches by year</li>
-</ul>
-<p><strong>Check your shift.</strong> If your breach rate comes in at or below the advertised level, that is the first thing to suspect — a VaR computed with same-day data will look excellent and be worthless.</p>
-<h2>Step 3 — Characterise the tail</h2>
-<p>Two things the breach count hides.</p>
-<ol>
-<li><strong>Clustering.</strong> Report breaches by year. Is your worst year consistent with independent</li>
-</ol>
-<p>breaches at your stated rate, or not? Say which, and show the numbers.</p>
-<ol>
-<li><strong>Magnitude.</strong> Table your five worst breaches: actual loss, VaR limit, excess in percentage</li>
-</ol>
-<p>points. Then compute CVaR — the average loss conditional on breaching — and compare it to your VaR.</p>
-<p>State the sentence a committee would need to hear about your worst case.</p>
-<h2>Step 4 — Price your rebalancing policy</h2>
-<p>State your policy — calendar, threshold, or never — chosen in prework before you priced it.</p>
-<p>Then estimate:</p>
-<ul>
-<li>the annual turnover it implies</li>
-<li>a round-trip cost assumption, and where you got it</li>
-<li>the resulting annual drag in basis points</li>
-</ul>
-<p>Compare against at least one alternative policy. Report the drag for both and say what the more expensive one buys you.</p>
-<p>If you conclude the cheaper policy is better, say so. <strong>A well-argued "do less" is a real finding</strong>, and it is right more often than students expect.</p>
-<h2>Step 5 — Name what your risk report cannot see</h2>
-<p>Using the handout's blind-spot table and your own <code>data_quality_issues.md</code>, write the limitations section.</p>
-<p>For each limitation: what it is, why this report cannot see it, and what someone relying on this report should therefore not conclude.</p>
-<p><strong>Include model risk explicitly</strong>, and use your own Step 2 backtest ratio as the evidence. You measured it. Report it.</p>
-<h2>Step 6 — Decide the action in advance</h2>
-<p>State what you would do if the risk limit is breached — before it is breached.</p>
-<p>Be specific and realistic. "Reduce exposure" is not an action. Which positions, by how much, on what trigger, and who decides?</p>
-<p>Then answer: <strong>what would have to be true for this plan to be the wrong response?</strong> Every pre-committed action has a scenario in which following it makes things worse. Name yours.</p>
-<h2>Step 7 — Your policy, your defence</h2>
-<p>You chose the rebalancing policy and the risk limits.</p>
-<blockquote>A committee member says your limit is set where it is because it is comfortable, not because it is right — and that a tighter limit would have caught the drawdown you just showed them.</blockquote>
-<p>Write the strongest version of their case, with the number that supports it. Then answer it or concede it. <strong>Conceding earns full marks.</strong></p>
-<h2>Step 8 — What did you notice that I did not ask about?</h2>
+<h2>Step 0 — Load what Week 4 left you</h2>
+<p>Load your weights and your Week 3 panel with the French columns. Build the portfolio's monthly return series, weights fixed and reset each month. Print the checks from prework Part A. Then subtract the risk-free column to get the excess series and print its annual mean, volatility and Sharpe ratio, labelled in-sample. <strong>The shape, not your answer:</strong></p>
+<pre><code>weights sum 1.000   min 0.000   max 0.200 (cap 0.200)   months 120   gaps 0
+portfolio  ann mean 19.45%  vol 14.02%  Sharpe 1.255   (in-sample, full window)
+</code></pre>
+<h2>Step 1 — The label</h2>
+<p>Run two regressions on the excess series: on <code>Mkt-RF</code> alone, then on <code>Mkt-RF</code>, <code>SMB</code> and <code>HML</code> together. Report, for each: the alpha per year with its t-statistic, every beta with its t-statistic, and R². Then report the share of your portfolio's variance the market explains beside the average share for your single names from Lab 3 Step 4. <strong>The shape, not your answer:</strong></p>
+<pre><code>                 alpha/yr   t     b_mkt   b_smb    b_hml    R²
+market only      8.6%      3.8    0.76                     0.75
+three factors    6.5%      3.3    0.83   −0.39   −0.00     0.82
+market explains: portfolio 75%   average single name 30%  (range 12%..55%)
+</code></pre>
+<p>Compare with your prework prediction and say, in one sentence, where you were furthest off.</p>
+<h2>Step 2 — Read it like a committee</h2>
+<p>Write three sentences a committee could use, one per loading, in plain words with the number in it. <strong>The shape, not your answer:</strong></p>
+<pre><code>Market 0.83: on average in this sample, a 10% market fall went with a fall of about 8 here.
+Size −0.39: on average, other things equal, a year when small caps beat large by 10 points went with lagging the market by about 4.
+Value 0.00: no tilt, consistent with the growth names and the staples offsetting.
+</code></pre>
+<p>Then the alpha. State it, state its t-statistic, and state what produced the weights it was measured on. If your weights came from an optimizer fitted on this window, the alpha is in-sample and you say so. If you want to claim any of it as skill, the burden is on you to say why.</p>
+<h2>Step 3 — Price your policy</h2>
+<p>Simulate your portfolio from the target weights over your window under three policies: the frequency you chose in prework, never rebalancing, and one other. For each report the number of resets, one-way turnover per year, drag at your cited cost, annual return, volatility, the largest drift of any weight from its target, and the biggest position at the end of the window. <strong>The shape, not your answer:</strong></p>
+<pre><code>quarterly   resets 39   turnover 12.5%/yr   drag 1.2 bp/yr at 10 bp round trip   max drift 5.0 pp   end: MSFT 24.0%
+never       resets  0   turnover  0         drag 0                                max drift 23.3 pp  end: MSFT 40.5%   (cap 20% on targets; holdings at twice it)
+</code></pre>
+<p>The cap binds your target weights; say how far holdings drifted above it between resets under each policy and, under "never", in which year they passed it. State whether you chose your frequency before or after seeing this table. Then write the sentence for the sheet: the policy, what it costs, and what it buys.</p>
+<h2>Step 4 — How bad did it get</h2>
+<p>Build the wealth path from your portfolio's monthly total returns and follow the four-line recipe in handout Part 4: wealth, running peak, drawdown, then the trough, the peak before it, and the months to recover. Report the worst month, the maximum drawdown with both dates and the recovery, and the count of months spent below a previous high. Do the same for your Week 3 benchmark. If a drawdown has not recovered by the end of your window, say so. <strong>The shape, not your answer:</strong></p>
+<pre><code>portfolio  worst month 2020-02 −8.5%   max drawdown −21.3%  peak 2021-12 (wealth 3.887) → trough 2022-09 (3.061)  recovered 7 months later   55 of 120 months below a prior high
+SPY        worst month 2020-03 −12.5%  max drawdown −23.9%  peak 2021-12 → trough 2022-09   recovered 15 months later
+</code></pre>
+<p>Check one number by hand: trough wealth divided by peak wealth, minus one, is your maximum drawdown. If it is not, the recipe is wrong somewhere.</p>
+<p>Then two sentences: what the drawdown tells a holder that the annual volatility does not, and what your monthly series cannot see.</p>
+<h2>Step 5 — The hand-over sheet, and the alpha defence</h2>
+<p>Put it on one page, in the shape of handout Part 5: the portfolio, what it is, what it costs, how bad, the convention, what it cannot see. Every line carries a number and the sentence it supports. The in-sample warning is on the page.</p>
+<p>The "what it cannot see" block has at least three entries, one sentence each: the window and its regime, how many years and what kind of decade; the universe, how the names were chosen and who is missing from it; and the fit, which numbers were computed on the window the weights were chosen on. Add anything specific to your panel, such as positions and liquidity not being modelled.</p>
+<p>Then the defence. A committee member reads your alpha and says: <em>your process adds value; the t-statistic is over two; put more capital behind it.</em> Write the strongest version of their case, with the number that supports it. Then answer it or concede it. Conceding earns full marks. So does answering it well. Pretending the alpha is not on the page earns nothing.</p>
+<h2>Step 6 — What did you notice that I did not ask about?</h2>
 <p>The standing question.</p>
-<p>Something this week behaved unexpectedly. A method that disagreed with the others more than you thought. A year whose breach count made no sense. A cost that dominated the others. A relationship between leverage and breach frequency.</p>
-<p>Write it down with evidence.</p>
-<p><strong>Graded on genuineness and evidence, never on whether it was the right thing to notice.</strong></p>
+<p>Something this week behaved unexpectedly. A loading with the wrong sign for what you thought the portfolio was. Holdings that passed the cap under "never" sooner than you guessed. A drawdown that started in a year you would not have named, or one that has not recovered yet.</p>
+<p>Write it down with evidence. This week it is not collected. Write it anyway; noticing with evidence is the habit the capstone memo runs on.</p>
+<hr />
 <h2>If you want to do this differently</h2>
-<p>You may depart from the method above — a different risk measure, a different backtest design, a different horizon. <strong>A defended departure earns full marks.</strong> State what you did instead, why, and what you gave up.</p>
-<p>If you think VaR is the wrong tool for your portfolio entirely and can argue it, that argument is welcome and worth making well.</p>
-<p><strong>Two sources, minimum — and where you have professional access, one of them is the professional source.</strong> This week that is <strong>WRDS / CRSP, and TRACE if your portfolio carries credit</strong>, for long history for tail estimates, and transaction-level bond data a free feed does not hold.</p>
-<p>Pending access is neither an excuse nor a penalty. Document the attempt — source, route tried, date, barrier, and why that source would have been independent — and use a second free source instead. <strong>The attempt counts; the outcome never does.</strong></p>
+<p>You may depart from the method above. A defended departure earns full marks. State what you did instead, why, and what you gave up.</p>
+<p>Three departures are welcome and worth a Step 6 finding: a threshold rebalancing policy with a band you choose and defend, which keeps holdings within the band; the same regressions on the CRSP monthly file with a longer history, which adds observations to every loading if the names existed then and their exposures held; or, if you want to cook rather than read the label, a simple long-only tilt toward one factor on your own panel, evaluated out of sample the Week 4 way, with its cost stated.</p>
+<p>Two sources, minimum, and where you have professional access, one of them is the professional source. This week that is CRSP monthly returns and <code>ff.factors_monthly</code> on WRDS, for history.</p>
+<p>Pending access is neither an excuse nor a penalty. Document the attempt, source, route tried, date, barrier, and why that source would have been independent, and use a second free source instead. The attempt counts; the outcome never does.</p>
 <h2>Submit</h2>
-<ul>
-<li>Your notebook, runnable start to finish</li>
-<li>The three VaR estimates and your choice among them</li>
-<li>Your backtest: expected, actual, ratio, by year</li>
-<li>The tail table and your CVaR</li>
-<li>Your rebalancing policy, priced, against one alternative</li>
-<li>The limitations section, including measured model risk</li>
-<li>Your pre-committed action and its failure scenario</li>
-<li>Your Step 7 defence and Step 8 finding</li>
-</ul>
+<p>The checkpoint, in the room on Thursday: your notebook as it stands after Steps 3 to 5, runnable from a fresh kernel up to wherever you stopped, with one line on where you stopped and your AI disclosure. Your updated <code>source_log.md</code>, with the cost source added, travels with it. Nothing else is collected this week.</p>
 <h2>Before Week 6 — do these</h2>
 <ol>
-<li>Keep your limitations section in a file of its own. Week 7 reuses it.</li>
-<li>Pick the company you will value in Week 6 and check it has filings you can reach.</li>
-<li>Bring one sentence on what you would need to know about a company before putting a number</li>
+<li>Keep the "what it cannot see" block from your sheet. Week 6 asks the same question of a valuation, and the habit transfers.</li>
+<li>Confirm that the two companies you locked for the capstone file with the SEC and that you can reach their filings. A company you cannot source is a company you cannot value to this course's standard.</li>
+<li>Watch Video 2, Brief Valuation for ABG, linked from the Week 6 prework. Bring one sentence on the first input you would want to verify.</li>
 </ol>
-<p>on it.</p>
-<p><strong>Lab 6 preview:</strong> value a company where every input traces to a sourced, dated figure — and discover that the same company reported two different numbers for the same year, both correct.</p>
+<p>Lab 6 preview: value a company where every input traces to a sourced, dated figure, and discover that the same company reported two different numbers for the same year, both correct.</p>
 </main></body></html>
