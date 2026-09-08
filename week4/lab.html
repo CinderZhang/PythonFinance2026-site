@@ -30,10 +30,40 @@ hr { border:0; border-top:1px solid var(--rule); margin:2rem 0; }
 <blockquote><strong>Register: DO.</strong> Teaching is in <code>handout.md</code>; conventions in <code>rules.md</code>.</blockquote>
 <p><strong>You arrive with:</strong> your panel, stated conventions, your excess-return series and covariance matrix from Week 3, the cap you chose in prework, and your prediction. From the session you have the two-window weight swing, the out-of-sample comparison against 1/N, and the long-only-with-cap table.</p>
 <p><strong>Where this goes next:</strong> Week 5 writes the one-page hand-over sheet for the exact portfolio you save in Step 5: what it is a bet on, what the rebalancing frequency you commit to costs, and how bad it got.</p>
-<p><strong>Honest completion floor.</strong> Tuesday in the room: Steps 0 to 2. Thursday in the room: Steps 3 to 5. Step 6 is written work outside the room. A student who leaves Thursday with Steps 0 to 5 in a notebook that runs has done the in-class core.</p>
-<p><strong>Checkpoint, one this week, Thursday.</strong> It is the state of your notebook after Steps 3 to 5 as they stand when you leave the room, submitted to Brightspace before you walk out and due that night, with one line on where you stopped and your AI disclosure. Tuesday's work is not collected; it is the floor you need to stand on Thursday.</p>
-<p><strong>Where the finished work goes.</strong> Steps 4 to 6, finished outside the room, and Lab 3's Steps 6 to 9 together are Exercise 3. The exercise page in Brightspace carries its own submission list.</p>
+<blockquote><strong>This week's lab, in three parts.</strong> Read the row for today.</p>
+<table>
+<thead>
+<tr>
+<th>Part</th>
+<th>When</th>
+<th>Steps</th>
+<th>What happens to it</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Tuesday, in the room</td>
+<td>0 to 2</td>
+<td>not collected; it is the floor Thursday stands on</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Thursday, in the room</td>
+<td>3 to 5</td>
+<td>submit before you leave, as the Brightspace assignment named <strong>Lab 4 — Portfolio Construction and the Limits of Optimization — Thursday record (CP6)</strong></td>
+</tr>
+<tr>
+<td>3</td>
+<td>after Thursday</td>
+<td>4 to 6, finished</td>
+<td>part of Exercise 3, together with Lab 3's Steps 6 to 9; the exercise page in Brightspace carries its own submission list</td>
+</tr>
+</tbody>
+</table>
+<p>Each checkpoint is the notebook as it stands when you leave, errors and all, with one line on where you stopped and your AI disclosure. Missed a session? Every part is fully doable from this page alone, and the syllabus's checkpoint rule covers a missed one. A student who leaves Thursday with Parts 1 and 2 in a notebook that runs has done the in-class core.</blockquote>
 <hr />
+<h2>Part 1 — Tuesday (not collected)</h2>
 <h2>Step 0 — Load what Week 3 left you</h2>
 <p>Load your excess-return series and your covariance matrix. Check three things and print the evidence: the matrix is square with one row per name, its diagonal equals your Week 3 volatilities squared, and it is symmetric. Then count your parameters. <strong>The shape, not your answer:</strong></p>
 <pre><code>names 8   months per window 60
@@ -49,6 +79,8 @@ in-sample Sharpe 2.234   (1/N on the same window: 0.993)
 <h2>Step 2 — Move the window</h2>
 <p>Re-estimate on the second half. Produce the table: each name, weight on A, weight on B, swing in percentage points, and gross leverage for both.</p>
 <p>Then answer in two sentences: which name moved most, and did anything about that company plausibly change by that much between the two windows?</p>
+<blockquote><strong>Nothing to submit yet.</strong> Tuesday's work is the floor Thursday stands on; keep going.</blockquote>
+<h2>Part 2 — Thursday (Checkpoint 6)</h2>
 <h2>Step 3 — Out of sample against 1/N</h2>
 <p>Hold the window-A weights through window B, reset monthly to the fixed weights, no re-estimation. Do the same for 1/N. Report annualized excess return, annual volatility, Sharpe ratio, and gross leverage for both. <strong>The shape, not your answer:</strong></p>
 <pre><code>window B:  tangency-from-A  Sharpe 0.434  gross 2.62     1/N  Sharpe 1.163  gross 1.00
@@ -64,6 +96,8 @@ largest swing A→B, constrained fits on each: 20.0 pp (was 81.4 pp)
 <p>You chose the cap in prework. Now defend it.</p>
 <p>A colleague says your cap is arbitrary: you picked a number, a different number gives a different portfolio, so the result is your choice rather than the data's. They are right that it is your choice. That is not the same as being wrong. Write the strongest version of their objection, with the number that supports it, then answer it or concede it. Conceding earns full marks. So does answering it well. Pretending the choice was not a choice earns nothing. Say whether you chose the cap before or after seeing the weights.</p>
 <p>Then produce the portfolio Week 5 will use: long-only with your cap, estimated on your full window. Save the weights and, beside them, the constraints that produced them and the gross leverage. You name the file; Week 5 loads what you saved.</p>
+<blockquote><strong>Submit now — Checkpoint 6.</strong> Your notebook as it stands after Steps 3 to 5, one line on where you stopped, your AI disclosure. Brightspace assignment: <strong>Lab 4 — Portfolio Construction and the Limits of Optimization — Thursday record (CP6)</strong>. Before you leave the room.</blockquote>
+<h2>Part 3 — After Thursday (Exercise 3)</h2>
 <h2>Step 6 — What did you notice that I did not ask about?</h2>
 <p>The standing question.</p>
 <p>Something in this week's optimization behaved unexpectedly. A name that never gets weight regardless of window. A cap that helped less than you thought, or more. A pattern in which names the optimizer loves. An in-sample number that looked too good, and was.</p>

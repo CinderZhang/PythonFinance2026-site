@@ -30,11 +30,40 @@ hr { border:0; border-top:1px solid var(--rule); margin:2rem 0; }
 <blockquote><strong>Register: DO.</strong> Teaching is in <code>handout.md</code>; conventions in <code>rules.md</code>.</blockquote>
 <p><strong>You arrive with:</strong> your portfolio's monthly return series built from the Week 4 weights and checked, the rebalancing frequency you chose in prework, a cited cost number, and your prediction. From the session you have the training case's label, its rebalancing table, and its worst month and drawdown with the recipe that produced them.</p>
 <p><strong>Where this goes next:</strong> Week 6 leaves portfolios and values a single company. This lab closes the portfolio arc with the one page you would hand over with the portfolio, and the habit of putting the in-sample warning on the page rather than in a footnote.</p>
-<p><strong>Honest completion floor.</strong> Tuesday in the room: Steps 0 to 2. Thursday in the room: Steps 3 to 5. Step 6 is written work outside the room. A student who leaves Thursday with Steps 0 to 5 in a notebook that runs has done the in-class core.</p>
-<p><strong>Checkpoint, one this week, Thursday.</strong> It is the state of your notebook after Steps 3 to 5 as they stand when you leave the room, submitted to Brightspace before you walk out and due that night, with one line on where you stopped and your AI disclosure. Tuesday's work is not collected; it is the floor you need to stand on Thursday.</p>
-<p><strong>The target lock travels with it.</strong> Thursday's checkpoint also carries your two capstone companies: name and ticker, one line each, with one sentence on why the pair. The instructor demonstration company is not eligible. The lock is binding; a change after this goes through the instructor.</p>
-<p><strong>Where the finished work goes.</strong> This week has no exercise of its own. The checkpoint is the only collected work, and nothing is graded that is not collected. Finish Step 5 and write Step 6 outside the room for your own record: the hand-over sheet is the page that shows what four weeks of portfolio work produced, and it is the right answer to an interviewer who asks.</p>
+<blockquote><strong>This week's lab, in three parts.</strong> Read the row for today.</p>
+<table>
+<thead>
+<tr>
+<th>Part</th>
+<th>When</th>
+<th>Steps</th>
+<th>What happens to it</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Tuesday, in the room</td>
+<td>0 to 2</td>
+<td>not collected; it is the floor Thursday stands on</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Thursday, in the room</td>
+<td>3 to 5</td>
+<td>submit before you leave, as the Brightspace assignment named <strong>Lab 5 — Allocation, Rebalancing, and Risk Reporting — Thursday record and target lock (CP7)</strong>, with your two capstone companies on it</td>
+</tr>
+<tr>
+<td>3</td>
+<td>after Thursday</td>
+<td>5 finished, and 6</td>
+<td>for your own record; this week has no exercise of its own and nothing beyond the checkpoint is collected</td>
+</tr>
+</tbody>
+</table>
+<p>Each checkpoint is the notebook as it stands when you leave, errors and all, with one line on where you stopped and your AI disclosure. The target lock travels with Thursday's checkpoint: your two capstone companies, name and ticker, one line each, with one sentence on why the pair; the instructor demonstration company is not eligible, and a change after this goes through the instructor. Missed a session? Every part is fully doable from this page alone, and the syllabus's checkpoint rule covers a missed one. A student who leaves Thursday with Parts 1 and 2 in a notebook that runs has done the in-class core.</blockquote>
 <hr />
+<h2>Part 1 — Tuesday (not collected)</h2>
 <h2>Step 0 — Load what Week 4 left you</h2>
 <p>Load your weights and your Week 3 panel with the French columns. Build the portfolio's monthly return series, weights fixed and reset each month. Print the checks from prework Part A. Then subtract the risk-free column to get the excess series and print its annual mean, volatility and Sharpe ratio, labelled in-sample. <strong>The shape, not your answer:</strong></p>
 <pre><code>weights sum 1.000   min 0.000   max 0.200 (cap 0.200)   months 120   gaps 0
@@ -55,6 +84,8 @@ Size −0.39: on average, other things equal, a year when small caps beat large 
 Value 0.00: no tilt, consistent with the growth names and the staples offsetting.
 </code></pre>
 <p>Then the alpha. State it, state its t-statistic, and state what produced the weights it was measured on. If your weights came from an optimizer fitted on this window, the alpha is in-sample and you say so. If you want to claim any of it as skill, the burden is on you to say why.</p>
+<blockquote><strong>Nothing to submit yet.</strong> Tuesday's work is the floor Thursday stands on; keep going.</blockquote>
+<h2>Part 2 — Thursday (Checkpoint 7)</h2>
 <h2>Step 3 — Price your policy</h2>
 <p>Simulate your portfolio from the target weights over your window under three policies: the frequency you chose in prework, never rebalancing, and one other. For each report the number of resets, one-way turnover per year, drag at your cited cost, annual return, volatility, the largest drift of any weight from its target, and the biggest position at the end of the window. <strong>The shape, not your answer:</strong></p>
 <pre><code>quarterly   resets 39   turnover 12.5%/yr   drag 1.2 bp/yr at 10 bp round trip   max drift 5.0 pp   end: MSFT 24.0%
@@ -72,6 +103,8 @@ SPY        worst month 2020-03 −12.5%  max drawdown −23.9%  peak 2021-12 →
 <p>Put it on one page, in the shape of handout Part 5: the portfolio, what it is, what it costs, how bad, the convention, what it cannot see. Every line carries a number and the sentence it supports. The in-sample warning is on the page.</p>
 <p>The "what it cannot see" block has at least three entries, one sentence each: the window and its regime, how many years and what kind of decade; the universe, how the names were chosen and who is missing from it; and the fit, which numbers were computed on the window the weights were chosen on. Add anything specific to your panel, such as positions and liquidity not being modelled.</p>
 <p>Then the defence. A committee member reads your alpha and says: <em>your process adds value; the t-statistic is over two; put more capital behind it.</em> Write the strongest version of their case, with the number that supports it. Then answer it or concede it. Conceding earns full marks. So does answering it well. Pretending the alpha is not on the page earns nothing.</p>
+<blockquote><strong>Submit now — Checkpoint 7.</strong> Your notebook as it stands after Steps 3 to 5, one line on where you stopped, your AI disclosure, and your two capstone companies. Brightspace assignment: <strong>Lab 5 — Allocation, Rebalancing, and Risk Reporting — Thursday record and target lock (CP7)</strong>. Before you leave the room.</blockquote>
+<h2>Part 3 — After Thursday (your own record)</h2>
 <h2>Step 6 — What did you notice that I did not ask about?</h2>
 <p>The standing question.</p>
 <p>Something this week behaved unexpectedly. A loading with the wrong sign for what you thought the portfolio was. Holdings that passed the cap under "never" sooner than you guessed. A drawdown that started in a year you would not have named, or one that has not recovered yet.</p>

@@ -30,10 +30,40 @@ hr { border:0; border-top:1px solid var(--rule); margin:2rem 0; }
 <blockquote><strong>Register: DO.</strong> Teaching is in <code>handout.md</code>; conventions in <code>rules.md</code>.</blockquote>
 <p><strong>You arrive with:</strong> your panel, a permanent identifier on every row, <code>data_quality_issues.md</code> with severities you assigned, and a statement of what your panel cannot be used for. From the session you have the French factor file loaded, Apple's Sharpe ratio and regression reproduced, and the idea that one regression produces all three numbers.</p>
 <p><strong>Where this goes next:</strong> Week 4 builds portfolios from the excess-return series and the covariance matrix you save in Step 5. Every convention you leave unstated becomes a silent assumption inside an optimizer.</p>
-<p><strong>Honest completion floor.</strong> Tuesday in the room: Step 0, the environment, for everyone, then Steps 1 and 2. Thursday in the room: Steps 3 to 5. Steps 6 to 9 belong outside the room. A student who leaves Thursday with Steps 0 to 5 in a notebook that runs on their own laptop has done the in-class core.</p>
-<p><strong>Checkpoints, two this week.</strong> Each is the state of your notebook when you leave the room, submitted to Brightspace before you walk out and due that night. Tuesday's checkpoint is the notebook after Steps 0 to 2 as they stand. Thursday's is the notebook after Steps 3 to 5 as they stand. Every checkpoint carries three things: the notebook, errors and all; one line on where you stopped; and your AI disclosure. Nothing is finished at home for a checkpoint; that is what the exercise is for.</p>
-<p><strong>Where the finished work goes.</strong> Steps 6 to 9, completed outside the room, are part of Exercise 3 together with Lab 4: the exercise asks for exactly this week's per-security table with its window and risk-free source, then next week's constrained portfolio against equal weight. The exercise page in Brightspace carries its own submission list.</p>
+<blockquote><strong>This week's lab, in three parts.</strong> Read the row for today.</p>
+<table>
+<thead>
+<tr>
+<th>Part</th>
+<th>When</th>
+<th>Steps</th>
+<th>What happens to it</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Tuesday, in the room</td>
+<td>0 to 2</td>
+<td>submit before you leave, as the Brightspace assignment named <strong>Lab 3 — Return, Risk, and Benchmark Construction — Tuesday record (CP4)</strong></td>
+</tr>
+<tr>
+<td>2</td>
+<td>Thursday, in the room</td>
+<td>3 to 5</td>
+<td>submit before you leave, as <strong>Lab 3 — Return, Risk, and Benchmark Construction — Thursday record (CP5)</strong></td>
+</tr>
+<tr>
+<td>3</td>
+<td>after Thursday</td>
+<td>6 to 9</td>
+<td>part of Exercise 3, together with Lab 4; the exercise page in Brightspace carries its own submission list</td>
+</tr>
+</tbody>
+</table>
+<p>Each checkpoint is the notebook as it stands when you leave, errors and all, with one line on where you stopped and your AI disclosure. Missed a session? Every part is fully doable from this page alone, and the syllabus's checkpoint rule covers a missed one. A student who leaves Thursday with Parts 1 and 2 in a notebook that runs on their own laptop has done the in-class core.</blockquote>
 <hr />
+<h2>Part 1 — Tuesday (Checkpoint 4)</h2>
 <h2>Step 0 — Your environment: VS Code, on your machine, with two agents</h2>
 <p>Done together on Tuesday, from the projector, on the student route. Every path below is the one demonstrated. Colab is the fallback only if your laptop cannot be made to work in the room; say so, and use it.</p>
 <p>Where things live is your decision. Make a folder for this course, put it wherever you keep work, and keep everything from here to Week 7 in it. The only rule about it is in <code>rules.md</code>: it holds nothing you cannot afford to lose, because agents will run inside it without asking.</p>
@@ -118,6 +148,8 @@ first row 2015-07:  AAPL -0.0329   SPY 0.0226   Mkt-RF 0.0157   RF 0.0000
 last row  2025-06:  AAPL  0.0215   SPY 0.0514   Mkt-RF 0.0486   RF 0.0034
 </code></pre>
 <p>If the row count is not what you declared, months were dropped in the join. Find them before going on.</p>
+<blockquote><strong>Submit now — Checkpoint 4.</strong> Your notebook as it stands after Steps 0 to 2, one line on where you stopped, your AI disclosure. Brightspace assignment: <strong>Lab 3 — Return, Risk, and Benchmark Construction — Tuesday record (CP4)</strong>. Before you leave the room.</blockquote>
+<h2>Part 2 — Thursday (Checkpoint 5)</h2>
 <h2>Step 3 — Sharpe, stated properly</h2>
 <p>For every security and for the equal-weight panel, compute the Sharpe ratio under the Week 3 standard, and beside it the CAGR-over-volatility shortcut, in one table. <strong>The shape, not your answer:</strong></p>
 <pre><code>             CAGR    ann vol   Sharpe (excess, arithmetic)   CAGR/vol, rf=0
@@ -147,6 +179,8 @@ check AAPL: sqrt(18.2² + 21.1²) = 27.9
 </ul>
 <p>Week 4 does not care what you called them. It cares that the matrix loads back in the same order as the returns, so check that now.</p>
 <p>Print the 3×3 corner of the covariance matrix and check that its diagonal is your Step 5 total volatility squared, using the unrounded volatility. <strong>The shape, not your answer:</strong> Apple 0.0776 = 0.2785².</p>
+<blockquote><strong>Submit now — Checkpoint 5.</strong> Your notebook as it stands after Steps 3 to 5, one line on where you stopped, your AI disclosure. Brightspace assignment: <strong>Lab 3 — Return, Risk, and Benchmark Construction — Thursday record (CP5)</strong>. Before you leave the room.</blockquote>
+<h2>Part 3 — After Thursday (Exercise 3)</h2>
 <h2>Step 6 — Verify one beta against something you did not write</h2>
 <p>Pick one security. Start here: https://finance.yahoo.com/quote/TICKER, statistics panel, <strong>Beta (5Y Monthly)</strong>. Record the figure and the retrieval date.</p>
 <p>Compare it with your Step 4 beta. If they differ, work the six checks in order: identity, frequency, window, return type, regressor, formula. Re-run yours on the matched window and conventions, using only complete months, and report both figures with their windows. Where the vendor does not state a convention, say which one you assumed and call the match provisional. <strong>The shape, not your answer:</strong> the Exxon entry in handout Part 7, which fails by 0.687, traces it to the window, and closes to 0.003 on sixty months ending 2026-07.</p>
