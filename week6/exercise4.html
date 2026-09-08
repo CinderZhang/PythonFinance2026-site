@@ -1,0 +1,67 @@
+<!doctype html><html lang='en'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>Exercise 4 — Valuation Base Model: Apple</title><style>
+:root { --bg:#ffffff; --fg:#14181d; --muted:#5a6572; --rule:#dfe3e8; --accent:#0b5fa5; --code-bg:#f4f6f8; }
+@media (prefers-color-scheme: dark) { :root { --bg:#0f1419; --fg:#e9ecf0; --muted:#9aa4b2; --rule:#2a323c; --accent:#6fb3f2; --code-bg:#182029; } }
+* { box-sizing: border-box; }
+body { margin:0; background:var(--bg); color:var(--fg); font: 17px/1.6 -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+main { max-width: 46rem; margin: 0 auto; padding: 2.25rem 1.25rem 4.5rem; }
+h1 { font-size:1.9rem; line-height:1.2; margin:0 0 1rem; letter-spacing:-.01em; }
+h2 { font-size:1.4rem; line-height:1.25; margin:2.2rem 0 .8rem; }
+h3 { font-size:1.1rem; margin:1.8rem 0 .6rem; }
+p, li { margin:.7rem 0; } li { margin:.35rem 0; } strong { font-weight:650; } a { color:var(--accent); }
+blockquote { margin:1.1rem 0; padding:.5rem 0 .5rem 1.1rem; border-left:3px solid var(--accent); color:var(--muted); }
+pre { background:var(--code-bg); border:1px solid var(--rule); border-radius:8px; padding:.9rem 1.1rem; overflow-x:auto; font:13.5px/1.55 ui-monospace, Menlo, Consolas, monospace; }
+code { font:.9em ui-monospace, Menlo, Consolas, monospace; background:var(--code-bg); padding:.08em .3em; border-radius:4px; }
+pre code { background:none; padding:0; }
+table { border-collapse:collapse; margin:1.1rem 0; font-size:.92rem; max-width:100%; display:block; overflow-x:auto; }
+th, td { border:1px solid var(--rule); padding:.45rem .7rem; text-align:left; } th { background:var(--code-bg); }
+hr { border:0; border-top:1px solid var(--rule); margin:2rem 0; }
+@media (max-width:600px) { body { font-size:16px; } h1 { font-size:1.6rem; } }
+.nav { margin: 0 0 1.5rem; font-size:.9rem; } .nav a { color: var(--accent); text-decoration: none; } .nav a:hover { text-decoration: underline; }
+.wk { border:1px solid var(--rule); border-radius:10px; padding:1.1rem 1.4rem; margin:0 0 1rem; }
+.wk h3 { margin:.1rem 0 .5rem; font-size:1.05rem; }
+.wk .num { color:var(--muted); font:600 11px/1 ui-monospace,Menlo,Consolas,monospace; letter-spacing:.1em; text-transform:uppercase; }
+.surfaces a { display:inline-block; margin:.3rem .4rem .3rem 0; padding:.3rem .65rem; border:1px solid var(--accent); border-radius:999px; font-size:.85rem; color:var(--accent); text-decoration:none; }
+.surfaces a:hover { background:var(--code-bg); }
+.lede { color:var(--muted); margin:0 0 2rem; }
+</style></head>
+<body><main>
+<div class='nav'><a href='../index.html'>MSF Financial Modeling</a></div>
+<h1>Exercise 4 — Valuation Base Model: Apple</h1>
+<blockquote><strong>Register: DO.</strong> This page is the whole specification. The teaching is in the Week 6 handout and the course videos; Lab 6 starts this model in the room and this exercise is its finished state.</blockquote>
+<p>Everyone builds the same company: <strong>Apple (AAPL)</strong>. The taught example, in Video 3 and on the Week 6 deck, is Asbury Automotive Group, the instructor's demonstration company, so what you see worked is the shape and what you hand in is your own reproduction of it on Apple. The capstone then runs this same pipeline on your two locked companies. Build it once here, well, and the second and third runs are cheap; that is the point of doing it on a company nobody is defending.</p>
+<h2>The data: you pull it</h2>
+<p>Apple's filed statements, obtained by you, by any of three routes. Each is a legitimate source; what matters is that every number you use carries its source, reporting period, currency, units, and the date you extracted it.</p>
+<ul>
+<li><strong>SEC company-facts API</strong> (guaranteed lane, the Week 6 handout's route). Start here: https://data.sec.gov/api/xbrl/companyfacts/CIK0000320193.json, with a User-Agent header naming you.</li>
+<li><strong>EDGAR filings directly</strong> (guaranteed lane): the 10-K's income statement, balance sheet, and cash-flow statement. Start here: https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&amp;CIK=0000320193&amp;type=10-K</li>
+<li><strong>Compustat on WRDS</strong> (professional lane): the fundamentals annual file. Record the variable names you used; Compustat's definitions are not the filing's line items, and the handout's Part 2 is about exactly that.</li>
+</ul>
+<p>Apple's fiscal year ends in late September and one year in the window has fifty-three weeks. Establish the fiscal calendar before you compute a growth rate; the handout's Part 3 shows what goes wrong if you do not.</p>
+<p>Two sources, minimum, and where you have professional access, one of them is the professional source. Pending access is neither an excuse nor a penalty. Document the attempt and use a second free source instead. The attempt counts; the outcome never does.</p>
+<h2>The model: the capstone's per-company requirements, on one company</h2>
+<p>These are the same eight things the capstone requires for each of your two companies. Nothing here is extra.</p>
+<ol>
+<li><strong>Grounding.</strong> Every input traces to a filed statement or a stated assumption, with source, period, currency, units, and extraction date.</li>
+<li><strong>Pro-forma statements and a five-year DCF.</strong> An explicit revenue driver, operating margin, tax rate, reinvestment and capital needs, free cash flow. State each driver's basis: history, guidance, or your own judgment, labelled as such.</li>
+<li><strong>Discount rate and terminal value, stated separately.</strong> Each component of the discount rate sourced or explicitly assumed. Terminal growth below the discount rate, checked in code so the model refuses to run if it is not. State what fraction of the value comes from the terminal value; if it is most of it, which it usually is, say so plainly.</li>
+<li><strong>The bridge.</strong> Enterprise value to equity value to value per share, using dated net debt and diluted shares.</li>
+<li><strong>The assumptions ledger.</strong> Minimum rows: revenue growth, operating margin, tax rate, discount rate, terminal growth, the net-debt and share-count bridge. Every load-bearing assumption, dated, with its source and your confidence in it.</li>
+<li><strong>Scenarios and sensitivity.</strong> Low, base and high cases, then a two-way sensitivity table on the two assumptions that move the value most. Name the highest-sensitivity assumption and write what would have to be true in the world for the low case and for the high case, as sentences, not cell references.</li>
+<li><strong>Checks, four kinds, one each at least.</strong> A known-answer check: a total you computed matches a total Apple filed. A reasonableness check: an implied multiple against Apple's own history or a peer. An edge case: the model fails loudly on an impossible input, such as terminal growth at the discount rate. An AI-risk check: one thing an agent produced that you verified against a source and, if it was wrong, what you changed.</li>
+<li><strong>The honest range</strong>, against the dated market price, and the single assumption most likely to move it.</li>
+</ol>
+<h2>What you hand in</h2>
+<ol>
+<li><strong>Your notebook</strong>, runnable start to finish from a fresh kernel, statements loaded from your chosen source with the extraction visible.</li>
+<li><strong>The assumptions ledger</strong>, as a markdown or CSV file: value, unit, source, source date, rationale, confidence.</li>
+<li><strong>A one-page summary</strong> in markdown: the range and the dated price; the terminal-value share; the highest-sensitivity assumption with its low and high sentences; the four checks and what each found; one sentence on what changed in your own judgment after the sensitivity table.</li>
+<li><strong>Your <code>source_log.md</code></strong>, updated with the statement source you used.</li>
+<li><strong>Your AI disclosure</strong>: each tool and how it was used.</li>
+</ol>
+<p>Markdown, notebooks and data files. No PDF or Word conversion.</p>
+<h2>How it is read</h2>
+<p>The lab page and this page are the rubric. The code is not graded; every agent can write a DCF. What is graded is what the code cannot decide: whether every number has a dated source, whether the range is honest, whether the sensitivity is read as statements about the world, whether the checks are real and one of them caught something. A defended departure from the method earns full marks: a different driver, a different horizon, multiples beside the DCF, stated and justified.</p>
+<p>A notebook without visible executed output is read as unfinished.</p>
+<h2>Dates and policy</h2>
+<p>The due date is on the Brightspace assignment page. Extension tokens apply to this exercise and are invoked before the deadline through the procedure in the syllabus.</p>
+</main></body></html>
