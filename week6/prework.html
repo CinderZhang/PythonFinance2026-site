@@ -27,9 +27,9 @@ hr { border:0; border-top:1px solid var(--rule); margin:2rem 0; }
 <body><main>
 <div class='nav'><a href='../index.html'>MSF Financial Modeling</a></div>
 <h1>Week 6 — Prework</h1>
-<blockquote><strong>Register: TEACH.</strong> The bridge from Lab 5 to what Lab 6 assumes.</blockquote>
+<blockquote><strong>Register: TEACH.</strong> The bridge from the ABG model to your own two companies.</blockquote>
 <p><strong>You arrive with:</strong> a working ABG model, built in Week 5's Thursday studio, and the two companies you locked and screened at that same checkpoint.</p>
-<p><strong>Both sessions this week are working sessions.</strong> There is no lecture to sit through and none to catch up on: the valuation core is delivered by Videos 3 and 4 and by the handout, and the room is for building. That only works if you arrive with the four things below. Part C is the one that makes or breaks Tuesday.</p>
+<p><strong>Both sessions this week are working sessions.</strong> There is no lecture to sit through and none to catch up on: the valuation core was Week 5, the handout is the reference, and the room is for building. That only works if you arrive with Part B done. Part B is the one that decides whether Tuesday works.</p>
 <table>
 <thead>
 <tr>
@@ -41,48 +41,30 @@ hr { border:0; border-top:1px solid var(--rule); margin:2rem 0; }
 <tbody>
 <tr>
 <td>A</td>
-<td><strong>Video 3</strong> — Pro-Forma for ABG: build the base case</td>
-<td>27 min</td>
+<td>The ABG playlist, revisited — the sensitivity half</td>
+<td>as needed</td>
 </tr>
 <tr>
 <td>B</td>
-<td><strong>Video 4</strong> — Pro-Forma for ABG: take it apart and present</td>
-<td>22 min</td>
-</tr>
-<tr>
-<td>C</td>
 <td>Pull the filed lines for <strong>both</strong> of your companies</td>
 <td>40 min</td>
 </tr>
-<tr>
-<td>D</td>
-<td>Rebuild ABG as far as you get, and report where you stopped</td>
-<td>60 min</td>
-</tr>
 </tbody>
 </table>
-<p><strong>Honest time budget: about two and a half hours</strong>, most of it Part D, and Part D is the one you are allowed to fail.</p>
+<p><strong>Honest time budget: about an hour</strong>, nearly all of it Part B.</p>
 <hr />
-<h2>Part A — Video 3: build the base case</h2>
-<p><strong>Pro-Forma for ABG: build the base case</strong> — <a href="https://youtu.be/O4PeC2PqwRY">https://youtu.be/O4PeC2PqwRY</a> (27 minutes; on YouTube, "Pro-Forma Valuation with AI Tutorial Part 1"). All four videos sit in one playlist, in course order: <a href="https://www.youtube.com/playlist?list=PLSzB59MC2JMQ">https://www.youtube.com/playlist?list=PLSzB59MC2JMQ</a>.</p>
-<p>Seven lines from three 10-Ks, nineteen assumptions with three labels, a five-year pro-forma built line by line with cash computed last, the check block, and the base case.</p>
-<p><strong>Watch for two things.</strong> The moment the standardised data-provider field for capital spending disagrees with the 10-K, and the rule that follows: <em>no balance, no valuation.</em></p>
-<h2>Part B — Video 4: take it apart</h2>
-<p><strong>Pro-Forma for ABG: take it apart and present</strong> — <a href="https://youtu.be/zDBUpjaQzpo">https://youtu.be/zDBUpjaQzpo</a> (22 minutes; on YouTube, "Part 2").</p>
-<p>The beta from sixty monthly returns and the seven discount rates it justifies, the terminal conventions, a tornado of nine shocks, three cases rerun rather than added, and the price the market implies.</p>
-<p><strong>Watch for one thing:</strong> the recession case is $210 and the four single shocks summed give $207. Why the model is rerun and never added is Thursday's work.</p>
-<h2>Part C — Pull both companies, before Tuesday</h2>
+<h2>Part A — The playlist, revisited</h2>
+<p><a href="https://www.youtube.com/playlist?list=PLSzB59MC2JMQ">https://www.youtube.com/playlist?list=PLSzB59MC2JMQ</a></p>
+<p>You watched these around Week 5's lecture. Nothing new is required. If one thing is worth going back to, it is the <strong>last video's</strong> second half: the beta and the seven discount rates it justifies, the tornado of one-at-a-time shocks, and the three cases rerun rather than added.</p>
+<p>That is what Thursday does on your own two companies, and it is the part people remember least.</p>
+<p><strong>One line from it to carry into Thursday:</strong> the recession case comes out at $210, and the four single shocks added together give $207. The model is rerun, never added, and Thursday's Step 6 is why.</p>
+<h2>Part B — Pull both companies, before Tuesday</h2>
 <p>This is the part that decides whether Tuesday works. Pulling and aligning statements takes longer than modelling them, and Tuesday has no time for it.</p>
 <p>For <strong>each</strong> of your two companies, open your AI partner in the folder you work in and send this, with the CIK filled in:</p>
 <blockquote>Pull company facts from https://data.sec.gov/api/xbrl/companyfacts/CIK{ten-digit CIK}.json with a User-Agent header that names me, and cache the JSON locally. Using 10-K observations only, and each fiscal year's figure as first reported in that year's own 10-K, print a table in $ millions for the last three fiscal years: revenue, gross profit or cost of revenue, operating expenses, operating income, pretax income, income tax, net income, depreciation and amortization, operating cash flow, capital expenditure, inventory, PP&amp;E net, total assets, shareholders' equity. Add the accession number and filed date for each year. Then tell me which of those lines is missing from the feed, and print each fiscal year's start date, end date and length in days.</blockquote>
-<p>Then, for each company, read four things off the filing itself and type them into the notebook with a comment naming the statement they came from, because the feed will not have all of them: <strong>capital expenditure</strong>, <strong>cash</strong>, <strong>total debt</strong> (current plus long-term), and the <strong>share count from the latest 10-Q or 10-K cover</strong>.</p>
-<p>Start here for the filings: https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&amp;CIK={your CIK}&amp;type=10-K</p>
+<p>Then, for each company, read four things off the filing itself and type them into the notebook with a comment naming the statement they came from, because the feed will not carry all of them: <strong>capital expenditure</strong>, <strong>cash</strong>, <strong>total debt</strong> (current plus long-term), and the <strong>share count from the latest 10-Q or 10-K cover</strong>.</p>
+<p>Start here for the filings: https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&amp;type=10-K</p>
 <p><strong>Two checks before you stop.</strong> Total assets less total liabilities equals equity, in the filed year. And every fiscal year in your window is the same length; if one is 53 weeks, write that on the row.</p>
 <p><strong>If a company will not yield these lines, say so now</strong>, by email, before Tuesday. Changing a pick on Tuesday costs you the session. Changing it tonight costs you an hour.</p>
-<h2>Part D — Rebuild ABG, and report where you stopped</h2>
-<p>Follow Video 3 and build the ABG model yourself. The known answer is <strong>$291.75 a share with 79.8% of the value in the terminal value</strong>.</p>
-<p><strong>You are not expected to finish, and Tuesday does not assume you did.</strong> The first thirty-five minutes of Tuesday build this model together, at the front, with everyone typing. Part D exists so that you arrive knowing <em>where</em> it gets hard for you, which makes those thirty-five minutes worth four times as much.</p>
-<p><strong>Find your own divergence.</strong> The handout's Part 4 to Part 6 print ABG's numbers year by year, and <code>week6_worked.py</code> beside them prints the whole projection. When your number differs, do not stare at the share price. Walk back: does your FY2026 revenue match 18,323.0? Your EBIT, 844.2? Your free cash flow to equity, 211.4? The first line that differs is the line to fix, and naming it is the skill.</p>
-<p><strong>Then report it</strong>, in the one-question Brightspace poll before Tuesday: finished and reproduced the answer, finished but a different number, stopped partway, or did not start. It is ungraded and it is not a test. It tells the instructor what Tuesday's first thirty-five minutes need to cover, and an honest "did not start" is more useful than a guess.</p>
-<p><strong>Bring to Tuesday:</strong> both companies' filed lines printed and sourced, your ABG rebuild however far it got, and the name of the first line where it diverged, if it did.</p>
+<p><strong>Bring to Tuesday:</strong> both companies' filed lines printed and sourced, and your ABG model from Thursday, with its company half and its method half clearly apart.</p>
 </main></body></html>
