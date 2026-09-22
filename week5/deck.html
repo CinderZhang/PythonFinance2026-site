@@ -22,222 +22,259 @@ th, td { border:1px solid var(--rule); padding:.5rem .8rem; text-align:left; } t
 @media (max-width:820px) { body { font-size:17px; } h2 { font-size:1.6rem; } }
 </style></head><body>
 <div id='bar'></div>
-<section class='slide title-slide'><h1>Week 5</h1><div class='sub'>FIN 69000-003 · Financial Analytics with Python (with AI)</div></section>
+<section class='slide title-slide'><h1>Week 5</h1><div class='sub'>FIN 69000-003 · Financial Analytics with Python (with AI) · **valuation core**</div></section>
 <section class='slide'><h2>Before we start — do these</h2>
 <ol>
-<li><strong>Tools alive.</strong> Load your Week 4 weights and the Week 3 panel; print the weights' sum and the series length. Both agents answering from your course folder. Nothing typed into AI.</li>
-<li><strong>Defend to a partner.</strong> Two minutes each: the cap you chose last week, and whether you chose it before or after seeing the weights.</li>
-<li><strong>Gap check.</strong> Write down which of these you cannot yet define in one sentence: factor loading, R², turnover, drawdown, in-sample. That list is yours for the week.</li>
+<li><strong>Tools alive.</strong> A notebook open, both agents answering from your folder. Today you need one cell and a calculator; nothing else.</li>
+<li><strong>Defend to a partner.</strong> Two minutes each: the portfolio you built last week — what is it a bet on, in one sentence?</li>
+<li><strong>Gap check.</strong> Which of these can you not define in one sentence: present value, free cash flow, cost of equity, terminal value, beta? That list is yours for the week.</li>
 </ol></section>
-<section class='slide'><h2>What you arrive with</h2>
-<ul>
-<li>A long-only, capped portfolio, saved with its constraints and gross leverage</li>
-<li>Its monthly return series, built and checked</li>
-<li>A rebalancing frequency, chosen in prework, with a reason</li>
-<li>A prediction: market beta, variance share, size and value signs</li>
-</ul>
-<p>Where it goes: one page you could hand over with the portfolio. Then Week 6 leaves portfolios for a single company.</p></section>
-<section class='slide'><h2>The question</h2>
-<p>You hand the portfolio to someone who has to hold it. In the first five minutes they ask:</p>
-<p><strong>What is this a bet on?</strong></p>
-<p><strong>What does it cost to keep it the way you built it?</strong></p>
-<p><strong>How bad did it get, and how do you know?</strong></p>
-<p>Three small computations: a regression you already know, a turnover table, a wealth path. No new mathematics. The judgment is in the reading.</p></section>
-<section class='slide'><h2>The paper</h2>
-<p>Fama &amp; French (1993), <em>Common risk factors in the returns on stocks and bonds</em>, Journal of Financial Economics.</p>
-<p>Week 3's regression, with two more columns: <strong>SMB</strong> (small minus big) and <strong>HML</strong> (value minus growth).</p>
-<p>Three series explain most of a diversified portfolio's return. After them, the alpha is usually near zero.</p>
-<p><strong>The framing</strong> — Ang (2014): factors are to assets what nutrients are to food. You read the label. You do not cook.</p>
-<p>Textbook, with the code: DRIVER <strong>Session 5 — Portfolio Metrics</strong> · <strong>Session 7 — Asset Allocation and Rebalancing</strong>.</p></section>
-<section class='slide'><h2>References — this week</h2>
-<p><strong>Papers</strong></p>
-<ul>
-<li>Fama, E. F., &amp; French, K. R. (1993). Common risk factors in the returns on stocks and bonds. <em>J. Financial Economics</em> 33(1), 3–56. doi:10.1016/0304-405X(93)90023-5</li>
-<li>McLean, R. D., &amp; Pontiff, J. (2016). Does academic research destroy stock return predictability? <em>J. Finance</em> 71(1), 5–32 — what happens to a premium after it is published.</li>
-</ul>
-<p><strong>Book</strong> — Ang, A. (2014). <em>Asset Management: A Systematic Approach to Factor Investing</em>. Oxford.</p>
-<p><strong>Textbook</strong> — Zhang, <em>DRIVER Financial Modeling</em>, cinderzhang.github.io/DRIVER-FinancialModeling — Sessions 5 and 7. Book chapter excerpt (PDF) follows on publisher approval.</p></section>
-<section class='slide'><h2>The label: Week 3's regression, two more columns</h2>
-<pre><code>R_p − RF  =  α  +  β_M (Mkt−RF)  +  β_S SMB  +  β_H HML  +  ε
+<section class='slide'><h2>The course turns here</h2>
+<p>Four weeks of portfolios. Done.</p>
+<p>From now to the end, one question:</p>
+<blockquote><strong>What is a company worth, and what would have to be true for you to be wrong?</strong></blockquote>
+<p><strong>This week:</strong> one company, all the way through — ABG, the training case from Video 1.
+<strong>Next week:</strong> your own two, both sessions, in this room.
+<strong>Week 7:</strong> you defend the choice between them.</p></section>
+<section class='slide'><h2>A dollar in 2030</h2>
+<p>A dollar in 2030 is worth less than a dollar today.</p>
+<p><strong>The cost of equity is the exchange rate.</strong></p>
+<p>If you require 10% a year:</p>
+<pre><code>a dollar in 1 year   →   1 / 1.10    =  90.9 cents today
+a dollar in 5 years  →   1 / 1.10⁵   =  62.1 cents today
 </code></pre>
-<p>The Week 4 training portfolio: AAPL 14 · MSFT 20 · KO 8 · JPM 20 · PG 19 · WMT 20. Gross 1.00.</p>
+<p>A company that hands you a stream of cash is worth the sum of that stream, each year converted at its own rate.</p>
+<p>That is the whole idea. Everything else is working out the stream.</p></section>
+<section class='slide'><h2>ABG's five years — do the first row by hand</h2>
+<pre><code>year     FCFE      × factor      =   present value
+2026    211.4       0.9091            192.2
+2027    255.1       0.8264            210.8
+2028    299.7       0.7513            225.2
+2029    320.9       0.6830            219.2
+2030    342.3       0.6209            212.5
+                              sum =  1,059.9
+</code></pre>
+<p><strong>211.4 ÷ 1.10 = 192.2.</strong> Do it now. Once the first one is yours, the other four stop being magic.</p>
+<blockquote>The present values <em>rise</em> here, because the cash flow grows faster than the factor shrinks. That is these numbers, <strong>not a rule.</strong> Never check a model against "PVs should shrink."</blockquote></section>
+<section class='slide'><h2>Every DCF has exactly five inputs</h2>
 <table>
 <thead>
 <tr>
-<th>120 months</th>
-<th>α / yr</th>
-<th>β mkt</th>
-<th>β size</th>
-<th>β value</th>
-<th>R²</th>
+<th>#</th>
+<th>Input</th>
+<th>ABG</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>market only</td>
-<td>8.6% (t 3.8)</td>
-<td>0.76</td>
-<td></td>
-<td></td>
-<td>0.75</td>
+<td>1</td>
+<td>the cash flows, over an explicit window</td>
+<td>211.4 → 342.3, five years</td>
 </tr>
 <tr>
-<td>three factors</td>
-<td>6.5% (t 3.3)</td>
-<td>0.83</td>
-<td><strong>−0.39</strong> (t −6.5)</td>
-<td>−0.00</td>
-<td>0.82</td>
+<td>2</td>
+<td>the discount rate</td>
+<td>10%</td>
 </tr>
 <tr>
-<td>SPY</td>
-<td>−0.1%</td>
-<td>0.98</td>
-<td>−0.14</td>
-<td>0.01</td>
-<td>0.996</td>
+<td>3</td>
+<td>growth after the window</td>
+<td>2.5%</td>
+</tr>
+<tr>
+<td>4</td>
+<td>the bridge to the shareholder</td>
+<td>none on this route</td>
+</tr>
+<tr>
+<td>5</td>
+<td>the share count</td>
+<td>17,951,349</td>
 </tr>
 </tbody>
 </table>
-<p>Market 0.83: slightly defensive. Size −0.39: big companies, and now a sentence. Value 0.00: consistent with the growth names and the staples offsetting.</p>
-<p>Loadings are average associations in this sample, not forecasts.</p></section>
-<section class='slide'><h2>What diversification did</h2>
-<p>Week 3: the market explained <strong>30%</strong> of a single name's variance on average (12% to 55%).</p>
-<p>This portfolio: <strong>75%</strong>.</p>
-<pre><code>variance 0.0197  =  market 0.0147  +  idiosyncratic 0.0049
-vol      14.0%      12.1%             7.0%
-</code></pre>
-<p>Company-specific risk did not vanish. It went from most of each stock to a quarter of the portfolio. That is diversification, in digits.</p></section>
-<section class='slide'><h2>The number that should make you pause</h2>
-<p>α = 6.5% a year, t = 3.3.</p>
-<p>Who chose these weights? <strong>Week 4's optimizer, on this exact window, to make this exact window look good.</strong></p>
-<p>In-sample, in the precise sense Week 4 taught. 1/N, which chose nothing, shows 4.2%.</p>
-<p>Label it. Say what produced it. That sentence is worth more than the number.</p></section>
-<section class='slide'><h2>Factor investing, in one slide</h2>
-<p>Hold the factors on purpose instead of by accident: size, value, momentum, profitability, low volatility. Many of the largest managers run such funds.</p>
-<p>Three things a careful reader knows:</p>
-<ol>
-<li>The premiums are <strong>historical averages</strong>, with decade-long droughts. Value lost to growth for most of the 2010s.</li>
-<li><strong>Published premiums shrink</strong> — McLean &amp; Pontiff: by more than half, on average, after the paper appears.</li>
-<li>A factor fund is <strong>still an estimation problem</strong>. Week 4, twice over.</li>
-</ol>
-<p>This course: read the label on your own portfolio. Not on the lab: building a factor strategy.</p></section>
-<section class='slide'><h2>What keeping it costs</h2>
-<p>Same weights, ten years, four policies. Drag = one-way turnover × round-trip cost.</p>
-<table>
-<thead>
-<tr>
-<th>policy</th>
-<th>turnover / yr</th>
-<th>drag at 10 bp</th>
-<th>Sharpe</th>
-<th>largest drift</th>
-<th>end</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>monthly</td>
-<td>20.8%</td>
-<td>2.1 bp</td>
-<td>1.255</td>
-<td>3.4 pp</td>
-<td>JPM 21%</td>
-</tr>
-<tr>
-<td>quarterly</td>
-<td>12.5%</td>
-<td>1.2 bp</td>
-<td>1.259</td>
-<td>5.0 pp</td>
-<td>MSFT 24%</td>
-</tr>
-<tr>
-<td>annual</td>
-<td>5.8%</td>
-<td>0.6 bp</td>
-<td>1.245</td>
-<td>7.0 pp</td>
-<td>JPM 24%</td>
-</tr>
-<tr>
-<td>never</td>
-<td>0</td>
-<td>0</td>
-<td>1.194</td>
-<td><strong>23.3 pp</strong></td>
-<td><strong>MSFT 40%</strong></td>
-</tr>
-</tbody>
-</table>
-<p>Down the cost column: for eight mega-caps, it is cheap. The return barely moves.</p>
-<p>Down the drift column: <strong>"never" carried MSFT to twice your cap.</strong> The portfolio you defended was gone within a few years. The cap binds targets; holdings drift between resets (quarterly: MSFT touched 24%).</p>
-<p>Rebalancing is about staying the portfolio you said you would hold. Not priced here: <strong>tax.</strong></p></section>
-<section class='slide'><h2>How bad did it get</h2>
+<p>Everything else in the <strong>model</strong> exists to produce input 1.</p>
+<p>Everything else in the <strong>argument</strong> is about inputs 2 and 3.</p>
+<blockquote>If you cannot say where each of the five came from, you do not have a valuation. You have a number.</blockquote></section>
+<section class='slide'><h2>Which cash flow, and why</h2>
 <table>
 <thead>
 <tr>
 <th></th>
-<th>worst month</th>
-<th>max drawdown</th>
-<th>peak → trough</th>
-<th>recover</th>
+<th>to the <strong>firm</strong></th>
+<th>to <strong>equity</strong></th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>portfolio</td>
-<td>2020-02 −8.5%</td>
-<td><strong>−21.3%</strong></td>
-<td>2021-12 → 2022-09</td>
-<td>7 months</td>
+<td>whose cash</td>
+<td>everyone, lenders included</td>
+<td>shareholders, after lenders</td>
 </tr>
 <tr>
-<td>1/N</td>
-<td>2020-02 −9.6%</td>
-<td>−18.0%</td>
-<td>2020-01 → 2020-03</td>
-<td>5</td>
+<td>discount at</td>
+<td>weighted average cost of capital</td>
+<td>cost of equity</td>
 </tr>
 <tr>
-<td>SPY</td>
-<td>2020-03 −12.5%</td>
-<td>−23.9%</td>
-<td>2021-12 → 2022-09</td>
-<td>15</td>
+<td>you get</td>
+<td>enterprise value, then bridge</td>
+<td>equity value, directly</td>
 </tr>
 </tbody>
 </table>
-<p>Drawdown is what a client lived through. "Vol 14%" is not.</p>
-<pre><code>wealth = (1+r).cumprod()  →  peak = wealth.cummax()  →  dd = wealth/peak − 1
-3.061 / 3.887 − 1 = −21.3%        55 of 120 months below a prior high
+<p>Both correct. Done consistently, same answer.</p>
+<p><strong>We take the equity route</strong>, because ABG makes the choice for us:</p>
+<blockquote>A dealer borrows to hold the cars on its lot. Floor-plan financing is working capital wearing a lender's clothes. The equity route prices the shares directly and avoids a bridge that would have to rule on what floor plan <em>is</em> — and every answer to that is arguable.</blockquote>
+<p>FCFE = net income + non-cash charges − reinvestment + net borrowing.
+<strong>ABG 2026:</strong> 413.6 + 82.4 + 120.0 − 250.0 − ΔWC + Δfloor plan − 150.0 = <strong>211.4</strong></p></section>
+<section class='slide'><h2>The discount rate is built, not typed</h2>
+<blockquote><strong>cost of equity = risk-free rate + beta × equity risk premium</strong></blockquote>
+<p>Beta is Week 3's regression, on the company: 60 monthly returns against the market, and the slope.</p>
+<pre><code>ABG        beta 0.71     standard error 0.28     R² 0.10
+           ABG vol 10.3%/mo    market 4.6%    correlation 0.32
 </code></pre>
-<p>Monthly data: intramonth lows unseen. A past drawdown is a record, not a limit.</p></section>
-<section class='slide'><h2>The hand-over sheet</h2>
-<pre><code>PORTFOLIO      AAPL 14  MSFT 20  KO 8  JPM 20  PG 19  WMT 20 (rounded) | gross 1.00 | long-only, cap 20% on targets
-WHAT IT IS     β mkt 0.83 · size −0.39 · value 0.00 · R² 0.82 · α +6.5%/yr t 3.3 — IN-SAMPLE
-               large-cap, slightly defensive, no value tilt; lagged when small caps ran, in this sample
-WHAT IT COSTS  quarterly · turnover 12.5%/yr · 1.2 bp/yr at an ASSUMED 10 bp · never → MSFT 40% · tax not priced
-HOW BAD        worst 2020-02 −8.5% · drawdown −21.3% (2021-12 → 2022-09, 7 months back) · 55 of 120 months below a high
-CONVENTION     every statistic on the monthly-reset series, whatever the policy line says
-WHAT IT        ten years, mostly rising, eight survivors · positions and liquidity not modelled ·
-CANNOT SEE     every number is on the window the weights were chosen on · a past drawdown is a record, not a limit
+<p>Read all four together. <strong>A standard error of 0.28 on 0.71 puts the true beta somewhere near 0.2 to 1.3.</strong></p>
+<p>Carry that in your head every time someone quotes a beta to two decimals.</p>
+<p>R² of 0.10: the market explains a tenth of ABG's movement. Nine tenths is the company.</p></section>
+<section class='slide'><h2>Three betas, three rates</h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>beta</th>
+<th>cost of equity</th>
+<th>$/share</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>observed</td>
+<td>0.71</td>
+<td>8.15%</td>
+<td>398</td>
+</tr>
+<tr>
+<td>Blume-adjusted (⅔ est + ⅓ of 1.0)</td>
+<td>0.81</td>
+<td>8.57%</td>
+<td>368</td>
+</tr>
+<tr>
+<td>bottom-up, re-levered at D/E 1.03</td>
+<td>1.03</td>
+<td>9.54%</td>
+<td>313</td>
+</tr>
+<tr>
+<td><strong>the base case</strong></td>
+<td><strong>1.13 implied</strong></td>
+<td><strong>10%</strong></td>
+<td><strong>292</strong></td>
+</tr>
+</tbody>
+</table>
+<p>The base case's 10% <strong>quietly assumes a beta of 1.13</strong> — higher than all three.</p>
+<p>Saying that out loud is the difference between an assumption and a mistake.</p>
+<blockquote>The rate always wants the levered beta, at the leverage you are forecasting. Whatever is debt in the cash flow is debt in the rate.</blockquote></section>
+<section class='slide'><h2>The terminal value</h2>
+<p>Your forecast stops at year five. The company does not.</p>
+<blockquote><strong>terminal value = next year's cash flow ÷ (r − g)</strong></blockquote>
+<pre><code>terminal cash flow   (342.3 + 150.0) × 1.025   =     504.6
+                      ↑ the repayment is finite — restore it
+terminal value       504.6 ÷ (0.10 − 0.025)    =   6,727.8
+discounted 5 years   × 0.6209                  =   4,177.5
+</code></pre></section>
+<section class='slide'><h2>The denominator is a hair-trigger</h2>
+<p>ABG, discount rate held at 10%:</p>
+<pre><code>g =  2.0%      $    276
+g =  5.0%      $    417
+g =  8.0%      $    979
+g =  9.5%      $  3,788
+g =  9.9%      $ 18,772
+g = 10.0%      division by zero
+g = 11.0%      −$1,831 a share
 </code></pre>
-<p>Every line: a number and the sentence it supports. The warnings are on the page, not in a footnote.</p></section>
+<p><strong>Look at the last line.</strong> Above the discount rate the formula does not fail loudly — it returns a confident negative number for a profitable company.</p>
+<p>The arithmetic ran. The valuation is meaningless.</p>
+<blockquote>That is why Thursday's model <strong>refuses</strong> when g ≥ r. A model that answers an impossible question answers it confidently, and you will not notice.</blockquote></section>
+<section class='slide'><h2>"Most of the value is in the terminal value"</h2>
+<pre><code>PV of five explicit years      1,059.9
+PV of the terminal value       4,177.5
+equity value                   5,237.3   ÷ 17,951,349  =  $291.75
+terminal share                    79.8%
+</code></pre>
+<p>You will hear 80% called normal for a going concern. Be suspicious — it is too loose to be useful.</p>
+<p><strong>Same business, same drivers. Only the window changes:</strong></p>
+<pre><code> 5-year window    $291.75     terminal share 79.8%
+10-year window    $288.94     terminal share 61.2%
+15-year window    $285.35     terminal share 46.0%
+</code></pre>
+<p>The value barely moves. The share collapses.</p>
+<blockquote><strong>The terminal share is partly an artifact of your horizon, not a measurement of where value comes from.</strong> Report it — with the horizon beside it. Neither means anything alone.</blockquote></section>
+<section class='slide'><h2>What actually moves it</h2>
+<pre><code>cost of equity  8.15%  8.57%   9%   9.42%  9.54%   10%    11%
+                $398   $368   $342   $319   $313   $292   $254
+</code></pre>
+<p><strong>$145 a share from the discount rate alone</strong>, and none of those seven is unreasonable. That is your honest range before a single operating assumption moves.</p>
+<pre><code>gross margin ±1 pt     $256 .. $327     swing $71
+capital spending ±50   $258 .. $325     swing $67
+revenue growth ±1 pt   $270 .. $314     swing $44
+</code></pre>
+<p>Market: about <strong>$183</strong>, mid-September 2026. Model: $292.</p>
+<p><strong>The gap is the finding.</strong> What must the market assume? A 13.8% cost of equity, or g = −3.3%, or a 14.1% gross margin. Each is a sentence about the world.</p></section>
+<section class='slide'><h2>The card</h2>
+<table>
+<thead>
+<tr>
+<th>Step</th>
+<th>Formula</th>
+<th>ABG</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1 forecast</td>
+<td>cash flow, each year</td>
+<td>211.4 → 342.3</td>
+</tr>
+<tr>
+<td>2 discount</td>
+<td>CF ÷ (1+r)ᵗ</td>
+<td>sum 1,059.9</td>
+</tr>
+<tr>
+<td>3 terminal</td>
+<td>final CF × (1+g) ÷ (r−g)</td>
+<td>6,727.8</td>
+</tr>
+<tr>
+<td>4 add</td>
+<td>ΣPV + PV(terminal)</td>
+<td>5,237.3</td>
+</tr>
+<tr>
+<td>5 per share</td>
+<td>÷ shares</td>
+<td><strong>$291.75</strong></td>
+</tr>
+</tbody>
+</table>
+<p>Say four things every time you report one:</p>
+<p><strong>the range, not the point · the terminal share with its horizon · the dated price · the one assumption that would move it most</strong></p></section>
 <section class='slide'><h2>Before Thursday — do these</h2>
 <ol>
-<li>Lab 5 Steps 0 to 2 on your own portfolio: the series and its checks, both regressions, the three committee sentences and the alpha with what produced it.</li>
-<li>Your rebalancing frequency is written down with its reason, and you can say whether you chose it before seeing the cost.</li>
-<li>Your cost number is cited, or labelled as an assumption.</li>
+<li><strong>Watch Video 3</strong> — Pro-Forma for ABG: build the base case, 27 minutes. Thursday you build what it builds, in this room. Link on the prework page.</li>
+<li><strong>Two capstone companies, shortlisted and screened.</strong> They file a 10-K; not a bank, insurer or REIT; operating income in three of the last five years; no transformational merger inside two years. Print three years of revenue, operating income and total assets for each.</li>
+<li>Have your Week 3 regression code where you can find it.</li>
 </ol>
-<p>Thursday: price the policy, write the risk line, build the sheet, defend the alpha. Thursday's checkpoint is that notebook as it stands when you leave, plus your two capstone companies, one line each.</p></section>
+<p>Thursday: build the projection, print the checks, run the valuation, break it on purpose, and lock your two companies. Thursday's checkpoint is that notebook as it stands when you leave, plus the lock.</p></section>
 <section class='slide'><h2>Before next week — do these</h2>
 <ol>
-<li>Lab 5 Steps 3 to 5 in the room Thursday; Step 6 outside it.</li>
-<li>Keep the "what it cannot see" block. Week 6 asks the same question of a valuation.</li>
-<li>Confirm your two capstone companies file with the SEC and you can reach their filings.</li>
-<li>Watch Video 2, Brief Valuation for ABG, from the Week 6 prework. Bring the first input you would want to verify.</li>
-<li>Two sources minimum, one professional where you have access. The attempt counts; the outcome does not.</li>
+<li>Projection running, check block green. Next week starts from it.</li>
+<li><strong>Keep the company half and the method half apart.</strong> Next week you swap the company half twice, and the session is timed on it.</li>
+<li>Pull the filed lines for both locked companies.</li>
+<li>Watch <strong>Video 4</strong> — take it apart and present, 22 minutes.</li>
 </ol>
-<p>Lab 6 preview: value a company where every input traces to a sourced, dated figure, and discover that the same company reported two different numbers for the same year, both correct.</p></section>
+<p><strong>Lab 6 preview:</strong> your first company through this pipeline Tuesday, your second Thursday, then the decision between them — which gets the capital, and what would flip it.</p></section>
 <div id='num'></div><div id='hint'>← → or space to navigate</div><script>var s=[].slice.call(document.querySelectorAll('.slide')),i=0;function go(n){i=Math.max(0,Math.min(s.length-1,n));s.forEach(function(e,k){e.classList.toggle('current',k===i);});document.getElementById('num').textContent=(i+1)+' / '+s.length;document.getElementById('bar').style.width=((i)/(s.length-1)*100)+'%';if(location.hash!=='#'+(i+1)){history.replaceState(null,'','#'+(i+1));}}document.addEventListener('keydown',function(e){if(e.key==='ArrowRight'||e.key===' '||e.key==='PageDown'){e.preventDefault();go(i+1);}else if(e.key==='ArrowLeft'||e.key==='PageUp'){e.preventDefault();go(i-1);}else if(e.key==='Home'){go(0);}else if(e.key==='End'){go(s.length-1);}});document.addEventListener('click',function(e){if(e.target.closest('a,pre,table'))return;go(i+1);});go(parseInt((location.hash||'#1').slice(1),10)-1||0);</script></body></html>

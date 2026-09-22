@@ -27,303 +27,226 @@ hr { border:0; border-top:1px solid var(--rule); margin:2rem 0; }
 <body><main>
 <div class='nav'><a href='../index.html'>MSF Financial Modeling</a></div>
 <h1>Week 5 — Handout</h1>
-<blockquote><strong>Register: TEACH.</strong> Narrative and worked examples. Graded steps are in <code>lab.md</code>; conventions are in <code>rules.md</code>.</blockquote>
-<p><strong>You arrive with:</strong> a long-only portfolio with your cap, saved with its constraints and its gross leverage, a defence of the cap, and one sentence on how often you intend to rebalance it.</p>
-<p><strong>Where this goes next:</strong> Week 6 leaves portfolios and values a single company. This week closes the portfolio arc with the one page you would hand over with the portfolio.</p>
+<blockquote><strong>Register: TEACH.</strong> Narrative and worked examples. Graded steps in <code>lab.md</code>; conventions in <code>rules.md</code>.</blockquote>
+<p><strong>You arrive with:</strong> four weeks of habits about where numbers come from, and a regression from Week 3 that turns sixty monthly returns into a beta. Nothing else is assumed.</p>
+<p>The course turns here. Portfolios are finished. From now to the end it is one question: <strong>what is a company worth, and what would have to be true for you to be wrong?</strong></p>
+<p>This week answers it once, on one company, all the way through. Next week you do it on your own two. Everything in this handout is worked on Asbury Automotive Group, the training case from Video 1, and every digit is reproduced by <code>week5_worked.py</code>, which pulls ABG from the SEC and prints the tables.</p>
 <hr />
 <h2>Why this matters</h2>
-<p>You have built a portfolio you can defend. Now imagine handing it to someone who has to hold it: a portfolio manager, a client, a committee. They do not ask for your Sharpe ratio. In the first five minutes they ask three things.</p>
-<p><em>What is this actually a bet on?</em> <em>What does it cost to keep it the way you built it?</em> <em>How bad did it get, and how do you know?</em></p>
-<p>A junior analyst who can answer those three questions on one page, with numbers, is trusted with the next portfolio. One who cannot is asked to go and find out. This week you find out, on the portfolio you already have, with the regression you already know how to run.</p>
-<p>Everything this week is three small computations: a regression you already know how to run, a turnover table that is arithmetic, and a wealth path. None of them is new mathematics. The judgment is in reading the results.</p>
+<p>Valuation is where analysts are hired and where they are caught out. Not because the arithmetic is hard — a discounted cash flow is about a dozen lines, and any AI will write one in seconds — but because the answer is only as good as five inputs, and almost nobody checks where those five came from.</p>
+<p>The question that separates a junior from a professional is not "what is your target price." It is <strong>"where did that number come from, and what would move it?"</strong></p>
 <hr />
 <h2>The paper</h2>
-<p>This week is anchored on <strong>Fama and French (1993), "Common risk factors in the returns on stocks and bonds", Journal of Financial Economics 33(1), 3–56.</strong></p>
-<p>Week 3 regressed one stock's excess return on the market's excess return and got a beta, an alpha, and a split of risk into the part the market explains and the part it does not. Fama and French added two more columns to that regression: <strong>SMB</strong>, the return of small companies minus big ones, and <strong>HML</strong>, the return of high book-to-market companies, value, minus low, growth. Their finding was that those three series together explain most of the variation in the returns of diversified stock portfolios, far more than the market alone, and that after those three are accounted for the remaining unexplained return, the alpha, is usually close to zero.</p>
-<p><strong>Read:</strong> the abstract and the introduction. Nothing else is required; the tables are there if you want to see the R² column move when the two factors are added. The paper is on ScienceDirect through Purdue Libraries. Start here: https://www.lib.purdue.edu → Databases → ScienceDirect. DOI 10.1016/0304-405X(93)90023-5.</p>
-<p><strong>The framing.</strong> Andrew Ang's <em>Asset Management: A Systematic Approach to Factor Investing</em> (Oxford, 2014) puts it in one sentence: factors are to assets what nutrients are to food. You do not eat protein; you eat things that contain it. You do not hold "the value factor"; you hold companies whose returns move with it. A portfolio's exposures are its nutritional label. That is what you write this week.</p>
-<p><strong>What the paper does not say.</strong> It does not say that the factors are guaranteed to pay, or that you should build a factor portfolio. This week you read the label. You do not cook.</p>
-<p><strong>Textbook.</strong> The free-lane counterpart, with code, is in the DRIVER textbook: <a href="https://cinderzhang.github.io/DRIVER-FinancialModeling/Session5-Portfolio-Metrics.html">Session 5 — Portfolio Metrics</a> for the regression and for drawdown, and <a href="https://cinderzhang.github.io/DRIVER-FinancialModeling/Session7-Asset-Allocation-Rebalancing.html">Session 7 — Asset Allocation and Rebalancing</a> for rebalancing and drift.</p>
+<p><strong>Kaplan and Ruback (1995), "The Valuation of Cash Flow Forecasts: An Empirical Analysis", Journal of Finance 50(4), 1059–1093.</strong></p>
+<p>They took fifty-one leveraged transactions from 1983 to 1989 where the buyers' own cash-flow forecasts became public, discounted those forecasts, and compared the result with what was actually paid. The discounted values landed within about <strong>ten percent of the transaction values on average, with a wide spread around that average</strong>. Valuations from comparable-company multiples did about as well, and the two together did better than either.</p>
+<p>That is the idea this week runs on, and it sets your expectations correctly: <strong>a discounted cash flow built from real forecasts lands in the neighbourhood, not on the point.</strong> A multiple is the check you run beside it. The arithmetic of the paper is thirty years old and the method has moved on; the finding has not.</p>
+<p><strong>Read:</strong> the abstract and the introduction. On Wiley Online Library through Purdue Libraries. Start here: https://www.lib.purdue.edu → Databases → Wiley Online Library. DOI 10.1111/j.1540-6261.1995.tb04050.x.</p>
+<p><strong>Where the method went.</strong> Damodaran (2005), "Valuation Approaches and Metrics: A Survey of the Theory and Evidence", Foundations and Trends in Finance 1(8), 693–784, maps everything that followed. One line in the references; the survey is enough.</p>
+<p><strong>The theory, names only.</strong> The terminal value you compute below is the Gordon–Shapiro (1956) growing perpetuity. The reason a valuation does not depend on whether cash reaches shareholders as dividends or buybacks is Miller and Modigliani (1961). Neither is required reading.</p>
 <hr />
-<h2>Part 1 — What the portfolio is a bet on</h2>
-<p>The portfolio is the Week 4 training case: the eight names, long-only, cap 20%, estimated on the full ten-year window. Six names are held: Apple 14%, Microsoft 20%, Coca-Cola 8%, JPMorgan 20%, Procter &amp; Gamble 19%, Walmart 20%. Johnson &amp; Johnson and Exxon are at zero. Gross leverage 1.00.</p>
-<p>Its monthly return is the weighted sum of the eight monthly returns, weights fixed and reset each month, the same convention Week 4 used. Subtract the risk-free rate and regress on the French factors. The equation is Week 3's with two more terms:</p>
-<pre><code>R_p − RF  =  α  +  β_M (Mkt−RF)  +  β_S SMB  +  β_H HML  +  ε
+<h2>Part 1 — Why discount at all</h2>
+<p>A dollar in 2030 is worth less than a dollar today, and <strong>the cost of equity is the exchange rate.</strong></p>
+<p>That is the whole of it. If you require 10% a year to hold this equity, then a dollar arriving in one year is worth 1 / 1.10 = 90.9 cents to you today, and a dollar arriving in five years is worth 1 / 1.10⁵ = 62.1 cents.</p>
+<p>So a company that will hand you a stream of cash is worth the sum of that stream, each year converted at its own exchange rate. ABG's five projected years, at 10%:</p>
+<pre><code>year   free cash flow to equity   × discount factor   =  present value
+2026            211.4                   0.9091               192.2
+2027            255.1                   0.8264               210.8
+2028            299.7                   0.7513               225.2
+2029            320.9                   0.6830               219.2
+2030            342.3                   0.6209               212.5
+                                                    sum =  1,059.9
 </code></pre>
-<p>Every number below comes from <a href="week5_worked.py"><code>week5_worked.py</code></a>, which reads the Week 3 panel file and the Week 4 weights.</p>
+<p><strong>Do the 2026 row by hand now.</strong> 211.4 ÷ 1.10 = 192.2. If you do the first one by hand, the other four stop being magic, and the rest of this week is arithmetic you already understand.</p>
+<p>Notice the present values <em>rise</em> across these five years even as the discount factor falls, because the cash flow grows faster than the factor shrinks. That is specific to these numbers, not a rule. <strong>Do not use "present values should shrink" as a check on your model</strong>; whether they shrink depends on the growth rate against the discount rate, and there is no general answer.</p>
+<hr />
+<h2>Part 2 — Every discounted cash flow has exactly five inputs</h2>
+<p>Strip away the spreadsheet and this is all there is:</p>
 <table>
 <thead>
 <tr>
-<th>120 months, 2015-07 to 2025-06</th>
-<th>α per year</th>
-<th>β market</th>
-<th>β size (SMB)</th>
-<th>β value (HML)</th>
-<th>R²</th>
+<th>#</th>
+<th>Input</th>
+<th>ABG</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>portfolio, market only</td>
-<td>8.6% (t 3.8)</td>
-<td>0.76</td>
-<td></td>
-<td></td>
-<td>0.75</td>
+<td>1</td>
+<td>the cash flows, for an explicit forecast window</td>
+<td>211.4, 255.1, 299.7, 320.9, 342.3, over five years</td>
 </tr>
 <tr>
-<td>portfolio, three factors</td>
-<td>6.5% (t 3.3)</td>
-<td>0.83</td>
-<td>−0.39 (t −6.5)</td>
-<td>−0.00 (t 0.0)</td>
-<td>0.82</td>
+<td>2</td>
+<td>the discount rate</td>
+<td>10%</td>
 </tr>
 <tr>
-<td>1/N, three factors</td>
-<td>4.2% (t 2.3)</td>
-<td>0.79</td>
-<td>−0.37 (t −6.6)</td>
-<td>+0.16 (t 4.1)</td>
-<td>0.83</td>
+<td>3</td>
+<td>the growth rate after the window ends</td>
+<td>2.5%</td>
 </tr>
 <tr>
-<td>SPY, three factors</td>
-<td>−0.1% (t −0.2)</td>
-<td>0.98</td>
-<td>−0.14</td>
-<td>+0.01</td>
-<td>0.996</td>
+<td>4</td>
+<td>the bridge to the shareholder</td>
+<td>none needed on this route; see Part 3</td>
+</tr>
+<tr>
+<td>5</td>
+<td>the share count</td>
+<td>17,951,349</td>
 </tr>
 </tbody>
 </table>
-<p>Read the portfolio's row as its label.</p>
-<p><strong>Market beta 0.83.</strong> Over these ten years, when the market moved one percent, this portfolio moved on average about 0.83 percent in the same direction. It is a slightly defensive equity portfolio, because Coca-Cola, Procter &amp; Gamble and Walmart pull the beta down.</p>
-<p><strong>Size −0.39, and the t-statistic says it is not noise.</strong> A negative loading on small-minus-big means the portfolio behaves like big companies. Of course it does: it is eight of the largest companies in the country, and a committee already knows that. What the number adds is a sentence they can use: <em>on average in this sample, other things equal, a year in which small caps beat large caps by ten points went with this portfolio lagging the market by about four.</em> A loading is an average association over the window, not a forecast for any particular year.</p>
-<p><strong>Value −0.00.</strong> No tilt either way, consistent with the growth names, Apple and Microsoft, offsetting the value names, JPMorgan and the consumer staples. That is worth saying because it is not what most people would guess from the tickers.</p>
-<p><strong>R² 0.82.</strong> The three factors explain 82% of the month-to-month variation in this sample. The market alone explained 75%. Look at the SPY row for scale: an index fund is 99.6% explained, because it <em>is</em> the market. Your portfolio is not an index fund, and the label says by how much.</p>
-<h3>The number that should make you pause</h3>
-<p>The alpha. 6.5% a year, with a t-statistic of 3.3, which by the usual rule is "significant." A junior analyst puts that on the page as evidence the portfolio adds value.</p>
-<p>Do not. Remember what produced these weights. Week 4's optimizer chose them on this exact window to maximize the Sharpe ratio on this exact window. The alpha is measured on the same 120 months the optimizer was fitted to, and the optimizer's whole job was to make those 120 months look good. It is in-sample, in the precise sense Week 4 taught. The 1/N row, which estimated nothing, still shows 4.2%, which tells you how much of the "alpha" is the decade these particular eight companies had rather than anything anyone chose. Label it in-sample and say what produced it. That sentence is worth more to a committee than the number.</p>
-<h3>What diversification did, in one line</h3>
-<p>Week 3 split each stock's risk into the part the market explains and the rest. For these eight names the market explained on average 30% of the variance, with a range from 12% to 55%. For the portfolio built from them, the market explains 75%.</p>
-<pre><code>portfolio annual variance 0.0197  =  market part 0.0147  +  idiosyncratic part 0.0049
-in volatility terms:   14.0%  total ;  12.1% from the market ;  7.0% idiosyncratic
-</code></pre>
-<p>The company-specific risk did not go away. It went from being most of each stock's risk to being a quarter of the portfolio's, because eight companies' surprises partly cancel. That is what diversification is, in numbers rather than as a slogan, and it is why the committee's first question is about the market exposure: after diversification, the market is most of what is left.</p>
+<p>Everything else in a valuation model exists to produce input 1. Everything else in a valuation <em>argument</em> is about inputs 2 and 3.</p>
+<blockquote><strong>The rule this gives you.</strong> If you cannot say where each of the five came from, you do not have a valuation. You have a number.</blockquote>
 <hr />
-<h2>Part 2 — What factor investing is, in one page</h2>
-<p>You will hear "factor investing" constantly in the industry, so here is what it means and what to be careful about, without building anything.</p>
-<p>The idea follows from the regression. If most of a diversified portfolio's return comes from a handful of factors, you can hold the factors deliberately rather than by accident. A factor fund does exactly that: it buys the stocks that load on a factor, small companies, cheap companies, companies whose price has been rising, profitable companies, low-volatility companies, and holds them systematically. Many of the largest asset managers run such funds, and a "multi-factor" fund combines several.</p>
-<table>
-<thead>
-<tr>
-<th>Factor</th>
-<th>The long side</th>
-<th>The short side, or the underweight</th>
-<th>Published where</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Market</td>
-<td>equities</td>
-<td>cash</td>
-<td>Sharpe (1964), Week 3</td>
-</tr>
-<tr>
-<td>Size</td>
-<td>small companies</td>
-<td>big companies</td>
-<td>Fama and French (1993)</td>
-</tr>
-<tr>
-<td>Value</td>
-<td>high book-to-market</td>
-<td>low book-to-market</td>
-<td>Fama and French (1993)</td>
-</tr>
-<tr>
-<td>Momentum</td>
-<td>past twelve-month winners</td>
-<td>past losers</td>
-<td>Carhart (1997)</td>
-</tr>
-<tr>
-<td>Profitability, investment</td>
-<td>profitable, conservative firms</td>
-<td>unprofitable, aggressive firms</td>
-<td>Fama and French (2015)</td>
-</tr>
-<tr>
-<td>Low volatility</td>
-<td>low-beta stocks</td>
-<td>high-beta stocks</td>
-<td>Frazzini and Pedersen (2014)</td>
-</tr>
-</tbody>
-</table>
-<p>Three things a careful reader knows.</p>
-<p><strong>The premiums are historical averages, not promises.</strong> Every factor above has had decade-long stretches of underperformance. Value lost to growth for most of the 2010s, which is part of why your portfolio's value loading is zero without anyone deciding it should be.</p>
-<p><strong>Published premiums shrink.</strong> McLean and Pontiff (2016, <em>Journal of Finance</em>) measured what happens to a return pattern after the academic paper that documents it appears: on average it fell by more than half. What is left is smaller, noisier, and shared with everyone who read the same paper.</p>
-<p><strong>A factor fund is still an estimation problem.</strong> Week 4's lesson applies twice: the factor loadings are estimated with error, and the factor premiums are estimated with worse error. A multi-factor fund is a portfolio of estimates.</p>
-<p>What you do with this in the course: read exposures, on your own portfolio, and say what they mean. What you do not do: build a factor strategy. If you want to, the Week 3 French file has everything you need and Lab 5's departure section is where it goes.</p>
-<hr />
-<h2>Part 3 — What keeping it costs</h2>
-<p>Your Week 4 portfolio has target weights. Prices move every month, so the actual weights drift away from the targets. Rebalancing trades them back. Every trade costs something, and you promised in Week 4 to say how often you would do it.</p>
-<p>The cost of a trade has three parts. Commissions, which for US large-cap equities at a retail broker are now close to zero. The bid-ask spread and market impact, which are paid on every trade, are invisible on a statement, and grow with the size of the order. Tax on realised gains, in a taxable account, which is often the largest of the three and is not in any of the numbers below.</p>
-<p>The arithmetic is short. <strong>Turnover</strong> is how much of the portfolio you trade: at each rebalance, sum the absolute changes in weight and halve it, so that selling 5% of Microsoft to buy 5% of Coca-Cola is 5% turnover, not 10%. Add it up per year. <strong>Drag</strong> is annual turnover times the round-trip cost of a trade, in basis points, bp, hundredths of a percent.</p>
-<p>Four policies on the same weights over the same ten years, starting at the targets and letting prices do what they did:</p>
-<table>
-<thead>
-<tr>
-<th>policy</th>
-<th>resets</th>
-<th>one-way turnover per year</th>
-<th>drag at 10 bp round trip</th>
-<th>drag at 50 bp</th>
-<th>annual return</th>
-<th>vol</th>
-<th>Sharpe</th>
-<th>largest drift from target</th>
-<th>biggest position at the end</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>monthly</td>
-<td>119</td>
-<td>20.8%</td>
-<td>2.1 bp</td>
-<td>10.4 bp</td>
-<td>19.5%</td>
-<td>14.0%</td>
-<td>1.255</td>
-<td>3.4 pp</td>
-<td>JPM 21.4%</td>
-</tr>
-<tr>
-<td>quarterly</td>
-<td>39</td>
-<td>12.5%</td>
-<td>1.2 bp</td>
-<td>6.2 bp</td>
-<td>19.5%</td>
-<td>14.0%</td>
-<td>1.259</td>
-<td>5.0 pp</td>
-<td>MSFT 24.0%</td>
-</tr>
-<tr>
-<td>annual</td>
-<td>9</td>
-<td>5.8%</td>
-<td>0.6 bp</td>
-<td>2.9 bp</td>
-<td>19.4%</td>
-<td>14.1%</td>
-<td>1.245</td>
-<td>7.0 pp</td>
-<td>JPM 24.1%</td>
-</tr>
-<tr>
-<td>never</td>
-<td>0</td>
-<td>0</td>
-<td>0</td>
-<td>0</td>
-<td>19.9%</td>
-<td>15.1%</td>
-<td>1.194</td>
-<td>23.3 pp</td>
-<td><strong>MSFT 40.5%</strong></td>
-</tr>
-</tbody>
-</table>
-<p>Returns and Sharpe ratios are before costs and, as always for this window, in-sample.</p>
-<p>Read it in two directions.</p>
-<p><strong>Down the cost column, the answer is: it is cheap.</strong> For eight of the most liquid stocks in the world, monthly rebalancing at a plausible 10 basis points round trip costs about two basis points a year. Even at 50 basis points, a number you would use for a less liquid name, it is ten. The return columns barely move between monthly, quarterly and annual. If you expected rebalancing frequency to be a big decision for this portfolio, the table says it is not.</p>
-<p><strong>Down the drift column is the reason to rebalance at all.</strong> Never touching the portfolio cost nothing and, over ten years, let Microsoft grow from 20% to 40.5% of it. Twice the cap. The cap you chose in Week 4 prework and defended in Lab 4 was silently gone within a few years, and the portfolio at the end of the decade was not the portfolio you defended. It was a Microsoft position with seven passengers.</p>
-<p>So the rebalancing decision for a portfolio like this is not about return or cost. It is about staying the portfolio you said you would hold. Quarterly keeps every name within 5 points of target for about one basis point a year. That is the sentence to write.</p>
-<p>One precision. The cap binds the target weights. Between resets the holdings drift, by up to the drift column: under quarterly resets Microsoft touched 24% before being trimmed back. If a committee wants the cap to hold on the holdings every day, a calendar is the wrong tool and the threshold policy below is the right one.</p>
-<p>Where the cost is <em>not</em> small: portfolios of small or thinly traded names, where round trips run to hundreds of basis points; strategies with high turnover by design, where 400% turnover at 10 basis points is 40 basis points a year before the strategy has done anything; and taxable accounts, where every rebalance realises gains. Your panel decides which world you are in, and the cost number you cite in prework is your evidence.</p>
-<p><strong>A policy that is not on the table.</strong> Threshold rebalancing trades only when a weight drifts past a band, say 5 points from target. It trades only when needed and keeps every holding within the band, which is what a cap on holdings, rather than on targets, requires. The band is a parameter you choose and defend, exactly like the cap was. It is welcome as a departure in Lab 5.</p>
-<hr />
-<h2>Part 4 — How bad did it get</h2>
-<p>The third question. Two numbers answer it, each with its dates, and both are already in your return series.</p>
+<h2>Part 3 — Which cash flow, and why</h2>
+<p>There are two standard routes, and the difference is who the cash belongs to.</p>
 <table>
 <thead>
 <tr>
 <th></th>
-<th>worst month</th>
-<th>maximum drawdown</th>
-<th>peak to trough</th>
-<th>months to recover</th>
+<th>Cash flow to the <strong>firm</strong></th>
+<th>Cash flow to <strong>equity</strong></th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>portfolio</td>
-<td>2020-02, −8.5%</td>
-<td>−21.3%</td>
-<td>2021-12 to 2022-09</td>
-<td>7</td>
+<td>Whose cash</td>
+<td>everyone who funded the business, lenders included</td>
+<td>shareholders only, after lenders are paid</td>
 </tr>
 <tr>
-<td>1/N</td>
-<td>2020-02, −9.6%</td>
-<td>−18.0%</td>
-<td>2020-01 to 2020-03</td>
-<td>5</td>
+<td>Discount at</td>
+<td>the weighted average cost of capital</td>
+<td>the cost of equity</td>
 </tr>
 <tr>
-<td>SPY</td>
-<td>2020-03, −12.5%</td>
-<td>−23.9%</td>
-<td>2021-12 to 2022-09</td>
-<td>15</td>
+<td>You get</td>
+<td>enterprise value, then you subtract net debt to reach equity</td>
+<td>equity value directly</td>
+</tr>
+<tr>
+<td>Extra step</td>
+<td>the bridge from enterprise value to equity value</td>
+<td>none</td>
 </tr>
 </tbody>
 </table>
-<p><strong>Worst month</strong> is what it says. <strong>Maximum drawdown</strong> is the largest fall from a previous high to a later low, measured on the wealth path, and it is the number a client actually experienced: someone who bought this portfolio at the end of 2021 was down 21% nine months later and waited another seven to get back to even. That is a different fact from "annual volatility 14%," and committees ask for it because they have lived through it.</p>
-<p>The recipe is four lines, on the monthly <strong>total</strong> returns, not the excess returns, because a client's wealth compounds the whole return:</p>
-<pre><code>1. wealth = (1 + r).cumprod()      one dollar compounded through the months
-2. peak   = wealth.cummax()        the highest value reached so far
-3. dd     = wealth / peak − 1      how far below that high, every month
-4. max drawdown = dd.min()         its month is the trough; the peak is the last high before it;
-                                   recovery = months from the trough until wealth first regains the peak,
-                                   or &quot;not recovered by window end&quot;
-</code></pre>
-<p>With digits, for the portfolio. Wealth reached 3.887 at the end of 2021 and fell to 3.061 by September 2022: 3.061 / 3.887 − 1 = −21.3%. It regained 3.887 seven months later. The COVID episode was the second deepest, 2.479 to 2.120 over two months, −14.5%, which is why "worst month" and "maximum drawdown" name different episodes here: the worst single month was February 2020, but the deepest hole was dug slowly in 2022. Over the ten years the portfolio spent 55 of 120 months below a previous high. That last number surprises most people, and it belongs on the page.</p>
-<p>Three conventions, stated so the number means the same thing to everyone. It is computed on monthly observations, so the low inside a month is not seen; the true March 2020 bottom was deeper than any month-end. It is computed on the monthly-reset series, the Week 4 convention, whatever rebalancing policy the sheet recommends; if you want the drawdown of the quarterly path, compute it on that path and say so. And it is a record of what happened, never a limit on what can happen: the next drawdown can be deeper than the worst one so far, and a sheet that reads "maximum drawdown −21%" as a floor has misread it.</p>
-<p><strong>What else exists, names only.</strong> Value at Risk and expected shortfall, which turn the tail of the distribution into one number; stress tests, which ask what a named scenario would do. On ten years of monthly data they rest on a handful of observations. The textbook covers them for anyone who wants them. Not on the lab.</p>
+<p>Both are correct and, done consistently, both give the same answer. <strong>This course takes the equity route</strong>, because the taught case makes the choice for us and the reason generalises:</p>
+<blockquote>A car dealer's financing is inseparable from its operations. ABG borrows to hold the cars on its lot — that is floor-plan financing, and it is working capital wearing a lender's clothes. Cash flow to equity, discounted at a levered cost of equity, prices the shares directly and avoids a bridge that would have to decide whether floor plan is debt or operations. Every answer to that question is arguable, so the honest move is not to need one.</blockquote>
+<p>Free cash flow to equity, in words: <strong>net income, plus the non-cash charges you added back, less what the business must reinvest, plus what it borrows net of what it repays.</strong> For ABG in 2026 that is 413.6 net income, plus 82.4 depreciation and 120.0 impairment, less 250.0 capital spending, less the change in working capital, plus the change in floor-plan financing, less the 150.0 of debt repaid. It comes to 211.4.</p>
+<p><strong>If you value a company whose financing is genuinely separate from its operations</strong> — most of them — the firm route is the more standard choice, and it is a welcome departure next week provided you do both your companies the same way.</p>
 <hr />
-<h2>Part 5 — The hand-over sheet</h2>
-<p>Put the three answers on one page. Here is the training case's, and it is the shape, not your answer:</p>
-<pre><code>PORTFOLIO        AAPL 14%  MSFT 20%  KO 8%  JPM 20%  PG 19%  WMT 20%  (rounded; 100.0% before rounding)
-                 gross 1.00  |  long-only, cap 20% on target weights, full window
-
-WHAT IT IS       market beta 0.83 ; size −0.39 ; value 0.00 ; R² 0.82   (three-factor regression, 120 months)
-                 alpha +6.5%/yr, t 3.3 — IN-SAMPLE: the weights were fitted on this window
-                 in plain words: a large-cap, slightly defensive equity portfolio with no value tilt.
-                 On average in this sample it lagged when small caps ran, and moved about 0.83 as far as the market.
-
-WHAT IT COSTS    quarterly reset ; one-way turnover 12.5%/yr ; drag 1.2 bp/yr at an ASSUMED 10 bp round trip
-                 why quarterly: &quot;never&quot; carried MSFT to 40%, twice the cap ; monthly bought nothing extra on this window
-                 holdings drift between resets, MSFT touched 24% ; not priced: tax
-
-HOW BAD          worst month 2020-02 −8.5% ; max drawdown −21.3% (2021-12 → 2022-09, recovered in 7 months)
-                 55 of 120 months below a previous high ; monthly data, intramonth lows not seen
-
-CONVENTION       every statistic above is on the monthly-reset series, the Week 4 convention, whatever the policy line says
-
-WHAT IT CANNOT   ten years, one regime mostly rising, eight survivors ; positions and liquidity not modelled ;
-SEE              every number above is on the window the weights were chosen on ; a past drawdown is a record, not a limit
+<h2>Part 4 — The discount rate, and how little you know it</h2>
+<p>The cost of equity is built, not typed. The standard construction:</p>
+<blockquote><strong>cost of equity = risk-free rate + beta × equity risk premium</strong></blockquote>
+<p>Beta is the one you compute. It is Week 3's regression, on the company instead of your portfolio: sixty monthly returns against the market's, and the slope is the beta.</p>
+<p>For ABG, over sixty months to August 2026:</p>
+<pre><code>beta                0.71
+standard error      0.28
+R²                  0.10
+ABG monthly vol    10.3%      market 4.6%      correlation 0.32
 </code></pre>
-<p>Every line is a number and the sentence it supports. Nothing on the page is a claim without its evidence next to it, and the in-sample warnings are on the page, not in a footnote.</p>
+<p>Read those four numbers together, because they are the honest part. A standard error of 0.28 on an estimate of 0.71 puts the true beta somewhere between about 0.2 and 1.3 at conventional confidence. <strong>Carry that in your head every time someone quotes a beta to two decimal places.</strong> The R² of 0.10 says the market explains a tenth of ABG's month-to-month movement; nine tenths is the company.</p>
+<p>Two standard adjustments, both defensible, neither required:</p>
+<ul>
+<li><strong>Blume</strong>, which pulls the estimate toward one because betas historically drift that way: two-thirds of your estimate plus one-third of 1.0, giving 0.81 for ABG.</li>
+<li><strong>Bottom-up</strong>, which averages the betas of comparable listed companies, strips out each one's leverage, and re-levers the average at your company's own debt-to-equity. For ABG that route gives 1.03.</li>
+</ul>
+<p>With a 5% risk-free rate and a 4.42% equity premium, those three betas give costs of equity of 8.15%, 8.57% and 9.54%. <strong>The base case's 10% quietly assumes a beta of 1.13</strong>, which is higher than any of them, and saying so out loud is the difference between an assumption and a mistake.</p>
+<blockquote><strong>The rule this gives you.</strong> The discount rate always wants the levered beta, at the leverage you are actually forecasting. And whatever you treat as debt on one side, treat as debt on the other, or the rate contradicts the cash flow.</blockquote>
 <hr />
-<h2>Part 6 — What a professional dataset changes here</h2>
-<p>The factor series you regressed on are free, from Ken French's library, and they are the reference implementation. The professional version of this week is about history and breadth. A factor exposure estimated on 120 months has wide error bands; the same regression on the CRSP monthly file adds decades of observations, provided the names existed then and their exposures did not change, which is the question to ask before trusting the narrower band. And a size loading of −0.39 means something different if the universe it is measured in is eight survivors than if it is the whole market with delistings kept. Week 2's problem, once more, propagates into every coefficient.</p>
+<h2>Part 5 — The terminal value, and the hard boundary</h2>
+<p>Your forecast stops at year five. The company does not. Everything after the window is one number, and the standard way to get it assumes the cash flow grows forever at a constant rate:</p>
+<blockquote><strong>terminal value = the year after the window's cash flow ÷ (discount rate − growth rate)</strong></blockquote>
+<p>For ABG, with one wrinkle worth understanding. The base case repays 150 of debt a year, but <strong>only during the explicit window</strong> — a finite repayment programme, not a perpetual one. So the terminal year's cash flow gets that 150 back before growing:</p>
+<pre><code>terminal cash flow   (342.3 + 150.0) × 1.025        =     504.6
+terminal value       504.6 ÷ (0.10 − 0.025)         =   6,727.8
+discounted 5 years   6,727.8 × 0.6209               =   4,177.5
+</code></pre>
+<p><strong>The denominator is a hair-trigger.</strong> It is the gap between two numbers you chose, and as the growth rate approaches the discount rate the gap goes to zero and the value goes to infinity. On ABG, at a 10% discount rate:</p>
+<pre><code>g = 2.0%      $   276
+g = 5.0%      $   417
+g = 8.0%      $   979
+g = 9.5%      $ 3,788
+g = 9.9%      $18,772
+g = 10.0%     division by zero
+g = 11.0%     the arithmetic returns −$1,831 a share
+</code></pre>
+<p>That last line is the one to remember. At a growth rate above the discount rate the formula does not fail loudly; <strong>it returns a confident negative number for a profitable company.</strong> The arithmetic ran. The valuation is meaningless. This is why the model you build on Thursday refuses to run when the growth rate is not below the discount rate: a model that lets you type an impossible input will hand you an answer, and you will not notice.</p>
+<p><strong>What growth rate is defensible?</strong> Below the long-run growth rate of the economy the company operates in, because a company growing faster than its economy forever eventually becomes the economy. And a forecast whose growth never fades is a claim that competition never arrives — that claim needs evidence, not a spreadsheet.</p>
+<hr />
+<h2>Part 6 — "Most of the value is in the terminal value"</h2>
+<p>Add ABG up:</p>
+<pre><code>present value of the five explicit years      1,059.9
+present value of the terminal value           4,177.5
+equity value                                  5,237.3
+÷ 17,951,349 shares                         = $291.75 a share
+terminal value as a share of the total           79.8%
+</code></pre>
+<p>Nearly eighty percent of the answer is the number after the forecast stops. You will hear that called normal for a going concern, and you should be suspicious of that reassurance, because it is too loose to be useful.</p>
+<p>Here is the part that is rarely said. Run the <strong>same business, the same drivers, the same everything</strong>, and only lengthen the explicit forecast window:</p>
+<pre><code> 5-year window     $291.75 a share      terminal share  79.8%
+ 8-year window     $290.25              terminal share  68.3%
+10-year window     $288.94              terminal share  61.2%
+15-year window     $285.35              terminal share  46.0%
+</code></pre>
+<p>The value barely moves. The terminal share collapses. <strong>The terminal share is partly an artifact of how long your forecast is, not a measurement of where the value comes from.</strong> It is still worth reporting, because a reader needs to know how much of your number rests on a single growth assumption, but do not treat it as a property of the company, and do not congratulate yourself for lowering it by forecasting further.</p>
+<blockquote><strong>The rule this gives you.</strong> Report the terminal share every time, and report your forecast horizon beside it. Neither means anything alone.</blockquote>
+<hr />
+<h2>Part 7 — What actually moves the answer</h2>
+<p>One assumption at a time, the whole model rerun each time — never a sensitivity table added up. ABG, per share:</p>
+<pre><code>cost of equity   8.15%  8.57%   9%   9.42%  9.54%   10%    11%
+                 $398   $368   $342   $319   $313   $292   $254
+</code></pre>
+<p>The discount rate alone moves the value by about $145 a share, which is half of the answer, and none of those seven rates is unreasonable. <strong>That spread is your honest range before a single operating assumption is touched.</strong></p>
+<p>Then the operating drivers, each shocked alone:</p>
+<pre><code>gross margin  ±1 point        $256 .. $327     swing $71
+capital spending  ±50         $258 .. $325     swing $67
+revenue growth  ±1 point      $270 .. $314     swing $44
+</code></pre>
+<p>The market was pricing ABG near $183 in mid-September 2026. Your model says $292. <strong>That gap is the finding</strong>, and the useful response is not to defend the model but to ask what the market must be assuming: a cost of equity of 13.8%, or terminal growth of −3.3%, or a gross margin of 14.1%. Each of those is a sentence about the world, and deciding which you believe is the analysis.</p>
+<hr />
+<h2>Part 8 — The card</h2>
+<p>Five rows. This is the whole method, and it fits on an index card.</p>
+<table>
+<thead>
+<tr>
+<th>Step</th>
+<th>Formula</th>
+<th>ABG</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1 · forecast</td>
+<td>cash flow, each year of the window</td>
+<td>211.4 → 342.3 over five years</td>
+</tr>
+<tr>
+<td>2 · discount</td>
+<td>CF ÷ (1 + r)ᵗ</td>
+<td>sum = 1,059.9 at r = 10%</td>
+</tr>
+<tr>
+<td>3 · terminal</td>
+<td>final CF × (1 + g) ÷ (r − g)</td>
+<td>504.6 ÷ 0.075 = 6,727.8</td>
+</tr>
+<tr>
+<td>4 · add</td>
+<td>Σ present values + present value of terminal</td>
+<td>1,059.9 + 4,177.5 = 5,237.3</td>
+</tr>
+<tr>
+<td>5 · per share</td>
+<td>equity value ÷ shares</td>
+<td>5,237.3m ÷ 17,951,349 = <strong>$291.75</strong></td>
+</tr>
+</tbody>
+</table>
+<p>And the four things to say every time you report one: <strong>the range, not the point; the terminal share with the horizon beside it; the dated price you are comparing against; and the single assumption that would move it most.</strong></p>
 <hr />
 <h2>This week's sources</h2>
 <p>Register: <a href="../sources.html">the source register</a>.</p>
@@ -336,30 +259,25 @@ SEE              every number above is on the window the weights were chosen on 
 </thead>
 <tbody>
 <tr>
-<td>Your Week 4 portfolio and the Week 3 panel file (guaranteed lane)</td>
-<td>everything this week</td>
+<td>SEC EDGAR company-facts API (Gen 2)</td>
+<td>the filed lines and their vintage; free, no key</td>
 </tr>
 <tr>
-<td>Ken French Data Library, Fama/French 3 Factors monthly (guaranteed lane)</td>
-<td><code>SMB</code> and <code>HML</code>, the two columns you have not used yet</td>
+<td>The 10-K itself</td>
+<td>capital spending, guidance, the share count on the latest cover</td>
 </tr>
 <tr>
-<td>WRDS: CRSP monthly stock file and <code>ff.factors_monthly</code> (professional lane)</td>
-<td>longer history for the exposures and the drawdown record</td>
-</tr>
-<tr>
-<td>A cited transaction-cost figure</td>
-<td>pricing your policy</td>
+<td>Compustat on WRDS (Gen 1)</td>
+<td>the standardised view, for comparison</td>
 </tr>
 </tbody>
 </table>
-<p>Two sources, minimum, and where you have professional access, one of them is the professional source. Pending access is neither an excuse nor a penalty. Document the attempt and use a second free source instead. The attempt counts; the outcome never does.</p>
-<hr />
+<p><strong>A number without a source is not an input.</strong> Two sources, minimum, and where you have professional access one of them is the professional source. Pending access is neither an excuse nor a penalty: document the attempt and use the filing. The attempt counts; the outcome never does.</p>
 <h2>Before the lab — do these</h2>
 <ol>
-<li>Build your portfolio's monthly return series from the weights you saved in Week 4, weights fixed and reset each month, and check its annual mean and volatility look like what Week 4 reported.</li>
-<li>Run the three-factor regression on it. Write the market beta, the size and value loadings, and the R² on one line, and one sentence saying what the portfolio is a bet on.</li>
-<li>Decide your rebalancing frequency before you price it. Prework Part B is where it goes.</li>
+<li>Watch <strong>Video 3</strong> (27 minutes). Thursday builds what it builds, in the room.</li>
+<li>Have two capstone companies shortlisted and screened, with three years of numbers printed for each. Thursday's checkpoint locks them.</li>
+<li>Have your Week 3 regression code where you can find it. The cost of equity is a beta you compute, not a number you type.</li>
 </ol>
-<p>Next: Lab 5 reads your portfolio's label, prices the policy you chose, writes its worst month and drawdown with their dates, and puts all three on one page you could hand to a committee.</p>
+<p><strong>Next: Lab 5</strong> builds this model on ABG in the room on Thursday, with the checks that make it trustworthy, and locks the two companies you value next week.</p>
 </main></body></html>

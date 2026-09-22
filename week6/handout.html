@@ -28,13 +28,21 @@ hr { border:0; border-top:1px solid var(--rule); margin:2rem 0; }
 <div class='nav'><a href='../index.html'>MSF Financial Modeling</a></div>
 <h1>Week 6 — Handout</h1>
 <blockquote><strong>Register: TEACH.</strong> Narrative and worked examples. Graded steps in <code>lab.md</code>; conventions in <code>rules.md</code>.</blockquote>
-<p><strong>You arrive with:</strong> a portfolio and its hand-over sheet, with the in-sample warnings and the block on what it cannot see on the page, and five weeks of habits about where numbers come from.</p>
-<p>Now you value a single company. Everything narrows to one name and a small number of inputs — and every one of those inputs turns out to have a vintage.</p>
+<p><strong>You arrive with:</strong> two capstone companies locked and screened, a beta you computed yourself in Week 3, five weeks of habits about where numbers come from, and the four ABG videos watched.</p>
+<p>Now you value two companies and choose between them. Everything narrows to two names, six 10-Ks, and a small number of inputs, and every one of those inputs turns out to have a vintage and a label.</p>
+<p>This handout is the reference you keep open while you build. Both sessions this week are working sessions; there is no lecture to catch up on, because the teaching is here and in Videos 3 and 4.</p>
 <hr />
 <h2>Why this matters</h2>
-<p>Valuation is where analysts are hired and where they are caught out. Not because the models are hard — a DCF is arithmetic, and any AI will build you one in seconds — but because a valuation is only as good as the provenance of the numbers inside it, and almost nobody checks.</p>
-<p>The question that separates a junior from a professional is not "what is your target price." It is <strong>"where did that number come from, and as of when?"</strong></p>
-<p>This week you will find that a blue-chip company reported two different figures for the same fiscal year, that both are correct, and that whichever your data vendor gave you depends on when they pulled it.</p>
+<p>Valuation is where analysts are hired and where they are caught out. Not because the arithmetic is hard: a discounted cash flow is a dozen lines, and any AI will build you one in seconds. Because a valuation is only as good as the provenance of the numbers inside it and the honesty of the assumptions on top of them, and almost nobody checks either.</p>
+<p>The question that separates a junior from a professional is not "what is your target price." It is <strong>"where did that number come from, as of when, and what would have to be true for it to be wrong?"</strong> This week builds a model that can answer all three: every input dated, every assumption labelled, every check printed, and a range against a dated price rather than a point.</p>
+<hr />
+<h2>The paper</h2>
+<p>This week is anchored on <strong>Kaplan and Ruback (1995), "The Valuation of Cash Flow Forecasts: An Empirical Analysis", Journal of Finance 50(4), 1059–1093.</strong></p>
+<p>They took fifty-one leveraged transactions from 1983 to 1989 where the buyers' own cash-flow forecasts became public, discounted those forecasts, and compared the result with what was actually paid. The discounted values landed within about ten percent of the transaction values on average, with a wide spread around that average; valuations from comparable-company multiples did about as well, and the two together did better than either. That is the idea this week runs on: a DCF built from real forecasts lands in the neighbourhood, not on the point, and a multiple is the check you run beside it. The arithmetic of the paper is thirty years old and the method has moved on; the idea has not.</p>
+<p><strong>Read:</strong> the abstract and the introduction. The paper is on Wiley Online Library through Purdue Libraries. Start here: https://www.lib.purdue.edu → Databases → Wiley Online Library. DOI 10.1111/j.1540-6261.1995.tb04050.x.</p>
+<p><strong>Where the method went.</strong> Damodaran (2005), "Valuation Approaches and Metrics: A Survey of the Theory and Evidence", Foundations and Trends in Finance 1(8), 693–784, is the map of everything that followed: discounted cash flow in its variants, relative valuation, and what the evidence says about each. One line in the references; the survey is enough.</p>
+<p><strong>The theory, names only.</strong> The terminal value you will compute is the Gordon–Shapiro (1956) growing perpetuity; the reason a valuation does not depend on whether cash is paid out as dividends or buybacks is Miller and Modigliani (1961). You are not asked to read either.</p>
+<p><strong>The worked example.</strong> The DRIVER textbook has no valuation session; the four course videos are this week's worked example and this week's valuation core. Videos 1 and 2 are how ABG was identified as the target, the screen and the brief valuation. Videos 3 and 4 are the pro-forma, and they are the model you rebuild: <strong>Video 3</strong> builds the base case on Asbury Automotive Group and <strong>Video 4</strong> takes it apart. Every digit below is reproduced by <code>week6_worked.py</code>, which pulls ABG from the SEC and prints the tables; its full output is beside it so you can find the exact line where your own rebuild first diverges. Their digits are below; <code>week6_worked.py</code> reproduces the base-case arithmetic from the company-facts API and the video's cash-flow path.</p>
 <hr />
 <h2>Part 1 — What is Apple's FY2017 operating cash flow?</h2>
 <p>It sounds like a fact. Ask the SEC:</p>
@@ -53,15 +61,9 @@ for f in d[&quot;units&quot;][&quot;USD&quot;]:
 10-K filed 2018-11-05      64,225,000,000
 10-K filed 2019-10-31      64,225,000,000
 </code></pre>
-<p>The same fiscal period. The same company. The same line item. <strong>Two different numbers.</strong></p>
-<p>As first reported in the FY2017 annual report: <strong>$63.598 billion</strong>. As it appears in the FY2018 annual report a year later, shown as the prior-year comparative: <strong>$64.225 billion</strong>.</p>
-<p>A difference of <strong>$627 million</strong> — about 1% — on one of the most scrutinised financial statements in the world.</p>
+<p>The same fiscal period. The same company. The same line item. <strong>Two different numbers.</strong> As first reported: $63.598 billion. As it appears a year later, as the prior-year comparative: $64.225 billion. A difference of $627 million, about 1%, on one of the most scrutinised financial statements in the world.</p>
 <h3>Neither is an error</h3>
-<p>This is not a scandal and nobody did anything wrong. Figures get revised: accounting standards change and require retrospective restatement, classifications are refined, discontinued operations are reclassified, errors are corrected.</p>
-<p>What matters is that <strong>"Apple's FY2017 operating cash flow" is not a single fact.</strong> It is a fact <em>with a vintage</em>, and the number you get depends on which filing you read.</p>
-<p>Now ask the question that should be uncomfortable: your data vendor gave you one of these. Do you know which? Do you know when they pulled it? Would you be able to reproduce their figure in a year?</p>
-<hr />
-<h2>Part 2 — Three different things, routinely confused</h2>
+<p>Figures get revised: accounting standards change and require retrospective restatement, classifications are refined, discontinued operations are reclassified, errors are corrected. What matters is that <strong>"Apple's FY2017 operating cash flow" is not a single fact.</strong> It is a fact <em>with a vintage</em>, and the number you get depends on which filing you read. Your data vendor gave you one of these. Do you know which?</p>
 <table>
 <thead>
 <tr>
@@ -74,7 +76,7 @@ for f in d[&quot;units&quot;][&quot;USD&quot;]:
 <tr>
 <td><strong>As first reported</strong></td>
 <td>the figure in the original filing for that period</td>
-<td>understanding what the market saw at the time</td>
+<td>what the market saw at the time</td>
 </tr>
 <tr>
 <td><strong>As-reported (current)</strong></td>
@@ -88,29 +90,23 @@ for f in d[&quot;units&quot;][&quot;USD&quot;]:
 </tr>
 </tbody>
 </table>
-<p>Week 2 taught you that a fundamental has a knowability date. This week adds the second dimension: it also has a <strong>value that changes</strong>. A figure has both a date it became knowable and a date it was last revised, and a rigorous analysis states both.</p>
-<p>The practical consequence: a backtest that ranks companies on operating cash flow, using data pulled today, is ranking them on numbers that in many cases did not exist in that form at the time. The bias is subtle and it favours whichever companies were later revised upward.</p>
+<p>Week 2 taught you that a fundamental has a knowability date. This week adds the second dimension: it also has a value that changes. This week's model is a current-state analysis, so it uses each year's figure as first reported in that year's own 10-K and checks whether a later 10-K changed it. For ABG's last three fiscal years, none of the thirteen lines the model uses did (<code>week6_worked.py</code> Table 1). That is a finding, and it goes in the ledger.</p>
 <hr />
-<h2>Part 3 — The year that had fifty-three weeks</h2>
-<p>Apple does not use a calendar year. Its fiscal year ends on the last Saturday of September, so most years are exactly 52 weeks — and occasionally one has to be 53 to keep the calendar aligned.</p>
+<h2>Part 2 — The year that had fifty-three weeks</h2>
+<p>ABG reports on the calendar year: 365 days, 366 in a leap year, every period comparable, nothing to adjust. That is the exception, not the rule, and Apple is the case to remember. Apple's fiscal year ends on the last Saturday of September, so most years are exactly 52 weeks and occasionally one has to be 53 to keep the calendar aligned.</p>
 <pre><code>Apple annual periods, from the 10-K filings
 
-2017-10-01 -&gt; 2018-09-29    364 days = 52.00 weeks
-2018-09-30 -&gt; 2019-09-28    364 days = 52.00 weeks
-2019-09-29 -&gt; 2020-09-26    364 days = 52.00 weeks
 2020-09-27 -&gt; 2021-09-25    364 days = 52.00 weeks
 2021-09-26 -&gt; 2022-09-24    364 days = 52.00 weeks
 2022-09-25 -&gt; 2023-09-30    371 days = 53.00 weeks   &lt;-- an extra week
 2023-10-01 -&gt; 2024-09-28    364 days = 52.00 weeks
 2024-09-29 -&gt; 2025-09-27    364 days = 52.00 weeks
 </code></pre>
-<p><strong>FY2023 contained an extra week.</strong> Roughly 1.9% more selling days than the years either side of it.</p>
-<p>So when you compute FY2023 revenue growth over FY2022, part of that growth is a week. And when you compute FY2024 growth over FY2023, part of that <em>decline</em> is the same week going away. An analyst who reports either number without mentioning it has introduced a real distortion into a growth series, and it will look exactly like a business trend.</p>
-<p>52/53-week fiscal calendars are common — retailers use them almost universally. Companies with different fiscal year-ends cannot be compared quarter-to-quarter without alignment. Neither problem announces itself.</p>
-<blockquote><strong>The rule this gives you.</strong> Before comparing any two periods, check they are the same length and cover the same season. This takes thirty seconds and it is skipped constantly.</blockquote>
+<p><strong>FY2023 contained an extra week</strong>, roughly 1.9% more selling days than the years either side. FY2024 revenue growth over FY2023 was 2.0%; part of that low number is the week going away. FY2025 growth over FY2024 was 6.4% on two equal years. An analyst who extrapolates growth from a series containing a 53-week year has introduced a real distortion, and it looks exactly like a business trend. Check both of your companies for this before Tuesday; a 53-week year in either one changes its growth series.</p>
+<blockquote><strong>The rule this gives you.</strong> Before computing any growth rate, check the two periods are the same length. Thirty seconds, skipped constantly.</blockquote>
 <hr />
-<h2>Part 4 — Why two platforms give you different numbers</h2>
-<p>You now have enough to predict the answer. When Capital IQ, LSEG, Compustat, and the filings themselves disagree about one company's revenue, it is almost always one of these:</p>
+<h2>Part 3 — Why two sources give you different numbers</h2>
+<p>When Capital IQ, LSEG, Compustat, and the filings disagree about one company's capital spending, it is almost always one of these:</p>
 <table>
 <thead>
 <tr>
@@ -141,29 +137,165 @@ for f in d[&quot;units&quot;][&quot;USD&quot;]:
 </tr>
 </tbody>
 </table>
-<p><strong>Standardisation is the one students underestimate.</strong> Compustat does not simply copy the filings — it maps them onto a consistent schema so that thousands of companies can be compared. That mapping is the product, and it involves decisions. Two vendors making different reasonable decisions produce different numbers from identical filings, and neither is wrong.</p>
-<p>This is the professional-data point of the week, and it inverts a natural assumption. You might expect the expensive platform to be <em>more</em> faithful to the filing. Often it is deliberately less faithful, because comparability across companies is worth more than fidelity to any one of them. <strong>Knowing which you need is the skill.</strong></p>
+<p>The video's digits: ABG's 10-K cash-flow statement says capital spending was <strong>142, 308, 205</strong> million in fiscal 2023, 2024, 2025. A data provider's standardised capital-spending field for the same years read <strong>142, 146, 19</strong>. Same company, same years, same word. The provider's field is a defined subset of the filing's line; the filing's line is what the business actually spent. The company-facts API shows the gap from the other side: after fiscal 2023 the tag most tools read for ABG's capex is simply empty, and the only way to get the number is to read the cash-flow statement. <strong>Standardisation is the one students underestimate.</strong> The expensive platform is often deliberately less faithful to any one filing, because comparability across thousands of companies is worth more to its customers than fidelity to one. Knowing which you need is the skill; checking the field against the filing is the habit.</p>
+<p>Non-GAAP is the same lesson wearing management's clothes. Adjusted figures exclude what management considers unrepresentative, and sometimes that is the same "one-off" for six consecutive years. ABG's asset impairments were 117, 150, 141 million in the last three years; the video treats them as a recurring non-cash charge, 120 a year, and says so. ABG's effective tax rate was 24.8, 25.2, 25.7%; the video forecasts 25.5% and says why. State which basis you used, every time.</p>
 <hr />
-<h2>Part 5 — GAAP, non-GAAP, and the adjustment nobody defines</h2>
-<p>Most companies report both statutory (GAAP) figures and their own adjusted figures. Adjusted numbers exclude things management considers unrepresentative — restructuring, acquisition costs, share-based compensation, impairments.</p>
-<p>Sometimes that is genuinely informative. Sometimes it is the same "one-off" charge appearing for six consecutive years.</p>
-<p>Three rules that will keep you out of trouble:</p>
-<ol>
-<li><strong>Non-GAAP is not standardised.</strong> Two companies' "adjusted EBITDA" are not comparable</li>
-</ol>
-<p>unless you check both reconciliations.</p>
-<ol>
-<li><strong>The reconciliation is required and is published.</strong> Read it. It tells you exactly what was</li>
-</ol>
-<p>excluded.</p>
-<ol>
-<li><strong>A recurring adjustment is not an adjustment.</strong> If it appears every year, it is a cost of</li>
-</ol>
-<p>doing business.</p>
-<p>State which basis you used. A valuation built on adjusted figures and presented without saying so is misleading even when every number in it is accurate.</p>
+<h2>Part 4 — Seven lines from three 10-Ks</h2>
+<p>The pro-forma starts from very little. For ABG, seven lines, three fiscal years, as first reported in each year's own 10-K, with the accession numbers on the page. The table is <code>week6_worked.py</code> Table 1, $ millions:</p>
+<pre><code>                        FY2023     FY2024     FY2025   filed
+revenue               14,802.7   17,188.6   17,999.0   2024-02-29, 2025-02-26, 2026-02-20
+gross profit           2,755.8    2,948.6    3,071.7
+SG&amp;A                   1,617.4    1,888.5    1,987.6
+net income               602.5      430.3      492.0
+inventory              1,768.3    1,978.8    2,135.8
+PP&amp;E, net              2,315.7    2,550.7    3,070.4
+shareholders' equity   3,244.1    3,502.1    3,891.9
+accessions: FY2023 0001144980-24-000076, FY2024 0001144980-25-000077, FY2025 0001144980-26-000051
+</code></pre>
+<p>From those lines, the ratios that become assumptions: gross margin 18.6, 17.2, 17.1%; SG&amp;A as a share of gross profit 58.7, 64.0, 64.7% (the ratio dealers actually manage); tax rate 24.8, 25.2, 25.7%; inventory days 54, 51, 52; depreciation about 3% of opening PP&amp;E. And one that is not what it looks like: reported revenue growth of 16% and 4.7% is mostly two acquisitions; same-store growth in the 10-K is about 1.2%.</p>
+<p><strong>Every assumption gets one of three labels.</strong> <em>History</em>: the ratio the filings show. <em>Guidance</em>: what management has said. <em>Judgment</em>: yours, and labelled as such. The video's model has nineteen assumptions: six from history, one from guidance, twelve judgments, plus one fact, the share count. The label is not decoration. It tells the reader which rows to argue with.</p>
+<table>
+<thead>
+<tr>
+<th>Driver</th>
+<th>Value</th>
+<th>Label</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Organic revenue growth</td>
+<td>1.8% a year</td>
+<td>judgment (same-store history 1.2%)</td>
+</tr>
+<tr>
+<td>Gross margin</td>
+<td>17.05%</td>
+<td>history (last two years, not the 2022 peak)</td>
+</tr>
+<tr>
+<td>SG&amp;A / gross profit</td>
+<td>66.5% → 64.5% over five years</td>
+<td>history, then judgment on the path</td>
+</tr>
+<tr>
+<td>Capital spending</td>
+<td>$250M a year</td>
+<td>guidance (first-half 2026 ran about 339 annualised)</td>
+</tr>
+<tr>
+<td>Asset impairments</td>
+<td>$120M a year, non-cash</td>
+<td>judgment (117, 150, 141 history)</td>
+</tr>
+<tr>
+<td>Tax rate</td>
+<td>25.5%</td>
+<td>history</td>
+</tr>
+<tr>
+<td>Cost of equity</td>
+<td>10%</td>
+<td>judgment; Part 6 tests it</td>
+</tr>
+<tr>
+<td>Terminal growth</td>
+<td>2.5%</td>
+<td>judgment</td>
+</tr>
+<tr>
+<td>Shares</td>
+<td>17,951,349</td>
+<td>fact: 2026-06-30 10-Q balance sheet, issued less treasury</td>
+</tr>
+</tbody>
+</table>
 <hr />
-<h2>Part 6 — The source ledger</h2>
-<p>Everything above resolves into one artefact: for every input in your valuation, you record where it came from and as of when.</p>
+<h2>Part 5 — The pro-forma, line by line, cash last</h2>
+<p>A pro-forma is the three statements projected forward from the drivers, in the order the arithmetic allows. Revenue from growth; gross profit from the margin; SG&amp;A from its ratio; depreciation from opening PP&E; interest from opening debt; tax from pretax income; net income. Then the balance sheet: inventory from days, PP&amp;E from capex less depreciation, debt from the paydown schedule, equity from net income less buybacks. <strong>Cash is computed last</strong>, from the cash-flow statement: opening cash plus every flow. It is never a plug. If cash would fall below the floor you set, a revolver line shows the draw, capped at what the company could actually borrow.</p>
+<p>ABG's first projected year, $ millions, from Video 3:</p>
+<pre><code>revenue        18,323     (17,999 x 1.018)
+gross profit    3,124     (17.05%)
+SG&amp;A            2,078     (66.5% of gross profit)
+EBIT              844     (after depreciation and the 120 impairment)
+interest          289     (floor plan 95 + term debt 194)
+pretax            555
+net income        414     (25.5% tax)
+cash, year end  101.8     computed last, above the 25 floor; revolver 0
+FCFE              211     free cash flow to equity, after interest, capex and the 150 paydown
+</code></pre>
+<p><strong>The rule: no balance, no valuation.</strong> Four items, and the video breaks the model on purpose to show each one working:</p>
+<ol>
+<li>Every projected year, assets minus liabilities minus equity equals zero, <strong>printed, not assumed</strong>.</li>
+<li>Cash on the balance sheet equals opening cash plus the cash-flow statement's net change. Unlink it and the residual shows immediately (the video's break: −61.4).</li>
+<li>Cash stays at or above the floor, or the revolver line shows the draw. Remove ABG's floor-plan financing and the revolver hits its 850 cap with cash at −1.1 billion, and the balance sheet still balances, which is the point: balancing is necessary, not sufficient.</li>
+<li>The check block sits under every projection you hand in, and <strong>the valuation cell refuses to run without it</strong>.</li>
+</ol>
+<p>Five years out, the video's FCFE path is 211, 255, 300, 321, 342. Net income is back to the FY2025 level by 2028. The revolver stays at zero in the base case.</p>
+<hr />
+<h2>Part 6 — The DCF, and where the value sits</h2>
+<p>Discount the equity cash flows at the cost of equity; add a terminal value for everything after year five; divide by the shares. <code>week6_worked.py</code> Table 3, $ millions:</p>
+<pre><code>PV of FY2026-30 FCFE at 10%             1,060
+terminal cash flow  (342 + 150) x 1.025   504     the 150 paydown is finite; the terminal year gets it back
+terminal value      504 / (0.10 - 0.025) 6,724
+discounted five years                    4,175
+equity value                             5,235     /  17,951,349 shares  =  $291.60
+video, with its own rounding: 1,060 + 4,177 = 5,237  -&gt;  $291.75     terminal share 80%
+market marker in the video: about $183, mid-September 2026 — a dated price, not a model output
+</code></pre>
+<p>Two things to say plainly. <strong>Eighty percent of the value is the terminal value</strong>, which rests on a growth rate somebody chose. And the model refuses to run if the terminal growth is not below the discount rate: <code>equity_dcf(FCFE, 0.10, 0.10)</code> raises, by design. A DCF that lets you type g = r has no opinion about anything.</p>
+<p>The terminal value is the Gordon–Shapiro perpetuity, cash flow next year over the rate spread. It is also where the conventions hide. Hold debt flat after year five, as the base case does, and you get $292. Let debt grow with the firm and it is $324. Let the perpetuity fund a third of its growth with debt, Damodaran's convention, $316. Growth of zero, $229. Growth of minus one percent, $212. Drop the tax shield on the impairment, $271. None of those is wrong; each is a stated convention, and a reader who cannot see which one you used cannot read your number.</p>
+<hr />
+<h2>Part 7 — What moves it</h2>
+<p><strong>The discount rate first</strong>, because the base case's 10% was a judgment. Week 3's regression on sixty monthly returns gives ABG a beta of 0.71 with a standard error of 0.28 and an R² of 0.10: a noisy estimate of a low number. Blume-adjust it toward one and it is 0.81. Build it bottom-up from four listed dealers, unlever, relever at ABG's own debt-to-equity of 1.03, and it is 1.03. With a 5% risk-free rate and a 4.42% equity premium, those betas give costs of equity of 8.15%, 8.57% and 9.54%; a beta of one gives 9.42%; and the 10% the base case used quietly assumed a beta of 1.13. Seven rates, one model, <code>week6_worked.py</code> Table 4:</p>
+<pre><code>r     8.15%   8.57%    9%    9.42%   9.54%   10%    11%
+$/sh   398     368    342     319     313    292    254      spread about $145 a share
+</code></pre>
+<p>The discount rate alone moves the value by half of itself. That is the honest range before a single operating assumption is touched.</p>
+<p><strong>Then the operating assumptions, one at a time.</strong> Video 4's tornado shocks nine of them. Gross margin plus or minus one point: $256 to $327, a swing of $71, the biggest bar. Capital spending plus or minus 50 million: 67. Organic growth plus or minus one point: 44. The SG&amp;A path: 34. Inventory days plus or minus five: 10. The tornado is how you find the assumption your paragraph in prework Part D should have named.</p>
+<p><strong>Then the cases, rerun and never added.</strong> Bear, with the cost ratio stuck at 68%: $236. Bull, 63%: $321. Recession, four drivers moved together: $210. If you had added the four single shocks from the tornado you would have written $207. The model says 210, because the drivers interact through the balance sheet and the revolver, which the recession case is the only one to draw. <strong>Rerun the model. Never add sensitivities.</strong></p>
+<p><strong>Then the price.</strong> Solve for what the market's $183 implies, one assumption at a time, holding the rest at base: a cost of equity of 13.8%, which is a beta near two; terminal growth of minus 3.3%; a gross margin of 14.1%, below anything in the history; capital spending of $407M a year. Each of those is a sentence about the world. Writing them is the analysis; the grid is the arithmetic.</p>
+<blockquote><strong>The rule this gives you.</strong> A sensitivity table is not a finding until it is translated into statements about the business: what would have to be true for the low end, and for the high end. Those two sentences are what a reader needs and what the lab collects.</blockquote>
+<hr />
+<h2>Part 8 — The four checks</h2>
+<p>Every model in this course carries four kinds of check, one of each at least, and the exercise page names them.</p>
+<p><strong>The known-answer check, defined once for every company.</strong> ABG has a published answer, $291.75, because the instructor built it. Your companies do not. So the known answer for your own model is the one every filer supplies: <strong>the model must reproduce the last actual fiscal year from the filing.</strong> Before you project anything, run your own pipeline on the year that already happened and print the comparison: revenue, gross profit, operating income and net income against the filed figures, and the share count and net debt against the balance sheet. If your rebuilt FY2025 does not reproduce the filed FY2025, every projected year is wrong in the same way and you have no business discounting it. This check is not fakeable by an agent that never opened the filing, and it is the first thing read in your submission.</p>
+<table>
+<thead>
+<tr>
+<th>Check</th>
+<th>What it asks</th>
+<th>The video's instance, on ABG</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Known answer</strong></td>
+<td>your pipeline reproduces the last filed year, to the dollar</td>
+<td>FY2025 gross profit less SG&amp;A less depreciation and impairment gives 860.7 against the filed operating income of 860.6</td>
+</tr>
+<tr>
+<td><strong>Reasonableness</strong></td>
+<td>an implied number is compared with the company's own history or a peer</td>
+<td>$292 on FY2025 earnings of 492 million over 17.95 million shares is a multiple you can put beside the dealers'</td>
+</tr>
+<tr>
+<td><strong>Edge case</strong></td>
+<td>the model fails loudly on an impossible input</td>
+<td><code>g = r</code> raises; a negative gross margin should too</td>
+</tr>
+<tr>
+<td><strong>AI risk</strong></td>
+<td>one thing an agent produced, verified against a source, and what changed</td>
+<td>the standardised capex field, 146 and 19 against the 10-K's 308 and 205; the model uses the filing</td>
+</tr>
+</tbody>
+</table>
+<p>The AI-risk check is the one students skip and the one the syllabus grades. Your agent will produce a share count, a tax rate, a capital-spending number. Pick one, open the filing, and write down whether it was right.</p>
+<p><strong>One more, and it is specific to you.</strong> Your company is not a car dealer. ABG's model carries a floor-plan line because dealers finance their inventory that way, and a pooled impairment because franchise rights get written down. Name <strong>one driver that exists in your company and not in ABG's</strong>, or one of ABG's that does not apply to yours, and say what you did about it. A model that carries ABG's nineteen rows unchanged under a different ticker has not been built; it has been renamed.</p>
+<hr />
+<h2>Part 9 — The assumptions ledger</h2>
+<p>Everything above resolves into one artefact: for every input, where it came from, as of when, and how much you trust it.</p>
 <table>
 <thead>
 <tr>
@@ -178,48 +310,69 @@ for f in d[&quot;units&quot;][&quot;USD&quot;]:
 </tr>
 <tr>
 <td>Value</td>
-<td>the number you used</td>
+<td>the number you used, with its unit</td>
 </tr>
 <tr>
-<td>Source</td>
-<td>filing, platform, or your own calculation</td>
+<td>Label</td>
+<td>history, guidance, judgment, or fact</td>
 </tr>
 <tr>
-<td>As-of date</td>
-<td>the date the figure was published or pulled</td>
+<td>Source and date</td>
+<td>the filing and its accession, or the statement of guidance, or "mine"</td>
 </tr>
 <tr>
-<td>Basis</td>
-<td>GAAP or non-GAAP; fiscal or calendar</td>
+<td>Rationale</td>
+<td>one sentence</td>
 </tr>
 <tr>
-<td>Note</td>
-<td>anything that would surprise a reader</td>
+<td>Confidence</td>
+<td>high, medium, low, with the tornado bar that justifies it</td>
 </tr>
 </tbody>
 </table>
-<p><strong>The shape, not your answer</strong> — one filled row:</p>
-<blockquote><strong>Input:</strong> FY2017 operating cash flow <strong>Value:</strong> $63.598bn <strong>Source:</strong> Apple 10-K for FY2017, filed 2017-11-03, via SEC EDGAR XBRL <strong>As-of date:</strong> as first reported, 2017-11-03 <strong>Basis:</strong> GAAP, fiscal year (52/53-week, ends last Saturday of September) <strong>Note:</strong> Revised to $64.225bn in the FY2018 10-K. I use the as-first-reported figure because this analysis reconstructs what was knowable at the time. A current-state analysis should use $64.225bn instead.</blockquote>
-<p>That note is the difference between an analyst and a spreadsheet. It does not just record the number — it records that there is a choice, which one was made, and when the other would be right.</p>
-<blockquote><strong>The rule this gives you.</strong> A valuation is a chain of sourced inputs. Any link you cannot date is a link you cannot defend, and it is the one you will be asked about.</blockquote>
+<p><strong>The shape, not your answer</strong>, one filled row:</p>
+<blockquote><strong>Input:</strong> gross margin, FY2026 to FY2030 <strong>Value:</strong> 17.05% <strong>Label:</strong> history <strong>Source and date:</strong> 18.6, 17.2, 17.1% in the FY2023 to FY2025 10-Ks, accessions above; FY2025 10-K filed 2026-02-20 <strong>Rationale:</strong> the last two years, not the 2022 peak, which was a pandemic pricing effect <strong>Confidence:</strong> medium; the tornado's biggest bar, plus or minus one point is plus or minus $35 a share</p>
+<p><strong>The rule this gives you.</strong> A valuation is a chain of labelled inputs. Any link you cannot date is a link you cannot defend, and it is the one you will be asked about.</blockquote>
 <hr />
-<h2>Part 7 — The model is the easy part</h2>
-<p>You can build a DCF in twenty minutes and AI can build one in twenty seconds. That is not where the value is, and it is not where you will be tested.</p>
-<p>Where valuations actually go wrong:</p>
-<ul>
-<li>The terminal value, which is usually most of the answer and rests on a growth rate somebody</li>
-</ul>
-<p>chose</p>
-<ul>
-<li>A discount rate assembled from components each carrying their own estimation error — and you</li>
-</ul>
-<p>have now spent a week on what estimation error does</p>
-<ul>
-<li>Growth assumptions extrapolated from a series containing a 53-week year</li>
-<li>Comparables selected, consciously or not, to support a conclusion already reached</li>
-<li>Inputs of unknown vintage</li>
-</ul>
-<p>Notice that only one of those is arithmetic. <strong>Spend your time on the inputs and the assumptions, because that is where the answer actually comes from</strong> — and be honest about how wide the range is. A single point estimate presented without a range is a claim to precision you do not have.</p>
+<h2>Part 10 — Choosing between two companies</h2>
+<p>Everything to here produces a range for one company. The capstone asks for something different and harder: <strong>which of your two gets the capital, under what conditions, and what would flip it.</strong> That is not a plotting exercise, and it is where most of the judgment marks live.</p>
+<h3>Both ranges on one exhibit</h3>
+<p>One picture, both companies, each range against its own dated market price. The moment you draw it you will find the problem: the ranges overlap. They almost always do. A range of $240 to $330 beside a range of $95 to $140 tells you nothing until both are expressed against what the market is charging.</p>
+<p>So express the decision in the only unit that compares: <strong>the gap between your range and the dated price</strong>, as a percentage, for each company. That is the number a committee acts on.</p>
+<blockquote><strong>The comparison is only honest if both models were built the same way.</strong> The same horizon, the same convention on the terminal value, and discount rates assembled from the same components with only the beta and the leverage differing. Two companies valued with two different methods cannot be ranked; you would be measuring your method, not the businesses.</blockquote>
+<h3>The flip point</h3>
+<p>A recommendation with no flip point is an opinion. Find the single assumption that, moved alone, reverses your ranking, and report <strong>the value at which it reverses</strong>.</p>
+<p><strong>The shape, not your answer:</strong> "We recommend A over B. The ranking turns on A's gross margin, which we hold at 17.05%. At 15.9% the two cases meet, and below that B ranks higher. A's margin has not been below 16.4% in ten years, which is why we hold the recommendation, and it is the number we would watch."</p>
+<p>That last sentence is the whole skill. The flip point cannot be produced by an agent that has not run your model, and it is the graded core of Thursday.</p>
+<h3>Triggers</h3>
+<p>A trigger is not "if the market changes." A trigger has three parts, and all three are required:</p>
+<table>
+<thead>
+<tr>
+<th>Part</th>
+<th>Means</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Observable</strong></td>
+<td>something published, that you could actually look up</td>
+<td>same-store gross margin in the next 10-Q</td>
+</tr>
+<tr>
+<td><strong>Threshold</strong></td>
+<td>a number, crossed in a stated direction</td>
+<td>below 16.4%</td>
+</tr>
+<tr>
+<td><strong>Review date</strong></td>
+<td>when you will look</td>
+<td>the Q1 filing, late April</td>
+</tr>
+</tbody>
+</table>
+<p>Two triggers, one per company, each written that way. "Monitor margins" is not a trigger. "If same-store gross margin prints below 16.4% in the Q1 10-Q, we re-rank" is.</p>
 <hr />
 <h2>This week's sources</h2>
 <p>Register: <a href="../sources.html">the source register</a>.</p>
@@ -232,32 +385,25 @@ for f in d[&quot;units&quot;][&quot;USD&quot;]:
 </thead>
 <tbody>
 <tr>
-<td>SEC EDGAR XBRL company-concept (Gen 2)</td>
-<td>revisions, vintage, fiscal calendars</td>
+<td>SEC EDGAR company-facts API (Gen 2)</td>
+<td>the filed lines, their vintage, the fiscal calendar; free, no key</td>
 </tr>
 <tr>
-<td>Financial Datasets (Gen 2)</td>
-<td>fundamentals, with a documented API</td>
+<td>The 10-K itself (Gen 2)</td>
+<td>capital spending, guidance, the share count on the latest cover</td>
 </tr>
 <tr>
-<td>LSEG Workspace / Capital IQ (Gen 1)</td>
-<td>the standardised view, for comparison</td>
+<td>Compustat on WRDS (Gen 1)</td>
+<td>the standardised view, for the comparison the AI-risk check needs</td>
 </tr>
 </tbody>
 </table>
-<p><strong>A number without a source is not an input.</strong> Anything can produce a plausible figure — a spreadsheet, a summary, a half-remembered fact, a model. Plausible is cheap.</p>
-<p>What makes a figure usable in a valuation is that you can name the filing it came from and the date it was published, and that someone else could retrieve the same figure from the same place. Everything in your ledger meets that standard or it is marked as not meeting it.</p>
-<hr />
-<p><strong>Two sources, minimum — and where you have professional access, one of them is the professional source.</strong> This week that is <strong>Compustat, beside SEC EDGAR as-filed — and IBES for any forward growth</strong>, for standardisation is a choice, not a fact, and no filing contains a forward estimate.</p>
-<p>Pending access is neither an excuse nor a penalty. Document the attempt — source, route tried, date, barrier, and why that source would have been independent — and use a second free source instead. <strong>The attempt counts; the outcome never does.</strong></p>
+<p><strong>A number without a source is not an input.</strong> Two sources, minimum, and where you have professional access, one of them is the professional source. This week that is <strong>Compustat beside SEC EDGAR as filed</strong>, because standardisation is a choice, not a fact, and the difference between the two is the AI-risk check waiting to be written. Pending access is neither an excuse nor a penalty. Document the attempt, source, route tried, date, barrier, and why that source would have been independent, and use the filing. <strong>The attempt counts; the outcome never does.</strong></p>
 <h2>Before the lab — do these</h2>
 <ol>
-<li>Run the Apple restatement query yourself, then run it on <strong>your</strong> company for one line item.</li>
+<li>Have the notebook from prework Part D open: ABG's calendar and its lines printed from the API.</li>
+<li>Have your Week 3 regression code to hand. Thursday tests the video's 10% with ABG's beta, computed the way you computed your panel's.</li>
+<li>Reread your Part E paragraph. Thursday's tornado will tell you whether you named the right assumption.</li>
 </ol>
-<p>Find out whether your company has revised anything.</p>
-<ol>
-<li>Check your company's fiscal calendar. Is it a calendar year? Are any recent years 53 weeks?</li>
-<li>Have your Week 5 limitations section open. It is about to be extended.</li>
-</ol>
-<p><strong>Next: Lab 6</strong> values your company with every input dated and sourced, finds where two sources disagree and says why, and reports a range rather than a number.</p>
+<p><strong>Next: Lab 6</strong> rebuilds the videos' model on ABG in the room, every number a known answer: Tuesday the filed lines, the calendar and the nineteen-row ledger; Thursday the pro-forma that balances, the DCF that refuses to run when the terminal growth is wrong, the sensitivity in sentences, and the four checks.</p>
 </main></body></html>

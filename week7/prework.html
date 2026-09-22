@@ -27,9 +27,10 @@ hr { border:0; border-top:1px solid var(--rule); margin:2rem 0; }
 <body><main>
 <div class='nav'><a href='../index.html'>MSF Financial Modeling</a></div>
 <h1>Week 7 — Prework</h1>
-<blockquote><strong>Register: TEACH.</strong> The bridge from six weeks of artefacts to one deliverable.</blockquote>
-<p><strong>You arrive with:</strong> everything you built. This week assembles it.</p>
-<p><strong>Honest time budget: about 2 hours.</strong> More than usual, deliberately — the assembly is the work, and doing it before the session makes the session useful.</p>
+<blockquote><strong>Register: TEACH.</strong> The bridge from two working models to a defence you can give in four minutes.</blockquote>
+<p><strong>You arrive with:</strong> two companies valued to the same standard, one exhibit, a flip point, two triggers, and an Edition A page written before any of it.</p>
+<p><strong>This week you build nothing.</strong> Both sessions are defences, in the room, in front of the class. What you bring is finished; what you do here is stand behind it and answer for it.</p>
+<p><strong>Honest time budget: about three hours</strong>, and none of it is modelling.</p>
 <table>
 <thead>
 <tr>
@@ -41,63 +42,93 @@ hr { border:0; border-top:1px solid var(--rule); margin:2rem 0; }
 <tbody>
 <tr>
 <td>A</td>
-<td>Gather every artefact into one place</td>
-<td>30 min</td>
+<td>Finish company B to company A's depth</td>
+<td>90 min</td>
 </tr>
 <tr>
 <td>B</td>
-<td>Run everything on a fresh kernel</td>
+<td>Cut the defence to four minutes, out loud, timed</td>
 <td>45 min</td>
 </tr>
 <tr>
 <td>C</td>
-<td>Identify your load-bearing assumption</td>
+<td>Write your discussant's question for the other cohort</td>
 <td>20 min</td>
 </tr>
 <tr>
 <td>D</td>
-<td>Draft the finding paragraph</td>
+<td>Check what your numbers say against each other</td>
 <td>25 min</td>
 </tr>
 </tbody>
 </table>
 <hr />
-<h2>Part A — Gather</h2>
-<p>One directory. Everything from Weeks 1 through 6:</p>
+<h2>Part A — Both companies, same depth</h2>
+<p>The capstone is comparative, and a comparison is only as good as its weaker half. Company A got Exercise 4's attention. Company B needs the same: the last filed year reproduced, the full driver set labelled, the scenarios, the sensitivity, the honest range against a dated price.</p>
+<p><strong>The test:</strong> could a reader tell which company you did first? If yes, B is not finished.</p>
+<h2>Part B — Four minutes, out loud, timed</h2>
+<p>Four minutes is about 550 spoken words. It is far shorter than it sounds, and the most common failure in this room will be a student still describing their company at the three-minute mark.</p>
+<p>Cut to this, and cut everything else:</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>The pair and the decision</td>
+<td>which gets the capital, in one sentence</td>
+<td>20 sec</td>
+</tr>
+<tr>
+<td>One exhibit</td>
+<td>both ranges against both dated prices, and the gap for each as a percentage</td>
+<td>60 sec</td>
+</tr>
+<tr>
+<td>The flip point</td>
+<td>the assumption that reverses the ranking, <strong>the value at which it reverses</strong>, and whether that value is inside the company's own history</td>
+<td>60 sec</td>
+</tr>
+<tr>
+<td>Two triggers</td>
+<td>observable, threshold, review date, one per company</td>
+<td>30 sec</td>
+</tr>
+<tr>
+<td>One check that caught something</td>
+<td>what you believed, what the filing said, what you changed</td>
+<td>30 sec</td>
+</tr>
+<tr>
+<td>Buffer</td>
+<td></td>
+<td>40 sec</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Banned, and it will be stopped:</strong> company background, a tour of your methodology, "I pulled the data from EDGAR", a slide of your code, an apology for what you did not finish.</p>
+<p><strong>One slide.</strong> The exhibit. Nothing else needs projecting, and a deck costs you the time you need.</p>
+<p><strong>Time it out loud, twice.</strong> Reading it in your head runs about 30% fast.</p>
+<h2>Part C — Your discussant question</h2>
+<p>You attend both sessions. On the day you are not presenting you are a <strong>graded discussant</strong> for one assigned classmate in the other cohort.</p>
+<p>Before your discussant day, submit one written question for the person you are assigned. A good question is answerable only by someone who ran their own model:</p>
 <ul>
-<li><code>security_master.csv</code> and <code>source_log.md</code></li>
-<li>your panel and <code>data_quality_issues.md</code></li>
-<li>your conventions statement and metrics</li>
-<li>your portfolio weights and constraints</li>
-<li>your risk report and limitations section</li>
-<li>your valuation and source ledger</li>
-<li>every notebook</li>
+<li><strong>Weak:</strong> "How did you choose your discount rate?"</li>
+<li><strong>Strong:</strong> "Your flip point is a gross margin of 15.9%. Your low case already runs a 16.2% margin. Why does the low case not already flip the ranking?"</li>
 </ul>
-<p><strong>If something is missing, find out now.</strong> Week 7 assembles; it does not rebuild. A missing artefact is a missing section of your deliverable.</p>
-<h2>Part B — Run everything, fresh kernel, in order</h2>
-<p>This will take longer than you expect and things will break. That is the point of doing it now rather than the night before the deadline.</p>
-<p>Record for each failure: what broke, why, and whether you can fix it.</p>
-<p>Common causes, in rough order of frequency:</p>
-<ul>
-<li>a file path that only existed on the day you wrote it</li>
-<li>a variable defined in a cell you later deleted</li>
-<li>a data pull that returns something different now than it did then</li>
-<li>a library behaviour that changed</li>
-</ul>
-<p>The third one is worth pausing on. If a data source returns different values now than it did in Week 2, <strong>that is a finding</strong>, and it belongs in your deliverable — you have direct evidence of the vintage problem you were taught, in your own work.</p>
-<h2>Part C — Identify your load-bearing assumption</h2>
-<p>Across your whole analysis, which single assumption, if wrong, most changes your conclusion?</p>
-<p>Write it down along with:</p>
-<ul>
-<li>why you made it</li>
-<li>what evidence supports it</li>
-<li>how strong that evidence actually is</li>
-<li>what would have to be true for it to be wrong</li>
-</ul>
-<p>You will defend this one on video with a data point you have not seen. Choosing it carefully now is worth more than rehearsing later.</p>
-<p><strong>Choose the real one.</strong> There is a temptation to nominate an assumption you feel comfortable defending. The grader will be able to tell whether it is actually load-bearing, and defending a minor assumption well scores worse than defending the real one imperfectly.</p>
-<h2>Part D — Draft the finding paragraph</h2>
-<p>Write the opening paragraph of your deliverable: your conclusion, its range, and your confidence in it. One paragraph.</p>
-<p>Bring it. One of these will be read cold by the room in the session, and every question the room asks is a defect you get to fix before submission.</p>
-<p><strong>Bring to the session:</strong> everything gathered, your fresh-kernel failure list, your load-bearing assumption with its evidence, and the finding paragraph.</p>
+<p>The strong one names their number and finds the tension between two of them. Read their exhibit and find yours.</p>
+<h2>Part D — Do your own numbers agree with each other?</h2>
+<p>An hour spent here will save your defence. The room will find these, and so will the grader.</p>
+<ol>
+<li>Does the range in your memo match the range your notebook prints today?</li>
+<li>Is every market price dated, and is the date within a week of your submission?</li>
+<li>Does your stated terminal share match what the model computes?</li>
+<li>Does your flip point actually flip it? Rerun once more and confirm.</li>
+<li>Does Edition A's prediction match what you now believe? <strong>If it does not, that is a finding, not an embarrassment</strong> — the memo ends on exactly that comparison.</li>
+</ol>
+<p><strong>Bring to your presenting day:</strong> one slide, four minutes rehearsed, your notebook open and navigable. <strong>Bring to your discussant day:</strong> your submitted question, and something to write with.</p>
 </main></body></html>

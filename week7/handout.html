@@ -27,140 +27,156 @@ hr { border:0; border-top:1px solid var(--rule); margin:2rem 0; }
 <body><main>
 <div class='nav'><a href='../index.html'>MSF Financial Modeling</a></div>
 <h1>Week 7 — Handout</h1>
-<blockquote><strong>Register: TEACH.</strong> Narrative and worked examples. The deliverable spec is in <code>lab.md</code>; conventions in <code>rules.md</code>.</blockquote>
-<p><strong>You arrive with:</strong> a reconciled security master, a panel with a data-quality catalog, verified metrics against a benchmark you defended, a portfolio with constraints you chose, a risk report carrying its own failure rate, and a valuation where every input is dated.</p>
-<p>This week you do not build anything new. You assemble what you have into one thing, and then you defend it.</p>
+<blockquote><strong>Register: TEACH.</strong> Narrative and worked examples. The defence structure is in <code>lab.md</code>; conventions in <code>rules.md</code>.</blockquote>
+<p><strong>You arrive with:</strong> two companies valued the same way, one exhibit, a flip point, two triggers, and a page you wrote before you knew any of the answers. Everything the capstone needs exists; this week decides how much of it you can stand behind.</p>
+<p>This week you do not build. You stand behind what you built, in four minutes, and answer two questions about your own numbers.</p>
 <hr />
 <h2>Why this matters</h2>
-<p>Everything you have made so far exists in notebooks. Notebooks are where analysis happens and where it also quietly dies — six weeks from now, on a different machine, half of them will not run and nobody will know which half.</p>
-<p>The deliverable is what survives. It is also the only part anyone outside this room will ever see, and it is what an employer means when they ask for a work sample.</p>
-<p>Two standards, and they are the whole assessment:</p>
-<ol>
-<li><strong>A colleague can pick it up and rerun it</strong> without asking you anything.</li>
-<li><strong>You can defend a key assumption on a data point you have not seen before</strong>, unaided.</li>
-</ol>
-<p>The first is about the artefact. The second is about whether the artefact is actually yours.</p>
+<p>Analysts are not hired for their models. Models are checked by someone else and replaced within a year. Analysts are hired because someone in a room watched them defend a number under pressure and believed them.</p>
+<p>The defence is the only part of this course that cannot be produced by an agent, delegated, or polished overnight. It is also the closest thing here to the job: a committee has capital for one position, you have four minutes, and the person across the table wants to know what would have to be true for you to be wrong.</p>
+<p>Two things are being tested, and only two. <strong>Can you state a decision and its condition in one sentence.</strong> And <strong>can you find any number you have written.</strong></p>
 <hr />
-<h2>Part 1 — What "reproducible by a colleague" actually means</h2>
-<p>Not "the code runs." Something stricter, and you can test it precisely.</p>
-<p>A colleague who has never seen your work should be able to:</p>
-<ul>
-<li>Understand what question you were answering, from the document alone</li>
-<li>Find every input, with its source and as-of date</li>
-<li>Rerun the analysis and get your numbers</li>
-<li>See what you chose, and why, at every point a choice existed</li>
-<li>Find out what your work cannot support, without having to ask</li>
-</ul>
-<p>The last two are what people skip. A reproducible calculation with hidden judgment calls is still not reproducible work — the reader can regenerate your arithmetic and has no idea whether they would have made the same decisions.</p>
-<h3>The cold-read test</h3>
-<p>Give your deliverable to someone with no context. Watch them read it. Every time they ask a question, that question is a defect in the document, not in them.</p>
-<p>Their first three questions are usually:</p>
-<ol>
-<li><em>What was the actual question here?</em></li>
-<li><em>Where did this number come from?</em></li>
-<li><em>Why did you do it this way and not the obvious other way?</em></li>
-</ol>
-<p>If your deliverable answers those three before they are asked, it is in better shape than most professional work.</p>
-<hr />
-<h2>Part 2 — What the deliverable says first</h2>
-<p>Analysts bury the answer. Reports that get read do not.</p>
-<p>Open with what you found and what it means. Then support it. The reader who stops after the first page should still have received your conclusion — and readers stop after the first page constantly, including the ones deciding whether to act on it.</p>
-<p>A structure that works:</p>
+<h2>Part 1 — Why four minutes is the right amount of pain</h2>
+<p>A real investment-committee slot is five to ten minutes for a position that took weeks. The compression is not an artefact of a 90-minute class with fourteen presenters; it is the actual job, and it is why the format feels brutal.</p>
+<p>Compression forces the thing that grading cannot: <strong>you must decide what the point is.</strong> A student with eight minutes describes. A student with four minutes concludes.</p>
+<p>The structure in <code>lab.md</code> is fixed for everyone, which means the room can compare fourteen defences on the same axes, and you do not spend your scarce seconds on scaffolding. What you choose to put <em>inside</em> each slot is where the judgment shows.</p>
+<h3>What the time actually costs</h3>
 <table>
 <thead>
 <tr>
-<th>Section</th>
-<th>Does what</th>
+<th>What</th>
+<th>Spoken length</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><strong>The finding</strong></td>
-<td>your conclusion, with its range and confidence, in a short paragraph</td>
+<td>Four minutes</td>
+<td>about 550 words</td>
 </tr>
 <tr>
-<td><strong>What it rests on</strong></td>
-<td>the two or three assumptions that actually drive it</td>
+<td>One sentence of company background</td>
+<td>25 words, 5% of your slot</td>
 </tr>
 <tr>
-<td><strong>What would change it</strong></td>
-<td>the sensitivity, translated into statements about the world</td>
+<td>"I pulled the financial statements from EDGAR using the company-facts API"</td>
+<td>13 words for information worth none</td>
 </tr>
 <tr>
-<td><strong>How it was built</strong></td>
-<td>data, method, choices made, in that order</td>
-</tr>
-<tr>
-<td><strong>What it cannot support</strong></td>
-<td>your limitations, specifically</td>
-</tr>
-<tr>
-<td><strong>Reproduce it</strong></td>
-<td>the source ledger and how to run the code</td>
+<td>The flip point, stated properly with its value and its history</td>
+<td>about 60 words, and it is the graded core</td>
 </tr>
 </tbody>
 </table>
-<p>Notice that limitations come <em>before</em> the appendix and are not hidden in it. That placement is a signal about the work: an analyst who leads with confidence and buries the caveats is managing an impression, and experienced readers know it.</p>
+<p>Every sentence that is not load-bearing is taking seconds from the flip point. That is the whole editing rule.</p>
 <hr />
-<h2>Part 3 — The limitations section is an asset, not a confession</h2>
-<p>Students consistently treat limitations as damage. They are the opposite, for a practical reason: <strong>the limitations section is the only part of your work that proves you understood it.</strong></p>
-<p>Anyone can produce a number. Only someone who understands the analysis can say precisely where it fails. That is why interviewers ask what is wrong with your model, and why the answer "nothing really" ends the conversation badly.</p>
-<p>You have been building this section for six weeks:</p>
-<ul>
-<li>Week 1 — sources disagree, and which differences you adjudicated how</li>
-<li>Week 2 — what your panel is contaminated by, with severities you assigned</li>
-<li>Week 3 — what your catalog forbids you from claiming</li>
-<li>Week 4 — that your optimizer output is a statement about your sample</li>
-<li>Week 5 — your risk model's measured failure rate</li>
-<li>Week 6 — the vintage of your inputs and the assumption driving your valuation</li>
-</ul>
-<p>That is a complete, specific, evidence-backed account of what your work cannot do. Almost nobody at your career stage has one.</p>
-<blockquote><strong>The rule this gives you.</strong> Never write "this analysis has limitations." Write the limitation, its evidence, and what the reader should therefore not conclude.</blockquote>
+<h2>Part 2 — Leading with the decision</h2>
+<p>Most people build up to a conclusion, because that is how the work happened. A committee reads and listens in the opposite order: conclusion, then condition, then evidence.</p>
+<p><strong>Weak, and common:</strong></p>
+<blockquote>"So I looked at two companies in the auto retail space. I started by pulling their filings, and I built a five-year pro-forma for each. The models gave me ranges of about $240 to $330 for the first one and $95 to $140 for the second. Based on that I think the first one looks more attractive..."</blockquote>
+<p>Three quarters of the slot is gone and nothing has been decided.</p>
+<p><strong>Strong:</strong></p>
+<blockquote>"We recommend A, and we hold that as long as its gross margin stays above roughly 16%. A trades at a 31% discount to our midpoint; B trades at 9%. Here is the exhibit."</blockquote>
+<p>Seventeen seconds, and the room now knows the decision, the condition, the magnitude, and where to look. Everything after it is evidence for a claim already on the table.</p>
+<blockquote><strong>The rule this gives you.</strong> Say the decision in the first sentence, and the condition in the second. If your first sentence contains the word "so", you are still narrating.</blockquote>
 <hr />
-<h2>Part 4 — The defense</h2>
-<p>You will defend a key assumption on video, using a data point you have not seen before.</p>
-<p>This is not a presentation. It is the part of a job that happens when a managing director asks you something you did not prepare for, and the whole point is to find out whether the understanding is real.</p>
-<p><strong>What a good defense does:</strong></p>
+<h2>Part 3 — What a committee actually asks</h2>
+<p>Not "what is your target price." The questions are always some version of <em>where is this fragile</em>, and they come in four shapes. You can prepare all four in an hour.</p>
+<table>
+<thead>
+<tr>
+<th>Shape</th>
+<th>What it sounds like</th>
+<th>What it is testing</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Locate it</strong></td>
+<td>"Show me the line that produces that."</td>
+<td>whether the model is yours</td>
+</tr>
+<tr>
+<td><strong>What would break it</strong></td>
+<td>"What has to be true for the ranking to reverse?"</td>
+<td>whether you know your flip point</td>
+</tr>
+<tr>
+<td><strong>Why should I believe that input</strong></td>
+<td>"Where did the terminal growth come from?"</td>
+<td>whether the inputs are sourced or invented</td>
+</tr>
+<tr>
+<td><strong>Why these two</strong></td>
+<td>"Is this comparison fair?"</td>
+<td>whether the two models were built the same way</td>
+</tr>
+</tbody>
+</table>
+<p>The two questions you get on the day are the first two shapes, aimed at your own cells. Your discussant's question is usually the third or fourth.</p>
+<p><strong>The worked answer, the shape not your answer:</strong></p>
+<blockquote><em>"Show me the line that produces your flip point."</em>
+"It is the gross-margin row in the driver table, cell three. I rerun the whole model at 15.9% and the two cases meet — here. It is a rerun, not an interpolation, because the revolver draws in the low case and that is not linear."</blockquote>
+<p>Thirty seconds, it locates the number, and it discloses a subtlety the asker did not ask about. That last part is what separates a defence from an answer.</p>
+<hr />
+<h2>Part 4 — Being wrong, well</h2>
+<p>The strongest sentence available to you this week is some version of:</p>
+<blockquote>"That changes my answer, and here is how much."</blockquote>
+<p>It is not a concession. It is the demonstration that the number was never a belief you were defending, but a conclusion you would revise on evidence, which is the only kind of number worth having.</p>
+<p>Three things that are graded as strength, not weakness:</p>
 <ol>
-<li>States the assumption plainly, and why you made it</li>
-<li>Says what evidence supports it and how strong that evidence is</li>
-<li>Takes the fresh data point seriously — actually engages with what it implies</li>
-<li>Says whether it changes the conclusion, and by how much</li>
-<li>If it does change it, <strong>says so</strong></li>
+<li><strong>A prediction from Edition A that the model demolished</strong>, named plainly. You wrote that page before you knew anything. If every prediction survived, either the work was thin or the page was written late, and both are visible.</li>
+<li><strong>A question you cannot answer in the room</strong>, followed by the answer in the memo. "I do not know, and I will find out" beats a confident invention, which the room can usually smell.</li>
+<li><strong>A recommendation you decline to make.</strong> If your two ranges overlap so heavily that no honest ranking exists, say that, show why, and state what evidence would separate them. That is a real finding, and it is rarer and harder than picking one.</li>
 </ol>
-<p>Point 5 is the one being tested. An analyst who updates on evidence in front of you is someone you can trust with a decision. An analyst who defends a position regardless of what arrives is not, and it takes about ninety seconds to tell which you are dealing with.</p>
-<p><strong>What a bad defense does:</strong> restates the assumption more confidently, explains why the new data point is not really relevant, or retreats into method detail. All three are recognisable and all three are read the same way.</p>
-<blockquote><strong>The rule this gives you.</strong> "That changes my answer, and here is how" is the strongest sentence available to you. It is not a concession. It is the demonstration.</blockquote>
+<p>What earns nothing: pretending the sensitivity is small when your own table says it is not; a memo that reads as though the defence never happened; and a range so wide that it cannot be wrong.</p>
 <hr />
-<h2>Part 5 — What you can now say you can do</h2>
-<p>Worth being concrete, because you will be asked, and because most of it is not obvious from a transcript.</p>
-<p>You can take a security or a company and produce a defensible analysis where every number is sourced and dated. Specifically, you can:</p>
-<ul>
-<li>Reconcile two data sources and tell a defect from a convention difference</li>
-<li>Key work on a permanent identifier and explain what breaks without one</li>
-<li>Detect survivorship and look-ahead contamination that produces clean-looking output</li>
-<li>Maintain a data-quality catalog that constrains what you are willing to claim</li>
-<li>Compute performance and risk metrics, state their conventions, and verify them independently</li>
-<li>Construct a portfolio and demonstrate where its optimizer breaks</li>
-<li>Produce a risk report that states its own measured failure rate</li>
-<li>Value a company with every input dated, reported as a range</li>
-<li>Say precisely what your work cannot support</li>
-</ul>
-<p>That last one is the one that gets you hired, and it is the one your competition cannot do.</p>
+<h2>Part 5 — Being the discussant</h2>
+<p>On the day you are not presenting you are doing the other half of the job, and it is graded.</p>
+<p>A good question names one of their numbers and finds a tension with another one of their numbers. It is not a general question about valuation, and it is not a gotcha.</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Weak</strong></td>
+<td>"How did you pick your discount rate?" — answerable without having read anything</td>
+</tr>
+<tr>
+<td><strong>Weak</strong></td>
+<td>"Did you consider a recession?" — invites a yes</td>
+</tr>
+<tr>
+<td><strong>Strong</strong></td>
+<td>"Your flip point is a 15.9% margin, but your low case already runs 16.2%. Why does the low case not already flip the ranking?"</td>
+</tr>
+<tr>
+<td><strong>Strong</strong></td>
+<td>"Both your companies use a 10% cost of equity, but one carries twice the leverage. Is the comparison fair?"</td>
+</tr>
+</tbody>
+</table>
+<p>Both strong questions took one careful read of an exhibit. That read is the work, and it is why the question is submitted in advance.</p>
+<p>Listening matters as much as asking. Your two-line record afterwards says what they answered and whether it moved you. A discussant who asks a sharp question and does not listen to the answer has done half the job.</p>
+<hr />
+<h2>Part 6 — What you submit afterwards, and why it is afterwards</h2>
+<p>The three capstone objects — the two-company model, the investment-committee memo, and the presentation video — are due after both defence days. That ordering is deliberate: feedback that cannot reach the artifact is decoration.</p>
+<p>So the memo carries a short section that most memos do not: what the defence exposed, what you changed with the numbers before and after, and what you were asked to change and did not, with your reason. A grader reading that section learns more about your judgment than the rest of the memo combined.</p>
+<p><strong>The video is not a recording of your four minutes.</strong> It is the longer artifact the live slot had no room for: the model on screen as evidence, both sensitivity analyses, the validation, the walk from enterprise value to per-share value. The defence proves the judgment is yours; the video shows the work behind it. Its own page states its length and requirements.</p>
 <hr />
 <h2>This week's sources</h2>
 <p>Register: <a href="../sources.html">the source register</a>.</p>
-<p>This week works with everything you have already gathered. No new source.</p>
-<p><strong>The limitations section is the part nobody else can write for you.</strong> Generic limitations — "data quality may vary", "past performance does not guarantee future results" — could be attached to any analysis ever produced, which is exactly why they are worthless.</p>
-<p>Yours are specific: the names that returned zero rows, your measured VaR breach ratio, the vintage of your valuation inputs, the assumption your conclusion turns on. Every one of those came from work you did. That is what makes the section evidence.</p>
-<hr />
-<p><strong>Two sources, minimum — and where you have professional access, one of them is the professional source.</strong> This week that is <strong>whichever your figures came from — named, with IBES named wherever a forward estimate appears</strong>, for the ledger is the deliverable; an untraced figure is an unsupported one.</p>
-<p>Pending access is neither an excuse nor a penalty. Document the attempt — source, route tried, date, barrier, and why that source would have been independent — and use a second free source instead. <strong>The attempt counts; the outcome never does.</strong></p>
+<p>Nothing new is pulled this week. Every figure you present was sourced in Weeks 5 and 6, and the only new requirement is that the market prices on your exhibit are dated within a week of your submission.</p>
+<p><strong>A number without a source is not an input</strong> — and this week, a number you cannot locate in your own notebook is not a number you can defend.</p>
 <h2>Before the session — do these</h2>
 <ol>
-<li>Assemble every artefact from Weeks 1 through 6 in one directory.</li>
-<li>Run everything, start to finish, on a fresh kernel. Note what breaks.</li>
-<li>Identify the single assumption most load-bearing in your work. You will defend that one.</li>
+<li>Time the four minutes out loud, twice. Not in your head; it runs about 30% fast in your head.</li>
+<li>Open your notebook and find, in under ten seconds: the flip-point row, the terminal-value share, and the dated price for each company.</li>
+<li>Reread Edition A. Decide now what you will say about the prediction that did not survive.</li>
+<li>Submit your discussant question for the classmate you were assigned.</li>
 </ol>
-<p><strong>Next: Lab 7</strong> is the deliverable and the defense. There is no new analysis in it — if something is missing, it is missing because it was not built, and this is not the week to build it.</p>
+<p><strong>Next: Lab 7</strong> is the defence itself, on your assigned day, and the discussant role on the other. Then the memo, the model and the video, revised with what the room told you.</p>
 </main></body></html>

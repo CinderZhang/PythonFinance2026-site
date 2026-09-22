@@ -26,11 +26,11 @@ hr { border:0; border-top:1px solid var(--rule); margin:2rem 0; }
 </style></head>
 <body><main>
 <div class='nav'><a href='../index.html'>MSF Financial Modeling</a></div>
-<h1>Lab 5 — The Hand-Over Sheet</h1>
+<h1>Lab 5 — The DCF, Built on ABG</h1>
 <blockquote><strong>Register: DO.</strong> Teaching is in <code>handout.md</code>; conventions in <code>rules.md</code>.</blockquote>
-<p><strong>You arrive with:</strong> your portfolio's monthly return series built from the Week 4 weights and checked, the rebalancing frequency you chose in prework, a cited cost number, and your prediction. From the session you have the training case's label, its rebalancing table, and its worst month and drawdown with the recipe that produced them.</p>
-<p><strong>Where this goes next:</strong> Week 6 leaves portfolios and values a single company. This lab closes the portfolio arc with the one page you would hand over with the portfolio, and the habit of putting the in-sample warning on the page rather than in a footnote.</p>
-<blockquote><strong>This week's lab, in three parts.</strong> Read the row for today.</p>
+<p><strong>You arrive with:</strong> Tuesday's lecture, Video 3 watched, and two shortlisted capstone companies with three years of numbers printed for each.</p>
+<p><strong>Where this goes next:</strong> next week you run this same pipeline on your own two companies, in the room, both sessions. The model you build Thursday is the one you reuse, so build it so it can be reused.</p>
+<blockquote><strong>This week's lab, in two parts.</strong> Read the row for today.</p>
 <table>
 <thead>
 <tr>
@@ -44,84 +44,84 @@ hr { border:0; border-top:1px solid var(--rule); margin:2rem 0; }
 <tr>
 <td>1</td>
 <td>Tuesday, in the room</td>
-<td>0 to 2</td>
-<td>not collected; it is the floor Thursday stands on</td>
+<td>0 and 1</td>
+<td>not collected; it is the arithmetic Thursday stands on</td>
 </tr>
 <tr>
 <td>2</td>
 <td>Thursday, in the room</td>
-<td>3 to 5</td>
-<td>submit before you leave, as the Brightspace assignment named <strong>Lab 5 — Allocation, Rebalancing, and Risk Reporting — Thursday record and target lock (CP7)</strong>, with your two capstone companies on it</td>
-</tr>
-<tr>
-<td>3</td>
-<td>after Thursday</td>
-<td>5 finished, and 6</td>
-<td>for your own record; this week has no exercise of its own and nothing beyond the checkpoint is collected</td>
+<td>2 to 5</td>
+<td>submit before you leave, as the Brightspace assignment named <strong>Lab 5 — Valuation Core: Pro-Forma and DCF — Thursday record and target lock (CP7)</strong></td>
 </tr>
 </tbody>
 </table>
-<p>Each checkpoint is the notebook as it stands when you leave, errors and all, with one line on where you stopped and your AI disclosure. The target lock travels with Thursday's checkpoint: your two capstone companies, name and ticker, one line each, with one sentence on why the pair; the instructor demonstration company is not eligible, and a change after this goes through the instructor. Missed a session? Every part is fully doable from this page alone, and the syllabus's checkpoint rule covers a missed one. A student who leaves Thursday with Parts 1 and 2 in a notebook that runs has done the in-class core.</blockquote>
+<p>The checkpoint is the notebook as it stands when you leave Thursday, errors and all, with one line on where you stopped, your AI disclosure, and your two locked companies. <strong>It scores the state you submit, not the finish line.</strong> A model whose check block is red, submitted with one line naming which check failed, scores the same as one that passes. A blank scores nothing.</p>
+<p>Missed a session? Both parts are fully doable from this page and Video 3 alone, and the syllabus's checkpoint rule covers a missed one.</blockquote>
 <hr />
 <h2>Part 1 — Tuesday (not collected)</h2>
-<h2>Step 0 — Load what Week 4 left you</h2>
-<p>Load your weights and your Week 3 panel with the French columns. Build the portfolio's monthly return series, weights fixed and reset each month. Print the checks from prework Part A. Then subtract the risk-free column to get the excess series and print its annual mean, volatility and Sharpe ratio, labelled in-sample. <strong>The shape, not your answer:</strong></p>
-<pre><code>weights sum 1.000   min 0.000   max 0.200 (cap 0.200)   months 120   gaps 0
-portfolio  ann mean 19.45%  vol 14.02%  Sharpe 1.255   (in-sample, full window)
+<h2>Step 0 — One row by hand</h2>
+<p>On paper or in one cell, compute the present value of ABG's 2026 free cash flow to equity at a 10% cost of equity.</p>
+<p><strong>Known answer:</strong> 211.4 ÷ 1.10 = <strong>192.2</strong>.</p>
+<p>Then the other four years, and add them. <strong>Known answer: 1,059.9.</strong></p>
+<p>Then the terminal value: (342.3 + 150.0) × 1.025 ÷ (0.10 − 0.025), discounted five years. <strong>Known answer: 6,727.8 before discounting, 4,177.5 after.</strong></p>
+<p>Add the two. Divide by 17,951,349 shares. <strong>Known answer: $291.75.</strong></p>
+<p>That is the entire method, done by hand, in ten minutes. Everything Thursday adds is the machinery that produces the five cash flows honestly and proves they are not invented.</p>
+<h2>Step 1 — Where the five inputs came from</h2>
+<p>Write down, in one line each, the source of every input you just used. Not the number: <strong>where it came from, and what kind of claim it is.</strong></p>
+<p><strong>The shape, not your answer:</strong></p>
+<pre><code>cash flows        a five-year projection of ABG's statements       built, from the drivers below
+discount rate     10%                                              JUDGMENT — Video 4 tests 8.15% to 11%
+terminal growth   2.5%                                             JUDGMENT — below long-run economic growth
+share count       17,951,349                                       FACT — 10-Q balance sheet 2026-06-30,
+                                                                   40,099,276 issued less 22,147,927 treasury
 </code></pre>
-<h2>Step 1 — The label</h2>
-<p>Run two regressions on the excess series: on <code>Mkt-RF</code> alone, then on <code>Mkt-RF</code>, <code>SMB</code> and <code>HML</code> together. Report, for each: the alpha per year with its t-statistic, every beta with its t-statistic, and R². Then report the share of your portfolio's variance the market explains beside the average share for your single names from Lab 3 Step 4. <strong>The shape, not your answer:</strong></p>
-<pre><code>                 alpha/yr   t     b_mkt   b_smb    b_hml    R²
-market only      8.6%      3.8    0.76                     0.75
-three factors    6.5%      3.3    0.83   −0.39   −0.00     0.82
-market explains: portfolio 75%   average single name 30%  (range 12%..55%)
-</code></pre>
-<p>Compare with your prework prediction and say, in one sentence, where you were furthest off.</p>
-<h2>Step 2 — Read it like a committee</h2>
-<p>Write three sentences a committee could use, one per loading, in plain words with the number in it. <strong>The shape, not your answer:</strong></p>
-<pre><code>Market 0.83: on average in this sample, a 10% market fall went with a fall of about 8 here.
-Size −0.39: on average, other things equal, a year when small caps beat large by 10 points went with lagging the market by about 4.
-Value 0.00: no tilt, consistent with the growth names and the staples offsetting.
-</code></pre>
-<p>Then the alpha. State it, state its t-statistic, and state what produced the weights it was measured on. If your weights came from an optimizer fitted on this window, the alpha is in-sample and you say so. If you want to claim any of it as skill, the burden is on you to say why.</p>
-<blockquote><strong>Nothing to submit yet.</strong> Tuesday's work is the floor Thursday stands on; keep going.</blockquote>
-<h2>Part 2 — Thursday (Checkpoint 7)</h2>
-<h2>Step 3 — Price your policy</h2>
-<p>Simulate your portfolio from the target weights over your window under three policies: the frequency you chose in prework, never rebalancing, and one other. For each report the number of resets, one-way turnover per year, drag at your cited cost, annual return, volatility, the largest drift of any weight from its target, and the biggest position at the end of the window. <strong>The shape, not your answer:</strong></p>
-<pre><code>quarterly   resets 39   turnover 12.5%/yr   drag 1.2 bp/yr at 10 bp round trip   max drift 5.0 pp   end: MSFT 24.0%
-never       resets  0   turnover  0         drag 0                                max drift 23.3 pp  end: MSFT 40.5%   (cap 20% on targets; holdings at twice it)
-</code></pre>
-<p>The cap binds your target weights; say how far holdings drifted above it between resets under each policy and, under "never", in which year they passed it. State whether you chose your frequency before or after seeing this table. Then write the sentence for the sheet: the policy, what it costs, and what it buys.</p>
-<h2>Step 4 — How bad did it get</h2>
-<p>Build the wealth path from your portfolio's monthly total returns and follow the four-line recipe in handout Part 4: wealth, running peak, drawdown, then the trough, the peak before it, and the months to recover. Report the worst month, the maximum drawdown with both dates and the recovery, and the count of months spent below a previous high. Do the same for your Week 3 benchmark. If a drawdown has not recovered by the end of your window, say so. <strong>The shape, not your answer:</strong></p>
-<pre><code>portfolio  worst month 2020-02 −8.5%   max drawdown −21.3%  peak 2021-12 (wealth 3.887) → trough 2022-09 (3.061)  recovered 7 months later   55 of 120 months below a prior high
-SPY        worst month 2020-03 −12.5%  max drawdown −23.9%  peak 2021-12 → trough 2022-09   recovered 15 months later
-</code></pre>
-<p>Check one number by hand: trough wealth divided by peak wealth, minus one, is your maximum drawdown. If it is not, the recipe is wrong somewhere.</p>
-<p>Then two sentences: what the drawdown tells a holder that the annual volatility does not, and what your monthly series cannot see.</p>
-<h2>Step 5 — The hand-over sheet, and the alpha defence</h2>
-<p>Put it on one page, in the shape of handout Part 5: the portfolio, what it is, what it costs, how bad, the convention, what it cannot see. Every line carries a number and the sentence it supports. The in-sample warning is on the page.</p>
-<p>The "what it cannot see" block has at least three entries, one sentence each: the window and its regime, how many years and what kind of decade; the universe, how the names were chosen and who is missing from it; and the fit, which numbers were computed on the window the weights were chosen on. Add anything specific to your panel, such as positions and liquidity not being modelled.</p>
-<p>Then the defence. A committee member reads your alpha and says: <em>your process adds value; the t-statistic is over two; put more capital behind it.</em> Write the strongest version of their case, with the number that supports it. Then answer it or concede it. Conceding earns full marks. So does answering it well. Pretending the alpha is not on the page earns nothing.</p>
-<blockquote><strong>Submit now — Checkpoint 7.</strong> Your notebook as it stands after Steps 3 to 5, one line on where you stopped, your AI disclosure, and your two capstone companies. Brightspace assignment: <strong>Lab 5 — Allocation, Rebalancing, and Risk Reporting — Thursday record and target lock (CP7)</strong>. Before you leave the room.</blockquote>
-<h2>Part 3 — After Thursday (your own record)</h2>
-<h2>Step 6 — What did you notice that I did not ask about?</h2>
-<p>The standing question.</p>
-<p>Something this week behaved unexpectedly. A loading with the wrong sign for what you thought the portfolio was. Holdings that passed the cap under "never" sooner than you guessed. A drawdown that started in a year you would not have named, or one that has not recovered yet.</p>
-<p>Write it down with evidence. This week it is not collected. Write it anyway; noticing with evidence is the habit the capstone memo runs on.</p>
+<p>Three of the four are judgments or facts you can check in a minute. The first one is the week's actual work, and it is Thursday.</p>
+<blockquote><strong>Nothing to submit today.</strong> Tuesday's arithmetic is what Thursday stands on. Watch Video 3 before Thursday.</blockquote>
+<h2>Part 2 — Thursday (Checkpoint 7, with the target lock)</h2>
+<p>Work in the folder you already own, with your AI partner open in it. Send the requests as written; the known answers are the video's, so a number that differs means something in your inputs differs, and finding which is the skill.</p>
+<h2>Step 2 — The company layer, and the projection (35 min)</h2>
+<p>Two halves, kept apart deliberately. The <strong>company</strong> half holds ABG's filed lines and its drivers. The <strong>method</strong> half holds the projection, the checks and the valuation, and knows nothing about which company it is running. Next week you replace only the first half, twice.</p>
+<p>Send:</p>
+<blockquote>Build me a five-year pro-forma for Asbury Automotive Group, fiscal 2026 to 2030, in $ millions, in two clearly separated parts: a COMPANY dictionary holding the opening balance sheet and the drivers, and METHOD functions that take that dictionary and know nothing about ABG.
+Opening balance sheet at 2025-12-31: revenue 17,999.0, inventory 2,135.8, PP&amp;E 3,070.4, cash 40.4, floor plan 2,027.0, debt 3,572.0, revolver 0, equity 3,891.7, other assets 6,371.6, other liabilities 2,127.5.
+Drivers: organic revenue growth 1.8%; gross margin 17.05%; SG&amp;A as a share of gross profit 66.5%, 65.5%, then 64.5% for years three to five; depreciation 2.68% of opening PP&E; a non-cash asset impairment of 120 a year; capital spending 250 a year; tax 25.5%; inventory 52.2 days of cost of sales; floor plan 94.9% of inventory; other working capital 0.8% of the change in revenue; floor-plan interest 4.67% and term-debt interest 5.44% on opening balances; a revolver at 6% capped at 850; minimum cash 25; term-debt repayment 150 a year; buyback 150 a year.
+Income statement: revenue, gross profit, SG&amp;A, depreciation, the impairment, EBIT, interest on opening balances, tax, net income. Balance sheet: inventory from days, floor plan from the ratio, PP&amp;E rolling with capital spending less depreciation, debt falling by the repayment, equity rolling with net income less the buyback, and other assets rolling with the working-capital change less the impairment. Free cash flow to equity is net income plus depreciation plus the impairment less capital spending less the change in inventory less other working capital plus the change in floor plan less the repayment. <strong>Cash is computed last</strong> from opening cash plus that flow less the buyback, drawing the revolver only if cash would fall below the minimum. Print the five years.</blockquote>
+<p><strong>Known answers, 2026:</strong> revenue 18,323.0 · gross profit 3,124.1 · SG&amp;A 2,077.5 · EBIT 844.2 · interest 289.0 · net income 413.6 · free cash flow to equity 211.4 · cash 101.8 · revolver 0. <strong>2030:</strong> net income 527.5 · free cash flow to equity 342.3 · cash 719.8. The path is 211.4, 255.1, 299.7, 320.9, 342.3.</p>
+<p><strong>If a number differs, walk the income statement down</strong> until you find the first line that does. That line is the fix. Do not start from the share price.</p>
+<h2>Step 3 — The check block (20 min)</h2>
+<p>A projection you cannot check is a guess with decimals.</p>
+<blockquote>Under the projection, print a check block for every year: total assets minus total liabilities minus equity; cash on the balance sheet minus what the cash-flow statement says it should be; and cash minus the minimum. Make it a function that returns True only when all three pass in every year, within a tenth of a million.</blockquote>
+<p><strong>Known answer:</strong> the balance line reads 0.0 in every year, and all five years pass.</p>
+<p><strong>Then break it on purpose, and put it back.</strong> Unlink cash from the cash-flow statement for one year and rerun: the residual appears immediately. Relink it. <strong>A check that cannot fail is not a check</strong>, and you have now seen yours fail.</p>
+<h2>Step 4 — The valuation, and the cell that refuses (20 min)</h2>
+<blockquote>Discount the five years of free cash flow to equity at a 10% cost of equity. Compute the terminal value as the final year's flow plus the final year's 150 repayment, restored because the repayment is finite, times 1.025, over 0.10 minus 0.025, discounted five years. Add them, divide by 17,951,349 shares, and print the present value of the five years, the discounted terminal value, equity value, value per share, and the terminal value's share of the total. <strong>Raise an error before any arithmetic if terminal growth is at or above the discount rate, or if the check block does not pass.</strong></blockquote>
+<p><strong>Known answer:</strong> 1,059.9 + 4,177.5 = 5,237.3, <strong>$291.75 a share, 79.8% terminal.</strong> Within a dollar, or an input differs from the list in Step 2.</p>
+<p><strong>Two probes, both quick, both required.</strong> Set terminal growth to 10% and rerun: the cell must raise, not return infinity. Break one line of the check block and rerun the valuation: it must refuse. A model that answers an impossible question will answer it confidently, and you will not notice.</p>
+<p>Then put the dated market price beside your number: ABG's close on the day you run this, with its date and source written down. The video's marker was about $183 in mid-September 2026; yours is yours.</p>
+<h2>Step 5 — The target lock (15 min)</h2>
+<p>Your two capstone companies, locked. On the checkpoint, one line each:</p>
+<ul>
+<li>name and ticker, and the CIK;</li>
+<li>one sentence on why this pair belongs together — same sector, or a comparison you will defend;</li>
+<li>one line confirming both passed the screen in the prework: they file a 10-K, they are not a bank, insurer or REIT, they have operating income in at least three of the last five years, and no transformational merger inside two years;</li>
+<li>the three years of revenue, operating income and total assets you printed for each, with accession numbers.</li>
+</ul>
+<p>ABG is the demonstration company and is not eligible as a pick. A change after this goes through the instructor, not silently, because next week's two sessions are built on these two names.</p>
+<blockquote><strong>Submit now — Checkpoint 7.</strong> Your notebook as it stands after Steps 2 to 4, one line on where you stopped or which check is failing, your AI disclosure, and the target lock from Step 5. Brightspace: <strong>Lab 5 — Valuation Core: Pro-Forma and DCF — Thursday record and target lock (CP7)</strong>. Before you leave the room.</p>
+<p><strong>The floor:</strong> the projection running with its known 2026 numbers, the check block printing whatever it prints, and the target lock. A student who leaves with that has done the in-class core, whether or not the valuation cell is finished.</blockquote>
 <hr />
 <h2>If you want to do this differently</h2>
-<p>You may depart from the method above. A defended departure earns full marks. State what you did instead, why, and what you gave up.</p>
-<p>Three departures are welcome and worth a Step 6 finding: a threshold rebalancing policy with a band you choose and defend, which keeps holdings within the band; the same regressions on the CRSP monthly file with a longer history, which adds observations to every loading if the names existed then and their exposures held; or, if you want to cook rather than read the label, a simple long-only tilt toward one factor on your own panel, evaluated out of sample the Week 4 way, with its cost stated.</p>
-<p>Two sources, minimum, and where you have professional access, one of them is the professional source. This week that is CRSP monthly returns and <code>ff.factors_monthly</code> on WRDS, for history.</p>
-<p>Pending access is neither an excuse nor a penalty. Document the attempt, source, route tried, date, barrier, and why that source would have been independent, and use a second free source instead. The attempt counts; the outcome never does.</p>
+<p>You may depart from the method above. A defended departure earns full marks: state what you did instead, why, and what you gave up.</p>
+<p>The welcome one this week is the firm route — free cash flow to the firm, discounted at a weighted average cost of capital, bridged to equity with dated net debt. It is the more standard choice for a company whose financing is separate from its operations, and the handout's Part 3 says why ABG is not that company. If you take it, say what you decided floor-plan financing is, and why.</p>
+<p>Two sources, minimum, and where you have professional access one of them is the professional source. This week that is Compustat beside SEC EDGAR as filed. Pending access is neither an excuse nor a penalty: document the attempt and use the filing. The attempt counts; the outcome never does.</p>
 <h2>Submit</h2>
-<p>The checkpoint, in the room on Thursday: your notebook as it stands after Steps 3 to 5, runnable from a fresh kernel up to wherever you stopped, with one line on where you stopped and your AI disclosure. Your updated <code>source_log.md</code>, with the cost source added, travels with it. Nothing else is collected this week.</p>
+<p>The checkpoint, in the room on Thursday: the notebook after Steps 2 to 4, runnable from a fresh kernel up to wherever you stopped, one line on where you stopped, your AI disclosure, and the target lock. Nothing else is collected this week; there is no exercise of its own.</p>
 <h2>Before Week 6 — do these</h2>
 <ol>
-<li>Keep the "what it cannot see" block from your sheet. Week 6 asks the same question of a valuation, and the habit transfers.</li>
-<li>Confirm that the two companies you locked for the capstone file with the SEC and that you can reach their filings. A company you cannot source is a company you cannot value to this course's standard.</li>
-<li>Watch Video 2, Brief Valuation for ABG, linked from the Week 6 prework. Bring one sentence on the first input you would want to verify.</li>
+<li>Get the projection running if it was not by 4:20, and the check block green. Next week starts from it.</li>
+<li><strong>Keep the two halves apart.</strong> Next week you replace the company half twice, and the whole session is timed on that separation being clean.</li>
+<li>Pull the filed lines for <strong>both</strong> locked companies, the way the prework pulled three years: revenue, gross profit, operating income, net income, depreciation, capital spending, inventory, PP&amp;E, total assets, equity, with accession numbers. Read capital spending, cash, total debt and the share count off the filings themselves.</li>
+<li>Watch <strong>Video 4</strong>, take it apart and present (22 minutes), from the Week 6 prework.</li>
 </ol>
-<p>Lab 6 preview: value a company where every input traces to a sourced, dated figure, and discover that the same company reported two different numbers for the same year, both correct.</p>
+<p><strong>Lab 6 preview:</strong> your first company through this pipeline on Tuesday, your second on Thursday, then the decision between them — which gets the capital, and what would flip it.</p>
 </main></body></html>

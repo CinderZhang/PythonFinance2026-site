@@ -26,85 +26,114 @@ hr { border:0; border-top:1px solid var(--rule); margin:2rem 0; }
 </style></head>
 <body><main>
 <div class='nav'><a href='../index.html'>MSF Financial Modeling</a></div>
-<h1>Week 6 — Lab</h1>
-<h1>Lab 6 — A Valuation You Can Date</h1>
-<blockquote><strong>Register: DO.</strong> Teaching is in <code>handout.md</code>; conventions in <code>rules.md</code>.</blockquote>
-<p><strong>You arrive with:</strong> the two companies you locked for the capstone, a portfolio hand-over sheet with its block on what it cannot see, and five weeks of habits about provenance. From the session you have the Apple restatement, the 53-week year, and the source ledger format.</p>
-<p><strong>Where this goes next:</strong> Week 7 assembles everything into one deliverable and you defend it on video. This valuation is its centrepiece, and the source ledger is what makes it reproducible by someone else.</p>
+<h1>Lab 6 — Two Companies, and the Decision Between Them</h1>
+<blockquote><strong>Register: DO.</strong> Teaching is in <code>handout.md</code>; conventions in <code>rules.md</code>. This lab starts Exercise 4 and the capstone; <a href="exercise4.html">the exercise page</a> is the specification for what you hand in.</blockquote>
+<p><strong>You arrive with:</strong> a working ABG model from Week 5's Thursday studio, two locked companies with their filed lines pulled and sourced (prework Part B), and Video 4 watched.</p>
+<p><strong>Where this goes next:</strong> Exercise 4 finishes company A. The capstone finishes both and writes the memo. Week 7 is your defence, in the room, in front of the class.</p>
+<blockquote><strong>Both sessions are working sessions.</strong> Read the row for today.</p>
+<table>
+<thead>
+<tr>
+<th>Part</th>
+<th>When</th>
+<th>What happens</th>
+<th>Collected</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Tuesday, in the room</td>
+<td>company A through your ABG pipeline; Edition A written on paper</td>
+<td><strong>Lab 6 — Capstone Studio: Two Companies and the Decision — Tuesday record (CP9)</strong>, before you leave</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Thursday, in the room</td>
+<td>company B through the same pipeline, then the decision, then a peer read</td>
+<td><strong>Lab 6 — Capstone Studio: Two Companies and the Decision — Thursday record (CP10)</strong>, before you leave</td>
+</tr>
+<tr>
+<td>3</td>
+<td>after Thursday</td>
+<td>finish company A properly</td>
+<td><strong>Exercise 4 — Valuation Base Model</strong>, on <a href="exercise4.html">its page</a></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Both checkpoints are scored on submitting the state, not on reaching the end.</strong> A model that fails its check block, submitted with one line naming which check failed and why you think it did, scores the same as one that passes. A blank scores nothing. That is deliberate: a named failure is evidence of work and a green tick from an agent is not.</blockquote>
 <hr />
-<h2>Step 1 — Find a revision in your own company</h2>
-<p>Run the XBRL company-concept query on your company for at least two line items.</p>
-<p>Look for any period reported with more than one value across filings. Report what you find.</p>
-<p><strong>If you find nothing, that is a legitimate result</strong> — report it as "no revisions found across N filings for these concepts," and say which concepts you checked. A negative result you actually looked for is worth full marks. A negative result you assumed is worth none.</p>
-<h2>Step 2 — Establish the fiscal calendar</h2>
-<p>For your company, report:</p>
+<h2>Part 1 — Tuesday (Checkpoint 9)</h2>
+<h2>Step 0 — Where everyone is, out loud (10 min)</h2>
+<p>The poll said who reproduced ABG. Find a partner on the other side of that line. Two minutes each: the first line where your number diverged, or, if you did not start, the step that stopped you.</p>
+<h2>Step 1 — The model, built once, together (35 min)</h2>
+<p>The instructor builds ABG's skeleton at the front. <strong>Type it as it goes.</strong> Do not watch. Do not paste it from an agent. The order matters more than the arithmetic, and the order is the thing an agent gets wrong:</p>
+<ol>
+<li>the income statement down to net income</li>
+<li>the balance sheet items that follow from drivers: inventory, floor plan, PP&amp;E, debt after the paydown, equity after net income and the buyback</li>
+<li>free cash flow to equity</li>
+<li><strong>cash, last</strong>, from opening cash plus that flow less the buyback, with the revolver drawn only if cash would fall below the floor</li>
+<li>the check block: the balance identity, the cash tie, the cash floor</li>
+<li>the valuation cell, which refuses to run if the checks fail or if terminal growth is not below the discount rate</li>
+</ol>
+<p><strong>Known answer:</strong> $291.75 a share, 79.8% terminal. <strong>You leave this step with a model that produces it.</strong> If yours does not, that is what the rest of the session's help is for; say so now rather than at 4:15.</p>
+<h2>Step 2 — Swap in company A (25 min)</h2>
+<p>Your ABG notebook has two halves. The <strong>company</strong> half holds the filed lines and the nineteen assumptions. The <strong>method</strong> half holds the projection, the checks and the discounted cash flow, and it does not know what company it is running. Separate them if they are not already separate: that separation is the whole reason company B will be cheap on Thursday.</p>
+<p>Now replace the company half with company A, from prework Part C.</p>
+<p>Two things will not carry over, and both are the point:</p>
 <ul>
-<li>fiscal year end, and whether it is a calendar year</li>
-<li>period lengths for the last five to eight annual periods, in days and weeks</li>
-<li>any 53-week year, or any change of fiscal year end</li>
+<li><strong>The drivers are not ABG's.</strong> Your company does not finance inventory with floor-plan notes. Work out its own drivers from its own history: the growth rate, the margin, the cost ratio, the tax rate, the reinvestment. Label each one history, guidance or judgment.</li>
+<li><strong>The known answer is not $291.75.</strong> It is your company's own last filed year. Before projecting anything, run your pipeline on the year that already happened and print revenue, operating income and net income beside the filed figures. <strong>If the rebuilt year does not reproduce the filed year, stop and fix that</strong>; every projected year is wrong in the same way until you do.</li>
 </ul>
-<p>Then state: <strong>does any growth rate you intend to compute span a period of unequal length?</strong> If so, say what you will do about it.</p>
-<h2>Step 3 — Two sources, one number</h2>
-<p>Pick one fundamental figure. Get it from <strong>two</strong> sources — the filings themselves plus one other, or two platforms if you have access.</p>
-<p>Report both, the difference, and your diagnosis using the handout's Part 4 table: vintage, fiscal alignment, standardisation, classification, or GAAP/non-GAAP.</p>
-<p>You have done this exercise before, in Week 1, on prices. It is the same skill on harder data.</p>
-<h2>Step 4 — Build the valuation</h2>
-<p>Value your company. DCF, multiples, or both — your choice, stated and justified.</p>
-<p>Requirements:</p>
+<h2>Step 3 — Edition A, on paper, no AI (15 min)</h2>
+<p>Close the laptop. This page is written in the room, by hand or in a plain file with no agent open, and it is the only writing in this course produced without AI. It is one page, and it takes the form:</p>
 <ul>
-<li>Every input appears in the source ledger with its as-of date and basis</li>
-<li>The discount rate's components are each sourced or explicitly assumed</li>
-<li>Terminal value assumptions are stated separately and prominently</li>
-<li><strong>Report a range, not a point.</strong> A single number implies a precision you do not have</li>
+<li><strong>Company A</strong>, one paragraph: what this business does, and the single driver you expect its value to turn on.</li>
+<li><strong>Company B</strong>, one paragraph: the same.</li>
+<li><strong>Your prediction</strong>, three lines: which one you expect to be worth more relative to its market price, roughly how wide you expect each range to be, and the assumption you expect to matter most.</li>
 </ul>
-<p>State what fraction of your valuation comes from the terminal value. If it is most of it — it usually is — say so plainly.</p>
-<h2>Step 5 — The source ledger</h2>
-<p>Complete the ledger for every input: input, value, source, as-of date, basis, note.</p>
-<p>The test: <strong>someone who has never seen your work should be able to rebuild your valuation from the ledger alone.</strong> That is also the Week 7 standard, so getting it right now saves you later.</p>
-<p>Any input you cannot date goes in the ledger marked as undated, with a note saying what you would need. Do not quietly leave it out.</p>
-<h2>Step 6 — Sensitivity: what would have to be true</h2>
-<p>Pick the two assumptions your valuation is most sensitive to. For each:</p>
-<ul>
-<li>How much does the valuation move over a plausible range?</li>
-<li><strong>What would have to be true about the business</strong> for the high end to be right? For the low</li>
-</ul>
-<p>end?</p>
-<p>The second question is the one that matters. A sensitivity table is arithmetic. Translating it into statements about the world is analysis, and it is what someone reading your work actually needs.</p>
-<h2>Step 7 — Your company, your judgment</h2>
-<p>You chose the company and every assumption in the model.</p>
-<blockquote>A colleague says your valuation is really just your terminal growth assumption wearing a spreadsheet, and that with a different assumption — equally defensible — you would get a materially different answer.</blockquote>
-<p><strong>They are very likely right about the arithmetic.</strong> Write the strongest version of their case, including the number that supports it. Then answer it or concede it.</p>
-<p><strong>Conceding earns full marks.</strong> So does a good answer about why your assumption is better supported than the alternative. What earns nothing is pretending the sensitivity is small when your own Step 6 table says it is not.</p>
-<h2>Step 8 — What did you notice that I did not ask about?</h2>
-<p>The standing question.</p>
-<p>Something in your company's filings or data was odd. A line item that moved without explanation. A segment definition that changed. A disclosure that answered a question nobody asked. A difference between what management emphasised and what the statements showed.</p>
-<p>Write it down with evidence.</p>
-<p><strong>Graded on genuineness and evidence, never on whether it was the right thing to notice.</strong> This is the week where the finding slot most often produces something genuinely interesting, because you are reading one company closely rather than a panel broadly.</p>
+<p>You are predicting before the model answers. Most of these predictions will be wrong, and that is the point: the capstone memo ends by comparing this page with what the model produced and saying what changed. A prediction written afterwards is worth nothing, and cannot be written afterwards, because this one is timestamped in the room.</p>
+<blockquote><strong>Submit now — Checkpoint 9.</strong> Your notebook as it stands after Steps 1 and 2, whatever state it is in, plus one line naming where you stopped or which check is failing, plus your Edition A page, plus your AI disclosure. Brightspace: <strong>Lab 6 — Capstone Studio: Two Companies and the Decision — Tuesday record (CP9)</strong>. Before you leave the room.</p>
+<p><strong>The floor:</strong> ABG reproducing, company A's lines loaded, the last filed year reproduced or the reason it is not, and Edition A written. A student who leaves with that has done the in-class core, whether or not company A's projection runs yet.</blockquote>
+<h2>Part 2 — Thursday (Checkpoint 10)</h2>
+<h2>Step 4 — Company B, through the same pipeline (25 min)</h2>
+<p>Swap the company half again. If Tuesday's separation was clean this is minutes, not an hour, and that is the lesson: <strong>one pipeline, run twice.</strong> If it is not minutes, the separation was not clean, and fixing it now is worth more than finishing.</p>
+<p>Same known-answer check: company B's last filed year, reproduced, before anything is projected.</p>
+<h2>Step 5 — One exhibit, both companies (20 min)</h2>
+<p>Both ranges on one picture, each against its own dated market price, with the date and source of each price written down.</p>
+<p>Then the number a committee actually acts on: for each company, <strong>the gap between your range and the price, as a percentage.</strong> Ranges in dollars cannot be compared across two companies. Gaps can.</p>
+<p><strong>Check the comparison is fair before you read it.</strong> Same horizon, same terminal convention, discount rates built from the same components with only the beta and the leverage differing. If they differ in any other way, you are ranking your own method, not the businesses.</p>
+<h2>Step 6 — The decision, the flip point, the triggers (25 min)</h2>
+<p>This is the graded core of the week, and the part no agent can produce, because it requires running your model.</p>
+<ol>
+<li><strong>The recommendation</strong>, one sentence: which company gets the capital, and the condition under which that holds.</li>
+<li><strong>The flip point</strong>: the single assumption that, moved alone, reverses the ranking, and <strong>the value at which it reverses.</strong> Find it by rerunning, not by arithmetic on the sensitivity table. Say whether that value is inside or outside the company's own history.</li>
+<li><strong>Two triggers</strong>, one per company, each with all three parts from handout Part 10: an observable you could look up, a threshold with a direction, and a review date.</li>
+</ol>
+<p><strong>The shape, not your answer:</strong> "We recommend A over B. The ranking turns on A's gross margin, held at 17.05%. At 15.9% the cases meet and B ranks higher. A's margin has not been below 16.4% in ten years, which is why the recommendation holds. Trigger: if same-store gross margin prints below 16.4% in the Q1 10-Q, due late April, we re-rank."</p>
+<h2>Step 7 — The peer read (15 min)</h2>
+<p>Swap your exhibit and your three decision lines with one other person. You each write <strong>three defects</strong> on the other's, in writing, and hand them back. Defects, not compliments, and not fixes: name what is missing, what is unsupported, or what a committee would ask first.</p>
+<p>You are graded on the note you <em>receive</em> being real, and on nothing about the other person's work. Their grade is theirs.</p>
+<blockquote><strong>Submit now — Checkpoint 10.</strong> Your exhibit, your three decision lines from Step 6, the peer note you received, and your AI disclosure. Brightspace: <strong>Lab 6 — Capstone Studio: Two Companies and the Decision — Thursday record (CP10)</strong>. Before you leave the room.</p>
+<p><strong>The floor:</strong> both companies' last filed years reproduced, one exhibit with both ranges against dated prices, and a flip point with a number on it. The full sensitivity on both companies is outside the room.</blockquote>
+<h2>Part 3 — After Thursday</h2>
+<h2>Step 8 — Finish company A</h2>
+<p><a href="exercise4.html">Exercise 4</a> is company A, finished properly: the full sensitivity, the scenarios, the four checks, the honest range. Its page is the specification and its due date is on its Brightspace page.</p>
+<h2>Step 9 — What did you notice that I did not ask about?</h2>
+<p>The standing question, not collected. Something in one of your companies behaved unexpectedly: a line that moved without explanation, a tag that went empty, a segment that was redefined, a share count that fell faster than you expected. Write it down with evidence. The capstone memo runs on this habit.</p>
+<hr />
 <h2>If you want to do this differently</h2>
-<p>You may depart from the method above — a different valuation approach, a different treatment of the terminal value, a decision not to produce a point estimate at all. <strong>A defended departure earns full marks.</strong> State what you did instead, why, and what you gave up.</p>
-<p>A well-argued "this company cannot be responsibly valued with the information available to me, and here is why" is a legitimate and sometimes excellent answer.</p>
-<p><strong>Two sources, minimum — and where you have professional access, one of them is the professional source.</strong> This week that is <strong>Compustat, beside SEC EDGAR as-filed — and IBES for any forward growth</strong>, for standardisation is a choice, not a fact, and no filing contains a forward estimate.</p>
-<p>Pending access is neither an excuse nor a penalty. Document the attempt — source, route tried, date, barrier, and why that source would have been independent — and use a second free source instead. <strong>The attempt counts; the outcome never does.</strong></p>
+<p>You may depart from the method above. A defended departure earns full marks. State what you did instead, why, and what you gave up.</p>
+<p>Two departures are welcome: discount free cash flow to the firm at a weighted cost of capital and bridge to equity with dated net debt, stating both rates, provided you do it for <strong>both</strong> companies so the comparison stays fair; or run a multiples check beside the discounted cash flow, the way Kaplan and Ruback found the two together did better than either.</p>
+<p>Two sources, minimum, and where you have professional access, one of them is the professional source. This week that is Compustat beside SEC EDGAR as filed, which is where the AI-risk check comes from. Pending access is neither an excuse nor a penalty. Document the attempt and use the filing. The attempt counts; the outcome never does.</p>
 <h2>Submit</h2>
-<ul>
-<li>Your notebook or model, runnable start to finish</li>
-<li>Your revision finding from Step 1, including a negative result if that is what you got</li>
-<li>The fiscal calendar table</li>
-<li>Your two-source comparison and diagnosis</li>
-<li>The valuation, as a range, with terminal-value share stated</li>
-<li><strong>The complete source ledger</strong></li>
-<li>Your sensitivity translation from Step 6</li>
-<li>Your Step 7 defence and Step 8 finding</li>
-</ul>
+<p>Two checkpoints, in the room: Tuesday's notebook plus Edition A, Thursday's exhibit plus the decision lines plus the peer note. Exercise 4 collects company A finished, on <a href="exercise4.html">its page</a>. Nothing else is collected this week.</p>
 <h2>Before Week 7 — do these</h2>
 <ol>
-<li>Collect every artefact from Weeks 1 through 6 in one place. Week 7 assembles, it does not</li>
+<li>Finish Exercise 4 on company A.</li>
+<li>Finish company B to the same standard. The capstone needs both at full depth, and Week 7 is defences, not building.</li>
+<li>Draft your four-minute defence to the structure on the <a href="../week7/lab.html">Week 7 lab page</a>. Time it out loud. Four minutes is shorter than you think.</li>
+<li>Keep Edition A. The memo ends by comparing it with what the model actually produced.</li>
 </ol>
-<p>rebuild.</p>
-<ol>
-<li>Reread your Week 5 limitations section and extend it with what you learned this week.</li>
-<li>Watch your own work as a stranger would: pick the one number a sceptical reader would</li>
-</ol>
-<p>challenge first, and be ready for it.</p>
-<p><strong>Lab 7 preview:</strong> assemble the term's work into a deliverable a colleague could pick up and rerun, then defend a key assumption on a fresh data point, on video, unaided.</p>
+<p><strong>Lab 7 preview:</strong> defend the decision in front of the room in four minutes, answer two questions on your own numbers, and act as the graded discussant for someone in the other cohort.</p>
 </main></body></html>

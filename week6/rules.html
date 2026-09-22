@@ -26,34 +26,45 @@ hr { border:0; border-top:1px solid var(--rule); margin:2rem 0; }
 </style></head>
 <body><main>
 <div class='nav'><a href='../index.html'>MSF Financial Modeling</a></div>
-<h1>Week 6 — Rules</h1>
 <h1>Week 6 — Rules and Conventions</h1>
 <blockquote><strong>Register: RULES.</strong> No teaching here — see <code>handout.md</code>.</blockquote>
-<h2>Every input is dated</h2>
-<p>Each figure in your valuation carries an as-of date and a basis. An input you cannot date is recorded in the ledger as undated, with a note saying what you would need to date it.</p>
-<p>Undated inputs are permitted. Silently omitted ones are not.</p>
+<h2>Every input is dated and labelled</h2>
+<p>Each figure in the model carries its source, the accession number or statement it came from, the date, and one of four labels: history, guidance, judgment, fact. An input you cannot date is recorded in the ledger as undated, with a note saying what you would need to date it. Undated inputs are permitted. Silently omitted ones are not.</p>
 <h2>Vintage is stated</h2>
-<p>Where a figure has been revised, state which vintage you used — as first reported, as-reported current, or point-in-time — and why that choice fits your purpose.</p>
-<p>Using one vintage for some inputs and another for others is a defect unless deliberate and disclosed.</p>
+<p>This week's model is a current-state analysis: each year's figure as first reported in that year's own 10-K, with a check of whether a later 10-K changed it. Using one vintage for some inputs and another for others is a defect unless deliberate and disclosed.</p>
 <h2>Basis is stated</h2>
-<p>GAAP or non-GAAP. Fiscal or calendar. Every time.</p>
-<p>A valuation built on adjusted figures and presented without saying so is misleading even when every number in it is accurate.</p>
+<p>GAAP or non-GAAP. Fiscal or calendar. A one-time charge is named as one-time and excluded or included by a stated decision, never by silence.</p>
 <h2>Period comparability</h2>
-<p>Before any growth rate, confirm the periods are the same length and cover the same season. A comparison spanning a 53-week year, a fiscal-year change, or a stub period is adjusted or flagged.</p>
+<p>Before any growth rate, confirm the periods are the same length. A comparison spanning a 53-week year is adjusted or flagged.</p>
+<h2>No balance, no valuation</h2>
+<p>Every projected year prints assets minus liabilities minus equity, and it is zero. Cash on the balance sheet equals opening cash plus the cash-flow statement's net change. Cash stays at or above the floor you set, or the revolver line shows the draw. The check block sits under every projection, and the valuation cell refuses to run without it.</p>
+<h2>Cash is computed last</h2>
+<p>From the cash-flow statement. Never a plug.</p>
+<h2>The terminal guard</h2>
+<p>The model raises an error when terminal growth is at or above the discount rate. The share of value coming from the terminal value is stated.</p>
+<h2>The known answer is the last filed year</h2>
+<p>Before any projection, the pipeline reproduces the company's own most recent filed year and prints the comparison against the filing: revenue, operating income, net income, the share count and net debt. A model that cannot reproduce what already happened does not get to project what has not.</p>
+<h2>The comparison is built the same way twice</h2>
+<p>Two companies are ranked only if both models share a horizon, a terminal convention, and a discount rate assembled from the same components, with only the beta and the leverage differing. Any other difference and the ranking measures the method, not the businesses.</p>
+<h2>A recommendation carries a flip point</h2>
+<p>The ranking names the single assumption that reverses it and the value at which it reverses, found by rerunning the model. Whether that value sits inside or outside the company's own history is stated.</p>
+<h2>A trigger has three parts</h2>
+<p>An observable that is published, a threshold with a direction, and a review date. Anything missing one of the three is not a trigger.</p>
+<h2>Edition A is written without AI, in the room</h2>
+<p>One page, no agent open, timestamped by the checkpoint that collects it: a paragraph on each company and a prediction of the ranking, the widths, and the assumption that will matter. It is never rewritten afterwards. The memo compares it with what the model produced and says what changed.</p>
+<h2>The share count is the latest filed count</h2>
+<p>From the most recent 10-Q or 10-K cover, dated, labelled as a fact. Not the year's weighted average, not a data feed's field.</p>
+<h2>Rerun, never add</h2>
+<p>Scenarios and cases are rerun through the whole model. Sensitivities are never summed.</p>
 <h2>Ranges, not points</h2>
-<p>Valuations are reported as ranges. A single point estimate claims a precision the inputs do not support.</p>
-<p>The share of value coming from the terminal assumption is stated explicitly.</p>
+<p>The valuation is reported as a range against a dated market price, with the assumption most likely to move it named.</p>
 <h2>The reproducibility test</h2>
-<p>The source ledger must let someone who has never seen your work rebuild the valuation.</p>
-<p>This is the same standard the Week 7 deliverable is graded against. It is not a formality.</p>
-<h2>Negative results count</h2>
-<p>"I checked for revisions across these concepts and these filings and found none" is a complete finding.</p>
-<p>"There were no revisions" without saying what you checked is not a finding, and will be treated as an unperformed check.</p>
+<p>The ledger and the notebook must let someone who has never seen your work rebuild the value. This is the capstone's standard, applied one company early.</p>
+<h2>Your company is not the training case</h2>
+<p>At least one driver in your model exists because of your company and not because ABG had it, or one of ABG's is absent because your company does not work that way. Name it. Nineteen rows carried over unchanged under a new ticker is a renamed model, not a built one.</p>
 <h2>AI use</h2>
-<p>AI builds valuation models quickly and correctly. It will also invent plausible-looking inputs if you let it, will not know the vintage of anything, and will confidently produce a point estimate to two decimal places.</p>
-<p>Never accept a number from an AI into your ledger without an independent source for it. A figure whose only provenance is that a model produced it is not sourced.</p>
-<p>What must be yours: the company, the assumptions, the vintage choices, the sensitivity translation, and the range.</p>
-<p>You must be able to explain every line of code and every input you submit.</p>
+<p>AI builds valuation models quickly and mostly correctly. It will also invent plausible-looking inputs, will not know the vintage of anything, will confidently produce a point estimate to two decimal places, and will read a standardised field as if it were the filing.</p>
+<p>Never accept a number from an AI into your ledger without a source for it. What must be yours: the assumptions and their labels, the vintage choices, the sensitivity translated into sentences, the range, and the answer to the AI-risk check. You must be able to explain every line of code and every input you submit.</p>
 <h2>Reproducibility and citation</h2>
 <p>Unchanged: fresh-kernel runs, every number traceable, every source in <code>source_log.md</code> with access route, coverage window, and retrieval date.</p>
 </main></body></html>

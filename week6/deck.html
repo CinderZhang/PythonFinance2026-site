@@ -22,139 +22,121 @@ th, td { border:1px solid var(--rule); padding:.5rem .8rem; text-align:left; } t
 @media (max-width:820px) { body { font-size:17px; } h2 { font-size:1.6rem; } }
 </style></head><body>
 <div id='bar'></div>
-<section class='slide title-slide'><h1>Week 6</h1><div class='sub'>FIN 69000-003 · Financial Analytics with Python (with AI)</div></section>
-<section class='slide'><h2>From a portfolio to one company</h2>
-<p>Five weeks of panels, portfolios, and risk reports.</p>
-<p>Now: one company, a handful of inputs.</p>
-<p>Not <em>"what is your target price."</em></p>
-<blockquote><strong>"Where did that number come from, and as of when?"</strong></blockquote></section>
-<section class='slide'><h2>What is Apple's FY2017 operating cash flow?</h2>
-<p>A factual question.</p>
-<p>Look it up. Give me the number.</p>
-<p>Now — <strong>where did you get it, and when did that source pull it?</strong></p></section>
-<section class='slide'><h2>Two answers, both correct</h2>
-<pre><code>period 2016-09-25 -&gt; 2017-09-30
+<section class='slide title-slide'><h1>Week 6</h1><div class='sub'>FIN 69000-003 · Financial Analytics with Python (with AI) · **two working sessions**</div></section>
+<section class='slide'><h2>Before we start — do these</h2>
+<ol>
+<li><strong>Tools alive.</strong> Both companies' filed lines print from your cached JSON. Both agents answering from your folder. Nothing typed into AI.</li>
+<li><strong>Find the other side.</strong> Partner with someone whose poll answer differed from yours. Two minutes each: the first line where your ABG rebuild diverged, or the step that stopped you.</li>
+<li><strong>Gap check.</strong> Which of these can you not define in one sentence: pro-forma, free cash flow to equity, terminal value, cost of equity, flip point? That list is yours for the week.</li>
+</ol></section>
+<section class='slide'><h2>This week is not a lecture</h2>
+<p>Videos 3 and 4 were the valuation core. The handout is the reference.</p>
+<p><strong>Tuesday:</strong> we build the model once together on ABG, then you swap in company A, then you write one page with the laptop shut.</p>
+<p><strong>Thursday:</strong> company B through the same pipeline, then the decision, then a peer read.</p>
+<blockquote>Both checkpoints score the <strong>state you submit</strong>, not the finish line. A failing check with a named diagnosis scores. A blank does not.</blockquote></section>
+<section class='slide'><h2>The build order — this is the part agents get wrong</h2>
+<pre><code>1  income statement      revenue → gross profit → costs → D&amp;A → EBIT
+                         → interest on OPENING debt → tax → net income
+2  balance sheet         inventory, PP&amp;E, debt after paydown,
+   from the drivers      equity after net income and buyback
+3  FCFE                  NI + D&amp;A + non-cash − capex − ΔWC + Δfinancing − paydown
+4  CASH, LAST            opening cash + FCFE − buyback
+                         revolver drawn ONLY if cash &lt; floor
+5  check block           balance identity · cash tie · cash floor
+6  valuation cell        refuses if checks fail, or if g ≥ r
+</code></pre>
+<p>Cash is never a plug. If you can type a number into cash, the model is wrong.</p></section>
+<section class='slide'><h2>ABG: the known answer</h2>
+<pre><code>FY2026E   revenue 18,323.0   EBIT 844.2   net income 413.6   FCFE 211.4   cash 101.8
+FY2030E   net income 527.5   FCFE 342.3   cash 719.8   revolver 0 in every year
 
-10-K filed 2017-11-03      63,598,000,000
-10-K filed 2018-11-05      64,225,000,000
-10-K filed 2019-10-31      64,225,000,000
+PV of five years          1,059.9
+terminal (342.3 + 150) × 1.025 / (0.10 − 0.025), discounted    4,177.5
+equity 5,237.3 / 17,951,349 shares  =  $291.75      terminal share 79.8%
 </code></pre>
-<p>Same period. Same company. Same line item.</p>
-<p><strong>$627 million apart — about 1%.</strong></p>
-<p>Nobody did anything wrong. Standards change; comparatives get restated.</p>
-<blockquote>It is not a single fact. It is a fact <strong>with a vintage</strong>.</blockquote></section>
-<section class='slide'><h2>Three things routinely confused</h2>
-<table>
-<thead>
-<tr>
-<th>Term</th>
-<th>Means</th>
-<th>Use for</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>As first reported</strong></td>
-<td>the figure in the original filing</td>
-<td>what the market saw at the time</td>
-</tr>
-<tr>
-<td><strong>As-reported (current)</strong></td>
-<td>as it stands now, restatements included</td>
-<td>current-state analysis</td>
-</tr>
-<tr>
-<td><strong>Point-in-time</strong></td>
-<td>as known on a specified date</td>
-<td>anything time-sensitive</td>
-</tr>
-</tbody>
-</table>
-<p>Week 2: a fundamental has a <strong>knowability date</strong>.</p>
-<p>This week: it also has a <strong>value that changes</strong>.</p>
-<p>A backtest on data pulled today is biased toward whoever was revised upward.</p></section>
-<section class='slide'><h2>The year that had fifty-three weeks</h2>
-<pre><code>2021-09-26 -&gt; 2022-09-24    364 days = 52.00 weeks
-2022-09-25 -&gt; 2023-09-30    371 days = 53.00 weeks   &lt;-- extra week
-2023-10-01 -&gt; 2024-09-28    364 days = 52.00 weeks
+<p>Your number differs? <strong>Walk back, do not stare at the price.</strong> Revenue 18,323.0 → EBIT 844.2 → FCFE 211.4. The first line that differs is the line to fix.</p></section>
+<section class='slide'><h2>Your known answer is not $291.75</h2>
+<p>ABG has a published answer because the instructor built it. Your company has a better one.</p>
+<blockquote><strong>Reproduce the last filed year before you project anything.</strong></blockquote>
+<p>Run your pipeline on the year that already happened. Print revenue, operating income and net income beside the filed figures. Tie the share count and net debt to the balance sheet.</p>
+<p>If the rebuilt year does not reproduce the filed year, every projected year is wrong the same way.</p>
+<p>This is the check an agent cannot fake, because it has to have opened the filing.</p></section>
+<section class='slide'><h2>Two halves, and only one of them changes</h2>
+<pre><code>COMPANY   the filed lines · the drivers, each labelled history / guidance / judgment
+          the opening balance sheet · the share count
+
+METHOD    project() · checks() · dcf() · revalue()
+          knows nothing about which company it is running
 </code></pre>
-<p>FY2023 had ~1.9% more selling days.</p>
-<p>So FY2023 growth is <strong>inflated</strong> by a week — and FY2024 growth is <strong>depressed</strong> by the same week going away.</p>
-<p>Two artefacts, opposite signs. Both look exactly like business trends.</p></section>
-<section class='slide'><h2>Why two platforms disagree</h2>
-<table>
-<thead>
-<tr>
-<th>Cause</th>
-<th>What is happening</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Vintage</td>
-<td>pulled before vs after a restatement</td>
-</tr>
-<tr>
-<td>Fiscal alignment</td>
-<td>calendarised, or not</td>
-</tr>
-<tr>
-<td><strong>Standardisation</strong></td>
-<td>mapped onto the vendor's own schema</td>
-</tr>
-<tr>
-<td>Classification</td>
-<td>discontinued ops, one-offs, segments</td>
-</tr>
-<tr>
-<td>GAAP vs non-GAAP</td>
-<td>statutory, or management's adjusted</td>
-</tr>
-</tbody>
-</table>
-<p>Compustat does not copy filings. It <strong>maps</strong> them, so thousands of companies compare.</p>
-<p>The expensive platform is often <em>deliberately less faithful</em> to any one filing.</p>
-<p><strong>Knowing which you need is the skill.</strong></p></section>
-<section class='slide'><h2>The recurring one-off</h2>
-<p>Adjusted figures exclude what management considers unrepresentative.</p>
-<p>Sometimes informative. Sometimes the same "one-off" charge for six straight years.</p>
-<ol>
-<li>Non-GAAP is <strong>not standardised</strong> — two companies' "adjusted EBITDA" are not comparable</li>
-<li>The reconciliation is <strong>published</strong> — read it</li>
-<li>A recurring adjustment <strong>is not an adjustment</strong></li>
-</ol>
-<p>State which basis you used.</p></section>
-<section class='slide'><h2>The source ledger</h2>
-<blockquote><strong>Input:</strong> FY2017 operating cash flow <strong>Value:</strong> $63.598bn <strong>Source:</strong> Apple 10-K FY2017, filed 2017-11-03, via SEC EDGAR XBRL <strong>As-of:</strong> as first reported, 2017-11-03 <strong>Basis:</strong> GAAP, fiscal year (52/53-week, ends last Saturday of September) <strong>Note:</strong> Revised to $64.225bn in the FY2018 10-K. I use as-first-reported because this analysis reconstructs what was knowable at the time. A current-state analysis should use $64.225bn.</blockquote>
-<p>The <strong>note</strong> is the difference between an analyst and a spreadsheet.</p>
-<blockquote>Any link you cannot date is a link you cannot defend.</blockquote></section>
-<section class='slide'><h2>The model is the easy part</h2>
-<p>AI builds a DCF in seconds. That is not where the value is.</p>
-<p>Where valuations actually go wrong:</p>
+<p>Separate them today and company B costs minutes on Thursday.</p>
+<p>Do not separate them and you will build the second model by hand. <strong>That is the difference the capstone is testing.</strong></p></section>
+<section class='slide'><h2>Your company is not a car dealer</h2>
+<p>ABG carries a floor-plan line because dealers finance inventory that way, and a pooled impairment because franchise rights get written down.</p>
+<p>Yours will not have those. It will have something else.</p>
+<blockquote>Name <strong>one driver that exists in your company and not in ABG's</strong> — or one of ABG's that does not apply to yours — and say what you did about it.</blockquote>
+<p>Nineteen rows carried over unchanged under a new ticker is a renamed model, not a built one. It is visible in about ten seconds.</p></section>
+<section class='slide'><h2>Edition A — laptop shut, 15 minutes</h2>
+<p>One page, no agent, written here, timestamped by the checkpoint.</p>
 <ul>
-<li><strong>Terminal value</strong> — usually most of the answer</li>
-<li>Discount rate components, each with estimation error</li>
-<li>Growth extrapolated from a 53-week year</li>
-<li>Comparables chosen to fit a conclusion</li>
-<li>Inputs of unknown vintage</li>
+<li><strong>Company A</strong>, one paragraph: what the business does, and the driver you expect its value to turn on</li>
+<li><strong>Company B</strong>, one paragraph: the same</li>
+<li><strong>Your prediction</strong>, three lines: which looks better against its price, how wide each range will be, which assumption will matter most</li>
 </ul>
-<p>Only one of those is arithmetic.</p>
-<p><strong>Report a range.</strong> A point estimate claims precision you do not have.</p></section>
-<section class='slide'><h2>Your company, your judgment</h2>
-<blockquote><em>"Your valuation is really just your terminal growth assumption wearing a spreadsheet."</em></blockquote>
-<p><strong>They are probably right about the arithmetic.</strong></p>
-<p>The difference is not the number. It is whether the assumption is <strong>stated, sourced, and sensitivity-tested</strong> — or buried.</p>
-<blockquote><strong>What did you notice that I did not ask about?</strong></blockquote></section>
-<section class='slide'><h2>Before next week — do these</h2>
-<blockquote><strong>Two sources minimum — and one of them professional where you have access.</strong> Pending access is documented, never penalised. The attempt counts; the outcome does not.</blockquote>
+<p>Most predictions will be wrong. That is the point — the memo ends by comparing this page with what the model produced.</p>
+<p>It cannot be written later. That is why it is written now.</p></section>
+<section class='slide'><h2>Thursday: one exhibit, both companies</h2>
+<p>Ranges in dollars do not compare across two companies. <strong>Gaps do.</strong></p>
+<p>For each company: the gap between your range and its dated price, as a percentage.</p>
+<blockquote><strong>Fair or nothing.</strong> Same horizon, same terminal convention, discount rates from the same components with only beta and leverage differing. Anything else and you are ranking your method.</blockquote></section>
+<section class='slide'><h2>The flip point</h2>
+<p>A recommendation with no flip point is an opinion.</p>
+<p><strong>The shape, not your answer:</strong></p>
+<blockquote>We recommend A over B. The ranking turns on A's gross margin, held at 17.05%. At <strong>15.9%</strong> the cases meet and B ranks higher. A's margin has not been below 16.4% in ten years, which is why the recommendation holds.</blockquote>
+<p>Find it by <strong>rerunning</strong>, not by arithmetic on the sensitivity table.</p>
+<p>Then say whether that value sits inside or outside the company's own history. That sentence is the whole skill.</p></section>
+<section class='slide'><h2>A trigger has three parts</h2>
+<table>
+<thead>
+<tr>
+<th>Part</th>
+<th>Means</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Observable</strong></td>
+<td>published, you could look it up</td>
+<td>same-store gross margin, next 10-Q</td>
+</tr>
+<tr>
+<td><strong>Threshold</strong></td>
+<td>a number, with a direction</td>
+<td>below 16.4%</td>
+</tr>
+<tr>
+<td><strong>Review date</strong></td>
+<td>when you look</td>
+<td>Q1 filing, late April</td>
+</tr>
+</tbody>
+</table>
+<p>"Monitor margins" is not a trigger.</p>
+<p>Two triggers, one per company.</p></section>
+<section class='slide'><h2>Before Thursday — do these</h2>
 <ol>
-<li>Find a <strong>revision</strong> in your own company — or report a negative result you actually looked for.</li>
-<li>Establish the <strong>fiscal calendar</strong>. Any 53-week years?</li>
-<li>Get one figure from <strong>two sources</strong>; diagnose the difference.</li>
-<li>Build the valuation. <strong>Report a range.</strong> State the terminal-value share.</li>
-<li>Complete the <strong>source ledger</strong> — every input dated, with notes.</li>
-<li>Translate sensitivity into statements about the business.</li>
-<li><strong>Gather every artefact from Weeks 1–6.</strong></li>
+<li>Company A's last filed year reproduced, or the reason it is not, written down.</li>
+<li>The company half and the method half actually separate in your notebook. Thursday is timed on this.</li>
+<li>Company B's filed lines loaded, the way A's were.</li>
+<li>Keep Edition A somewhere you will find it in two weeks.</li>
 </ol>
-<p><strong>Week 7 assembles. It does not rebuild.</strong> Anything missing arrives missing.</p></section>
+<p>Thursday: company B, one exhibit, the flip point, two triggers, a peer read.</p></section>
+<section class='slide'><h2>Before Week 7 — do these</h2>
+<ol>
+<li>Finish Exercise 4 on company A. The exercise page is the specification.</li>
+<li>Finish company B to the same depth. <strong>Week 7 is defences, not building.</strong></li>
+<li>Draft the four-minute defence to the structure on the Week 7 lab page, and time it out loud.</li>
+<li>Two sources minimum, one professional where you have access. The attempt counts; the outcome does not.</li>
+</ol>
+<p><strong>Lab 7 preview:</strong> defend the decision in front of the room in four minutes, answer two questions on your own numbers, and act as graded discussant for someone in the other cohort.</p></section>
 <div id='num'></div><div id='hint'>← → or space to navigate</div><script>var s=[].slice.call(document.querySelectorAll('.slide')),i=0;function go(n){i=Math.max(0,Math.min(s.length-1,n));s.forEach(function(e,k){e.classList.toggle('current',k===i);});document.getElementById('num').textContent=(i+1)+' / '+s.length;document.getElementById('bar').style.width=((i)/(s.length-1)*100)+'%';if(location.hash!=='#'+(i+1)){history.replaceState(null,'','#'+(i+1));}}document.addEventListener('keydown',function(e){if(e.key==='ArrowRight'||e.key===' '||e.key==='PageDown'){e.preventDefault();go(i+1);}else if(e.key==='ArrowLeft'||e.key==='PageUp'){e.preventDefault();go(i-1);}else if(e.key==='Home'){go(0);}else if(e.key==='End'){go(s.length-1);}});document.addEventListener('click',function(e){if(e.target.closest('a,pre,table'))return;go(i+1);});go(parseInt((location.hash||'#1').slice(1),10)-1||0);</script></body></html>

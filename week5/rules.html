@@ -28,28 +28,33 @@ hr { border:0; border-top:1px solid var(--rule); margin:2rem 0; }
 <div class='nav'><a href='../index.html'>MSF Financial Modeling</a></div>
 <h1>Week 5 — Rules and Conventions</h1>
 <blockquote><strong>Register: RULES.</strong> No teaching here — see <code>handout.md</code>.</blockquote>
-<h2>The policy is chosen before it is priced</h2>
-<p>Your rebalancing frequency goes in writing during prework, before you compute its cost. In Lab 5 Step 3 you will be asked whether you chose before or after seeing the table, and the honest answer is required.</p>
-<p>Choosing after is legitimate practice. It must be disclosed as what it is. Presenting a post-hoc policy as a prior principle is not.</p>
-<h2>An alpha is reported with what produced the weights</h2>
-<p>Every alpha you report carries its t-statistic and one sentence on how the weights it was measured on were chosen. If the weights were fitted on the same window, the alpha is labelled in-sample, every time it appears.</p>
-<p>An unlabelled alpha is read as a claim of skill. If that is not what you mean, label it.</p>
-<h2>A drawdown is reported with its dates and its convention</h2>
-<p>Every maximum drawdown you report carries the peak date, the trough date, the months to recover or "not recovered by window end", the return series it was computed on, and the observation frequency. A drawdown on monthly data is labelled as such: intramonth lows are not in it.</p>
-<p>A past drawdown is a record of what happened. It is never reported as a limit on what can happen.</p>
-<h2>The cap is a cap on targets unless you say otherwise</h2>
-<p>The cap you defended in Week 4 binds your target weights. Holdings drift between resets. When you report a policy, report how far holdings drifted past the cap under it.</p>
-<h2>Costs are sourced, and tax is named</h2>
-<p>A round-trip cost you found is cited with its source. A round-trip cost you assumed is stated as an assumption, in those words. Tax is named as a cost that is not in the number.</p>
-<h2>Leverage is reported, always</h2>
-<p>Every portfolio you report carries its gross leverage. Inherited from Week 4; it does not lapse.</p>
-<h2>Inherited conventions</h2>
-<p>Your Week 3 and Week 4 conventions bind here: return type, frequency, annualization, risk-free source, window, and fixed weights reset monthly for the return series. The regression inherits every one of them. If a convention changes, every coefficient changes with it. Say so.</p>
+<h2>Every input is dated and labelled</h2>
+<p>Each figure carries its source, the accession number or statement it came from, the date, and one of four labels: history, guidance, judgment, fact. An input you cannot date is recorded as undated, with a note saying what you would need to date it. Undated inputs are permitted. Silently omitted ones are not.</p>
+<h2>The five inputs are stated separately</h2>
+<p>The cash flows, the discount rate, the terminal growth rate, any bridge, and the share count. A valuation that does not show all five is not reviewable.</p>
+<h2>Cash is computed last</h2>
+<p>From the cash-flow statement: opening cash plus the period's flows. Never a plug. If you can type a number into cash, the model is wrong.</p>
+<h2>No balance, no valuation</h2>
+<p>Every projected year prints the balance identity, the cash tie between the balance sheet and the cash-flow statement, and cash against the floor. The valuation cell refuses to run when a check fails.</p>
+<p>A balance sheet that does not balance is not a forecast. It is a bug.</p>
+<h2>The terminal guard</h2>
+<p>The model raises an error when terminal growth is at or above the discount rate. Without the guard the arithmetic returns a confident negative number for a profitable company, and you will not notice.</p>
+<p>Terminal growth is below the long-run growth rate of the economy the company operates in.</p>
+<h2>The terminal share is reported with the horizon beside it</h2>
+<p>Neither means anything alone. Lengthening the forecast lowers the share without changing the value.</p>
+<h2>The discount rate is built, not typed</h2>
+<p>Risk-free rate, beta and equity risk premium, each stated. The beta is computed from returns, and its standard error is reported with it. Whatever you treat as debt in the cash flow, treat as debt in the rate.</p>
+<h2>The share count is the latest filed count</h2>
+<p>From the most recent 10-Q or 10-K cover, dated, labelled a fact. Not the year's weighted average, not a data feed's field.</p>
+<h2>Rerun, never add</h2>
+<p>Scenarios are rerun through the whole model. Sensitivities are never summed.</p>
+<h2>Ranges, not points</h2>
+<p>The valuation is reported as a range against a market price you dated, with the assumption most likely to move it named.</p>
+<h2>The target lock is binding</h2>
+<p>Two companies, screened, with the screen confirmed in writing. ABG is not eligible. A change after the lock goes through the instructor.</p>
 <h2>AI use</h2>
-<p>AI writes factor regressions and drawdown code fluently. Four things it will do without comment: report the alpha as evidence of skill; report a drawdown without its dates or its recovery; leave tax out of a trading-cost estimate and not say so; and describe a factor tilt as if the premium were guaranteed. It will not label anything in-sample.</p>
-<p>Ask for the code. Then do the reading yourself. That is what this week is.</p>
-<p>What must be yours: the three committee sentences, the before-or-after statement, the reading of the drawdown, the sheet, and the alpha defence.</p>
-<p>You must be able to explain every line of code you submit.</p>
+<p>AI builds valuation models quickly and mostly correctly. It will also invent plausible inputs, will not know the vintage of anything, will produce a point estimate to two decimal places, and will read a standardised data field as though it were the filing.</p>
+<p>Never accept a number from an AI into your model without a source for it. What must be yours: the assumptions and their labels, the vintage choices, the range, and the answer to what would move it. You must be able to explain every line of code and every input you submit.</p>
 <h2>Reproducibility and citation</h2>
-<p>Unchanged: fresh-kernel runs, every number traceable to code, every source in <code>source_log.md</code>.</p>
+<p>Unchanged: fresh-kernel runs, every number traceable, every source in <code>source_log.md</code> with access route, coverage window, and retrieval date.</p>
 </main></body></html>
