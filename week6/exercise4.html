@@ -36,9 +36,13 @@ hr { border:0; border-top:1px solid var(--rule); margin:2rem 0; }
 <li><strong>SEC company-facts API</strong> (the Week 6 handout's route). Start here: <code>https://data.sec.gov/api/xbrl/companyfacts/CIK{your ten-digit CIK}.json</code>, with a User-Agent header naming you.</li>
 <li><strong>The filings themselves</strong>, for everything the feed does not carry, which will include capital expenditure and the current share count. Start here: https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&amp;type=10-K</li>
 <li><strong>Compustat on WRDS</strong> (professional lane): the fundamentals annual file. Record the variable names; Compustat's definitions are not the filing's line items, and the handout's Part 3 is about exactly that.</li>
+<li><strong>Capital IQ, LSEG Workspace, or the Financial Datasets API</strong> (professional lane) stand in for Compustat if that is what you have. Record the field names the same way.</li>
+<li><strong>The market price</strong> for requirement 8, and the returns behind the beta in requirement 3, come from the same lane: CRSP or the Compustat security file on WRDS, Capital IQ, or the Financial Datasets price endpoint.</li>
 </ul>
+<p><strong>Yahoo Finance and <code>yfinance</code> are not accepted sources for any input on this page.</strong> A free consumer feed is not a documented attempt at professional access.</p>
 <p>Establish the fiscal calendar before you compute any growth rate. If your company has a 53-week year or changed its year end, say so on the row.</p>
 <p>Two sources, minimum, and where you have professional access, one of them is the professional source. Pending access is neither an excuse nor a penalty: document the attempt and use the filing. The attempt counts; the outcome never does.</p>
+<p><strong>Python does the work.</strong> Extraction, alignment, the pro-forma, the check block, the discounted cash flow, the scenarios, the tornado and the exhibit are all code in the notebook, runnable from a fresh kernel. Hand-typed numbers are limited to the filing reads the feed does not carry, each with a comment naming the statement. A spreadsheet may be a scratchpad; it is not the model.</p>
 <h2>The model: the capstone's per-company requirements, on one company</h2>
 <p>These are the same things the capstone requires for each company. Nothing here is extra.</p>
 <ol>
@@ -53,7 +57,7 @@ hr { border:0; border-top:1px solid var(--rule); margin:2rem 0; }
 <li><strong>Reasonableness.</strong> An implied multiple against the company's own history or a peer.</li>
 <li><strong>Edge case.</strong> The model fails loudly on an impossible input, such as terminal growth at the discount rate. Show it failing.</li>
 <li><strong>AI risk.</strong> One thing an agent produced that you verified against a source, and what you changed if it was wrong.</li>
-<li><strong>The honest range</strong>, against a market price dated within a week of submission, and the single assumption most likely to move it.</li>
+<li><strong>The honest range</strong>, against a market price dated within a week of submission and pulled from a professional source, and the single assumption most likely to move it.</li>
 <li><strong>One driver that is yours.</strong> Name a driver that exists in your company and not in ABG's, or one of ABG's that does not apply to yours, and say what you did about it. ABG's nineteen rows carried over unchanged under a different ticker is a renamed model, not a built one.</li>
 </ol>
 <h2>What you hand in</h2>

@@ -63,6 +63,10 @@ hr { border:0; border-top:1px solid var(--rule); margin:2rem 0; }
 </table>
 <p><strong>Both checkpoints are scored on submitting the state, not on reaching the end.</strong> A model that fails its check block, submitted with one line naming which check failed and why you think it did, scores the same as one that passes. A blank scores nothing. That is deliberate: a named failure is evidence of work and a green tick from an agent is not.</blockquote>
 <hr />
+<h2>Data and tools this week</h2>
+<p><strong>Professional sources, not Yahoo Finance.</strong> Every filed line, price and estimate in this lab, in Exercise 4 and in the capstone comes from a professional source or from the filing itself: <strong>Compustat and CRSP on WRDS</strong>, <strong>Capital IQ</strong>, <strong>LSEG Workspace</strong>, or the <strong>Financial Datasets API</strong>, beside <strong>SEC EDGAR as filed</strong>. <strong>Yahoo Finance and <code>yfinance</code> are not accepted sources for any input here</strong>: not for the filed lines, not for the market price your range is read against, not for the beta. Where you have professional access, use it. Where it is still pending, document the attempt and use the filing; the attempt counts, the outcome never does. A free consumer feed is not an attempt.</p>
+<p><strong>Python does the work.</strong> The pull, the calendar check, the pro-forma, the check block, the discounted cash flow, the sensitivity and the exhibit all live in your notebook and rerun from a fresh kernel. Hand-typed numbers are limited to the four filing reads from prework Part B, each with a comment naming the statement it came from. A spreadsheet may be a scratchpad; it is not the model, and a figure that exists only in a spreadsheet cell has no source.</p>
+<hr />
 <h2>Part 1 — Tuesday (Checkpoint 9)</h2>
 <h2>Step 0 — Where everyone is, out loud (10 min)</h2>
 <p>The poll said who reproduced ABG. Find a partner on the other side of that line. Two minutes each: the first line where your number diverged, or, if you did not start, the step that stopped you.</p>
@@ -100,7 +104,7 @@ hr { border:0; border-top:1px solid var(--rule); margin:2rem 0; }
 <p>Swap the company half again. If Tuesday's separation was clean this is minutes, not an hour, and that is the lesson: <strong>one pipeline, run twice.</strong> If it is not minutes, the separation was not clean, and fixing it now is worth more than finishing.</p>
 <p>Same known-answer check: company B's last filed year, reproduced, before anything is projected.</p>
 <h2>Step 5 — One exhibit, both companies (20 min)</h2>
-<p>Both ranges on one picture, each against its own dated market price, with the date and source of each price written down.</p>
+<p>Both ranges on one picture, each against its own dated market price, with the date and source of each price written down. The price comes from a professional source, per the rule at the top of this page: CRSP or the Compustat security file on WRDS, Capital IQ, or the Financial Datasets price endpoint, pulled in code.</p>
 <p>Then the number a committee actually acts on: for each company, <strong>the gap between your range and the price, as a percentage.</strong> Ranges in dollars cannot be compared across two companies. Gaps can.</p>
 <p><strong>Check the comparison is fair before you read it.</strong> Same horizon, same terminal convention, discount rates built from the same components with only the beta and the leverage differing. If they differ in any other way, you are ranking your own method, not the businesses.</p>
 <h2>Step 6 — The decision, the flip point, the triggers (25 min)</h2>
@@ -125,7 +129,7 @@ hr { border:0; border-top:1px solid var(--rule); margin:2rem 0; }
 <h2>If you want to do this differently</h2>
 <p>You may depart from the method above. A defended departure earns full marks. State what you did instead, why, and what you gave up.</p>
 <p>Two departures are welcome: discount free cash flow to the firm at a weighted cost of capital and bridge to equity with dated net debt, stating both rates, provided you do it for <strong>both</strong> companies so the comparison stays fair; or run a multiples check beside the discounted cash flow, the way Kaplan and Ruback found the two together did better than either.</p>
-<p>Two sources, minimum, and where you have professional access, one of them is the professional source. This week that is Compustat beside SEC EDGAR as filed, which is where the AI-risk check comes from. Pending access is neither an excuse nor a penalty. Document the attempt and use the filing. The attempt counts; the outcome never does.</p>
+<p>Two sources, minimum, and where you have professional access, one of them is the professional source. This week that is Compustat beside SEC EDGAR as filed, which is where the AI-risk check comes from; Capital IQ, LSEG or the Financial Datasets API stand in for Compustat if that is what you have. Yahoo Finance is never one of the two. Pending access is neither an excuse nor a penalty. Document the attempt and use the filing. The attempt counts; the outcome never does.</p>
 <h2>Submit</h2>
 <p>Two checkpoints, in the room: Tuesday's notebook plus Edition A, Thursday's exhibit plus the decision lines plus the peer note. Exercise 4 collects company A finished, on <a href="exercise4.html">its page</a>. Nothing else is collected this week.</p>
 <h2>Before Week 7 — do these</h2>
